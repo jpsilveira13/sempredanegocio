@@ -18,10 +18,41 @@
 
 <body>
 <header>
+
     <div class="wrapper">
         <nav class="navbar navbar-inverse navbar-fixed-top">
             <div class="container">
                 <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navigation">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand text-uppercase no-padding logo-topo" href="/">
+                        <img src="{{asset('images/logo.png')}}" class="img-responsive menu-logo-display" title="Fire Walking Brasil" alt="Logo Fire Walking Brasil"/>
+                       
+                    </a>
+                </div>
+
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse menu-header-margem" id="navigation">
+                    <ul class="nav navbar-nav navbar-right position-relative">
+                        <li><a href="#">Quem Somos </a></li>
+                        <li><a href="{{url('eventos')}}">Eventos</a></li>
+
+                        <li><a href="{{url('contato')}}">Contato</a></li>
+                        <li><button type="button" id="btn-roxo" class="btn btn-success navbar-btn btn-circle btn-login-color" ><i class="fa fa-user"></i> Minha Conta</button></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </div>
+    <!--<div class="wrapper">
+        <nav class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container">
+
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navigation">
                         <span class="sr-only">Toggle navigation</span>
@@ -35,12 +66,12 @@
                     </a>
                 </div>
 
-                <!-- Collect the nav links, forms, and other content for toggling -->
+
                 <div class="collapse navbar-collapse menu-header-margem" id="navigation">
                     <ul class="nav navbar-nav navbar-right position-relative estilo-fonte-menu">
 
-                        <li class="btn-menu-login-li">
-                            <a href="" class="btn btn-default btn-menu-login" ><i class="fa fa-user"></i> Minha Conta
+                        <li>
+                            <a href=""  ><i class="fa fa-user"></i> Minha Conta
                             </a></li>
                         <li>
                             <span class="label-free">
@@ -51,12 +82,15 @@
                 </div>
             </div>
         </nav>
-    </div>
+    </div> -->
 </header>
 <div class="jumbotron1 subhead">
     <div class="container">
         <h1>Não perca tempo!</h1>
         <p>Anuncie agora no maior portal de aluguéis do BRASIL.</p>
+         <span class="label-free">
+                             <a href="" id="btn-orange" class="btn btn-large"> Anuncie Agora </a>
+         </span>
     </div>
 </div>
 <section>
