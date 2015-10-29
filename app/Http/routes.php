@@ -15,5 +15,9 @@
 Route::get('/', 'HomeController@index');
 
 
+Route::get('imoveis', 'HomeController@imoveis');
+
+Route::get('anunciar', 'HomeController@anunciar');
+
 
 

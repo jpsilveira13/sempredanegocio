@@ -13,6 +13,8 @@
     <link rel="stylesheet" href="{{ asset('css/site.css') }}">
     <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/jquery.bootstrapvalidator/0.5.2/css/bootstrapValidator.min.css"/>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <link href='//cdn.jsdelivr.net/devicons/1.8.0/css/devicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="{{ asset('css/nouislider.min.css') }}">
 
 </head>
 
@@ -32,7 +34,7 @@
                     </button>
                     <a class="navbar-brand text-uppercase no-padding logo-topo" href="/">
                         <img src="{{asset('images/logo.png')}}" class="img-responsive menu-logo-display" title="Fire Walking Brasil" alt="Logo Fire Walking Brasil"/>
-                       
+
                     </a>
                 </div>
 
@@ -49,40 +51,6 @@
             </div>
         </nav>
     </div>
-    <!--<div class="wrapper">
-        <nav class="navbar navbar-inverse navbar-fixed-top">
-            <div class="container">
-
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navigation">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand text-uppercase no-padding logo-topo" href="/">
-                        <img src="{{asset('images/logo.png')}}" class="img-responsive menu-logo-display" title="Sempre da Negócio" alt="Sempre da Negócio"/>
-
-                    </a>
-                </div>
-
-
-                <div class="collapse navbar-collapse menu-header-margem" id="navigation">
-                    <ul class="nav navbar-nav navbar-right position-relative estilo-fonte-menu">
-
-                        <li>
-                            <a href=""  ><i class="fa fa-user"></i> Minha Conta
-                            </a></li>
-                        <li>
-                            <span class="label-free">
-                             <a href="" id="btn-orange" class="btn btn-large " > Anuncie Agora </a>
-                            </span>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-    </div> -->
 </header>
 <div class="jumbotron1 subhead">
     <div class="container">
@@ -95,7 +63,7 @@
 </div>
 <section>
     <div class="container">
-        <div class="row">
+        <div class="row no-margin">
             @yield('categories')
             @yield('content')
 
@@ -121,8 +89,8 @@
 <script src="{{asset('js/jquery-2.1.4.min.js')}}"></script>
 <script src="{{ asset('js/bootstrap.min.js') }}"></script>
 <script src="{{ asset('js/npm.js') }}"></script>
-
 <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery.bootstrapvalidator/0.5.2/js/bootstrapValidator.min.js"></script>
 <script src="{{asset('js/site.js')}}"></script>
+<script src="{{ asset('js/nouislider.min.js') }}"></script>
 </body>
 </html>
