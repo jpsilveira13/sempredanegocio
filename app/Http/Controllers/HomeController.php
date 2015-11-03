@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace sempredanegocio\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Http\Requests;
-use App\Http\Controllers\Controller;
+use sempredanegocio\Http\Requests;
+use sempredanegocio\Http\Controllers\Controller;
 
 class HomeController extends Controller
 {
@@ -27,16 +27,17 @@ class HomeController extends Controller
 
     }
 
-    public  function anunciar(){
+    public  function anuncie(){
         //$products = Product::orderBy(DB::raw('RAND()'))->get();
 
 
-        return view('site.pages.anunciar', [
+        return view('site.pages.anuncie', [
             'title' => 'Sempredanegocio.com.br | Não perca tempo! Anuncie',
             'description' => 'Os melhores alugueis no melhor site.',
             //'product' => $products
 
         ]);
-
     }
+
+
 }

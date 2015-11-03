@@ -1,5 +1,50 @@
 $(document).ready(function(){
 
+
+    $('#uf').ufs({
+        onChange: function(uf){
+            $('#cidade').cidades({uf: uf});
+            $('#cidade').show('fast');
+        }
+    });
+    $('#labelQuarto').mouseover(function(){
+       $('#divQuartos').addClass('display-block');
+    });
+
+    $('#divQuartos').mouseleave(function(){
+
+       $(this).removeClass('display-block');
+    });
+
+    $('#labelFaixaPreco').mouseover(function(){
+        $('#divFaixaPreco').addClass('display-block');
+    });
+
+    $('#divFaixaPreco').mouseleave(function(){
+
+        $(this).removeClass('display-block');
+    });
+
+    $('#labelSuite').mouseover(function(){
+        $('#divSuite').addClass('display-block');
+    });
+
+    $('#divSuite').mouseleave(function(){
+
+        $(this).removeClass('display-block');
+    });
+
+    $('#labelVaga').mouseover(function(){
+        $('#divVaga').addClass('display-block');
+    });
+
+    $('#divVaga').mouseleave(function(){
+
+        $(this).removeClass('display-block');
+    });
+
+
+
  //validação formulario de contato
  /*  $('#contact-form').bootstrapValidator({
   //  live: 'enabled',

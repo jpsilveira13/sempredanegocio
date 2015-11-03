@@ -41,7 +41,7 @@
             <label id="labelQuarto" class="icone-quartos filtro quartos" data-label="Quartos" >
                 QUARTOS
                 <span class="icone-seta-light-baixo"></span>
-                <div id="divQuartos" class="filtro-check check-quartos content-filtro" data-filtro="checked" style="display: none" >
+                <div id="divQuartos" class="filtro-check check-quartos content-filtro" data-filtro="checked" >
                     <div class="titulo-check">
                         quartos
                     </div>

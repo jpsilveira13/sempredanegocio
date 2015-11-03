@@ -92,5 +92,9 @@
 <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery.bootstrapvalidator/0.5.2/js/bootstrapValidator.min.js"></script>
 <script src="{{asset('js/site.js')}}"></script>
 <script src="{{ asset('js/nouislider.min.js') }}"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAExt7vsJrLsnF3UQ7fk_ix51BderXpv6Q"
+        type="text/javascript"></script>
+<script src="/vendor/artesaos/cidades/js/scripts.js"></script>
+
 </body>
 </html>

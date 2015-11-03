@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Events;
+namespace sempredanegocio\Events;
 
 abstract class Event
 {

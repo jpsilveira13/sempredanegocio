@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Controllers\Auth;
+namespace sempredanegocio\Http\Controllers\Auth;
 
-use App\User;
+use sempredanegocio\User;
 use Validator;
-use App\Http\Controllers\Controller;
+use sempredanegocio\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 
@@ -33,6 +33,9 @@ class AuthController extends Controller
         $this->middleware('guest', ['except' => 'getLogout']);
     }
 
+    public function getLogin() {
+        return view('auth/login');
+    }
     /**
      * Get a validator for an incoming registration request.
      *

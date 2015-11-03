@@ -17,7 +17,14 @@ Route::get('/', 'HomeController@index');
 
 Route::get('imoveis', 'HomeController@imoveis');
 
-Route::get('anunciar', 'HomeController@anunciar');
+Route::get('anuncie', 'HomeController@anuncie');
 
 
 
+
+//Controlador para o login
+Route::controllers([
+    'auth' => 'Auth\AuthController',
+    'password' => 'Auth\PasswordController',
+
+]);

@@ -50,6 +50,13 @@ section{
 
 }
 
+#estilo-checkbox-bootstrap .checkbox-inline+ .checkbox-inline, .radio-inline+.radio-inline{
+    margin-left: 0px;
+    margin-right: 20px;
+    line-height: 25px;
+
+}
+
 /* CSS STARTER TAG */
 
 label, select, button, input[type="button"], input[type="submit"], input[type="radio"], input[type="checkbox"] {
@@ -72,6 +79,10 @@ select {
     outline: 0;
 }
 
+.init-margin-right-checkbox{
+    margin-right: 20px!important;
+    margin-left: 0px!important;
+}
 
 .no-padding-left{
 
@@ -603,7 +614,15 @@ footer{
 }
 
 
+#divQuartos{
+    display: none;
 
+}
+
+.display-block{
+
+    display: block!important;
+}
 .filtro-check {
     width: 129px;
     background: #f5f5f5;
@@ -963,7 +982,111 @@ input[type=text].input-slider-preco-esq, input[type=text].input-slider-esq, inpu
     100% {-webkit-transform:rotate(-360deg);}
 }
 
+.area-anuncio-total{
+    background: #fff;
+    margin: 20px auto;
+    border: 1px solid #dce0e0;
+    position: relative;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    padding: 30px;
 
+
+}
+
+.anuncio-titulo{
+    color: #472147;
+    font-size: 25px;
+    font-weight: 300;
+    text-align: center;
+    margin-top: 10px;
+
+}
+
+.anuncio-texto-header{
+    color: #472147;
+    font-size: 14px;
+    font-weight: 300;
+    text-align: center;
+    margin: 0 0 40px;
+
+}
+
+.input-small{
+    width: 85px;
+
+}
+
+.input-large{
+    width: 70%;
+
+}
+
+#cidade{
+    display: none;
+
+}
+
+.anuncio-area-mapa{
+
+    height: 450px;
+    background-color: black;
+
+}
+
+
+.material_checkbox
+{
+    position: relative;
+    margin: 25px;
+}
+
+.material_checkbox:focus
+{
+    outline-color: #fff;
+}
+
+.material_checkbox:before
+{
+    border: 2px solid #ccc;
+    content: "";
+    cursor: pointer;
+    display: block;
+    height: 15px;
+    position: absolute;
+    -moz-transition: all 0.3s ease-in-out;
+    -o-transition: all 0.3s ease-in-out;
+    -webkit-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+    width: 15px;
+    z-index: 1;
+}
+
+.material_checkbox:checked:before
+{
+    border-top-style: none;
+    border-right-style: none;
+    height: 10px;
+    -moz-transform: rotate(-45deg);
+    -ms-transform: rotate(-45deg);
+    -o-transform: rotate(-45deg);
+    -webkit-transform: rotate(-45deg);
+    transform: rotate(-45deg);
+}
+
+.material_checkbox:after
+{
+    background: #fff;
+    content: "";
+    display: block;
+    height: 15px;
+    position: absolute;
+    top: 0;
+    width: 15px;
+    z-index: 0;
+}
+.material_checkbox:checked:before{border-color:#5677fc;}
 
 
 
@@ -981,3 +1104,5 @@ input[type=text].input-slider-preco-esq, input[type=text].input-slider-esq, inpu
 /********************************/
 /*      fim Media Queries       */
 /********************************/
+
+
