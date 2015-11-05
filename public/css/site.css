@@ -17,7 +17,7 @@ cores:
 
 
 
-/* importação feita pelo site ZAP */
+/* importaï¿½ï¿½o feita pelo site ZAP */
 @font-face{font-family:'Site-ZAP';
     src:url('http://temporada.cjs.zapcorp.com.br/Content/fonts/Site-ZAP-Temporada.eot?-q1yypi');
     src:url('http://temporada.cjs.zapcorp.com.br/Content/fonts/Site-ZAP-Temporada.eot?#iefix-q1yypi') format('embedded-opentype'),url('http://temporada.cjs.zapcorp.com.br/Content/fonts/Site-ZAP-Temporada.ttf?-q1yypi') format('truetype'),url('http://temporada.cjs.zapcorp.com.br/Content/fonts/Site-ZAP-Temporada.woff?-q1yypi') format('woff');
@@ -28,7 +28,7 @@ cores:
 
 [class^="icone-"]:before,[class*=" icone-"]:before{font-family:'Site-ZAP';speak:none;font-style:normal;font-weight:normal;font-variant:normal;text-transform:none;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}.icone-escudo:before{content:"\e642"}.icone-pacotes:before{content:"\e643"}.icone-cidade:before{content:"\e63f"}.icone-montanha:before{content:"\e640"}.icone-praia:before{content:"\e641"}.icone-data-atualizacao:before{content:"\e639"}.icone-tipo-temporada:before{content:"\e63a"}.icone-vagas:before{content:"\e634"}.icone-suites:before{content:"\e635"}.icone-quartos:before{content:"\e636"}.icone-hospedes:before{content:"\e60c"}.icone-faixa-preco:before{content:"\e637"}.icone-area:before{content:"\e638"}.icone-facebook2:before{content:"\e63b"}.icone-google-plus2:before{content:"\e63e"}.icone-twitter2:before{content:"\e63c"}.icone-facebook:before{content:"\e631"}.icone-twitter:before{content:"\e632"}.icone-google-plus:before{content:"\e607"}.icone-youtube:before{content:"\e627"}.icone-like:before{content:"\e608"}.icone-meh:before{content:"\e609"}.icone-dislike:before{content:"\e60a"}.icone-salvar-busca:before{content:"\e62b"}.icone-alerta:before{content:"\e60b"}.icone-busca:before{content:"\e63d"}.icone-chat-vazado:before{content:"\e60d"}.icone-chat:before{content:"\e60e"}.icone-imprimir:before{content:"\e62c"}.icone-android:before{content:"\e604"}.icone-apple:before{content:"\e605"}.icone-fechar-modal:before{content:"\e606"}.icone-check:before{content:"\e60f"}.icone-seta-light-cima:before{content:"\e62e"}.icone-seta-light-baixo:before{content:"\e62f"}.icone-share:before{content:"\e25a"}.icone-favoritada:before{content:"\e601"}.icone-nao-favoritada:before{content:"\e603"}.icone-menu:before{content:"\e630"}.icone-foto:before{content:"\e617"}.icone-tour-virtual:before{content:"\e618"}.icone-video:before{content:"\e619"}.icone-distancia-ate:before{content:"\e61a"}.icone-visao-lista:before{content:"\e61b"}.icone-visao-galeria:before{content:"\e61c"}.icone-gps-fixed:before{content:"\e61d"}.icone-informacao:before{content:"\e61e"}.icone-informacao2:before{content:"\e633"}.icone-alerta-reportar:before{content:"\e61f"}.icone-limpar:before{content:"\e626"}.icone-seta-simples-baixo:before{content:"\e620"}.icone-seta-simples-cima:before{content:"\e621"}.icone-seta-simples-esq:before{content:"\e622"}.icone-seta-simples-dir:before{content:"\e623"}.icone-seta-cheia-baixo:before{content:"\e624"}.icone-seta-cheia-cima:before{content:"\e625"}.icone-lead:before{content:"\e610"}.icone-e-mail:before{content:"\e611"}.icone-telefone:before{content:"\e612"}.icone-editar:before{content:"\e613"}.icone-remover:before{content:"\e614"}.icone-smartphone:before{content:"\e62d"}.icone-seta-indice-baixo:before{content:"\e615"}.icone-seta-indice-cima:before{content:"\e616"}.icone-seta-resultados:before{content:"\e628"}.icone-seta-cheia-esq:before{content:"\e629"}.icone-seta-cheia-dir:before{content:"\e62a"}
 
-/* ALTERAÇÕES BOOTSTRAP */
+/* ALTERAï¿½ï¿½ES BOOTSTRAP */
 
 
 
@@ -56,6 +56,19 @@ section{
     line-height: 25px;
 
 }
+
+#budget-form .input-group-addon {
+    padding: 6px 12px;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1;;
+    text-align: center;
+    background-color: #472147;
+    border: 1px solid #472147;
+    border-radius: 4px;
+    color: #fff;
+}
+
 
 /* CSS STARTER TAG */
 
@@ -119,7 +132,7 @@ body{
     font-size: 14px;
     line-height: 20px;
     color: #444;
-    background-color: #fff;
+    background-color: #F7F4EC;
     -webkit-font-smoothing: antialiased;
 
 }
@@ -151,6 +164,8 @@ header {
     -ms-border-radius: 0px;
 
 }
+
+
 
 #btn-roxo{
     background-color: #472147;
@@ -995,6 +1010,11 @@ input[type=text].input-slider-preco-esq, input[type=text].input-slider-esq, inpu
 
 }
 
+.anuncio-titulo-estilo h2{
+    color: #4C2147;
+
+}
+
 .anuncio-titulo{
     color: #472147;
     font-size: 25px;
@@ -1087,6 +1107,424 @@ input[type=text].input-slider-preco-esq, input[type=text].input-slider-esq, inpu
     z-index: 0;
 }
 .material_checkbox:checked:before{border-color:#5677fc;}
+
+
+
+/* Imovel interno */
+
+.btn {
+    display: inline-block;
+    padding: 8px 13px 8px 13px;
+    border: 0;
+    font-size: 14px;
+    line-height: 20px;
+    border-radius: 5px;
+    outline: none;
+    cursor: pointer;
+    background-color: #ddd;
+}
+
+
+.box-default{
+    background-color: #fff;
+    padding: 20px;
+    box-shadow: 0 2px 3px silver;
+    margin-bottom: 20px;
+    clear: both;
+    position: relative;
+    box-sizing: border-box;
+
+}
+
+.box-default .title {
+    display: block;
+    font-size: 12px;
+    text-transform: uppercase;
+    margin: 0 0 10px;
+    line-height: 12px;
+}
+
+
+.imovel-area-detalhe h1{
+    max-width: 60%;
+    font-size: 20px;
+    margin: 0;
+    line-height: 20px;
+
+}
+
+.imovel-area-detalhe .subtitle {
+    display: block;
+    font-size: 12px;
+    font-weight: normal;
+    text-transform: uppercase;
+    margin-bottom: 7px;
+    line-height: 12px;
+}
+
+.imovel-area-detalhe  .logradouro {
+    float: left;
+    font-size: 16px;
+    margin-top: 3px;
+}
+
+.imovel-area-detalhe .value-ficha{
+    display: block;
+    font-weight: bold;
+    font-size: 23px;
+    line-height: 20px;
+    text-align: right;
+
+}
+
+.informacoes-imovel .unstyled {
+    display: block;
+    font-size: 20px;
+    text-align: center;
+    font-weight: bold;
+    margin-bottom: 9px;
+}
+
+ul.unstyled {
+    margin: 0;
+    list-style: none;
+}
+
+.informacoes-imovel li {
+    float: left;
+    margin-right: 20px;
+}
+
+
+
+.informacoes-imovel .text-info {
+    display: block;
+    font-size: 10px;
+    font-weight: normal;
+    text-align: center;
+    text-transform: uppercase;
+    line-height: 8px;
+    margin-top: 8px;
+}
+
+.box-descricao-caract p {
+    margin-bottom: 0;
+    line-height: 21px;
+}
+
+.box-descricao-caract h3:nth-child(3) {
+    margin-top: 20px;
+}
+
+ul.thumbnails-carousel {
+    padding: 5px 0 0 0;
+    margin: 0;
+    list-style-type: none;
+    text-align: center;
+}
+ul.thumbnails-carousel .center {
+    display: inline-block;
+}
+ul.thumbnails-carousel li {
+    margin-right: 5px;
+    float: left;
+    cursor: pointer;
+}
+.controls-background-reset {
+    background: none !important;
+}
+.active-thumbnail {
+    opacity: 0.4;
+}
+.indicators-fix {
+    bottom: 70px;
+}
+
+.carrosel-fotos-imovel .item:hover{
+    box-shadow: 0px 0px 0px rgba(0, 0, 0, 0);
+
+
+
+}
+
+.carrosel-fotos-imovel img{
+    margin-right: auto;
+    margin-left: auto;
+
+}
+
+.bar-actions li {
+    float: left;
+    letter-spacing: -0.4px;
+    font-size: 13px;
+}
+
+.bar-actions li a {
+    line-height: 14px;
+}
+
+.bar-actions li a:before {
+    font-size: 14px;
+    float: left;
+    line-height: 19px;
+    margin-right: 5px;
+}
+
+.bar-actions .share-social {
+    margin: 0 40px;
+}
+
+.bar-actions .share-social .icone-social {
+    float: left;
+    margin-left: 10px;
+}
+
+.bar-actions .share-social .icone-social:before {
+    font-size: 24px;
+    margin-right: 0;
+}
+
+.bar-actions .share-social .icone-e-mail:before {
+    color: #ebd073;
+    font-size: 28px;
+    line-height: 21px;
+}
+
+#modalDenuncieAbrir{
+    color: #ff5a00;
+
+}
+
+.contatar-ficha .list-buttons {
+    margin-bottom: 10px;
+}
+
+.btn-zap {
+    color: #fff;
+    text-transform: uppercase;
+    font-size: 13px;
+    position: relative;
+    background-color: #5B2B4D;
+    text-align: center;
+}
+
+.contatar-ficha .text-aoligar {
+    font-size: 11px;
+    margin-bottom: 5px;
+}
+
+.contatar-ficha .number {
+    width: 100%;
+    background-color: #e5e5e5;
+    font-size: 22px;
+    padding: 10px 0;
+    border-radius: 5px;
+    font-weight: bold;
+    margin: 0 0 10px;
+}
+
+span#number_tel {
+    width: 100%;
+    background-color: #e5e5e5;
+    font-size: 22px;
+    padding: 10px 15px;
+    border-radius: 5px;
+    font-weight: bold;
+    margin: 0 0 10px;
+}
+
+.tab-pane .number {
+    display: inline-block;
+    width: 100%;
+    margin: 1.5rem 0;
+    font-size: 22px;
+}
+
+.content-floaters {
+    position: relative;
+    margin-bottom: 10px;
+    height: 100%;
+    width: 100%;
+}
+
+.text-center, .tc {
+    text-align: center;
+}
+
+.contatar-anunciante .tab-mensagem {
+    border-top: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+    padding: 10px 0;
+}
+
+.contatar-ficha .form-mensagem {
+    margin: 0;
+    font-size: 12px;
+}
+
+input.span1, textarea.span1 {
+    width: 94px;
+}
+
+.contatar-ficha #txtTelefone {
+    width: 169px;
+}
+
+.contatar-ficha textarea {
+    height: 82px;
+    resize: none;
+    line-height: 16px;
+}
+
+.input-block-level {
+    display: block;
+    width: 100%;
+    min-height: 30px;
+    box-sizing: border-box;
+}
+
+#frmEnviarMensagem textarea, input[type="text"], input[type="password"], input[type="number"], input[type="email"], input[type="tel"] {
+    background-color: #fff;
+    border: 1px solid #e5e5e5;
+    display: inline-block;
+    padding: 7px 20px;
+    margin-bottom: 10px;
+    font-size: 14px;
+    font-weight: lighter;
+    line-height: 20px;
+    color: #666;
+    border-radius: 4px;
+    vertical-align: middle;
+}
+
+
+#frmEnviarMensagem input[type="submit"], input[type="button"], input[type="radio"], input[type="checkbox"] {
+    width: auto;
+}
+
+#frmEnviarMensagem .btn.focus, .btn:focus, .btn:hover{
+    color: #fff;
+
+}
+.mt10 {
+    margin-top: 10px;
+}
+
+.contatar-ficha .check-ofertas label {
+    font-size: 11px;
+    line-height: 11px;
+    display: inline;
+    margin-left: 7px;
+}
+
+.ml18 {
+    margin-left: 18px;
+}
+
+.contatar-ficha .btn-link {
+    float: left;
+    width: 80px;
+    line-height: 30px;
+    cursor: pointer;
+}
+
+.contatar-ficha .contact:before {
+    float: left;
+    margin-right: 10px;
+    line-height: 20px;
+}
+
+
+.btn-link {
+    background-color: transparent;
+    border: 0;
+    color: #ff5a00;
+    text-transform: uppercase;
+}
+
+.btn-fav-ficha {
+    float: left;
+    background-color: #e5e5e5;
+    width: 100%;
+    border-radius: 5px;
+    font-size: 12px;
+    text-transform: uppercase;
+    height: 30px;
+    line-height: 25px;
+    cursor: pointer;
+}
+
+.btn-fav-ficha .icone-favoritada {
+    line-height: 30px;
+    height: 30px;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    margin-right: 10px;
+}
+
+.addicon, .addiconS, .removeicon {
+    background-color: #ff5a00;
+    width: 25px;
+    height: 25px;
+    line-height: 25px;
+    color: #fff;
+    text-align: center;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.add img {
+    margin-top: 0;
+}
+
+.add span {
+    margin: 2px 0 0 7px;
+    font-family: 'Roboto Condensed';
+    font-size: 12px;
+}
+
+
+.outras-informacoes {
+    font-size: 12px;
+    line-height: 16px;
+}
+
+.outras-informacoes .content-anunciante {
+    margin-top: 10px;
+    color: #ff5a00;
+}
+
+.outras-informacoes .content-anunciante .logo {
+    max-height: 52px;
+    margin-right: 15px;
+    max-width: 88px;
+    border: solid 4px #eee;
+}
+
+.outras-informacoes .anunciante {
+    margin-top: -3px;
+    width: 131px;
+    font-family: 'Roboto Condensed';
+}
+
+
+.outras-informacoes .logo img {
+    width: 100%;
+}
+
+.mt40{
+    margin-top: 40px;
+
+}
+
+.estilo-fonte-h2{
+    margin: 0;
+    line-height: 24px;
+    margin-bottom: 10px;
+    font-weight: lighter;
+    font-size: 21px;
+
+}
 
 
 

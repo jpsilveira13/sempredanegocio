@@ -19,7 +19,7 @@
     <ul id="menu-fixo" class="nav nav-pills nav-stacked hidden-xs hidden-sm">
         <li class="bg-escolha-categorias">Buscar por Categorias</li>
         <li><a href="#"><i class="fa fa-bicycle fa-2x"></i> Esportes</a></li>
-        <li><a href="#"><i class="fa fa-home fa-2x"></i> Imóveis</a></li>
+        <li><a href="{{asset('imoveis')}}"><i class="fa fa-home fa-2x"></i> Imóveis</a></li>
         <li><a href="#"><i class="fa fa-car fa-2x"></i> Veículos</a></li>
     </ul>
 </nav>

@@ -39,5 +39,13 @@ class HomeController extends Controller
         ]);
     }
 
+    public function imovelInterno(){
+
+        return view('site.pages.imovel', [
+            'title' => 'Sempredanegocio.com.br | Não perca tempo! Anuncie.',
+            'description' => 'Os melhores alugueis no melhor site.',
+        ]);
+    }
+
 
 }

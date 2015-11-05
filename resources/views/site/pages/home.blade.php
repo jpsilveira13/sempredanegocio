@@ -29,7 +29,7 @@
                                     <p class="lead">$21.000</p>
                                 </div>
                                 <div class="col-xs-12 col-md-6">
-                                    <a class="btn btn-success" href="http://www.jquery2dotnet.com">Add to cart</a>
+                                    <a class="btn btn-success" href="{{asset('imoveis/1/teste')}}">Add to cart</a>
                                 </div>
                             </div>
                         </div>

@@ -15,10 +15,16 @@
 Route::get('/', 'HomeController@index');
 
 
+/* imoveis routes */
 Route::get('imoveis', 'HomeController@imoveis');
 
 Route::get('anuncie', 'HomeController@anuncie');
 
+Route::get('imoveis/1/teste',[
+    'uses' => "HomeController@imovelInterno"
+
+
+]);
 
 
 

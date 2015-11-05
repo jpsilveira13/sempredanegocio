@@ -11,10 +11,11 @@
     <!-- CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous">
     <link rel="stylesheet" href="{{ asset('css/site.css') }}">
-    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/jquery.bootstrapvalidator/0.5.2/css/bootstrapValidator.min.css"/>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
     <link href='//cdn.jsdelivr.net/devicons/1.8.0/css/devicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="{{ asset('css/nouislider.min.css') }}">
+    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/jquery.bootstrapvalidator/0.5.2/css/bootstrapValidator.min.css"/>
+
 
 </head>
 
@@ -57,7 +58,7 @@
         <h1>Não perca tempo!</h1>
         <p>Anuncie agora no maior portal de aluguéis do BRASIL.</p>
          <span class="label-free">
-                             <a href="" id="btn-orange" class="btn btn-large"> Anuncie Agora </a>
+             <a href="{{asset('anuncie')}}" id="btn-orange" class="btn btn-large"> Anuncie Agora </a>
          </span>
     </div>
 </div>
@@ -89,12 +90,14 @@
 <script src="{{asset('js/jquery-2.1.4.min.js')}}"></script>
 <script src="{{ asset('js/bootstrap.min.js') }}"></script>
 <script src="{{ asset('js/npm.js') }}"></script>
-<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery.bootstrapvalidator/0.5.2/js/bootstrapValidator.min.js"></script>
 <script src="{{asset('js/site.js')}}"></script>
 <script src="{{ asset('js/nouislider.min.js') }}"></script>
+<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery.bootstrapvalidator/0.5.2/js/bootstrapValidator.min.js"></script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAExt7vsJrLsnF3UQ7fk_ix51BderXpv6Q"
         type="text/javascript"></script>
 <script src="/vendor/artesaos/cidades/js/scripts.js"></script>
+
+
 
 </body>
 </html>
