@@ -34,7 +34,7 @@
                         <span class="icon-bar"></span>
                     </button>
                     <a class="navbar-brand text-uppercase no-padding logo-topo" href="/">
-                        <img src="{{asset('images/logo.png')}}" class="img-responsive menu-logo-display" title="Fire Walking Brasil" alt="Logo Fire Walking Brasil"/>
+                        <img src="{{asset('images/logo.png')}}" class="img-responsive menu-logo-display" title="Sempre Da Negócio" alt="Sempre Da Negóciol"/>
 
                     </a>
                 </div>

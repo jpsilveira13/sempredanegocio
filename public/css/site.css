@@ -81,6 +81,16 @@ label, select, button, input[type="button"], input[type="submit"], input[type="r
 
 }
 
+.mb18 {
+    margin-bottom: 18px;
+}
+
+.mr10 {
+    margin-right: 10px;
+}
+
+
+
 select {
     height: 30px;
     line-height: 30px;
@@ -405,6 +415,16 @@ header {
     border-radius: 0px;
 }
 
+.thumbnail:hover{
+    border-color:#472147 ;
+    webkit-box-shadow: 0 0 9px 0 #472147;
+    -moz-box-shadow: 0 0 9px 0 #472147;
+    box-shadow: 0 0 9px 0 #472147;
+    border-bottom: 1px solid #472147;
+
+
+}
+
 .item.list-group-item
 {
     float: none;
@@ -472,12 +492,7 @@ header {
 
 }
 
-.item:hover{
-    border-color: #472147;
-    box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.2);
 
-
-}
 
 
 
@@ -1421,6 +1436,10 @@ input.span1, textarea.span1 {
     margin-left: 18px;
 }
 
+.text-right, .tr {
+    text-align: right;
+}
+
 .contatar-ficha .btn-link {
     float: left;
     width: 80px;
@@ -1463,7 +1482,7 @@ input.span1, textarea.span1 {
 }
 
 .addicon, .addiconS, .removeicon {
-    background-color: #ff5a00;
+    background-color: #5B2B4D;
     width: 25px;
     height: 25px;
     line-height: 25px;
@@ -1524,6 +1543,236 @@ input.span1, textarea.span1 {
     font-weight: lighter;
     font-size: 21px;
 
+}
+
+
+/* modal */
+
+
+#txtConteudo{
+    background-color: #fff;
+    border: 1px solid #e5e5e5;
+    display: inline-block;
+    padding: 7px 20px;
+    margin-bottom: 10px;
+    font-size: 14px;
+    font-weight: lighter;
+    line-height: 20px;
+    color: #666;
+    border-radius: 4px;
+    vertical-align: middle;
+
+}
+
+.modal-footer {
+    padding: 14px 15px 15px;
+    background-color: #f5f5f5;
+    border-top: 1px solid #ddd;
+    position: relative;
+    border-radius: 0 0 6px 6px;
+    box-shadow: inset 0 1px 0 #fff;
+
+}
+
+
+.denuncie-modal .text {
+    float: left;
+    width: 140px;
+    margin-right: 20px;
+}
+
+.denuncie-modal p, .denuncie-modal label {
+    line-height: 1.5;
+    margin-bottom: 20px;
+    font-size: 14px;
+}
+
+.denuncie-form {
+    float: left;
+    width: 350px;
+    margin-left: 20px;
+}
+
+.denuncie-modal select {
+    height: 30px;
+    line-height: 30px;
+    width: 220px;
+    border: 0;
+    background-color: #e5e5e5;
+    padding: 0 20px;
+    color: #000;
+    background: #ddd;
+    outline: 0;
+}
+
+.denuncie-modal textarea{
+    background-color: #fff;
+    border: 1px solid #e5e5e5;
+    display: inline-block;
+    padding: 7px 20px;
+    margin-bottom: 10px;
+    font-size: 14px;
+    font-weight: lighter;
+    line-height: 20px;
+    color: #666;
+    border-radius: 4px;
+    vertical-align: middle;
+
+}
+
+.center-button {
+    margin: 20px auto;
+    text-align: center;
+
+}
+
+.text-left, .tl {
+    text-align: left;
+}
+
+.modal-login .login-box {
+    float: left;
+    width: 50%;
+    background-color: #f6f5f1;
+    padding: 12px 10px;
+    box-sizing: border-box;
+    border-radius: 3px;
+    margin: 0;
+    position: relative;
+}
+
+.modal-login .titulo {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.modal-login .desc, .modal-cadastro .desc {
+    font-size: 13px;
+    line-height: 14px;
+}
+
+.modal .aviso {
+    background-color: #fdfae9;
+    box-sizing: border-box;
+    font-size: 14px;
+    color: #444;
+    padding: 10px 16px;
+    border: 1px solid #ffeb63;
+}
+
+.modal-login .login-box input[type=email] {
+    width: 100%;
+    margin-bottom: 15px;
+}
+
+.modal-login .loading, .cadastro .loading {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    width: 20px;
+    height: 20px;
+}
+
+.modal-login .login-box .forgot-pass {
+    float: left;
+    margin: 0;
+    font-size: 12px;
+}
+
+.modal-login .login-box button {
+    float: right;
+    width: 114px;
+}
+
+.saving-distance, .saved-distance, .error-distance, .auth-loading, .saving-fav {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255,255,255,0.7);
+}
+
+.error-distance .message {
+    background: #fde9e9;
+}
+
+.modal-login .login-box {
+    float: left;
+    width: 50%;
+    background-color: #f6f5f1;
+    padding: 12px 10px;
+    box-sizing: border-box;
+    border-radius: 3px;
+    margin: 0;
+    position: relative;
+}
+
+.modal-login .cadastro-box {
+    float: right;
+    width: 50%;
+    box-sizing: border-box;
+    padding: 12px 7px 12px 25px;
+}
+
+.modal-login .cadastro-box input[type=text], .modal-login .cadastro-box input[type=email], .modal-cadastro input[type=text], .modal-cadastro input[type=password], .modal-cadastro input[type=email] {
+    width: 100%;
+}
+
+.modal-login .loading, .cadastro .loading {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    width: 20px;
+    height: 20px;
+}
+
+.modal-login .cadastro-box .info {
+    float: left;
+    font-size: 12px;
+    line-height: 14px;
+    clear: both;
+    margin: 7px 0 0;
+}
+
+input.span4, textarea.span4 {
+    width: 286px;
+}
+
+.modal-login .radio, .checkbox{
+    min-height: 20px;
+    padding-left: 20px;
+
+}
+
+.modal-login .modal-footer-login {
+    display: block;
+    text-align: center;
+    background: #f7f9fe;
+}
+
+.modal-footer-login .btn-facebook {
+    cursor: pointer;
+    background-color: #007aa5;
+    color: #fff;
+    width: 200px;
+    margin: 0 auto;
+    border-radius: 5px;
+    padding: 4px 8px 4px 5px;
+}
+
+.modal-footer-login .icone-facebook:before {
+    margin-right: 10px;
+}
+
+.modal-login .modal-footer-login .text {
+    display: block;
+    font-size: 13px;
+    line-height: 14px;
+    color: #838383;
+    max-width: 264px;
+    margin: 12px auto 0;
+    text-align: center;
 }
 
 
