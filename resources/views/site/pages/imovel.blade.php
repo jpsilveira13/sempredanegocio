@@ -3,8 +3,8 @@
 @section('content')
     <div class="clearfix" style="margin-bottom: 10px"></div>
 
-    <div class="container">
-        <div class="col-md-8 col-lg-8">
+    <div class="container no-padding">
+        <div class="col-md-12 col-lg-8 ">
             <div class="side-left">
                 <div class="box-default clearfix imovel-area-detalhe">
                     <h1 class="pull-left">
@@ -13,7 +13,7 @@
                         <br />
                         <span class="logradouro">Vl Mariana, Sao Paulo - SP</span>
                     </h1>
-                    <div class="pull-right clearfix">
+                    <div class="pull-right posvalue-imovel">
                         <span class="value-ficha">
                                 <span class="subtitle">Valor de Locacao</span>
                                 R$ 1.730
@@ -254,8 +254,8 @@
 
                         <div id="divLogin" class="login-box">
                             <p class="titulo">Já sou cadastrado</p>
-                            <p id="mensagemPadrao" class="desc">Se você já é um usuário do ZAP, pode fazer seu login abaixo.</p>
-                            <p id="mensagemEmailExistente" class="aviso" style="display: none;">O email informado já está cadastrado no ZAP Imóveis. Faça seu login abaixo.</p>
+                            <p id="mensagemPadrao" class="desc">Se você já é um usuário do Sempre da Negócio, pode fazer seu login abaixo.</p>
+                            <p id="mensagemEmailExistente" class="aviso" style="display: none;">O email informado já está cadastrado no Sempre da Negócio Imóveis. Faça seu login abaixo.</p>
                             <div class="rel">
                                 <input type="email" id="txtEmailUsuarioLogin" class="input input-block-level" placeholder="E-mail" data-toggle="tooltip" title="Este campo deve ser preenchido" autocapitalize="off">
                                 <img id="imgLoadingEmail" src="http://cjs.zapcorp.com.br/Content/img/loader.gif" alt="Loading" class="loading hide" width="20" height="20">
@@ -329,7 +329,7 @@
 
                         <div id="divMiniCadastro" class="cadastro-box no-show">
                             <p class="titulo">Não sou cadastrado</p>
-                            <p class="desc">Ainda não está no ZAP? Preencha os campos abaixo para iniciar o cadastro.</p>
+                            <p class="desc">Ainda não está no Sempre da Negócio? Preencha os campos abaixo para iniciar o cadastro.</p>
 
                             <input id="txtNomeUsuarioCadastro" class="input input-block-level span3" type="text" placeholder="Nome e sobrenome">
                             <div class="rel">
@@ -342,9 +342,9 @@
                     </div>
 
                     <div id="cadastro" class="cadastro" style="display: none;">
-                        <p class="desc">Preencha as informações para criar seu cadastro no ZAP e ter acesso a sua conta</p>
+                        <p class="desc">Preencha as informações para criar seu cadastro no Sempre da Negócio e ter acesso a sua conta</p>
 
-                        <p class="aviso">O email informado não está cadastrado no ZAP Imóveis. Faça seu cadastro no formulário abaixo ou tente fazer <a href="#" onclick="ExibirLogin();">login novamente</a>.</p>
+                        <p class="aviso">O email informado não está cadastrado no Sempre da Negócio. Faça seu cadastro no formulário abaixo ou tente fazer <a href="#" onclick="ExibirLogin();">login novamente</a>.</p>
 
                         <input id="txtNomeCadastro" class="input input-block-level span4" type="text" placeholder="Nome e sobrenome" maxlength="100">
                         <div class="rel">

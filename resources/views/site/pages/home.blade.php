@@ -14,9 +14,15 @@
                             class="glyphicon glyphicon-th"></span>Grade</a>
             </div>
         </div>
+        <div class="row">
+            <div class="col-md-12 col-lg-12 hidden-sm hidden-xs banner-propaganda">
+                <img src="{{asset('images/bannerTeste2.jpg')}}" alt="Propaganda" />
+            </div>
+        </div>
+        <br />
         <div id="products" class="row list-group">
             @for($i = 0;$i<10;$i++)
-                <div class="item  col-xs-6 col-lg-4 bloco-item">
+                <div class="item  col-xs-12 col-lg-6 bloco-item">
                     <div class="thumbnail">
                         <img class="group list-group-image" src="http://placehold.it/400x250/000/fff" alt="" />
                         <div class="caption">
@@ -37,6 +43,11 @@
                 </div>
             @endfor
 
+        </div>
+    </div>
+    <div class="col-lg-1 col-md-1 hidden-xs hidden-sm" >
+        <div class="area-banner-lateral">
+            <img src="{{asset('images/bannerTeste1.jpg')}}" alt="Banner teste 1"/>
         </div>
     </div>
 @endsection

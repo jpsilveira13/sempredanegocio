@@ -31,7 +31,10 @@ cores:
 /* ALTERA��ES BOOTSTRAP */
 
 
+.area-banner-lateral{
+margin-top: 220px;
 
+}
 .well{
     background-color: #F7F4EC;
     border: none;
@@ -413,6 +416,13 @@ header {
     -webkit-border-radius: 0px;
     -moz-border-radius: 0px;
     border-radius: 0px;
+}
+
+
+.thumbnail img.group.list-group-image {
+    margin-right: auto;
+    margin-left: auto;
+    padding: 5px;
 }
 
 .thumbnail:hover{
@@ -1775,12 +1785,115 @@ input.span4, textarea.span4 {
     text-align: center;
 }
 
+.informacoes-imovel li:last-child {
+    margin-right: 0;
+}
+
+
+
 
 
 
 /********************************/
-/*          Media Queries       */
+/*   Media Queries breakpoints  */
 /********************************/
+
+@media only screen and (max-width: 959px){
+    /* media página imovel */
+    .side-left, .side-right, .box-default, .container-financiamento .tool, .posvalue-imovel, .release-header>.pull-left, .container-conheca .tab-content-big, .container-conheca .tab-content-small, .check-ofertas {
+        width: 100%;
+    }
+    .side-left {
+        display: -webkit-flex;
+        display: flex;
+        -webkit-flex-flow: column;
+        flex-flow: column;
+    }
+
+    .imovel-area-detalhe h1 {
+        max-width: 100%;
+    }
+
+    .bnt-ancoralead {
+        display: block;
+    }
+    .side-left .box-default {
+        -webkit-flex: 1 1 auto;
+        flex: 1 1 auto;
+    }
+
+    .imovel-area-detalhe  .posvalue-imovel {
+        float: left;
+        text-align: left;
+        margin-top: 10px;
+    }
+
+    .imovel-area-detalhe  .posvalue-imovel .value-ficha {
+        text-align: left;
+    }
+
+    .informacoes-imovel li {
+        margin-bottom: 10px;
+    }
+
+    .informacoes-imovel .pull-right {
+        width: 100%;
+        border-top: 1px solid #ccc;
+        padding-top: 10px;
+    }
+
+    .banner-ficha, .endereco-imovel .link-anchor, .informacoes-imovel .pull-right {
+        float: left;
+    }
+
+    .informacoes-imovel .pull-right {
+        width: 100%;
+        border-top: 1px solid #ccc;
+        padding-top: 10px;
+    }
+
+    .bar-actions li {
+        clear: both;
+    }
+
+    .bar-actions .share-social {
+        margin: 10px 0 0;
+    }
+
+    .bar-actions li .modal-denuncie {
+        float: left;
+        margin-top: 10px;
+    }
+
+    .modal-distancia #box-exemplos-distancia, .modal-distancia .details-distance, #denuncie-modal .span4, #denuncie-modal .tab-pane .span2, .modal-login .login-box, .modalLocalidade .select2-container, #divTags .tags-location-modal-h, #savesearch-modal .field {
+        width: 100%;
+    }
+
+    #divMiniCadastro{
+        display: none;
+
+    }
+
+    .denuncie-modal .text {
+        width: 100%;
+    }
+
+    .denuncie-modal .denuncie-form {
+        width: 100%;
+        margin: 0;
+    }
+
+
+
+
+    .box-default {
+        padding: 10px;
+        margin-bottom: 10px;
+    }
+
+
+
+}
 @media screen and (min-width: 980px){
 
 }
