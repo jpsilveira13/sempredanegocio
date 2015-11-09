@@ -142,7 +142,7 @@
                                 </li>
                             </ul>
                             <!-- telefone contato -->
-                            <div id="phone" class="tab-phone tab-pane active" style="display: block;">
+                            <div id="phone" class="tab-phone tab-pane hide active" style="display: block;">
                                 <p class="text-aoligar">Ao ligar, diga que você viu esse anúncio no Sempre da Negócio.</p>
                                 <span id="number_tel" class="number tc">( 11 ) 2129-2200</span>
 

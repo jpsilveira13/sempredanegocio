@@ -4,7 +4,7 @@
 </div><!-- fechamento da div row que esta dentro do layout -->
 </div><!-- fechamento da container  que esta dentro do layout -->
 
-<div class="container-fluid container-filtros">
+<div class="container-fluid container-filtros" id="barra-fixa-menu">
     <ul class="filtros-principais clearfix">
         <li>
             <label id="labelTipo" class="icone-tipo-temporada filtro" data-label="QUAL O TIPO?">
@@ -146,7 +146,8 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-6 pull-right">
+
+        <div class="col-md-6 pull-right hidden-sm hidden-xs">
             <form class="pull-right">
                 <div class="select2-container pull-right " style="margin-top:9px">
                     <select class="select2-choice" id="sortby">
@@ -174,24 +175,49 @@
         <div class="clearfix"></div>
         <div id="products" class="row list-group">
             @for($i = 0;$i<10;$i++)
-                <div class="item  col-xs-6 col-lg-4 bloco-item">
-                    <div class="thumbnail">
-                        <img class="group list-group-image" src="http://placehold.it/400x250/000/fff" alt="" />
-                        <div class="caption">
-                            <h4 class="group inner list-group-item-heading">Product title</h4>
-                            <p class="group inner list-group-item-text">
-                                Product description... Lorem ipsum dolor sit amet, consectetuer adipiscing elit,
-                                sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.</p>
-                            <div class="row">
-                                <div class="col-xs-12 col-md-6">
-                                    <p class="lead">$21.000</p>
+                <div class="item  col-xs-12 col-sm-6 col-lg-4 col-md-4 bloco-item">
+                    <a class="item-total" href="{{asset('imoveis/1/teste')}}" >
+                        <div class="thumbnail">
+
+                            <img class="group list-group-image content-img-sugestao" src="http://imagens.zapcorp.com.br/imoveis/761283/zap296020/35549b74-f1f2-48cf-8c4a-aa82b84834ee_m.jpg" alt="titulo imagem" />
+
+                            <div class="caption infos-suggest">
+                                <h4 class="group inner list-group-item-heading text-bairro">PRAIA GRANDE<br />
+                                    Arrial do Cabo
+                                </h4>
+                                <p class="group inner list-group-item-text">
+                                <ul class="list-infos unstyled clearfix no-padding" id="tooltip-config">
+                                    <li class="icone-quartos zaptip" data-original-title="Quantidade de quartos" data-toggle="tooltip">4</li>
+                                    <li class="icone-suites zaptip" data-original-title="Quantidade de suítes" data-toggle="tooltip">2</li>
+                                    <li class="icone-vagas zaptip" data-original-title="Quantidade de vagas" data-toggle="tooltip">0</li>
+                                    <li class="icone-hospedes zaptip" data-original-title="Quantidade de pessoas" data-toggle="tooltip">12</li>
+                                </ul>
+
+                                <div class="row">
+                                    <div class="col-xs-12 col-md-12">
+                                        <p class="lead description-anuncio">
+                                            apartamento duplex LOCALIZADO NA PRAIA GRA...
+                                        </p>
+                                    </div>
+
                                 </div>
-                                <div class="col-xs-12 col-md-6">
-                                    <a class="btn btn-success" href="http://www.jquery2dotnet.com">Add to cart</a>
+                                <div class="row mb4">
+                                    <div class="col-xs-6 col-md-6">
+                                        <div class="bottom-suggest">
+                                            <span class="val-imovel">R$ 300</span>
+                                            <span class="text-diaria">/ diária</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-6 col-md-6 ">
+                                        <div class="acoes-minifichas-sugestoes">
+                                            <span class="addicon btnFavorito4090308 icone-favoritada pull-right"  data-toggle="tooltip" data-placement="top" data-original-title="Adicionar à minha lista"></span>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </a>
+
                 </div>
             @endfor
 

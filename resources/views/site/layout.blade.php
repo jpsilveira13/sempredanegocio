@@ -23,7 +23,7 @@
 <header>
 
     <div class="wrapper">
-        <nav class="navbar navbar-inverse navbar-fixed-top">
+        <nav class="navbar navbar-inverse">
             <div class="container">
                 <!-- Brand and toggle get grouped for better mobile display -->
                 <div class="navbar-header">
@@ -40,25 +40,26 @@
                 </div>
 
                 <!-- Collect the nav links, forms, and other content for toggling -->
-                <div class="collapse navbar-collapse menu-header-margem" id="navigation">
-                    <ul class="nav navbar-nav navbar-right position-relative">
+                <div class="collapse navbar-collapse menu-header-margem">
+                    <ul class="nav navbar-nav navbar-right">
                         <li><a href="#">Quem Somos </a></li>
                         <li><a href="{{url('eventos')}}">Eventos</a></li>
 
                         <li><a href="{{url('contato')}}">Contato</a></li>
-                        <li><button type="button" id="btn-roxo" class="btn btn-success navbar-btn btn-circle btn-login-color" ><i class="fa fa-user"></i> Minha Conta</button></li>
+                        <li><a href="#"><span class="glyphicon glyphicon-user"></span> Cadastra-se</a></li>
+                        <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Entrar</a></li>
                     </ul>
                 </div>
             </div>
         </nav>
     </div>
 </header>
-<div class="jumbotron1 subhead">
+<div id="menu-anuncio-fixo" class="jumbotron1 subhead">
     <div class="container">
         <h1>Não perca tempo!</h1>
         <p>Anuncie agora no maior portal de aluguéis do BRASIL.</p>
          <span class="label-free">
-             <a href="{{asset('anuncie')}}" id="btn-orange" class="btn btn-large"> Anuncie Agora </a>
+             <a href="{{asset('anuncie')}}" id="btn-orange" class="btn btn-anuncio"> Anuncie Agora </a>
          </span>
     </div>
 </div>
@@ -86,6 +87,9 @@
     </div>
 </footer>
 
+<a href="#" title="Anuncie" class="btn btn-anuncio" id="btAnuncie">Anuncie Agora</a>
+
+
 <!-- JS -->
 <script src="{{asset('js/jquery-2.1.4.min.js')}}"></script>
 <script src="{{ asset('js/bootstrap.min.js') }}"></script>
@@ -96,7 +100,6 @@
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAExt7vsJrLsnF3UQ7fk_ix51BderXpv6Q"
         type="text/javascript"></script>
 <script src="/vendor/artesaos/cidades/js/scripts.js"></script>
-
 
 
 </body>

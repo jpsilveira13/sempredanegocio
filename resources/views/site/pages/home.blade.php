@@ -5,7 +5,14 @@
     @include('site.pages.categorias_home')
 @stop
 @section('content')
-    <div class="col-md-9">
+    <br />
+    <div class="row">
+        <div class="col-md-12 col-lg-12 hidden-sm hidden-xs banner-propaganda">
+            <img src="{{asset('images/bannerTeste2.jpg')}}" alt="Propaganda" />
+        </div>
+    </div>
+
+    <div class="col-md-11">
         <div class="well well-sm">
             <strong>Exibir como </strong>
             <div class="btn-group">
@@ -14,36 +21,60 @@
                             class="glyphicon glyphicon-th"></span>Grade</a>
             </div>
         </div>
-        <div class="row">
-            <div class="col-md-12 col-lg-12 hidden-sm hidden-xs banner-propaganda">
-                <img src="{{asset('images/bannerTeste2.jpg')}}" alt="Propaganda" />
-            </div>
-        </div>
-        <br />
-        <div id="products" class="row list-group">
-            @for($i = 0;$i<10;$i++)
-                <div class="item  col-xs-12 col-lg-6 bloco-item">
-                    <div class="thumbnail">
-                        <img class="group list-group-image" src="http://placehold.it/400x250/000/fff" alt="" />
-                        <div class="caption">
-                            <h4 class="group inner list-group-item-heading">Product title</h4>
-                            <p class="group inner list-group-item-text">
-                                Product description... Lorem ipsum dolor sit amet, consectetuer adipiscing elit,
-                                sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.</p>
-                            <div class="row">
-                                <div class="col-xs-12 col-md-6">
-                                    <p class="lead">$21.000</p>
-                                </div>
-                                <div class="col-xs-12 col-md-6">
-                                    <a class="btn btn-success" href="{{asset('imoveis/1/teste')}}">Add to cart</a>
+
+        <section class="sugestao-anuncio">
+            <h2>Sugestões de anúncios para você</h2>
+
+            <div id="products" class="row list-group">
+                @for($i = 0;$i<10;$i++)
+                    <div class="item  col-xs-12 col-sm-6 col-lg-4 col-md-4 bloco-item">
+                        <a class="item-total" href="{{asset('imoveis/1/teste')}}" >
+                            <div class="thumbnail">
+
+                                <img class="group list-group-image content-img-sugestao" src="http://imagens.zapcorp.com.br/imoveis/761283/zap296020/35549b74-f1f2-48cf-8c4a-aa82b84834ee_m.jpg" alt="titulo imagem" />
+
+                                <div class="caption infos-suggest">
+                                    <h4 class="group inner list-group-item-heading text-bairro">PRAIA GRANDE<br />
+                                        Arrial do Cabo
+                                    </h4>
+                                    <p class="group inner list-group-item-text">
+                                    <ul class="list-infos unstyled clearfix no-padding" id="tooltip-config">
+                                        <li class="icone-quartos zaptip" data-original-title="Quantidade de quartos" data-toggle="tooltip">4</li>
+                                        <li class="icone-suites zaptip" data-original-title="Quantidade de suítes" data-toggle="tooltip">2</li>
+                                        <li class="icone-vagas zaptip" data-original-title="Quantidade de vagas" data-toggle="tooltip">0</li>
+                                        <li class="icone-hospedes zaptip" data-original-title="Quantidade de pessoas" data-toggle="tooltip">12</li>
+                                    </ul>
+
+                                    <div class="row">
+                                        <div class="col-xs-12 col-md-12">
+                                            <p class="lead description-anuncio">
+                                                apartamento duplex LOCALIZADO NA PRAIA GRA...
+                                            </p>
+                                        </div>
+
+                                    </div>
+                                    <div class="row mb4">
+                                        <div class="col-xs-6 col-md-6">
+                                            <div class="bottom-suggest">
+                                                <span class="val-imovel">R$ 300</span>
+                                                <span class="text-diaria">/ diária</span>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-6 col-md-6 ">
+                                            <div class="acoes-minifichas-sugestoes">
+                                                <span class="addicon btnFavorito4090308 icone-favoritada pull-right"  data-toggle="tooltip" data-placement="top" data-original-title="Adicionar à minha lista"></span>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                </div>
-            @endfor
+                        </a>
 
-        </div>
+                    </div>
+                @endfor
+
+            </div>
+        </section>
     </div>
     <div class="col-lg-1 col-md-1 hidden-xs hidden-sm" >
         <div class="area-banner-lateral">

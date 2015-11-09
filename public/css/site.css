@@ -32,7 +32,7 @@ cores:
 
 
 .area-banner-lateral{
-margin-top: 220px;
+    margin-top: 116px;
 
 }
 .well{
@@ -75,6 +75,29 @@ section{
 
 /* CSS STARTER TAG */
 
+img {
+
+    height: auto;
+    vertical-align: middle;
+    border: 0;
+
+}
+
+a:hover {
+    color: #007c32;
+    text-decoration: underline;
+}
+
+a:hover, a:active {
+    outline: 0;
+    text-decoration: none;
+}
+
+a {
+    color: #5B2B4D;
+    text-decoration: none;
+}
+
 label, select, button, input[type="button"], input[type="submit"], input[type="radio"], input[type="checkbox"] {
     cursor: pointer;
 }
@@ -91,6 +114,19 @@ label, select, button, input[type="button"], input[type="submit"], input[type="r
 .mr10 {
     margin-right: 10px;
 }
+
+.mb4{
+    margin-bottom: 4px;
+
+}
+
+.fixar {
+    position: fixed;
+    margin-top: 0px !important;
+    z-index: 10;
+    top: 0;
+}
+
 
 
 
@@ -215,6 +251,13 @@ header {
 
 }
 
+.btn-anuncio{
+    font-size: 1.3em!important;
+    font-weight: 700!important;
+    padding-left: 50px!important;
+    padding-right: 50px!important;
+
+}
 
 .estilo-fonte-menu li a{
     color: #6C88BB!important;
@@ -303,6 +346,12 @@ header {
     -webkit-box-shadow: inset 0 3px 7px rgba(0, 0, 0, .2), inset 0 -3px 7px rgba(0, 0, 0, .2);
     -moz-box-shadow: inset 0 3px 7px rgba(0, 0, 0, .2), inset 0 -3px 7px rgba(0, 0, 0, .2);
     box-shadow: inset 0 3px 7px rgba(0, 0, 0, .2), inset 0 -3px 7px rgba(0, 0, 0, .2);
+    z-index: 0;
+
+}
+
+.navbar{
+    z-index: 10;
 
 }
 
@@ -422,7 +471,7 @@ header {
 .thumbnail img.group.list-group-image {
     margin-right: auto;
     margin-left: auto;
-    padding: 5px;
+    padding: 8px;
 }
 
 .thumbnail:hover{
@@ -434,6 +483,24 @@ header {
 
 
 }
+
+.item .item-total{
+    width: 100%;
+    text-decoration: none;
+    cursor: pointer;
+    display: block;
+
+}
+
+
+
+.thumbnail .item-total:hover .  {
+    color: #007c32;
+    -webkit-transition: all 0.5s;
+    transition: all 0.5s;
+}
+
+
 
 .item.list-group-item
 {
@@ -464,6 +531,12 @@ header {
     background: #eeeeee;
 }
 
+.infos-suggest .text-bairro {
+    font-size: 1.2em;
+}
+
+
+
 .item.list-group-item:before, .item.list-group-item:after
 {
     display: table;
@@ -487,9 +560,52 @@ header {
 .bloco-item h4, .bloco-item p{
     font-family: pt-sans, sans-serif;
     color : #5B2B4D;
-    text-align: center;
+    text-align: left;
 
 }
+
+.bloco-item h4{
+    line-height: 22px;
+
+}
+
+.infos-suggest .description {
+    height: 32px;
+}
+
+.infos-suggest .list-infos li:first-child {
+    margin-left: 0;
+}
+
+.infos-suggest .list-infos li {
+    float: left;
+    margin-left: 20px;
+    font-size: 16px;
+}
+
+.bottom-suggest .val-imovel {
+    font-size: 18px;
+    color: #5B2B4D;
+    -webkit-transition: all 0.5s;
+    transition: all 0.5s;
+}
+
+.bottom-suggest .text-diaria {
+    font-size: 12px;
+    -webkit-transition: all 0.5s;
+    transition: all 0.5s;
+}
+
+
+
+.description-anuncio {
+    font-size: 14px;
+    margin-top: 4px;
+    border-bottom: 1px solid #EEEBE3;
+    margin-bottom: 4px;
+    padding-bottom: 6px;
+}
+
 
 .list-group-item h4, .list-group-item p{
 
@@ -1905,4 +2021,26 @@ input.span4, textarea.span4 {
 /*      fim Media Queries       */
 /********************************/
 
+
+#products .list-group-item{
+    padding: 0;
+
+}
+
+#btAnuncie{
+    position: fixed;
+    bottom: 10px;
+    left: 30px;
+    overflow: hidden;
+    cursor: pointer;
+    display: none;
+    background-color: #FF6347;
+    color: #FFF!important;
+    font-family: pt-sans, sans-serif;
+    border-radius: 0px;
+    -webkit-border-radius: 0px;
+    -o-border-radius: 0px;
+    -ms-border-radius: 0px;
+
+}
 

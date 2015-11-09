@@ -105,42 +105,16 @@ $(document).ready(function(){
         }
     });
 
-    //IREI AINDA ALTERAR ISSO
-    $('#labelQuarto').mouseover(function(){
-        $('#divQuartos').addClass('display-block');
+    $(window).scroll(function(){
+        if ($(this).scrollTop() > 300) {
+            $('#btAnuncie').fadeIn();
+        } else {
+            $('#btAnuncie').fadeOut();
+        }
     });
 
-    $('#divQuartos').mouseleave(function(){
 
-        $(this).removeClass('display-block');
-    });
 
-    $('#labelFaixaPreco').mouseover(function(){
-        $('#divFaixaPreco').addClass('display-block');
-    });
-
-    $('#divFaixaPreco').mouseleave(function(){
-
-        $(this).removeClass('display-block');
-    });
-
-    $('#labelSuite').mouseover(function(){
-        $('#divSuite').addClass('display-block');
-    });
-
-    $('#divSuite').mouseleave(function(){
-
-        $(this).removeClass('display-block');
-    });
-
-    $('#labelVaga').mouseover(function(){
-        $('#divVaga').addClass('display-block');
-    });
-
-    $('#divVaga').mouseleave(function(){
-
-        $(this).removeClass('display-block');
-    });
 
 
 
@@ -152,10 +126,39 @@ $(document).ready(function(){
         $('#products .item').removeClass('list-group-item');
         $('#products .item').addClass('grid-group-item, bloco-item');
     });
-    $('#nav-wrapper').height($("#nav").height());
-    $('.nav').affix({offset: {top: 260} });
+
+
+    //js quadrado texto
+
+    $("#tooltip-config li").tooltip({
+        placement : 'top'
+    });
+
+    //js página imovel interno
+
+    $('#liTelefone').click(function(){
+        $('#phone').removeClass('hide').addClass('show');
+
+    });
+
+    //js página imoveis barra fixa pesquisar
+
+    var offset = $('#barra-fixa-menu').offset().top;
+    var meuMenu = $('#barra-fixa-menu');
+
+    $(document).on('scroll', function () {
+        if (offset <= $(window).scrollTop()) {
+            meuMenu.addClass('fixar');
+
+        } else {
+            meuMenu.removeClass('fixar');
+
+        }
+    });
 
 
 
 
 });
+
+
