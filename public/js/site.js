@@ -57,43 +57,6 @@ $(document).ready(function(){
 
     })(window, jQuery);
 
-    $('.thumbnails-carousel').thumbnailsCarousel();
-//validação formulario de contato
-    $('.form-validation').bootstrapValidator({
-        //  live: 'enabled',
-        message: 'Esse valor não é válido',
-        feedbackIcons: {
-            valid: 'glyphicon glyphicon-ok',
-            invalid: 'glyphicon glyphicon-remove',
-            validating: 'glyphicon glyphicon-refresh'
-        },
-        fields: {
-
-            bairro: {
-                validators: {
-                    notEmpty: {
-                        message: 'O campo bairro é requerido e não pode ser vazio.'
-                    }
-                }
-            },
-            rua: {
-                validators: {
-                    notEmpty: {
-                        message: 'O campo rua é requerido e não pode ser vazio.'
-                    }
-                }
-            },
-            numero: {
-                validators: {
-                    notEmpty: {
-                        message: 'O campo numero é requerido e não pode ser vazio.'
-                    }
-                }
-            },
-
-        }
-    });
-
     //js slider imovel
 
 
@@ -114,16 +77,17 @@ $(document).ready(function(){
     });
 
 
-
-
-
-
     //js modal evento
     $('#list').click(function(event){event.preventDefault();
         $('#products .item').addClass('list-group-item').removeClass('bloco-item');
+        $('#products .list-infos').addClass('list-item-nav');
+        $('#products .list-infos').addClass('list-item-nav2');
+
     });
     $('#grid').click(function(event){event.preventDefault();
         $('#products .item').removeClass('list-group-item');
+        $('#products .list-infos').removeClass('list-item-nav');
+        $('#products .list-infos').removeClass('list-item-nav2');
         $('#products .item').addClass('grid-group-item, bloco-item');
     });
 
@@ -141,6 +105,32 @@ $(document).ready(function(){
 
     });
 
+
+
+    //js anuncie
+
+    $('.openCategoriaImoveis').click(function(){
+
+        $('.categoria-imoveis').css('display','block');
+        $('.openCategoriaImoveis').addClass('selected-menu') ;
+    });
+
+
+    $('.subCategoriaAp').click(function(){
+
+        $('.subcategoria-imoveis').css('display','block');
+        $('.openCategoriaImoveis').addClass('selected-menu') ;
+    });
+
+
+    $('.openCategoriaVeiculos').click(function(event){event.preventDefault();
+        $('.categoria-imoveis').css('display','block');
+        $('.openCategoriaVeiculos').addClass('selected-menu');
+
+    });
+
+
+
     //js página imoveis barra fixa pesquisar
 
     var offset = $('#barra-fixa-menu').offset().top;
@@ -155,7 +145,6 @@ $(document).ready(function(){
 
         }
     });
-
 
 
 

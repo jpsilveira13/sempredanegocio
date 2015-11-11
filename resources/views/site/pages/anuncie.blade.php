@@ -39,6 +39,42 @@
             <h1 class="anuncio-titulo"><strong>Postar o seu anúncio é GRÁTIS, rápido e fácil!</strong></h1>
             <p class="anuncio-texto-header">O seu anúncio pode ser visto todos os dias por milhares de pessoas.</p>
             <form action=""  method="post" class="form-group anuncio-titulo-estilo form-validation" id="budget-form">
+                <div class="row">
+                    <div class="col-md-12 col-lg-12">
+                        <h2><i class="fa fa-newspaper-o"></i> Tipo de anúncio</h2>
+                        <hr />
+                    </div>
+                </div>
+                <div class="row" id="menu-anuncio">
+                    <div class="col-md-3 col-lg-3 col-xs-3">
+                        <ul class="nav nav-pills nav-stacked list nav-estilo-anuncio text-right">
+                            <li id="" class="item"><p class="text openCategoriaImoveis">Imóveis <span class="glyphicon glyphicon-chevron-right"></span></p></li>
+                            <li id="" class="item openCategoriaVeiculos" ><p class="text">Veículos <span class="glyphicon glyphicon-chevron-right"></span></p></li>
+                            <li id="" class="item"><p class="text openCategoriaEquipamentos">Equipamentos <span class="glyphicon glyphicon-chevron-right"></span></p></li>
+                            <li id="" class="item openCategoriaShow"><p class="text">Festas e Eventos <span class="glyphicon glyphicon-chevron-right"></span></p></li>
+                        </ul>
+                    </div>
+                    <div class="col-md-3 col-lg-3 col-xs-3 categoria-imoveis">
+                        <ul class="nav nav-pills nav-stacked list nav-estilo-anuncio-categoria text-right">
+                            <li class="item subCategoriaAp"><p class="text">Apartamentos <span class="glyphicon glyphicon-chevron-right"></span></p></li>
+                            <li class="item"><p class="text">Casas <span class="glyphicon glyphicon-chevron-right"></span></p></li>
+                            <li class="item"><p class="text">Aluguel de quartos <span class="glyphicon glyphicon-chevron-right"></span></p></li>
+                            <li class="item"><p class="text">Temporada <span class="glyphicon glyphicon-chevron-right"></span></p></li>
+                            <li class="item"><p class="text">Terrenos, sítios e fazendas <span class="glyphicon glyphicon-chevron-right"></span></p></li>
+                            <li class="item"><p class="text">Lojas, salas e outros <span class="glyphicon glyphicon-chevron-right"></span></p></li>
+                        </ul>
+                    </div>
+                    <div class="col-md-3 col-lg-3 col-xs-3 subcategoria-imoveis">
+                        <ul class="nav list nav-pills nav-stacked nav-total nav-estilo-anuncio-subcategoria text-center">
+                            <li class="item"><p class="text">Imóveis </p></li>
+                            <li class="item"><p class="text">Veículos </p></li>
+                            <li class="item"><p class="text">Equipamentos </p></li>
+                            <li class="item"><p class="text">Imóveis </p></li>
+                            <li class="item"><p class="text">Veículos</p></li>
+                            <li class="item"><p class="text">Equipamentos</p></li>
+                        </ul>
+                    </div>
+                </div>
                 <h2><i class="fa fa-map-marker"></i> Sobre a localizao</h2>
                 <hr />
                 <div class="row">
@@ -52,11 +88,12 @@
                             <select  id="cidade" class="form-control input-large" name="cidade"></select>
                         </div>
                         <div class="form-group">
-                            <label class="control-label">Zona/Bairro: *</label>
+                            <label>Zona/Bairro: *</label><br />
                             <input type="text" class="form-control input-large" id="bairro" required placeholder="Nome do bairro ou zona*" name="bairro" />
                         </div>
+
                         <div class="form-group">
-                            <label>Nome da rua: *</label>
+                            <label>Nome da rua: *</label><br />
                             <input type="text" class="form-control input-large" id='rua' placeholder="Ex.: Av. Paulista" name="rua" />
                         </div>
                         <div class="form-group " style="display:none">
@@ -65,18 +102,18 @@
                         </div>
                     </div>
 
-                    <div class="col-md-6 col-lg-6 hidden-sm anuncio-area-mapa">
-                        <div class="anuncio-area-mapa"></div>
+                    <div class="col-md-6 col-lg-6 hidden-sm">
+                        <div class="anuncio-area-mapa center-block"></div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-12 col-lg-12">
-                        <h2><i class="fa fa-home"></i>  Propriedade</h2>
+                        <h2><i class="fa fa-home"></i> Propriedade</h2>
                         <hr />
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-3 col-lg-3 col-xs-12">
+                    <div class="col-md-3 col-lg-3 col-sm-6 col-xs-12">
                         <div class="form-group">
                             <label>Tipo de moradia *</label>
                             <select class="form-control" name="tipo-moradia">
@@ -89,7 +126,7 @@
                             </select>
                         </div>
                     </div>
-                    <div class="col-md-3 col-lg-3 col-xs-12">
+                    <div class="col-md-3 col-lg-3 col-sm-6 col-xs-12">
                         <div class="form-group">
                             <label>Número de quartos *</label>
                             <select class="form-control" name="numero-quarto">
@@ -102,7 +139,7 @@
                             </select>
                         </div>
                     </div>
-                    <div class="col-md-3 col-lg-3 col-xs-12">
+                    <div class="col-md-3 col-lg-3 col-sm-6 col-xs-12">
                         <div class="form-group">
                             <label>Vagas de garagem *</label>
                             <select class="form-control" name="numero-garagem">
@@ -115,7 +152,7 @@
                             </select>
                         </div>
                     </div>
-                    <div class="col-md-3 col-lg-3 col-xs-12">
+                    <div class="col-md-3 col-lg-3 col-sm-6 col-xs-12">
                         <div class="form-group">
                             <label>Quantas suítes *</label>
                             <select class="form-control" name="numero-suite">
@@ -130,33 +167,32 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-4 col-lg-4 col-xs-12">
+                    <div class="col-md-4 col-lg-4 col-sm-6 col-xs-12">
                         <label>Área Construída: *</label>
                         <div class="input-group">
                             <input class="form-control" placeholder="Ex.: 150" type="number" required name="area-construida">
                             <div class="input-group-addon">m²</div>
                         </div>
                     </div>
-                    <div class="col-md-4 col-lg-4 col-xs-12">
+                    <div class="col-md-4 col-lg-4 col-sm-6 col-xs-12">
                         <label>Condomínio: *</label>
                         <div class="input-group">
                             <div class="input-group-addon">R$</div>
-                            <input class="form-control" placeholder="Ex.: 150" type="number" required name="valor-condominio">
-                            <div class="input-group-addon">,00</div>
+                            <input class="form-control" placeholder="Ex.: 150" type="tel" required name="valor-condominio">
+
                         </div>
                     </div>
-                    <div class="col-md-4 col-lg-4 col-xs-12">
+                    <div class="col-md-4 col-lg-4 col-sm-6 col-xs-12">
                         <label>IPTU: *</label>
                         <div class="input-group">
                             <div class="input-group-addon">R$</div>
                             <input  class="form-control" placeholder="Ex.: 150" type="number" required name="valor-condominio">
-                            <div class="input-group-addon">,00</div>
                         </div>
                     </div>
                 </div>
                 <br />
                 <div class="row">
-                    <div id="estilo-checkbox-bootstrap" class="col-md-12 col-lg-12 col-xs-12">
+                    <div id="estilo-checkbox-bootstrap" class="col-md-12 col-lg-12 col-sm-6 col-xs-12">
                         <label>Características</label><br />
                         <label class="checkbox-inline">
                             <input type="checkbox" class="material_checkbox" name="caracteristicas[]"  value="Ar Condicionado">   Ar Condiconado
@@ -241,13 +277,13 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-6 col-lg-6">
+                    <div class="col-md-6 col-lg-6 col-sm-6 col-xs-12">
                         <div class="form-group">
                             <label>Nome: *</label>
                             <input type="text" name='nome-usuario' class="form-control" />
                         </div>
                     </div>
-                    <div class="col-md-6 col-lg-6">
+                    <div class="col-md-6 col-lg-6 col-sm-6 col-xs-12">
                         <div class="form-group">
                             <label>Telefone: *</label>
                             <input type="tel" name='telefone-usuario' maxlength="15" pattern="\([0-9]{2}\) [0-9]{4,6}-[0-9]{3,4}$" class="form-control" />
@@ -255,27 +291,27 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-6 col-lg-6">
+                    <div class="col-md-6 col-lg-6 col-sm-6 col-xs-12">
                         <div class="form-group">
                             <label>Email: *</label>
                             <input type="email" id="email-usuario" name='email-usuario' class="form-control" />
                         </div>
                     </div>
-                    <div class="col-md-6 col-lg-6">
+                    <div class="col-md-6 col-lg-6 col-sm-6 col-xs-12">
                         <div class="form-group">
                             <label>Verificar email: *</label>
-                            <input type="text" required id="verifica-email" name='verifica-email' class="form-control" />
+                            <input type="email" required id="verifica-email" name='verifica-email' class="form-control" />
                         </div>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-6 col-lg-6">
+                    <div class="col-md-6 col-lg-6 col-sm-6 col-xs-12">
                         <div class="form-group">
                             <label>Senha: *</label>
                             <input type="password" id="senha-usuario" name='senha-usuario' class="form-control" />
                         </div>
                     </div>
-                    <div class="col-md-6 col-lg-6">
+                    <div class="col-md-6 col-lg-6 col-sm-6 col-xs-12">
                         <div class="form-group">
                             <label>Verificar Senha: *</label>
                             <input type="password" id="verifica-senha" name='verifica-senha' class="form-control" />
@@ -303,6 +339,4 @@
         </div>
     </div>
 </div><!-- fim do anuncio total -->
-
-
 @endsection

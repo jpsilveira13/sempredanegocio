@@ -27,7 +27,7 @@
 
             <div id="products" class="row list-group">
                 @for($i = 0;$i<10;$i++)
-                    <div class="item  col-xs-12 col-sm-6 col-lg-4 col-md-4 bloco-item">
+                    <div class="item  col-xs-12 col-sm-6 col-lg-3 col-md-3 bloco-item">
                         <a class="item-total" href="{{asset('imoveis/1/teste')}}" >
                             <div class="thumbnail">
 
@@ -43,26 +43,32 @@
                                         <li class="icone-suites zaptip" data-original-title="Quantidade de suítes" data-toggle="tooltip">2</li>
                                         <li class="icone-vagas zaptip" data-original-title="Quantidade de vagas" data-toggle="tooltip">0</li>
                                         <li class="icone-hospedes zaptip" data-original-title="Quantidade de pessoas" data-toggle="tooltip">12</li>
-                                    </ul>
 
-                                    <div class="row">
+                                    </ul>
+                                    <!-- essa div só ficara visivel quando for lista -->
+                                    <div class="col-xs-12 col-md-12 list-item-nav2">
+                                        <p class="lead description-anuncio">
+                                            apartamento duplex LOCALIZADO NA PRAIA GRA...
+                                        </p>
+                                    </div>
+
+                                    <div class="row list-group-hidden">
                                         <div class="col-xs-12 col-md-12">
                                             <p class="lead description-anuncio">
                                                 apartamento duplex LOCALIZADO NA PRAIA GRA...
                                             </p>
                                         </div>
-
                                     </div>
                                     <div class="row mb4">
-                                        <div class="col-xs-6 col-md-6">
+                                        <div class="col-xs-6 col-md-6 ">
                                             <div class="bottom-suggest">
                                                 <span class="val-imovel">R$ 300</span>
                                                 <span class="text-diaria">/ diária</span>
                                             </div>
                                         </div>
-                                        <div class="col-xs-6 col-md-6 ">
+                                        <div class="col-xs-6 col-md-6 fr ">
                                             <div class="acoes-minifichas-sugestoes">
-                                                <span class="addicon btnFavorito4090308 icone-favoritada pull-right"  data-toggle="tooltip" data-placement="top" data-original-title="Adicionar à minha lista"></span>
+                                                <span class="addicon btnFavorito4090308 icone-favoritada pull-right fvestilo"  data-toggle="tooltip" data-placement="top" data-original-title="Adicionar à minha lista"></span>
                                             </div>
                                         </div>
                                     </div>
@@ -71,6 +77,7 @@
                         </a>
 
                     </div>
+
                 @endfor
 
             </div>
