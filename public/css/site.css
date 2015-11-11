@@ -2014,7 +2014,8 @@ input.span4, textarea.span4 {
 
 .selected-menu {
     background-color: #5B2B4D!important;
-    color: #fff!;
+    color: #fff!important;
+
 
 }
 
@@ -2051,12 +2052,16 @@ input.span4, textarea.span4 {
 }
 
 
-.categoria-imoveis, .subcategoria-imoveis{
+.categoria-imoveis, .subcategoria-ap{
 
     display: none;
 
 }
 
+.show{
+    display: block!important;
+
+}
 
 
 

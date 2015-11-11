@@ -39,6 +39,8 @@
             <h1 class="anuncio-titulo"><strong>Postar o seu anúncio é GRÁTIS, rápido e fácil!</strong></h1>
             <p class="anuncio-texto-header">O seu anúncio pode ser visto todos os dias por milhares de pessoas.</p>
             <form action=""  method="post" class="form-group anuncio-titulo-estilo form-validation" id="budget-form">
+                <input type="hidden" value="0" name="categoria" id="categoria">
+                <input type="hidden" value="0" name="subcategoria" id="subcategoria">
                 <div class="row">
                     <div class="col-md-12 col-lg-12">
                         <h2><i class="fa fa-newspaper-o"></i> Tipo de anúncio</h2>
@@ -48,30 +50,93 @@
                 <div class="row" id="menu-anuncio">
                     <div class="col-md-3 col-lg-3 col-xs-3">
                         <ul class="nav nav-pills nav-stacked list nav-estilo-anuncio text-right">
-                            <li id="" class="item"><p class="text openCategoriaImoveis">Imóveis <span class="glyphicon glyphicon-chevron-right"></span></p></li>
-                            <li id="" class="item openCategoriaVeiculos" ><p class="text">Veículos <span class="glyphicon glyphicon-chevron-right"></span></p></li>
-                            <li id="" class="item"><p class="text openCategoriaEquipamentos">Equipamentos <span class="glyphicon glyphicon-chevron-right"></span></p></li>
-                            <li id="" class="item openCategoriaShow"><p class="text">Festas e Eventos <span class="glyphicon glyphicon-chevron-right"></span></p></li>
+                            <li id="1" class="item openCategoriaImoveis"><p class="text">Imóveis <span class="glyphicon glyphicon-chevron-right"></span></p></li>
+                            <li id="2" class="item openCategoriaVeiculos" ><p class="text">Veículos <span class="glyphicon glyphicon-chevron-right"></span></p></li>
+                            <li id="3" class="item"><p class="text openCategoriaEquipamentos">Equipamentos <span class="glyphicon glyphicon-chevron-right"></span></p></li>
+                            <li id="4" class="item openCategoriaShow"><p class="text">Festas e Eventos <span class="glyphicon glyphicon-chevron-right"></span></p></li>
                         </ul>
                     </div>
-                    <div class="col-md-3 col-lg-3 col-xs-3 categoria-imoveis">
+                    <!-- categoria veiculos -->
+                    <div class="col-md-3 col-lg-3 col-xs-3 categoria-veiculos hide">
                         <ul class="nav nav-pills nav-stacked list nav-estilo-anuncio-categoria text-right">
-                            <li class="item subCategoriaAp"><p class="text">Apartamentos <span class="glyphicon glyphicon-chevron-right"></span></p></li>
-                            <li class="item"><p class="text">Casas <span class="glyphicon glyphicon-chevron-right"></span></p></li>
-                            <li class="item"><p class="text">Aluguel de quartos <span class="glyphicon glyphicon-chevron-right"></span></p></li>
-                            <li class="item"><p class="text">Temporada <span class="glyphicon glyphicon-chevron-right"></span></p></li>
-                            <li class="item"><p class="text">Terrenos, sítios e fazendas <span class="glyphicon glyphicon-chevron-right"></span></p></li>
-                            <li class="item"><p class="text">Lojas, salas e outros <span class="glyphicon glyphicon-chevron-right"></span></p></li>
+                            <li id="10" class="item categoria-ap"><p class="text">Carros </p></li>
+                            <li id="20" class="item categoria-cs"><p class="text">Caminhões, ônibus e vans</p></li>
+                            <li id="30" class="item categoria-al"><p class="text">Motos</p></li>
+                            <li id="40" class="item categoria-temp"><p class="text">Peças e acessórios <span class="glyphicon glyphicon-chevron-right"></span></p></li>
                         </ul>
                     </div>
-                    <div class="col-md-3 col-lg-3 col-xs-3 subcategoria-imoveis">
+                    <!-- subcategoria veiculos -->
+                    <div class="col-md-3 col-lg-3 col-xs-3 subcategoria-car hide">
+                        <input type="hidden" value="" name="pecas_type" id="pecas_type">
                         <ul class="nav list nav-pills nav-stacked nav-total nav-estilo-anuncio-subcategoria text-center">
-                            <li class="item"><p class="text">Imóveis </p></li>
-                            <li class="item"><p class="text">Veículos </p></li>
-                            <li class="item"><p class="text">Equipamentos </p></li>
-                            <li class="item"><p class="text">Imóveis </p></li>
-                            <li class="item"><p class="text">Veículos</p></li>
-                            <li class="item"><p class="text">Equipamentos</p></li>
+                            <li id="1" class="item"><p class="text">Carros </p></li>
+                            <li id="2" class="item"><p class="text">Caminhões, ônibus e vans </p></li>
+                            <li id="3" class="item"><p class="text">Motos </p></li>
+                        </ul>
+                    </div>
+                    <!-- categoria imoveis -->
+                    <div class="col-md-3 col-lg-3 col-xs-3 categoria-imoveis hide">
+                        <ul class="nav nav-pills nav-stacked list nav-estilo-anuncio-categoria text-right">
+                            <li id="10" class="item categoria-ap"><p class="text">Apartamentos <span class="glyphicon glyphicon-chevron-right"></span></p></li>
+                            <li id="20" class="item categoria-cs"><p class="text">Casas <span class="glyphicon glyphicon-chevron-right"></span></p></li>
+                            <li id="30" class="item categoria-al"><p class="text">Aluguel de quartos </p></li>
+                            <li id="40" class="item categoria-temp"><p class="text">Temporada <span class="glyphicon glyphicon-chevron-right"></span></p></li>
+                            <li id="50" class="item categoria-tr"><p class="text">Terrenos, sítios e fazendas <span class="glyphicon glyphicon-chevron-right"></span></p></li>
+                            <li id="60" class="item categoria-lj"><p class="text">Lojas, salas e outros</p></li>
+                            <li id="60" class="item categoria-lancamentos"><p class="text">Lançamentos <span class="glyphicon glyphicon-chevron-right"></span></p></li>
+                        </ul>
+                    </div>
+                    <!-- subcategoria imoveis apartamento -->
+                    <div class="col-md-3 col-lg-3 col-xs-3 subcategoria-ap hide">
+                        <input type="hidden" value="" name="apartmento_type" id="apartmento_type">
+                        <ul class="nav list nav-pills nav-stacked nav-total nav-estilo-anuncio-subcategoria text-center">
+                            <li id="1" class="item"><p class="text">Padrão </p></li>
+                            <li id="2" class="item"><p class="text">Cobertura </p></li>
+                            <li id="3" class="item"><p class="text">Duplex/Triplex </p></li>
+                            <li id="4" class="item"><p class="text">Kitchenette </p></li>
+                            <li id="5" class="item"><p class="text">Loft/Studio</p></li>
+
+                        </ul>
+                    </div>
+                    <!-- subcategoria imoveis casa -->
+                    <div class="col-md-3 col-lg-3 col-xs-3 subcategoria-cs hide">
+                        <input type="hidden" value="" name="casa_type" id="casa_type">
+                        <ul class="nav list nav-pills nav-stacked nav-total nav-estilo-anuncio-subcategoria text-center">
+                            <li id="1" class="item "><p class="text">Rua pública </p></li>
+                            <li id="2" class="item"><p class="text">Vila </p></li>
+                            <li id="3" class="item"><p class="text">Condomínio fechado</p></li>
+                        </ul>
+                    </div>
+                    <!-- subcategoria imoveis temporada -->
+                    <div class="col-md-3 col-lg-3 col-xs-3 subcategoria-temp hide">
+                        <input type="hidden" value="" name="temporada_type" id="temporada_type">
+                        <ul class="nav list nav-pills nav-stacked nav-total nav-estilo-anuncio-subcategoria text-center">
+                            <li id="1" class="item "><p class="text">Apartamento </p></li>
+                            <li id="2" class="item"><p class="text">Casa </p></li>
+                            <li id="3" class="item"><p class="text">Quarto</p></li>
+                            <li id="3" class="item"><p class="text">Quarto Compartilhado</p></li>
+                            <li id="3" class="item"><p class="text">Pousada</p></li>
+                        </ul>
+                    </div>
+                    <!-- subcategoria imoveis terrenos e etc -->
+                    <div class="col-md-3 col-lg-3 col-xs-3 subcategoria-tr hide">
+                        <input type="hidden" value="" name="terreno_type" id="terreno_type">
+                        <ul class="nav list nav-pills nav-stacked nav-total nav-estilo-anuncio-subcategoria text-center">
+                            <li id="1" class="item "><p class="text">Terrenos e lotes</p></li>
+                            <li id="2" class="item"><p class="text">Sítios e chácaras </p></li>
+                            <li id="3" class="item"><p class="text">Fazendas</p></li>
+                            <li id="3" class="item"><p class="text">Outros</p></li>
+                        </ul>
+                    </div>
+
+                    <!-- subcategoria lançamentos -->
+                    <div class="col-md-3 col-lg-3 col-xs-3 subcategoria-lancamentos hide">
+                        <input type="hidden" value="" name="lancamento_type" id="lancamento_type">
+                        <ul class="nav list nav-pills nav-stacked nav-total nav-estilo-anuncio-subcategoria text-center">
+                            <li id="1" class="item "><p class="text">Apartamento</p></li>
+                            <li id="2" class="item"><p class="text">Casas </p></li>
+                            <li id="3" class="item"><p class="text">Lojas e salas comerciais</p></li>
+                            <li id="3" class="item"><p class="text">Terreno e loteamentos</p></li>
                         </ul>
                     </div>
                 </div>
@@ -103,7 +168,9 @@
                     </div>
 
                     <div class="col-md-6 col-lg-6 hidden-sm">
-                        <div class="anuncio-area-mapa center-block"></div>
+                        <div class="anuncio-area-mapa center-block">
+                            <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d60081.57254231143!2d-47.93496225!3d-19.750978449999998!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1spt-BR!2sbr!4v1447264947839" width="100%" height="100%" frameborder="0" style="border:0" allowfullscreen></iframe>
+                        </div>
                     </div>
                 </div>
                 <div class="row">
