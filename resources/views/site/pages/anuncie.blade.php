@@ -38,7 +38,8 @@
         <div class="area-anuncio-total">
             <h1 class="anuncio-titulo"><strong>Postar o seu anúncio é GRÁTIS, rápido e fácil!</strong></h1>
             <p class="anuncio-texto-header">O seu anúncio pode ser visto todos os dias por milhares de pessoas.</p>
-            <form action=""  method="post" class="form-group anuncio-titulo-estilo form-validation" id="budget-form">
+            <form action="<?=url('anuncie')?>"  method="post" class="form-group anuncio-titulo-estilo form-validation"  accept-charset="UTF-8" enctype="multipart/form-data" id="budget-form">
+                {!! csrf_field() !!}
                 <input type="hidden" value="0" name="categoria" id="categoria">
                 <input type="hidden" value="0" name="subcategoria" id="subcategoria">
                 <div class="row">
@@ -88,7 +89,7 @@
                     </div>
                     <!-- subcategoria imoveis apartamento -->
                     <div class="col-md-3 col-lg-3 col-xs-3 subcategoria-ap hide">
-                        <input type="hidden" value="" name="apartmento_type" id="apartmento_type">
+                        <input type="hidden" value="" name="apartamento_type" id="apartamento_type">
                         <ul class="nav list nav-pills nav-stacked nav-total nav-estilo-anuncio-subcategoria text-center">
                             <li id="1" class="item"><p class="text">Padrão </p></li>
                             <li id="2" class="item"><p class="text">Cobertura </p></li>
@@ -161,8 +162,8 @@
                             <label>Nome da rua: *</label><br />
                             <input type="text" class="form-control input-large" id='rua' placeholder="Ex.: Av. Paulista" name="rua" />
                         </div>
-                        <div class="form-group " style="display:none">
-                            <label>Número da casa/prédio: *</label>
+                        <div class="form-group">
+                            <label>Número da casa/prédio: *</label><br />
                             <input type="text" class="form-control input-small" id="numero" placeholder="Ex.: 9999" name="numero" />
                         </div>
                     </div>
@@ -183,7 +184,7 @@
                     <div class="col-md-3 col-lg-3 col-sm-6 col-xs-12">
                         <div class="form-group">
                             <label>Tipo de moradia *</label>
-                            <select class="form-control" name="tipo-moradia">
+                            <select class="form-control" name="tipo_moradia">
                                 <option value="">Escolha uma opção</option>
                                 <option value="Apartamento">Apartamento</option>
                                 <option value="Casa">Casa</option>
@@ -196,7 +197,7 @@
                     <div class="col-md-3 col-lg-3 col-sm-6 col-xs-12">
                         <div class="form-group">
                             <label>Número de quartos *</label>
-                            <select class="form-control" name="numero-quarto">
+                            <select class="form-control" name="numero_quarto">
                                 <option value="">Escolher</option>
                                 <option value="1">1</option>
                                 <option value="2">2</option>
@@ -209,7 +210,7 @@
                     <div class="col-md-3 col-lg-3 col-sm-6 col-xs-12">
                         <div class="form-group">
                             <label>Vagas de garagem *</label>
-                            <select class="form-control" name="numero-garagem">
+                            <select class="form-control" name="numero_garagem">
                                 <option value="">Escolher</option>
                                 <option value="1">1</option>
                                 <option value="2">2</option>
@@ -222,7 +223,7 @@
                     <div class="col-md-3 col-lg-3 col-sm-6 col-xs-12">
                         <div class="form-group">
                             <label>Quantas suítes *</label>
-                            <select class="form-control" name="numero-suite">
+                            <select class="form-control" name="numero_suite">
                                 <option value="">Escolher</option>
                                 <option value="1">1</option>
                                 <option value="2">2</option>
@@ -237,7 +238,7 @@
                     <div class="col-md-4 col-lg-4 col-sm-6 col-xs-12">
                         <label>Área Construída: *</label>
                         <div class="input-group">
-                            <input class="form-control" placeholder="Ex.: 150" type="number" required name="area-construida">
+                            <input class="form-control" placeholder="Ex.: 150" type="number" required name="area_construida">
                             <div class="input-group-addon">m²</div>
                         </div>
                     </div>
@@ -245,7 +246,7 @@
                         <label>Condomínio: *</label>
                         <div class="input-group">
                             <div class="input-group-addon">R$</div>
-                            <input class="form-control" placeholder="Ex.: 150" type="tel" required name="valor-condominio">
+                            <input class="form-control" placeholder="Ex.: 150" type="tel" required name="valor_condominio">
 
                         </div>
                     </div>
@@ -253,7 +254,7 @@
                         <label>IPTU: *</label>
                         <div class="input-group">
                             <div class="input-group-addon">R$</div>
-                            <input  class="form-control" placeholder="Ex.: 150" type="number" required name="valor-condominio">
+                            <input  class="form-control" placeholder="Ex.: 150" type="number" required name="valor_iptu">
                         </div>
                     </div>
                 </div>
@@ -305,7 +306,7 @@
                     <div class="col-md-5 col-lg-5 col-xs-12">
                         <div class="form-group">
                             <label>Título : *</label>
-                            <input type="text" name="anuncio-titulo" placeholder="Ex.: Vendo Apartamento" class="form-control" />
+                            <input type="text" name="anuncio_titulo" placeholder="Ex.: Vendo Apartamento" class="form-control" />
                         </div>
                     </div>
                 </div>
@@ -313,7 +314,15 @@
                     <div class="col-md-12 col-lg-12 col-xs-12">
                         <div class="form-group">
                             <label>Descrição : *</label>
-                            <textarea class="form-control" rows="12" name="anuncio-descricao" placeholder="Ex.: Apartamento bem equipado"></textarea>
+                            <textarea class="form-control" rows="12" name="anuncio_descricao" placeholder="Ex.: Apartamento bem equipado"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 col-lg-12 col-xs-12">
+                        <div class="form-group">
+                            <label>Preço : *</label>
+                            <textarea class="form-control"  name="preco" placeholder="Ex.: Apartamento bem equipado"></textarea>
                         </div>
                     </div>
                 </div>
@@ -331,8 +340,12 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="form-group">
-                            <input type="file" />
+                        <div class="form-group ">
+                            <div class="upload-image position-relative">
+                                    <i class="fa fa fa-camera fa-4x mt6 ml23"></i>
+                                    <p class="help-block text-center">Adicionar fotos</p>
+                                    <input type="file" name="anuncio_image" />
+                            </div><br />
                             <p class="help-block">Você pode fazer o upload de 8 fotos (de até 8Mb, em formatos de jpg ou png).</p>
                         </div>
                     </div>

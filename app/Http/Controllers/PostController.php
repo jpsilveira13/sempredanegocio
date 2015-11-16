@@ -5,14 +5,16 @@ namespace sempredanegocio\Http\Controllers;
 use Illuminate\Http\Request;
 use sempredanegocio\Http\Requests;
 use sempredanegocio\Http\Controllers\Controller;
+use sempredanegocio\Post;
 
-class AnuncieController extends Controller{
+class PostController extends Controller
+{
 
-    private $anuncieModel;
+    private $postModel;
 
-    public function __construct(Anuncie $anuncieModel){
+    public function __construct(Post $postModel){
+        $this->postModel = $postModel;
 
-        $this->anuncieModel = $anuncieModel;
     }
 
     public function store(Request $request){
@@ -30,3 +32,7 @@ class AnuncieController extends Controller{
     }
 
 }
+
+
+
+

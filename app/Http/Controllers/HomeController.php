@@ -5,6 +5,8 @@ namespace sempredanegocio\Http\Controllers;
 use Illuminate\Http\Request;
 use sempredanegocio\Http\Requests;
 use sempredanegocio\Http\Controllers\Controller;
+use sempredanegocio\Post;
+use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
@@ -15,13 +17,13 @@ class HomeController extends Controller
     }
 
     public  function imoveis(){
-        //$products = Product::orderBy(DB::raw('RAND()'))->get();
+        $imoveis = Post::orderBy(DB::raw('RAND()'))->get();
 
 
         return view('site.pages.imoveis', [
-            'title' => 'Sempredanegocio.com.br | Não perca tempo! Anuncie',
+            'title' => 'Sempredanegocio.com.br | NÃ£o perca tempo! Anuncie',
             'description' => 'Os melhores alugueis no melhor site.',
-            //'product' => $products
+            'imoveis' => $imoveis
 
         ]);
 
@@ -32,7 +34,7 @@ class HomeController extends Controller
 
 
         return view('site.pages.anuncie', [
-            'title' => 'Sempredanegocio.com.br | Não perca tempo! Anuncie',
+            'title' => 'Sempredanegocio.com.br | NÃ£o perca tempo! Anuncie',
             'description' => 'Os melhores alugueis no melhor site.',
             //'product' => $products
 
@@ -42,7 +44,7 @@ class HomeController extends Controller
     public function imovelInterno(){
 
         return view('site.pages.imovel', [
-            'title' => 'Sempredanegocio.com.br | Não perca tempo! Anuncie.',
+            'title' => 'Sempredanegocio.com.br | NÃ£o perca tempo! Anuncie.',
             'description' => 'Os melhores alugueis no melhor site.',
         ]);
     }

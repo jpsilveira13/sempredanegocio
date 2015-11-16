@@ -174,7 +174,7 @@
         </div>
         <div class="clearfix"></div>
         <div id="products" class="row list-group">
-            @for($i = 0;$i<10;$i++)
+            @foreach($imoveis as $imovel)
                 <div class="item  col-xs-12 col-sm-6 col-lg-4 col-md-4 bloco-item">
                     <a class="item-total" href="{{asset('imoveis/1/teste')}}" >
                         <div class="thumbnail">
@@ -225,7 +225,7 @@
                     </a>
 
                 </div>
-            @endfor
+            @endforeach
 
         </div>
     </div>

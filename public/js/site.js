@@ -225,7 +225,7 @@ $(document).ready(function(){
             $('.subcategoria-temp').removeClass('show').addClass('hide');
             $('.subcategoria-lancamentos').removeClass('show').addClass('hide');
             $('.subcategoria-cs').removeClass('show').addClass('hide');
-            $('#apartmento_type').attr('value','');
+            $('#apartamento_type').attr('value','');
             $('#casa_type').attr('value','');
             $('#terreno_type').attr('value','');
             $('#temporada_type').attr('value','');
@@ -243,7 +243,7 @@ $(document).ready(function(){
             $('.subcategoria-al').removeClass('show').addClass('hide');
             $('.subcategoria-cs').removeClass('show').addClass('hide');
             $('.subcategoria-lancamentos').removeClass('show');
-            $('#apartmento_type').attr('value','');
+            $('#apartamento_type').attr('value','');
             $('#casa_type').attr('value','');
             $('#terreno_type').attr('value','');
             $('#temporada_type').attr('value','');
@@ -268,7 +268,7 @@ $(document).ready(function(){
     $('.categoria-imoveis .item').click(function(){
         var id = $(this).attr('id');
         $('#subcategoria').attr('value', id);
-        $('#apartmento_type').attr('value','');
+        $('#apartamento_type').attr('value','');
         $('#casa_type').attr('value','');
         $('#terreno_type').attr('value','');
         $('#temporada_type').attr('value','');
@@ -300,7 +300,7 @@ $(document).ready(function(){
             $('.subcategoria-temp').removeClass('show').addClass('hide');
             $('.subcategoria-lancamentos').removeClass('show').addClass('hide');
             $('.subcategoria-cs').removeClass('show').addClass('hide');
-            $('#apartmento_type').attr('value','');
+            $('#apartamento_type').attr('value','');
             $('#casa_type').attr('value','');
             $('#terreno_type').attr('value','');
             $('#temporada_type').attr('value','');
@@ -318,7 +318,7 @@ $(document).ready(function(){
             $('.subcategoria-al').removeClass('show').addClass('hide');
             $('.subcategoria-cs').removeClass('show').addClass('hide');
             $('.subcategoria-lancamentos').removeClass('show');
-            $('#apartmento_type').attr('value','');
+            $('#apartamento_type').attr('value','');
             $('#casa_type').attr('value','');
             $('#terreno_type').attr('value','');
             $('#temporada_type').attr('value','');
@@ -349,7 +349,7 @@ $(document).ready(function(){
         }
 
         var id = $(this).attr('id');
-        $('#apartmento_type').attr('value',id);
+        $('#apartamento_type').attr('value',id);
 
     });
     $('.subcategoria-cs .item').click(function(){

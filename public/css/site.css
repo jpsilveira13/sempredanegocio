@@ -251,6 +251,47 @@ header {
 
 }
 
+.upload-image{
+    width: 110px;
+    height: 90px;
+    border: 1px dashed #d2d2d2;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.ml23{
+    margin-left: 23px;
+
+
+}
+
+.mt6{
+    margin-top: 6px;
+
+}
+
+.txt-center{
+    t
+
+}
+
+.upload-image input[type=file] {
+    position: absolute;
+    top: 0;
+    display: none;
+    right: 0;
+    min-width: 100%;
+    min-height: 100%;
+    font-size: 100px;
+    text-align: right;
+    filter: alpha(opacity=0);
+    opacity: 0;
+    outline: none;
+    background: white;
+    cursor: inherit;
+    display: block;
+}
+
 .btn-anuncio{
     font-size: 1.3em!important;
     font-weight: 700!important;
