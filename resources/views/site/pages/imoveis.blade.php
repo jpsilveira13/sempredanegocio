@@ -175,7 +175,7 @@
         <div class="clearfix"></div>
         <div id="products" class="row list-group">
             @foreach($imoveis as $imovel)
-                <div class="item  col-xs-12 col-sm-6 col-lg-4 col-md-4 bloco-item">
+                <div class="item  col-xs-12 col-sm-6 col-lg-3 col-md-3 bloco-item">
                     <a class="item-total" href="{{asset('imoveis/1/teste')}}" >
                         <div class="thumbnail">
 

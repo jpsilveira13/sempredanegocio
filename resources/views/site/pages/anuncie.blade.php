@@ -33,13 +33,25 @@
     </div> -->
 
 
+
+
 <div class="row">
     <div class="col-md-12 col-lg-12">
         <div class="area-anuncio-total">
             <h1 class="anuncio-titulo"><strong>Postar o seu anúncio é GRÁTIS, rápido e fácil!</strong></h1>
             <p class="anuncio-texto-header">O seu anúncio pode ser visto todos os dias por milhares de pessoas.</p>
+            @if (count($errors) > 0)
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+
             <form action="<?=url('anuncie')?>"  method="post" class="form-group anuncio-titulo-estilo form-validation"  accept-charset="UTF-8" enctype="multipart/form-data" id="budget-form">
-                {!! csrf_field() !!}
+                <input type="hidden" name="_token" value="{{ csrf_token() }}">
                 <input type="hidden" value="0" name="categoria" id="categoria">
                 <input type="hidden" value="0" name="subcategoria" id="subcategoria">
                 <div class="row">
@@ -60,19 +72,19 @@
                     <!-- categoria veiculos -->
                     <div class="col-md-3 col-lg-3 col-xs-3 categoria-veiculos hide">
                         <ul class="nav nav-pills nav-stacked list nav-estilo-anuncio-categoria text-right">
-                            <li id="10" class="item categoria-ap"><p class="text">Carros </p></li>
-                            <li id="20" class="item categoria-cs"><p class="text">Caminhões, ônibus e vans</p></li>
-                            <li id="30" class="item categoria-al"><p class="text">Motos</p></li>
-                            <li id="40" class="item categoria-temp"><p class="text">Peças e acessórios <span class="glyphicon glyphicon-chevron-right"></span></p></li>
+                            <li id="20" class="item categoria-ap"><p class="text">Carros </p></li>
+                            <li id="21" class="item categoria-cs"><p class="text">Caminhões, ônibus e vans</p></li>
+                            <li id="22" class="item categoria-al"><p class="text">Motos</p></li>
+                            <li id="23" class="item categoria-temp"><p class="text">Peças e acessórios <span class="glyphicon glyphicon-chevron-right"></span></p></li>
                         </ul>
                     </div>
                     <!-- subcategoria veiculos -->
                     <div class="col-md-3 col-lg-3 col-xs-3 subcategoria-car hide">
                         <input type="hidden" value="" name="pecas_type" id="pecas_type">
                         <ul class="nav list nav-pills nav-stacked nav-total nav-estilo-anuncio-subcategoria text-center">
-                            <li id="1" class="item"><p class="text">Carros </p></li>
-                            <li id="2" class="item"><p class="text">Caminhões, ônibus e vans </p></li>
-                            <li id="3" class="item"><p class="text">Motos </p></li>
+                            <li id="200" class="item"><p class="text">Carros </p></li>
+                            <li id="201" class="item"><p class="text">Caminhões, ônibus e vans </p></li>
+                            <li id="203" class="item"><p class="text">Motos </p></li>
                         </ul>
                     </div>
                     <!-- categoria imoveis -->
@@ -91,11 +103,11 @@
                     <div class="col-md-3 col-lg-3 col-xs-3 subcategoria-ap hide">
                         <input type="hidden" value="" name="apartamento_type" id="apartamento_type">
                         <ul class="nav list nav-pills nav-stacked nav-total nav-estilo-anuncio-subcategoria text-center">
-                            <li id="1" class="item"><p class="text">Padrão </p></li>
-                            <li id="2" class="item"><p class="text">Cobertura </p></li>
-                            <li id="3" class="item"><p class="text">Duplex/Triplex </p></li>
-                            <li id="4" class="item"><p class="text">Kitchenette </p></li>
-                            <li id="5" class="item"><p class="text">Loft/Studio</p></li>
+                            <li id="100" class="item"><p class="text">Padrão </p></li>
+                            <li id="101" class="item"><p class="text">Cobertura </p></li>
+                            <li id="102" class="item"><p class="text">Duplex/Triplex </p></li>
+                            <li id="103" class="item"><p class="text">Kitchenette </p></li>
+                            <li id="104" class="item"><p class="text">Loft/Studio</p></li>
 
                         </ul>
                     </div>
@@ -319,10 +331,10 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-12 col-lg-12 col-xs-12">
+                    <div class="col-md-2 col-lg-2 col-xs-12">
                         <div class="form-group">
                             <label>Preço : *</label>
-                            <textarea class="form-control"  name="preco" placeholder="Ex.: Apartamento bem equipado"></textarea>
+                            <input type="text" class="form-control"  name="preco" placeholder="Ex.: 150.00" />
                         </div>
                     </div>
                 </div>
@@ -342,9 +354,9 @@
                     <div class="row">
                         <div class="form-group ">
                             <div class="upload-image position-relative">
-                                    <i class="fa fa fa-camera fa-4x mt6 ml23"></i>
-                                    <p class="help-block text-center">Adicionar fotos</p>
-                                    <input type="file" name="anuncio_image" />
+                                <i class="fa fa fa-camera fa-4x mt6 ml23"></i>
+                                <p class="help-block text-center">Adicionar fotos</p>
+                                <input type="file" id="anuncio_images[]" multiple="true" name="anuncio_images[]" />
                             </div><br />
                             <p class="help-block">Você pode fazer o upload de 8 fotos (de até 8Mb, em formatos de jpg ou png).</p>
                         </div>

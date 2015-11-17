@@ -20,7 +20,7 @@ Route::get('imoveis', 'HomeController@imoveis');
 
 Route::get('anuncie', 'HomeController@anuncie');
 
-Route::post('anuncie','AnuncieController@store');
+Route::post('anuncie','AnuncioController@store');
 
 Route::get('imoveis/1/teste',[
     'uses' => "HomeController@imovelInterno"

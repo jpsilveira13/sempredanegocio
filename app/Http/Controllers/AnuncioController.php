@@ -3,84 +3,35 @@
 namespace sempredanegocio\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Input;
+use sempredanegocio\Anuncio;
+use sempredanegocio\AnuncioCaracteristica;
 use sempredanegocio\Http\Requests;
 use sempredanegocio\Http\Controllers\Controller;
 
 class AnuncioController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
+    private $anuncioModel;
+
+    public function __construct(Anuncio $anuncioModel){
+
+        $this->anuncioModel = $anuncioModel;
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
+    public function store(Request $request){
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
+        $data_anuncio = $request->all();
+        $caracteristicas = $request->get('caracteristicas');
+        unset($data_anuncio['caracteristicas']);
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
+        $anuncio = Anuncio::create($data_anuncio);
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
+        foreach($caracteristicas as $caracteristica){
+            $caracteristica_classe = new AnuncioCaracteristica();
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
+            $anuncio->caracteristicas()->save($caracteristica_classe);
+        }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+        return view('site.pages.anuncie');
     }
 }

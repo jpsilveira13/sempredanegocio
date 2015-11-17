@@ -54,7 +54,7 @@
         </nav>
     </div>
 </header>
-<div id="menu-anuncio-fixo" class="jumbotron1 subhead">
+<div id="menu-anuncio-fixo" class="jumbotron1 subhead <?=Request::is('anuncie') ? 'hide' : '' ?>">
     <div class="container">
         <h1>Não perca tempo!</h1>
         <p>Anuncie agora no maior portal de aluguéis do BRASIL.</p>
@@ -87,7 +87,8 @@
     </div>
 </footer>
 
-<a href="#" title="Anuncie" class="btn btn-anuncio" id="btAnuncie">Anuncie Agora</a>
+
+<a href="{{url('anuncie')}}" title="Anuncie" class="btn btn-anuncio <?=Request::is('anuncie') ? 'hide' : '' ?>" id="btAnuncie">Anuncie Agora</a>
 
 
 <!-- JS -->

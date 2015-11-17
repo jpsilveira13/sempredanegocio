@@ -13,7 +13,7 @@
     </div>
 
     <div class="col-md-11">
-        <div class="well well-sm">
+        <div class="well well-sm hidden-xs hidden-sm">
             <strong>Exibir como </strong>
             <div class="btn-group">
                 <a href="#" id="list" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-th-list">
@@ -21,7 +21,6 @@
                             class="glyphicon glyphicon-th"></span>Grade</a>
             </div>
         </div>
-
         <section class="sugestao-anuncio">
             <h2>Sugestões de anúncios para você</h2>
 
