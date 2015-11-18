@@ -1,6 +1,6 @@
 <?php
 
-namespace sempredanegocio;
+namespace sempredanegocio\Models;
 
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
@@ -11,10 +11,11 @@ use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 
 class User extends Model implements AuthenticatableContract,
-                                    AuthorizableContract,
-                                    CanResetPasswordContract
+    AuthorizableContract,
+    CanResetPasswordContract
 {
     use Authenticatable, Authorizable, CanResetPassword;
+
 
     /**
      * The database table used by the model.
@@ -36,9 +37,4 @@ class User extends Model implements AuthenticatableContract,
      * @var array
      */
     protected $hidden = ['password', 'remember_token'];
-
-    /*public function anuncioUser(){
-        return $this->hasMany('sempredanegocio\Anuncio');
-
-    } */
 }

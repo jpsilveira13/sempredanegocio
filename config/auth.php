@@ -28,7 +28,7 @@ return [
     |
     */
 
-    'model' => sempredanegocio\User::class,
+    'model' => sempredanegocio\Models\User::class,
 
     /*
     |--------------------------------------------------------------------------

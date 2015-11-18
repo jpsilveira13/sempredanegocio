@@ -28,6 +28,10 @@ Route::get('imoveis/1/teste',[
 
 ]);
 
+Route::get('anuncie',[
+
+   'uses' => 'HomeController@anuncieCategoria'
+]);
 
 
 //Controlador para o login

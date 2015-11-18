@@ -5,6 +5,8 @@ namespace sempredanegocio\Http\Controllers;
 use Illuminate\Http\Request;
 use sempredanegocio\Http\Requests;
 use sempredanegocio\Http\Controllers\Controller;
+use sempredanegocio\Models\Category;
+use sempredanegocio\Models\SubCategory;
 use sempredanegocio\Post;
 use Illuminate\Support\Facades\DB;
 
@@ -39,6 +41,18 @@ class HomeController extends Controller
             //'product' => $products
 
         ]);
+    }
+
+    public function anuncieCategoria(){
+        $anuncieCats = Category::get();
+        $anuncieSubCat = SubCategory::get();
+
+        return view('site.pages.anuncie',[
+            'anunciecats' => $anuncieCats,
+            'anunciesubcats' => $anuncieSubCat
+
+        ]);
+
     }
 
     public function imovelInterno(){

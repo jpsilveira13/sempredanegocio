@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateAnuncioCaracteristicasTable extends Migration
+class CreateSubcategoriesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,11 +12,11 @@ class CreateAnuncioCaracteristicasTable extends Migration
      */
     public function up()
     {
-        Schema::create('anuncio_caracteristicas', function (Blueprint $table) {
+        Schema::create('sub_categories', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('caracteristicas');
-            $table->integer('anuncio_id')->unsigned()->nullabe();
-            $table->foreign('anuncio_id')->references('id')->on('anuncios')->onDelete('cascade');
+            $table->string('name');
+            $table->integer('category_id')->unsigned();
+            $table->foreign('category_id')->references('id')->on('categories');
             $table->timestamps();
         });
     }
@@ -28,6 +28,6 @@ class CreateAnuncioCaracteristicasTable extends Migration
      */
     public function down()
     {
-        Schema::drop('anuncio_caracteristicas');
+        Schema::drop('subcategories');
     }
 }

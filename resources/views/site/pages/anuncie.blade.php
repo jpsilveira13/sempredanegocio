@@ -62,11 +62,16 @@
                 </div>
                 <div class="row" id="menu-anuncio">
                     <div class="col-md-3 col-lg-3 col-xs-3">
+
                         <ul class="nav nav-pills nav-stacked list nav-estilo-anuncio text-right">
-                            <li id="1" class="item openCategoriaImoveis"><p class="text">Imóveis <span class="glyphicon glyphicon-chevron-right"></span></p></li>
+                            @foreach($anunciecats as $anunciecat)
+                                <li id="{{$anunciecat->id}}" class="item openCategoriaImoveis"><p class="text">{{$anunciecat->name}} <span class="glyphicon glyphicon-chevron-right"></span></p></li>
+                                @endforeach
+                                        <!-- <li id="1" class="item openCategoriaImoveis"><p class="text">Imóveis <span class="glyphicon glyphicon-chevron-right"></span></p></li>
+
                             <li id="2" class="item openCategoriaVeiculos" ><p class="text">Veículos <span class="glyphicon glyphicon-chevron-right"></span></p></li>
                             <li id="3" class="item"><p class="text openCategoriaEquipamentos">Equipamentos <span class="glyphicon glyphicon-chevron-right"></span></p></li>
-                            <li id="4" class="item openCategoriaShow"><p class="text">Festas e Eventos <span class="glyphicon glyphicon-chevron-right"></span></p></li>
+                            <li id="4" class="item openCategoriaShow"><p class="text">Festas e Eventos <span class="glyphicon glyphicon-chevron-right"></span></p></li> -->
                         </ul>
                     </div>
                     <!-- categoria veiculos -->
@@ -90,6 +95,10 @@
                     <!-- categoria imoveis -->
                     <div class="col-md-3 col-lg-3 col-xs-3 categoria-imoveis hide">
                         <ul class="nav nav-pills nav-stacked list nav-estilo-anuncio-categoria text-right">
+                            @foreach($anunciesubcats as $anunciesubcat)
+                                <li id="{{$anunciesubcat->id}}" class="item categoria-ap"><p class="text">{{$anunciesubcat->name}} <span class="glyphicon glyphicon-chevron-right"></span></p></li>
+                                @endforeach
+                                        <!--
                             <li id="10" class="item categoria-ap"><p class="text">Apartamentos <span class="glyphicon glyphicon-chevron-right"></span></p></li>
                             <li id="20" class="item categoria-cs"><p class="text">Casas <span class="glyphicon glyphicon-chevron-right"></span></p></li>
                             <li id="30" class="item categoria-al"><p class="text">Aluguel de quartos </p></li>
@@ -97,6 +106,8 @@
                             <li id="50" class="item categoria-tr"><p class="text">Terrenos, sítios e fazendas <span class="glyphicon glyphicon-chevron-right"></span></p></li>
                             <li id="60" class="item categoria-lj"><p class="text">Lojas, salas e outros</p></li>
                             <li id="60" class="item categoria-lancamentos"><p class="text">Lançamentos <span class="glyphicon glyphicon-chevron-right"></span></p></li>
+
+                            -->
                         </ul>
                     </div>
                     <!-- subcategoria imoveis apartamento -->
@@ -193,20 +204,7 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-3 col-lg-3 col-sm-6 col-xs-12">
-                        <div class="form-group">
-                            <label>Tipo de moradia *</label>
-                            <select class="form-control" name="tipo_moradia">
-                                <option value="">Escolha uma opção</option>
-                                <option value="Apartamento">Apartamento</option>
-                                <option value="Casa">Casa</option>
-                                <option value="Rancho">Rancho</option>
-                                <option value="Chácara">Chácara</option>
-                                <option value="Fazenda">Fazenda</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col-md-3 col-lg-3 col-sm-6 col-xs-12">
+                    <div class="col-md-4 col-lg-4 col-sm-6 col-xs-12">
                         <div class="form-group">
                             <label>Número de quartos *</label>
                             <select class="form-control" name="numero_quarto">
@@ -219,7 +217,7 @@
                             </select>
                         </div>
                     </div>
-                    <div class="col-md-3 col-lg-3 col-sm-6 col-xs-12">
+                    <div class="col-md-4 col-lg-4 col-sm-6 col-xs-12">
                         <div class="form-group">
                             <label>Vagas de garagem *</label>
                             <select class="form-control" name="numero_garagem">
@@ -232,7 +230,7 @@
                             </select>
                         </div>
                     </div>
-                    <div class="col-md-3 col-lg-3 col-sm-6 col-xs-12">
+                    <div class="col-md-4 col-lg-4 col-sm-6 col-xs-12">
                         <div class="form-group">
                             <label>Quantas suítes *</label>
                             <select class="form-control" name="numero_suite">

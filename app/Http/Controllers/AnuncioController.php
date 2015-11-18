@@ -23,15 +23,28 @@ class AnuncioController extends Controller
         $data_anuncio = $request->all();
         $caracteristicas = $request->get('caracteristicas');
         unset($data_anuncio['caracteristicas']);
+        $anuncio = Anuncio::create($data_anuncio);
+
+
+        foreach($caracteristicas  as $caracteristica){
+            $caractere = new AnuncioCaracteristica();
+            $anuncio->caracteristicas()->save($caractere);
+
+
+        }
+
+       /* $data_anuncio = $request->all();
+        $caracteristicas = $request->get('caracteristicas');
+        unset($data_anuncio['caracteristicas']);
 
         $anuncio = Anuncio::create($data_anuncio);
 
         foreach($caracteristicas as $caracteristica){
-            $caracteristica_classe = new AnuncioCaracteristica();
+            $caracteristica = new AnuncioCaracteristica();
 
-            $anuncio->caracteristicas()->save($caracteristica_classe);
+            $anuncio->caracteristicas()->save($caracteristica);
         }
 
-        return view('site.pages.anuncie');
+        return view('site.pages.anuncie'); */
     }
 }
