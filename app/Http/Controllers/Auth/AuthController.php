@@ -2,7 +2,7 @@
 
 namespace sempredanegocio\Http\Controllers\Auth;
 
-use sempredanegocio\User;
+use sempredanegocio\Models\User;
 use Validator;
 use sempredanegocio\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
@@ -34,7 +34,7 @@ class AuthController extends Controller
     }
 
     public function getLogin() {
-        return view('auth/login');
+        return view('/');
     }
     /**
      * Get a validator for an incoming registration request.
@@ -64,5 +64,14 @@ class AuthController extends Controller
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
         ]);
+    }
+
+    public function getLogout()
+    {
+        // Log out
+        \Auth::logout();
+        \Session::flush(); // Destroy all sessions
+
+        return redirect('/');
     }
 }

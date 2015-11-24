@@ -137,6 +137,8 @@ return [
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
         'Artesaos\Providers\CidadesServiceProvider',
+        Bestmomo\Scafold\ScafoldServiceProvider::class,
+        Laravel\Socialite\SocialiteServiceProvider::class,
         /*
          * Application Service Providers...
          */
@@ -144,6 +146,7 @@ return [
         sempredanegocio\Providers\AuthServiceProvider::class,
         sempredanegocio\Providers\EventServiceProvider::class,
         sempredanegocio\Providers\RouteServiceProvider::class,
+
 
     ],
 
@@ -193,6 +196,7 @@ return [
         'URL'       => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View'      => Illuminate\Support\Facades\View::class,
+        'Socialize' => Laravel\Socialite\Facades\Socialite::class
 
     ],
 

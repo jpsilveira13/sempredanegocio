@@ -29,10 +29,18 @@ return [
         'region' => 'us-east-1',
     ],
 
+
+
     'stripe' => [
-        'model'  => sempredanegocio\User::class,
+        'model'  => sempredanegocio\Models\User::class,
         'key'    => env('STRIPE_KEY'),
         'secret' => env('STRIPE_SECRET'),
+    ],
+
+    'facebook' => [
+        'client_id' => '190387111301918',
+        'client_secret' => 'ec1279ddb7e26e2927798bbd3dd76f55',
+        'redirect' => 'http://localhost:8000/auth/facebook/callback',
     ],
 
 ];

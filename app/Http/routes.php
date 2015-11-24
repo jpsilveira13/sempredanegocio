@@ -33,8 +33,15 @@ Route::get('anuncie',[
    'uses' => 'HomeController@anuncieCategoria'
 ]);
 
+/* Rotas login facebook */
+Route::get('auth/facebook', 'SocialController@redirectToProvider');
+Route::get('auth/facebook/callback', 'SocialController@handleProviderCallback');
+
 
 //Controlador para o login
+
+
+
 Route::controllers([
     'auth' => 'Auth\AuthController',
     'password' => 'Auth\PasswordController',

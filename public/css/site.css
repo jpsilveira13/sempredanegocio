@@ -270,11 +270,6 @@ header {
 
 }
 
-.txt-center{
-    t
-
-}
-
 .upload-image input[type=file] {
     position: absolute;
     top: 0;
@@ -342,16 +337,42 @@ header {
 
 }
 
-.navbar-inverse .navbar-nav>li>a{
 
-    color: #5B2B4D;
+.user-menu-icon{
+    -moz-transition: all, 0.15s, ease-out;
+    -o-transition: all, 0.15s, ease-out;
+    -webkit-transition: all, 0.15s, ease-out;
+    transition: all, 0.15s, ease-out;
+    -moz-border-radius: 50%;
+    -webkit-border-radius: 50%;
+    border-radius: 50%;
+    background-size: 100%;
+    color: #AAA;
+    letter-spacing: 0;
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    margin-right: 5px;
+    border: 1px solid #EEE;
+    text-align: center;
+    padding-top: 6px;
+    position: relative;
+    top: 2px;
+    word-break: break-all;
+
 }
 
+.user-menu-icon:hover{
+    border-color: #5B2B4D;
 
-.navbar-inverse .navbar-nav>li>a:hover{
-
-    color: #120736;
 }
+
+.align-div-menu{
+    position: relative;
+    top: -9px;
+
+}
+
 
 
 
@@ -439,7 +460,8 @@ header {
 
 }
 
-.navbar-inverse{
+.navbar-sempredanegocio{
+
     background-color: #FAFAFC;
     border-color: #FAFAFC;
     webkit-box-shadow: 0 0 9px 0 #472147;
@@ -447,6 +469,8 @@ header {
     box-shadow: 0 0 9px 0 #472147;
     border-bottom: 1px solid #472147;
 }
+
+
 
 #menu-fixo  li{
     position: relative;
@@ -1569,6 +1593,16 @@ ul.thumbnails-carousel li {
 
 }
 
+#imgFacebook a{
+    color:#fff;
+
+}
+
+#imgFacebook a:hover{
+    text-decoration: none;
+
+}
+
 .contatar-ficha .list-buttons {
     margin-bottom: 10px;
 }
@@ -2266,7 +2300,6 @@ input#images{display: none;}
 /********************************/
 
 
-
 #btAnuncie{
     position: fixed;
     bottom: 10px;
@@ -2283,7 +2316,6 @@ input#images{display: none;}
     -ms-border-radius: 0px;
 
 }
-
 
 
 

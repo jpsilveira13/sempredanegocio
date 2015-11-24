@@ -42,6 +42,14 @@ $factory->define(sempredanegocio\Models\SubCategory::class, function (Faker\Gene
     ];
 });
 
+$factory->define(sempredanegocio\Models\Feature::class, function (Faker\Generator $faker) {
+    return[
+
+        'name' => $faker->word
+    ];
+});
+
+
 
 
 
