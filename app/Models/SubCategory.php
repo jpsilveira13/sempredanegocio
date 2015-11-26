@@ -18,5 +18,11 @@ class SubCategory extends Model
 
     }
 
+    public function advertCategory(){
+        return $this->hasMany(AdvertCategory::class);
+
+    }
+
+
 
 }

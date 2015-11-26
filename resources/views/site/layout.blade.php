@@ -56,7 +56,7 @@
                 <ul class="nav navbar-nav navbar-right">
                     @if(auth()->guest())
                         @if(!Request::is('auth/login'))
-                            <li><a href="#loginModal" id="modalLogin" class="" data-toggle="modal" data-target="#loginModal"><span class="glyphicon glyphicon-user"></span> Cadastra-se</a></li>
+                            <li><a href="#loginModal" id="modalLogin" class="" data-toggle="modal" data-target="#loginModal"><span class="glyphicon glyphicon-user"></span> Iniciar Sessão</a></li>
                             <li><a href="#loginModal" id="modalLogin" class="" data-toggle="modal" data-target="#loginModal"><span class="glyphicon glyphicon-heart"></span> Favoritos</a></li>
                         @endif
                     @else
@@ -69,7 +69,7 @@
                             <ul class="dropdown-menu" role="menu">
                                 <li><a href="{{ url('/auth/logout') }}">Acessar o Painel</a></li>
                                 <li class="divider"></li>
-                                <li><a href="{{ url('/auth/logout') }}">Logout</a></li>
+                                <li><a href="{{ url('/auth/logout') }}">Sair</a></li>
                             </ul>
                         </li>
                         <li><a href="#" id=""><span class="user-menu-icon glyphicon glyphicon-heart"></span> Favoritos</a></li>
@@ -104,7 +104,7 @@
         <div class="container">
             <div class="col-md-12">
                 <div class="footer-texto text-center">
-                    <p>Sempre da negócio  © Todos os direitos reservados.</p>
+                    <p>Sempre da Negócio  © Todos os direitos reservados. Uma empresa do grupo <strong>Inovar</strong></p>
 
                 </div>
             </div>
@@ -210,7 +210,7 @@
 
                     <div id="divMiniCadastro" class="cadastro-box no-show">
                         <p class="titulo">Não sou cadastrado</p>
-                        <p class="desc">Ainda não está no Sempre da Negócio? Preencha os campos abaixo para iniciar o cadastro.</p>
+                        <p class="desc">Preencha os campos abaixo para iniciar o cadastro.</p>
 
                         <input id="txtNomeUsuarioCadastro" class="input input-block-level span3" type="text" placeholder="Nome e sobrenome">
                         <div class="rel">

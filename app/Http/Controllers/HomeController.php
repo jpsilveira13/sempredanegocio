@@ -3,8 +3,11 @@
 namespace sempredanegocio\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Response;
 use sempredanegocio\Http\Requests;
 use sempredanegocio\Http\Controllers\Controller;
+use sempredanegocio\Models\AdvertCategory;
 use sempredanegocio\Models\Category;
 use sempredanegocio\Models\SubCategory;
 use sempredanegocio\Post;
@@ -61,6 +64,35 @@ class HomeController extends Controller
             'title' => 'Sempredanegocio.com.br | Não perca tempo! Anuncie.',
             'description' => 'Os melhores alugueis no melhor site.',
         ]);
+    }
+
+    public  function getCategories(){
+        $cat_id = Input::get('cat_id');
+
+        $subcategories = SubCategory::where('category_id', '=',$cat_id)->get();
+        return Response::json($subcategories);
+
+
+    }
+
+    public  function getAdvSub(){
+        $adv_id = Input::get('adv_id');
+
+        $advertcategories = AdvertCategory::where('subcategory_id', '=',$adv_id)->get();
+       // dd($advertcategories);
+
+        return Response::json($advertcategories);
+
+
+    }
+
+
+    public function testes(){
+
+        $teste = 10;
+        $advsub = AdvertCategory::where('subcategory_id', '=',$teste)->get();
+        dd($advsub);
+
     }
 
 

@@ -68,6 +68,40 @@ $(document).ready(function(){
         }
     });
 
+
+    $('#category_id').on('change',function(e){
+
+        var cat_id = e.target.value;
+
+        $('#divSubCategory').show('fast');
+        $.get('/ajax-subcat?cat_id=' + cat_id, function(data){
+            $('#subcategory').empty();
+            $.each(data, function(index, subcatObj){
+
+                $('#subcategory').append('<option value="'+subcatObj.id+'" id="'+subcatObj.id+'" >'+subcatObj.name+'</option>');
+            });
+
+        });
+
+    });
+
+    $('#subcategory').on('change',function(e){
+        var adv_id = e.target.value;
+
+        $('#divAdvertSubcategory').show('fast');
+        $.get('/ajax-advcat?adv_id=' + adv_id, function(data){
+            $('#advertcategory').empty();
+            $.each(data, function(index, advCatObj){
+
+                $('#advertcategory').append('<option value="'+advCatObj.id+'" id="'+advCatObj.id+'" >'+advCatObj.name+'</option>');
+            });
+
+        });
+
+    });
+
+
+
     $(window).scroll(function(){
         if ($(this).scrollTop() > 300) {
             $('#btAnuncie').fadeIn();

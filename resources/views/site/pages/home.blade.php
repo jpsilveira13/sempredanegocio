@@ -8,7 +8,7 @@
     <br />
     <div class="row">
         <div class="col-md-12 col-lg-12 hidden-sm hidden-xs banner-propaganda">
-            <img src="{{asset('images/bannerTeste2.jpg')}}" alt="Propaganda" />
+            <img src="{{asset('images/bannerTeste2.jpg')}}"  alt="Propaganda" />
         </div>
     </div>
 

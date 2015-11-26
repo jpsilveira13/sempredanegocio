@@ -33,6 +33,22 @@ Route::get('anuncie',[
    'uses' => 'HomeController@anuncieCategoria'
 ]);
 
+Route::get('/ajax-subcat',[
+
+   'uses' => 'HomeController@getCategories'
+]);
+
+Route::get('/ajax-advcat',[
+
+    'uses' => 'HomeController@getAdvSub'
+]);
+
+Route::get('teste',[
+    'uses' => 'HomeController@testes'
+
+
+]);
+
 /* Rotas login facebook */
 Route::get('auth/facebook', 'SocialController@redirectToProvider');
 Route::get('auth/facebook/callback', 'SocialController@handleProviderCallback');

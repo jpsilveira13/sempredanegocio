@@ -518,7 +518,7 @@ header {
 
 
 .item{
-    margin-bottom: 2%;
+
 
 }
 
@@ -2293,11 +2293,43 @@ input#images{display: none;}
         width: auto;
 
     }
+
+
+    #menu-anuncio-responsivo{
+        display: block!important;
+
+    }
+
+    #menu-anuncio{
+        display: none!important;
+
+    }
 }
+
 
 /********************************/
 /*      fim Media Queries       */
 /********************************/
+#menu-anuncio-responsivo{
+    display: none;
+
+}
+
+#menu-anuncio{
+    display: block;
+
+}
+
+#divSubCategory{
+    display: none;
+
+}
+#divAdvertSubcategory{
+    display: none;
+
+}
+
+
 
 
 #btAnuncie{
