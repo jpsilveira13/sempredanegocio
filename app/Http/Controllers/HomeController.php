@@ -9,6 +9,7 @@ use sempredanegocio\Http\Requests;
 use sempredanegocio\Http\Controllers\Controller;
 use sempredanegocio\Models\AdvertCategory;
 use sempredanegocio\Models\Category;
+use sempredanegocio\Models\Feature;
 use sempredanegocio\Models\SubCategory;
 use sempredanegocio\Post;
 use Illuminate\Support\Facades\DB;
@@ -49,10 +50,11 @@ class HomeController extends Controller
     public function anuncieCategoria(){
         $anuncieCats = Category::get();
         $anuncieSubCat = SubCategory::get();
-
+        $anuncieCaract = Feature::get();
         return view('site.pages.anuncie',[
             'anunciecats' => $anuncieCats,
-            'anunciesubcats' => $anuncieSubCat
+            'anunciesubcats' => $anuncieSubCat,
+            'anunciecaracts' => $anuncieCaract
 
         ]);
 

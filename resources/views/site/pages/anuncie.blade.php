@@ -19,8 +19,6 @@
 
                 <form action="<?=url('anuncie')?>"  method="post" class="form-group anuncio-titulo-estilo form-validation"  accept-charset="UTF-8" enctype="multipart/form-data" id="budget-form">
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                    <input type="hidden" value="0" name="categoria" id="categoria">
-                    <input type="hidden" value="0" name="subcategoria" id="subcategoria">
                     <div class="row">
                         <div class="col-md-12 col-lg-12">
                             <h2><i class="fa fa-newspaper-o"></i> Informações do anúncio</h2>
@@ -54,7 +52,7 @@
                             <div id="divAdvertSubcategory" class="center-block col-sm-12 col-xs-12">
                                 <div class="form-group">
                                     <label for="Subcategoria">Seleciona o tipo</label>
-                                    <select class="form-control" id="advertcategory" name="advertcategory">
+                                    <select class="form-control" id="advertcategory" name="adverts_categories_id">
                                         <options value="">Escolha uma</options>
                                     </select>
                                 </div>
@@ -113,7 +111,7 @@
                         </div>
                         <!-- subcategoria imoveis apartamento -->
                         <div class="col-md-4 col-lg-4 col-xs-4 subcategoria-ap hide">
-                            <input type="hidden" value="" name="apartamento_type" id="apartamento_type">
+                            <input type="hidden" value="" name="adverts_categories_id" id="apartamento_type">
                             <ul class="nav list nav-pills nav-stacked nav-total nav-estilo-anuncio-subcategoria text-center">
                                 <li id="100" class="item"><p class="text">Padrão </p></li>
                                 <li id="101" class="item"><p class="text">Cobertura </p></li>
@@ -273,38 +271,13 @@
                     <div class="row">
                         <div id="estilo-checkbox-bootstrap" class="col-md-12 col-lg-12 col-sm-6 col-xs-12">
                             <label>Características</label><br />
-                            <label class="checkbox-inline">
-                                <input type="checkbox" class="material_checkbox" name="caracteristicas[]"  value="Ar Condicionado">   Ar Condiconado
 
-                            </label>
-                            <label class="checkbox-inline">
-                                <input type="checkbox" class="material_checkbox" name="caracteristicas[]" value="Academia">  Academia
-                            </label>
-                            <label class="checkbox-inline">
+                            @foreach($anunciecaracts as $anunciecaract)
+                                <label class="checkbox-inline">
+                                    <input type="checkbox" class="material_checkbox" name="caracteristicas[]"  value="{{$anunciecaract->name}}"> {{$anunciecaract->name}}
 
-                                <input type="checkbox" name="caracteristicas[]" class="material_checkbox" value="Armários Embutidos"> Armários embutidos
-                            </label>
-                            <label class="checkbox-inline">
-                                <input type="checkbox" name="caracteristicas[]" class="material_checkbox" value="Piscina">Piscina
-                            </label>
-                            <label class="checkbox-inline">
-                                <input type="checkbox" name="caracteristicas[]" class="material_checkbox" value="Porteiro">Porteiro 24h
-                            </label>
-                            <label class="checkbox-inline">
-                                <input type="checkbox" name="caracteristicas[]" class="material_checkbox" value="Varanda">  Varanda
-                            </label>
-                            <label class="checkbox-inline">
-                                <input type="checkbox" class="material_checkbox" name="caracteristicas[]" value="Área de Serviço">  Área de serviço
-                            </label>
-                            <label class="checkbox-inline">
-                                <input type="checkbox" class="material_checkbox" name="caracteristicas[]" value="Churrasqueira">  Churrasqueira
-                            </label>
-                            <label class="checkbox-inline">
-                                <input type="checkbox" class="material_checkbox" name="caracteristicas[]" value="Quarto da Empregada">  Quarto de Empregada
-                            </label>
-                            <label class="checkbox-inline">
-                                <input type="checkbox" class="material_checkbox" name="caracteristicas[]" value="Salão de festa">  Salão de festa
-                            </label>
+                                </label>
+                            @endforeach
                         </div>
                     </div>
                     <div class="row">
@@ -361,57 +334,61 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-md-12 col-lg-12">
-                            <h2><i class="fa fa-user"></i> Sua conta</h2>
-                            <hr />
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6 col-lg-6 col-sm-6 col-xs-12">
-                            <div class="form-group">
-                                <label>Nome: *</label>
-                                <input type="text" name='nome-usuario' class="form-control" />
+
+                    <div class="<?=(Request::is('auth/login'))? 'hide' : 'show' ?>">
+                        <div class="row">
+                            <div class="col-md-12 col-lg-12">
+                                <h2><i class="fa fa-user"></i> Sua conta</h2>
+                                <hr />
                             </div>
                         </div>
-                        <div class="col-md-6 col-lg-6 col-sm-6 col-xs-12">
-                            <div class="form-group">
-                                <label>Telefone: *</label>
-                                <input type="tel" name='telefone-usuario' maxlength="15" pattern="\([0-9]{2}\) [0-9]{4,6}-[0-9]{3,4}$" class="form-control" />
+                        <div class="row">
+                            <div class="col-md-6 col-lg-6 col-sm-6 col-xs-12">
+                                <div class="form-group">
+                                    <label>Nome: *</label>
+                                    <input type="text" name='nome-usuario' class="form-control" />
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-lg-6 col-sm-6 col-xs-12">
+                                <div class="form-group">
+                                    <label>Telefone: *</label>
+                                    <input type="tel" name='telefone-usuario' maxlength="15" pattern="\([0-9]{2}\) [0-9]{4,6}-[0-9]{3,4}$" class="form-control" />
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6 col-lg-6 col-sm-6 col-xs-12">
-                            <div class="form-group">
-                                <label>Email: *</label>
-                                <input type="email" id="email-usuario" name='email-usuario' class="form-control" />
+
+                        <div class="row">
+                            <div class="col-md-6 col-lg-6 col-sm-6 col-xs-12">
+                                <div class="form-group">
+                                    <label>Email: *</label>
+                                    <input type="email" id="email-usuario" name='email-usuario' class="form-control" />
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-lg-6 col-sm-6 col-xs-12">
+                                <div class="form-group">
+                                    <label>Verificar email: *</label>
+                                    <input type="email" required id="verifica-email" name='verifica-email' class="form-control" />
+                                </div>
                             </div>
                         </div>
-                        <div class="col-md-6 col-lg-6 col-sm-6 col-xs-12">
-                            <div class="form-group">
-                                <label>Verificar email: *</label>
-                                <input type="email" required id="verifica-email" name='verifica-email' class="form-control" />
+                        <div class="row">
+                            <div class="col-md-6 col-lg-6 col-sm-6 col-xs-12">
+                                <div class="form-group">
+                                    <label>Senha: *</label>
+                                    <input type="password" id="senha-usuario" name='senha-usuario' class="form-control" />
+                                </div>
                             </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6 col-lg-6 col-sm-6 col-xs-12">
-                            <div class="form-group">
-                                <label>Senha: *</label>
-                                <input type="password" id="senha-usuario" name='senha-usuario' class="form-control" />
+                            <div class="col-md-6 col-lg-6 col-sm-6 col-xs-12">
+                                <div class="form-group">
+                                    <label>Verificar Senha: *</label>
+                                    <input type="password" id="verifica-senha" name='verifica-senha' class="form-control" />
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-md-6 col-lg-6 col-sm-6 col-xs-12">
-                            <div class="form-group">
-                                <label>Verificar Senha: *</label>
-                                <input type="password" id="verifica-senha" name='verifica-senha' class="form-control" />
+                            <div class="col-md-6 col-lg-6">
+                                <label>
+                                    <input type="checkbox" > Quero receber novidades do sempre da negócio
+                                </label>
                             </div>
-                        </div>
-                        <div class="col-md-6 col-lg-6">
-                            <label>
-                                <input type="checkbox" > Quero receber novidades do sempre da negócio
-                            </label>
                         </div>
                     </div>
                     <div class="row">

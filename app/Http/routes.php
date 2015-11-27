@@ -20,7 +20,7 @@ Route::get('imoveis', 'HomeController@imoveis');
 
 Route::get('anuncie', 'HomeController@anuncie');
 
-Route::post('anuncie','AnuncioController@store');
+Route::post('anuncie','AdvertController@store');
 
 Route::get('imoveis/1/teste',[
     'uses' => "HomeController@imovelInterno"
@@ -37,6 +37,8 @@ Route::get('/ajax-subcat',[
 
    'uses' => 'HomeController@getCategories'
 ]);
+
+/* rotas ajax */
 
 Route::get('/ajax-advcat',[
 

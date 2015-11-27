@@ -8,6 +8,7 @@ class AdvertCategory extends Model
 {
     protected $table = 'adverts_categories';
     protected $fillable = [
+        'subcategory_id',
         'name',
 
 
@@ -18,6 +19,10 @@ class AdvertCategory extends Model
 
     }
 
+    public function advert(){
+        return $this->hasMany(Advert::class);
+
+    }
 
 
 }

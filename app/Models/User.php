@@ -16,6 +16,11 @@ class User extends Model implements AuthenticatableContract,
 {
     use Authenticatable, Authorizable, CanResetPassword;
 
+    public function advertuser(){
+        return $this->hasMany(Advert::class);
+
+    }
+
     public function getAuthIdentifier()
     {
         return $this->getKey();
