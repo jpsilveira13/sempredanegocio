@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Advert extends Model
 {
+    protected $table = "adverts";
 
     protected $fillable = [
         'user_id',
@@ -42,15 +43,10 @@ class Advert extends Model
 
     }
 
-    public function features(){
-        return $this->belongsToMany(Feature::class,FeatureAdvert::class);
+  public function features(){
+      return $this->belongsToMany(Feature::class);
 
-    }
-
-
-
-
-
+  }
 
 
 }

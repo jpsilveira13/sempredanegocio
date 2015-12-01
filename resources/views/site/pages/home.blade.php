@@ -11,7 +11,19 @@
             <img src="{{asset('images/bannerTeste2.jpg')}}"  alt="Propaganda" />
         </div>
     </div>
+    <div class="row">
 
+        @if (session('status'))
+            <div class="col-md-12">
+
+                <div class="alert alert-success">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                    {{ session('status') }}
+                </div>
+            </div>
+
+        @endif
+    </div>
     <div class="col-md-11">
         <div class="well well-sm hidden-xs hidden-sm">
             <strong>Exibir como </strong>

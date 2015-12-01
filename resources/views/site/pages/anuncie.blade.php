@@ -2,12 +2,15 @@
 
 @section('content')
 
+
+
     <div class="row">
         <div class="col-md-12 col-lg-12">
             <div class="area-anuncio-total">
                 <h1 class="anuncio-titulo"><strong>Postar o seu anúncio é GRÁTIS, rápido e fácil!</strong></h1>
                 <p class="anuncio-texto-header">O seu anúncio pode ser visto todos os dias por milhares de pessoas.</p>
                 @if (count($errors) > 0)
+
                     <div class="alert alert-danger">
                         <ul>
                             @foreach ($errors->all() as $error)
@@ -19,6 +22,7 @@
 
                 <form action="<?=url('anuncie')?>"  method="post" class="form-group anuncio-titulo-estilo form-validation"  accept-charset="UTF-8" enctype="multipart/form-data" id="budget-form">
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                    <input type="hidden" name="user_id" />
                     <div class="row">
                         <div class="col-md-12 col-lg-12">
                             <h2><i class="fa fa-newspaper-o"></i> Informações do anúncio</h2>
@@ -274,7 +278,7 @@
 
                             @foreach($anunciecaracts as $anunciecaract)
                                 <label class="checkbox-inline">
-                                    <input type="checkbox" class="material_checkbox" name="caracteristicas[]"  value="{{$anunciecaract->name}}"> {{$anunciecaract->name}}
+                                    <input type="checkbox" class="material_checkbox" name="caracteristicas[]"  value="{{$anunciecaract->id}}"> {{$anunciecaract->name}}
 
                                 </label>
                             @endforeach
@@ -328,14 +332,15 @@
                                 <div class="upload-image position-relative">
                                     <i class="fa fa fa-camera fa-4x mt6 ml23"></i>
                                     <p class="help-block text-center">Adicionar fotos</p>
-                                    <input type="file" id="anuncio_images[]" multiple="true" name="anuncio_images[]" />
-                                </div><br />
+                                    <input type="file" id="anuncio_images[]" multiple="multiple" name="anuncio_images[]" />
+                                </div>
+                                <br />
                                 <p class="help-block">Você pode fazer o upload de 8 fotos (de até 8Mb, em formatos de jpg ou png).</p>
                             </div>
                         </div>
                     </div>
 
-                    <div class="<?=(Request::is('auth/login'))? 'hide' : 'show' ?>">
+                    <div class="<?=(Request::is('auth/login'))? 'show' : 'hide' ?>">
                         <div class="row">
                             <div class="col-md-12 col-lg-12">
                                 <h2><i class="fa fa-user"></i> Sua conta</h2>
@@ -343,19 +348,6 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-md-6 col-lg-6 col-sm-6 col-xs-12">
-                                <div class="form-group">
-                                    <label>Nome: *</label>
-                                    <input type="text" name='nome-usuario' class="form-control" />
-                                </div>
-                            </div>
-                            <div class="col-md-6 col-lg-6 col-sm-6 col-xs-12">
-                                <div class="form-group">
-                                    <label>Telefone: *</label>
-                                    <input type="tel" name='telefone-usuario' maxlength="15" pattern="\([0-9]{2}\) [0-9]{4,6}-[0-9]{3,4}$" class="form-control" />
-                                </div>
-                            </div>
-                        </div>
 
                         <div class="row">
                             <div class="col-md-6 col-lg-6 col-sm-6 col-xs-12">
@@ -367,7 +359,7 @@
                             <div class="col-md-6 col-lg-6 col-sm-6 col-xs-12">
                                 <div class="form-group">
                                     <label>Verificar email: *</label>
-                                    <input type="email" required id="verifica-email" name='verifica-email' class="form-control" />
+                                    <input type="email" id="verifica-email" name='verifica-email' class="form-control" />
                                 </div>
                             </div>
                         </div>

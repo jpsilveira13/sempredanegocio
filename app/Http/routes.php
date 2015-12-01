@@ -45,7 +45,7 @@ Route::get('/ajax-advcat',[
     'uses' => 'HomeController@getAdvSub'
 ]);
 
-Route::get('teste',[
+Route::get('testes',[
     'uses' => 'HomeController@testes'
 
 

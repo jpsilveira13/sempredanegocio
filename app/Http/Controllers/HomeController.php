@@ -91,9 +91,10 @@ class HomeController extends Controller
 
     public function testes(){
 
-        $teste = 10;
-        $advsub = AdvertCategory::where('subcategory_id', '=',$teste)->get();
-        dd($advsub);
+        return view('testes.testes', [
+            'title' => 'Sempredanegocio.com.br | Não perca tempo! Anuncie.',
+            'description' => 'Os melhores alugueis no melhor site.',
+        ]);
 
     }
 

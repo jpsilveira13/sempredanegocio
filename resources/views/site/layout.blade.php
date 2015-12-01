@@ -117,6 +117,9 @@
 
 <!-- modal area site -->
 
+<!-- modal anuncio criado -->
+
+
 
 <div class="modal modal-login fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
