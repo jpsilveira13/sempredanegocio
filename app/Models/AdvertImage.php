@@ -8,7 +8,7 @@ class AdvertImage extends Model
 {
 
     protected $fillable = [
-        'adverts_id',
+        'advert_id',
         'extension',
 
 

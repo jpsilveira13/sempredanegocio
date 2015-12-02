@@ -16,7 +16,7 @@ class CreateAdvertImagesTable extends Migration
             $table->increments('id');
             $table->string('extension');
             $table->integer('adverts_id')->unsigned();
-            $table->foreign('adverts_id')->references('id')->on('adverts');
+            $table->foreign('advert_id')->references('id')->on('adverts');
             $table->timestamps();
         });
     }

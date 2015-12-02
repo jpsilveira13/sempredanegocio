@@ -29,13 +29,18 @@ class AdvertController extends Controller
         $data['user_id'] = Auth::user()->id;
         $data['adverts_categories_id'] = 100;
         $features = $request->get('caracteristicas');
-        $image = $request->file('anuncio_images');
+        $images = $request->file('anuncio_images');
+
         unset($data['anuncio_images']);
         unset($data['caracteristicas']);
+
         $anuncio = Advert::create($data);
-        $renamed = md5(date('Ymdhms').$image->getClientOriginalName()).'.'.$image->getClientOriginalExtension();
-        $image->move(public_path().'/gallery/', $renamed);
-        $advertImage::create(['adverts_id' => $anuncio->id,'extension' => $renamed]);
+        foreach($images as $image){
+
+            $renamed = md5(date('Ymdhms').$image->getClientOriginalName()).'.'.$image->getClientOriginalExtension();
+            $image->move(public_path().'/gallery/', $renamed);
+            $advertImage::create(['adverts_id' => $anuncio->id,'extension' => $renamed]);
+        }
         $anuncio->features()->sync($features);
         return redirect('/')->with('status', 'Anúncio inserido com sucesso!');
 

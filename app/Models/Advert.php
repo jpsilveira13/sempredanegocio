@@ -30,7 +30,7 @@ class Advert extends Model
 
     public function images(){
 
-        return $this->hasMany(AdvertImage::class);
+        return $this->hasMany('sempredanegocio\Models\AdvertImage');
     }
 
     public function advertcategory(){

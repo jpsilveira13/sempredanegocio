@@ -12,7 +12,14 @@
 */
 
 
-Route::get('/', 'HomeController@index');
+Route::get('/', function(){
+   return view('layout');
+});
+
+Route::get('/', [
+
+    'uses' => 'HomeController@index'
+]);
 
 
 /* imoveis routes */

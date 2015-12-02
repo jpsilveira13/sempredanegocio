@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Response;
 use sempredanegocio\Http\Requests;
 use sempredanegocio\Http\Controllers\Controller;
+use sempredanegocio\Models\Advert;
 use sempredanegocio\Models\AdvertCategory;
 use sempredanegocio\Models\Category;
 use sempredanegocio\Models\Feature;
@@ -18,7 +19,13 @@ class HomeController extends Controller
 {
     public function index(){
 
-        return view('site.pages.home');
+
+        $adverts = Advert::get();
+
+        return view('site.pages.home',[
+            'adverts' => $adverts,
+
+        ]);
 
     }
 
