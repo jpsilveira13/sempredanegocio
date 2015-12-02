@@ -4,11 +4,11 @@ namespace sempredanegocio\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class FeatureImage extends Model
+class AdvertImage extends Model
 {
 
     protected $fillable = [
-        'features_id',
+        'adverts_id',
         'extension',
 
 

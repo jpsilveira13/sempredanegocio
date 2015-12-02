@@ -1,9 +1,6 @@
 @extends('site.layout')
 
 @section('content')
-
-
-
     <div class="row">
         <div class="col-md-12 col-lg-12">
             <div class="area-anuncio-total">
@@ -332,11 +329,12 @@
                                 <div class="upload-image position-relative">
                                     <i class="fa fa fa-camera fa-4x mt6 ml23"></i>
                                     <p class="help-block text-center">Adicionar fotos</p>
-                                    <input type="file" id="anuncio_images[]" multiple="multiple" name="anuncio_images[]" />
+                                    <input type="file" multiple id="photos" name="anuncio_images[]" />
                                 </div>
                                 <br />
                                 <p class="help-block">Você pode fazer o upload de 8 fotos (de até 8Mb, em formatos de jpg ou png).</p>
                             </div>
+                            <ul id="photos_clearing" class="clearing-thumbs upload-imagem no-padding" data-clearing></ul>
                         </div>
                     </div>
 
@@ -348,6 +346,19 @@
                             </div>
                         </div>
                         <div class="row">
+                            <div class="col-md-6 col-lg-6 col-sm-6 col-xs-12">
+                                <div class="form-group">
+                                    <label>Nome: *</label>
+                                    <input type="text" name='nome-usuario' class="form-control" />
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-lg-6 col-sm-6 col-xs-12">
+                                <div class="form-group">
+                                    <label>Telefone: *</label>
+                                    <input type="tel" name='telefone-usuario' maxlength="15" pattern="\([0-9]{2}\) [0-9]{4,6}-[0-9]{3,4}$" class="form-control" />
+                                </div>
+                            </div>
+                        </div>
 
                         <div class="row">
                             <div class="col-md-6 col-lg-6 col-sm-6 col-xs-12">
@@ -359,7 +370,7 @@
                             <div class="col-md-6 col-lg-6 col-sm-6 col-xs-12">
                                 <div class="form-group">
                                     <label>Verificar email: *</label>
-                                    <input type="email" id="verifica-email" name='verifica-email' class="form-control" />
+                                    <input type="email"  id="verifica-email" name='verifica-email' class="form-control" />
                                 </div>
                             </div>
                         </div>

@@ -9,7 +9,9 @@ use Illuminate\Support\Facades\Redirect;
 use sempredanegocio\Http\Requests;
 use sempredanegocio\Http\Controllers\Controller;
 use sempredanegocio\Models\Advert;
+use sempredanegocio\Models\AdvertImage;
 use sempredanegocio\Models\Feature;
+
 
 class AdvertController extends Controller
 {
@@ -20,19 +22,21 @@ class AdvertController extends Controller
         $this->advertModel = $advertModel;
     }
 
-    public function store(Request $request){
+    public function store(Request $request, AdvertImage $advertImage){
 
         $data = $request->all();
-        dd($data);
+
         $data['user_id'] = Auth::user()->id;
         $data['adverts_categories_id'] = 100;
         $features = $request->get('caracteristicas');
-        $images = $request->get('anuncio_images');
-        dd($images);
+        $image = $request->file('anuncio_images');
+        unset($data['anuncio_images']);
         unset($data['caracteristicas']);
         $anuncio = Advert::create($data);
+        $renamed = md5(date('Ymdhms').$image->getClientOriginalName()).'.'.$image->getClientOriginalExtension();
+        $image->move(public_path().'/gallery/', $renamed);
+        $advertImage::create(['adverts_id' => $anuncio->id,'extension' => $renamed]);
         $anuncio->features()->sync($features);
-        //return \Redirect::to('/');
         return redirect('/')->with('status', 'Anúncio inserido com sucesso!');
 
     }

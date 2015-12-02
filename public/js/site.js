@@ -1,7 +1,62 @@
 $(document).ready(function(){
 
-    //js slider imovel
 
+        //JS carregar fotos ;D
+    var multiPhotoDisplay;
+
+    $('#photos').on('change', function(e) {
+        return multiPhotoDisplay(this);
+    });
+
+    this.readURL = function(input) {
+        var reader;
+        if (input.files && input.files[0]) {
+            reader = new FileReader();
+            reader.onload = function(e) {
+                var $preview;
+                $('.image_to_upload').attr('src', e.target.result);
+                $preview = $('.preview');
+                if ($preview.hasClass('hide')) {
+                    return $preview.toggleClass('hide');
+                }
+            };
+            return reader.readAsDataURL(input.files[0]);
+        }
+    };
+
+    multiPhotoDisplay = function(input) {
+        var file, i, len, reader, ref;
+        if (input.files && input.files[0]) {
+            ref = input.files;
+            for (i = 0, len = ref.length; i < len; i++) {
+                file = ref[i];
+                reader = new FileReader();
+                reader.onload = function(e) {
+                    var image_html;
+                    image_html =
+                        "<li>" +
+                            "<div class='image-anuncio'>" +
+                            "<span></span>" +
+                            "<img width=\"80\" height=\"38\" src=\"" + e.target.result + "\">" +
+                            "</div>" +
+                        "</li>";
+                    $('#photos_clearing').append(image_html);
+                    if ($('.pics-label.hide').length !== 0) {
+                        $('.pics-label').toggle('hide').removeClass('hide');
+                    }
+                    return $(document).foundation('orbit','reflow');
+                };
+                reader.readAsDataURL(file);
+            }
+            window.post_files = input.files;
+            if (window.post_files !== void 0) {
+                return input.files = $.merge(window.post_files, input.files);
+            }
+        }
+    };
+
+
+    //js slider imovel
     (function(window, $, undefined) {
 
         var conf = {
@@ -437,18 +492,7 @@ $(document).ready(function(){
 
 //js página imoveis barra fixa pesquisar
 
-    var offset = $('#barra-fixa-menu').offset().top;
-    var meuMenu = $('#barra-fixa-menu');
 
-    $(document).on('scroll', function () {
-        if (offset <= $(window).scrollTop()) {
-            meuMenu.addClass('fixar');
-
-        } else {
-            meuMenu.removeClass('fixar');
-
-        }
-    });
 
     //multiple images anuncio
 
@@ -488,25 +532,13 @@ $(document).ready(function(){
     });
 
 
-    function reorderImages(){
-        // get the items
-        var images = $('#sortable li');
 
-        var i=0, nrOrder=0;
-        for(i;i<images.length;i++){
-
-            var image = $(images[i]);
-
-            if( image.hasClass('ui-state-default') && !image.hasClass('ui-sortable-placeholder') ){
-                image.attr('data-order', nrOrder);
-                var orderNumberBox = image.find('.order-number');
-                orderNumberBox.html(nrOrder+1);
-                nrOrder++;
-            }// end if;
-
-        }// end for;
-    }
 
 });
+
+
+
+
+
 
 

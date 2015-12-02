@@ -11,4 +11,6 @@ class Feature extends Model
         return $this->belongsToMany(Advert::class);
 
     }
+
+
 }

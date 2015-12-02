@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateFeatureImagesTable extends Migration
+class CreateAdvertImagesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,11 +12,11 @@ class CreateFeatureImagesTable extends Migration
      */
     public function up()
     {
-        Schema::create('feature_images', function (Blueprint $table) {
+        Schema::create('advert_images', function (Blueprint $table) {
             $table->increments('id');
             $table->string('extension');
-            $table->integer('features_id')->unsigned();
-            $table->foreign('features_id')->references('id')->on('features');
+            $table->integer('adverts_id')->unsigned();
+            $table->foreign('adverts_id')->references('id')->on('adverts');
             $table->timestamps();
         });
     }
@@ -28,6 +28,6 @@ class CreateFeatureImagesTable extends Migration
      */
     public function down()
     {
-        Schema::drop('feature_images');
+        Schema::drop('advert_images');
     }
 }

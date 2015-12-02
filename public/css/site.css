@@ -2348,6 +2348,48 @@ input#images{display: none;}
     -ms-border-radius: 0px;
 
 }
+.upload-imagem{
+    display: block;
+
+}
+
+.upload-imagem li{
+    float: left;
+    overflow: hidden;
+    width: 102px;
+    margin: 0 6px 0 0;
+    position: relative;
+    height: 95px;
+    margin-bottom: 10px;
+}
+
+.image-anuncio{
+
+    background: none repeat scroll 0 0 #FFF;
+    display: table-cell;
+    border: 1px solid #38b;
+    width: 102px;
+    height: 75px;
+    vertical-align: middle;
+    text-align: center;
+    position: absolute;
+    top: 20px;
+    z-index: 100;
+
+}
+
+.image-anuncio span{
+    height: 100%;
+    display: inline-block;
+
+}
+
+.image-anuncio img{
+    position: relative;
+    top:-29px;
+
+}
+
 
 
 /* modal css login */
