@@ -1,7 +1,7 @@
 $(document).ready(function(){
 
 
-        //JS carregar fotos ;D
+    //JS carregar fotos ;D
     var multiPhotoDisplay;
 
     $('#photos').on('change', function(e) {
@@ -35,10 +35,10 @@ $(document).ready(function(){
                     var image_html;
                     image_html =
                         "<li>" +
-                            "<div class='image-anuncio'>" +
-                            "<span></span>" +
-                            "<img width=\"80\" height=\"38\" src=\"" + e.target.result + "\">" +
-                            "</div>" +
+                        "<div class='image-anuncio'>" +
+                        "<span></span>" +
+                        "<img width=\"80\" height=\"38\" src=\"" + e.target.result + "\">" +
+                        "</div>" +
                         "</li>";
                     $('#photos_clearing').append(image_html);
                     if ($('.pics-label.hide').length !== 0) {
@@ -54,7 +54,6 @@ $(document).ready(function(){
             }
         }
     };
-
 
     //js slider imovel
     (function(window, $, undefined) {

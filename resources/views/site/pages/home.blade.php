@@ -13,16 +13,7 @@
     </div>
     <div class="row">
 
-        @if (session('status'))
-            <div class="col-md-12">
 
-                <div class="alert alert-success">
-                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                    {{ session('status') }}
-                </div>
-            </div>
-
-        @endif
     </div>
     <div class="col-md-11">
         <div class="well well-sm hidden-xs hidden-sm">
@@ -39,7 +30,7 @@
             <div id="products" class="row list-group">
                 @foreach($adverts as $advert)
                     <div class="item  col-xs-12 col-sm-6 col-lg-3 col-md-3 bloco-item">
-                        <a class="item-total" href="{{asset('imoveis/1/teste')}}" >
+                        <a class="item-total" href="{{url('/')}}/imoveis/{{$advert->url_anuncio}}" >
                             <div class="thumbnail">
                                 @if(count($advert->images))
                                     <img class="group list-group-image content-img-sugestao" src="{{url('gallery/'.$advert->images()->first()->extension)}}" width="220" height="229" alt="titulo imagem" />
@@ -61,7 +52,7 @@
                                     <!-- essa div só ficara visivel quando for lista -->
                                     <div class="col-xs-12 col-md-12 list-item-nav2">
                                         <p class="lead description-anuncio">
-                                            tipo
+                                            {{str_limit($advert->anuncio_descricao,$limit = 42, $end=" ...")}}
                                         </p>
                                     </div>
 

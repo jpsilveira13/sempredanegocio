@@ -53,7 +53,7 @@
                             <div id="divAdvertSubcategory" class="center-block col-sm-12 col-xs-12">
                                 <div class="form-group">
                                     <label for="Subcategoria">Seleciona o tipo</label>
-                                    <select class="form-control" id="advertcategory" name="adverts_categories_id">
+                                    <select class="form-control" id="advertcategory" name="advert_categories_id">
                                         <options value="">Escolha uma</options>
                                     </select>
                                 </div>
@@ -112,7 +112,7 @@
                         </div>
                         <!-- subcategoria imoveis apartamento -->
                         <div class="col-md-4 col-lg-4 col-xs-4 subcategoria-ap hide">
-                            <input type="hidden" value="" name="adverts_categories_id" id="apartamento_type">
+                            <input type="hidden" value="" name="advert_categories_id" id="apartamento_type">
                             <ul class="nav list nav-pills nav-stacked nav-total nav-estilo-anuncio-subcategoria text-center">
                                 <li id="100" class="item"><p class="text">Padrão </p></li>
                                 <li id="101" class="item"><p class="text">Cobertura </p></li>

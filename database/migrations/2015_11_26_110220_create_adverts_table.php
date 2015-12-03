@@ -28,10 +28,11 @@ class CreateAdvertsTable extends Migration
             $table->string('anuncio_titulo');
             $table->text('anuncio_descricao');
             $table->decimal('preco');
+            $table->string('url_anuncio');
             $table->integer('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users');
-            $table->integer('adverts_categories_id')->unsigned();
-            $table->foreign('adverts_categories_id')->references('id')->on('adverts_categories');
+            $table->integer('advert_categories_id')->unsigned();
+            $table->foreign('advert_categories_id')->references('id')->on('adverts_categories');
 
             $table->timestamps();
         });

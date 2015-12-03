@@ -27,7 +27,8 @@ class AdvertController extends Controller
         $data = $request->all();
 
         $data['user_id'] = Auth::user()->id;
-        $data['adverts_categories_id'] = 100;
+        $data['advert_categories_id'] = 100;
+        $data['url_anuncio'] = str_slug($data['anuncio_titulo']);
         $features = $request->get('caracteristicas');
         $images = $request->file('anuncio_images');
 

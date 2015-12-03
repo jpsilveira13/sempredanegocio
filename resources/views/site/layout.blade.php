@@ -15,6 +15,7 @@
     <link href='//cdn.jsdelivr.net/devicons/1.8.0/css/devicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="{{ asset('css/nouislider.min.css') }}">
     <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/jquery.bootstrapvalidator/0.5.2/css/bootstrapValidator.min.css"/>
+    <link rel="stylesheet" href="{{ asset('css/sweetalert.css') }}"/>
 
 
 </head>
@@ -297,15 +298,23 @@
 <!-- Facebook api -->
 
 <script src="{{asset('js/jquery-2.1.4.min.js')}}"></script>
-<script src="{{ asset('js/bootstrap.min.js') }}"></script>
-<script src="{{ asset('js/npm.js') }}"></script>
+<script src="{{asset('js/bootstrap.min.js')}}"></script>
+<script src="{{asset('js/npm.js')}}"></script>
 <script src="{{asset('js/site.js')}}"></script>
-<script src="{{ asset('js/nouislider.min.js') }}"></script>
+<script src="{{asset('js/nouislider.min.js')}}"></script>
+<script src="{{asset('js/sweetalert.min.js')}}"></script>
 <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery.bootstrapvalidator/0.5.2/js/bootstrapValidator.min.js"></script>
 <!--<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAExt7vsJrLsnF3UQ7fk_ix51BderXpv6Q"
        type="text/javascript"></script> -->
 
 <script src="/vendor/artesaos/cidades/js/scripts.js"></script>
+@if (session('status'))
+    <script>
+        swal("Parabéns!", "Seu anúncio foi criado com sucesso!", "success")
+    </script>
+
+
+@endif
 
 
 </body>
