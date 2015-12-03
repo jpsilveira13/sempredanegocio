@@ -15,7 +15,7 @@ class CreateAdvertImagesTable extends Migration
         Schema::create('advert_images', function (Blueprint $table) {
             $table->increments('id');
             $table->string('extension');
-            $table->integer('adverts_id')->unsigned();
+            $table->integer('advert_id')->unsigned();
             $table->foreign('advert_id')->references('id')->on('adverts');
             $table->timestamps();
         });

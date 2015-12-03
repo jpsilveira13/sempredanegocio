@@ -41,9 +41,8 @@
                     <div class="item  col-xs-12 col-sm-6 col-lg-3 col-md-3 bloco-item">
                         <a class="item-total" href="{{asset('imoveis/1/teste')}}" >
                             <div class="thumbnail">
-                                <?=$advert->images->extension ?>
-                                @if(count($advert->images()))
-                                    <img class="group list-group-image content-img-sugestao" src="" width="220" height="229" alt="titulo imagem" />
+                                @if(count($advert->images))
+                                    <img class="group list-group-image content-img-sugestao" src="{{url('gallery/'.$advert->images()->first()->extension)}}" width="220" height="229" alt="titulo imagem" />
                                 @else
                                     <img class="group list-group-image content-img-sugestao" src="http://imagens.zapcorp.com.br/imoveis/761283/zap296020/35549b74-f1f2-48cf-8c4a-aa82b84834ee_m.jpg" width="220" height="229" alt="titulo imagem" />
                                 @endif
