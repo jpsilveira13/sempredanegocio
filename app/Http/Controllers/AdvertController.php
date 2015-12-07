@@ -11,6 +11,7 @@ use sempredanegocio\Http\Controllers\Controller;
 use sempredanegocio\Models\Advert;
 use sempredanegocio\Models\AdvertImage;
 use sempredanegocio\Models\Feature;
+use Intervention\Image\Facades\Image;
 
 
 class AdvertController extends Controller
@@ -34,17 +35,20 @@ class AdvertController extends Controller
 
         unset($data['anuncio_images']);
         unset($data['caracteristicas']);
-
         $anuncio = Advert::create($data);
         foreach($images as $image){
-
             $renamed = md5(date('Ymdhms').$image->getClientOriginalName()).'.'.$image->getClientOriginalExtension();
-            $image->resize('603','302')->move(public_path().'/gallery/', $renamed);
+            $path = public_path().'/gallery/'.$renamed;
+            Image::make($image->getRealPath())->resize(603,362)->save($path);
             $advertImage::create(['advert_id' => $anuncio->id,'extension' => $renamed]);
+
         }
         $anuncio->features()->sync($features);
         return redirect('/')->with('status', 'Anúncio inserido com sucesso!');
 
     }
+
+
+
 
 }

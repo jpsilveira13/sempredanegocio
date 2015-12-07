@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-br" ng-app="myApp">
 <head>
 
     <meta charset="utf-8">
@@ -295,7 +295,6 @@
 
 
 <!-- JS -->
-<!-- Facebook api -->
 
 <script src="{{asset('js/jquery-2.1.4.min.js')}}"></script>
 <script src="{{asset('js/bootstrap.min.js')}}"></script>
@@ -307,6 +306,9 @@
 <!--<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAExt7vsJrLsnF3UQ7fk_ix51BderXpv6Q"
        type="text/javascript"></script> -->
 
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
+<script src="{{asset('js/ng-infinite-scroll.min.js')}}"></script>
+<script src="{{asset('js/siteangular.js')}}"></script>
 <script src="/vendor/artesaos/cidades/js/scripts.js"></script>
 @if (session('status'))
     <script>

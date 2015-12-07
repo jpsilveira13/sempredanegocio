@@ -139,7 +139,8 @@ return [
         'Artesaos\Providers\CidadesServiceProvider',
         Bestmomo\Scafold\ScafoldServiceProvider::class,
         Laravel\Socialite\SocialiteServiceProvider::class,
-        'Intervention\Image\ImageServiceProvider',
+        Illuminate\Html\HtmlServiceProvider::class,
+        Intervention\Image\ImageServiceProvider::class,
         /*
          * Application Service Providers...
          */
@@ -198,7 +199,10 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View'      => Illuminate\Support\Facades\View::class,
         'Socialize' => Laravel\Socialite\Facades\Socialite::class,
-        'Image'     => 'Intervention\Image\Facades\Image'
+        'Form'      => Illuminate\Html\FormFacade::class,
+        'HTML'      => Illuminate\Html\HtmlFacade::class,
+        'Image'     => Intervention\Image\Facades\Image::class
+
 
     ],
 

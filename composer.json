@@ -12,7 +12,8 @@
     "laravel/socialite": "~2.0",
     "guzzlehttp/guzzle": "~4.0",
     "bestmomo/scafold": "dev-master",
-    "intervention/image": "^2.3"
+    "illuminate/html": "5.*",
+    "intervention/image": "dev-master"
   },
   "require-dev": {
     "fzaninotto/faker": "~1.4",

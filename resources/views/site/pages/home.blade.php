@@ -27,7 +27,7 @@
         <section class="sugestao-anuncio">
             <h2>Sugestões de anúncios para você</h2>
 
-            <div id="products" class="row list-group">
+            <div id="products" class="row list-group" ng-controller="ContentsController">
                 @foreach($adverts as $advert)
                     <div class="item  col-xs-12 col-sm-6 col-lg-3 col-md-3 bloco-item">
                         <a class="item-total" href="{{url('/')}}/imovel/{{$advert->id}}/{{$advert->url_anuncio}}" >

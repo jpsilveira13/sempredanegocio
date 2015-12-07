@@ -48,7 +48,7 @@
 
                                 @foreach($advert->images()->get() as $images)
                                     <div class="item <?php if($j==0){echo 'active';}?> srle">
-                                        <img style="width:603px;height:362px" src="{{url('gallery/'.$images->extension)}}" alt="<?=$j?>.jpg" class="img-responsive">
+                                        <img  src="{{url('gallery/'.$images->extension)}}" alt="<?=$j?>.jpg" class="img-responsive">
                                         <div class="carousel-caption">
                                             <p></p>
                                         </div>
