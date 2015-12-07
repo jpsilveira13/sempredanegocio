@@ -11,7 +11,8 @@
     "artesaos/cidadesbr": "^1.0",
     "laravel/socialite": "~2.0",
     "guzzlehttp/guzzle": "~4.0",
-    "bestmomo/scafold": "dev-master"
+    "bestmomo/scafold": "dev-master",
+    "intervention/image": "^2.3"
   },
   "require-dev": {
     "fzaninotto/faker": "~1.4",

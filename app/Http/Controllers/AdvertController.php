@@ -39,15 +39,12 @@ class AdvertController extends Controller
         foreach($images as $image){
 
             $renamed = md5(date('Ymdhms').$image->getClientOriginalName()).'.'.$image->getClientOriginalExtension();
-            $image->move(public_path().'/gallery/', $renamed);
+            $image->resize('603','302')->move(public_path().'/gallery/', $renamed);
             $advertImage::create(['advert_id' => $anuncio->id,'extension' => $renamed]);
         }
         $anuncio->features()->sync($features);
         return redirect('/')->with('status', 'Anúncio inserido com sucesso!');
 
     }
-
-
-
 
 }

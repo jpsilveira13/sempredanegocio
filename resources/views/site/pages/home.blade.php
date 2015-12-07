@@ -12,7 +12,7 @@
         </div>
     </div>
     <div class="row">
-
+        <h2>Temos {{$adverts->count()}} anúncios cadastrados</h2>
 
     </div>
     <div class="col-md-11">
@@ -30,7 +30,7 @@
             <div id="products" class="row list-group">
                 @foreach($adverts as $advert)
                     <div class="item  col-xs-12 col-sm-6 col-lg-3 col-md-3 bloco-item">
-                        <a class="item-total" href="{{url('/')}}/imoveis/{{$advert->url_anuncio}}" >
+                        <a class="item-total" href="{{url('/')}}/imovel/{{$advert->id}}/{{$advert->url_anuncio}}" >
                             <div class="thumbnail">
                                 @if(count($advert->images))
                                     <img class="group list-group-image content-img-sugestao" src="{{url('gallery/'.$advert->images()->first()->extension)}}" width="220" height="229" alt="titulo imagem" />

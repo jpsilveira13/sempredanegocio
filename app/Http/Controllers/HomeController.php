@@ -67,11 +67,14 @@ class HomeController extends Controller
 
     }
 
-    public function imovelInterno(){
+    public function imovelInterno($id){
+        $advert = Advert::find($id);
+
 
         return view('site.pages.imovel', [
             'title' => 'Sempredanegocio.com.br | Não perca tempo! Anuncie.',
             'description' => 'Os melhores alugueis no melhor site.',
+            'advert' => $advert
         ]);
     }
 

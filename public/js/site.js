@@ -24,6 +24,8 @@ $(document).ready(function(){
         }
     };
 
+    //js fotos múltiplas anuncie
+
     multiPhotoDisplay = function(input) {
         var file, i, len, reader, ref;
         if (input.files && input.files[0]) {
@@ -529,9 +531,6 @@ $(document).ready(function(){
         reorderImages();
 
     });
-
-
-
 
 });
 

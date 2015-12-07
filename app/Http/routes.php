@@ -29,7 +29,7 @@ Route::get('anuncie', 'HomeController@anuncie');
 
 Route::post('anuncie','AdvertController@store');
 
-Route::get('imoveis/1/teste',[
+Route::get('imovel/{id}/{url_anuncio}',[
     'uses' => "HomeController@imovelInterno"
 
 

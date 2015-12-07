@@ -530,7 +530,7 @@ header {
     -webkit-border-radius: 0px;
     -moz-border-radius: 0px;
     border-radius: 0px;
-    min-height: 381px;
+
 }
 
 
@@ -598,7 +598,7 @@ header {
 }
 
 .infos-suggest .text-bairro {
-    font-size: 1.2em;
+    font-size: 1.1em;
 }
 
 
@@ -986,6 +986,9 @@ footer{
     border-bottom: 1px solid #ebebeb;
 }
 
+
+
+
 .opcoes-check input[type="checkbox"] {
     margin: 10px 5px 0 0;
     float: left;
@@ -1103,9 +1106,6 @@ input[type=text].input-slider-preco-esq, input[type=text].input-slider-esq, inpu
     right: 5px;
 }
 
-
-
-
 .icone-suites:before {
     content: "\e635";
 }
@@ -1132,13 +1132,9 @@ input[type=text].input-slider-preco-esq, input[type=text].input-slider-esq, inpu
 
 }
 
-
-
-
 /********************************/
 /*          anunciar            */
 /********************************/
-
 
 .conteneur {
     width:431px;
@@ -1461,6 +1457,17 @@ input[type=text].input-slider-preco-esq, input[type=text].input-slider-esq, inpu
     line-height: 12px;
 }
 
+.img-pequena{
+    width: 48px;
+    height: 48px;
+
+}
+
+.height-image-slider{
+    height:456px;
+
+}
+
 .imovel-area-detalhe  .logradouro {
     float: left;
     font-size: 16px;
@@ -1696,12 +1703,12 @@ input.span1, textarea.span1 {
     background-color: #fff;
     border: 1px solid #e5e5e5;
     display: inline-block;
-    padding: 7px 20px;
+    padding: 7px 10px;
     margin-bottom: 10px;
     font-size: 14px;
-    font-weight: lighter;
     line-height: 20px;
-    color: #666;
+    color: #000;
+    font-weight: 600;
     border-radius: 4px;
     vertical-align: middle;
 }
