@@ -19,7 +19,6 @@
 
                 <form action="<?=url('anuncie')?>"  method="post" class="form-group anuncio-titulo-estilo form-validation"  accept-charset="UTF-8" enctype="multipart/form-data" id="budget-form">
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                    <input type="hidden" name="user_id" />
                     <div class="row">
                         <div class="col-md-12 col-lg-12">
                             <h2><i class="fa fa-newspaper-o"></i> Informações do anúncio</h2>
@@ -337,7 +336,6 @@
                             <ul id="photos_clearing" class="clearing-thumbs upload-imagem no-padding" data-clearing></ul>
                         </div>
                     </div>
-
                     <div class="<?php if(!Auth::user()!= null): echo 'show';else:echo 'hide'; endif ?>">
                         <div class="row">
                             <div class="col-md-12 col-lg-12">

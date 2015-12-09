@@ -9,7 +9,7 @@
     "php": ">=5.5.9",
     "laravel/framework": "5.1.*",
     "artesaos/cidadesbr": "^1.0",
-    "laravel/socialite": "^2.0",
+    "laravel/socialite": "2.*",
     "guzzlehttp/guzzle": "~4.0",
     "bestmomo/scafold": "dev-master",
     "illuminate/html": "5.*",

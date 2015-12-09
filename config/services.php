@@ -40,7 +40,7 @@ return [
     'facebook' => [
         'client_id' => '190387111301918',
         'client_secret' => 'ec1279ddb7e26e2927798bbd3dd76f55',
-        'redirect' => 'http://www.sempredanegocio.com.br/auth/facebook/callback'
+        'redirect' => 'http://www.sempredanegocio.com.br/social/login/facebook'
     ],
 
 ];
