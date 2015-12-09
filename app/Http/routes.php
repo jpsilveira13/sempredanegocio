@@ -59,11 +59,15 @@ Route::get('testes',[
 ]);
 
 /* Rotas login facebook */
-Route::get('auth/facebook', 'SocialController@redirectToProvider');
+Route::get('auth/facebook/', 'SocialController@redirectToProvider');
 Route::get('auth/facebook/callback', 'SocialController@handleProviderCallback');
 
 
 //Controlador para o login
+
+
+Route::get('social/login/redirect/{provider}', ['uses' => 'Auth\AuthController@redirectToProvider', 'as' => 'social.login']);
+Route::get('social/login/{provider}', 'Auth\AuthController@handleProviderCallback');
 
 
 

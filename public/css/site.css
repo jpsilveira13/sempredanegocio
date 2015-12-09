@@ -726,6 +726,10 @@ header {
 
 }
 
+#products{
+    position: relative;
+}
+
 #products .item.list-group-item .caption{
     padding: 9px 9px 0px 9px;
     height: 200px;
@@ -753,6 +757,22 @@ header {
     font-size: 1.2em;
     -webkit-transition: all 0.5s;
     transition: all 0.5s;
+
+}
+
+
+
+.btn-mostrar{
+    text-align: center;
+    background-color: #d9edf7;
+    border:1px solid #bce8f1;
+
+
+}
+
+.btn-mostrar a{
+    display: block;
+    padding: 5px 20px;
 
 }
 
@@ -1708,7 +1728,6 @@ input.span1, textarea.span1 {
     font-size: 14px;
     line-height: 20px;
     color: #000;
-    font-weight: 600;
     border-radius: 4px;
     vertical-align: middle;
 }
@@ -2426,4 +2445,33 @@ input#images{display: none;}
 
 .fechar{display:block; text-align:right;}
 
+
+.carregamento-anuncio{
+
+
+}
+
+#infscr-loading {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: 0;
+    /* padding: 40px 0; */
+    z-index: 9999;
+    text-align: center;
+    /* margin-left: auto; */
+    /* margin-right: auto; */
+}
+
+#infscr-loading img{
+    margin-left: auto;
+    margin-right: auto;
+
+}
+
+.end-msg{
+font-size: 1em;
+
+}
 

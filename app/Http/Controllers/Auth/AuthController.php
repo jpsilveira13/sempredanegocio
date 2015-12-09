@@ -7,6 +7,8 @@ use Validator;
 use sempredanegocio\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
+use Laravel\Socialite\Facades\Socialite;
+use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
@@ -33,9 +35,39 @@ class AuthController extends Controller
         $this->middleware('guest', ['except' => 'getLogout']);
     }
 
+
+
+
+
     public function getLogin() {
         return view('/');
     }
+
+    public function redirectToProvider($provider){
+        return Socialite::driver($provider)->redirect();
+
+    }
+
+    public function handleProviderCallback($provider)
+    {
+        $socUser = Socialite::driver($provider)->user();
+        $user = User::where('idsocial',$socUser->getId())->first();
+        if(!$user){
+            $user = new User();
+            $user->idsocial = $socUser->getId();
+            $user->social = "Facebook";
+            $user->avatar = $socUser->getAvatar();
+            $user->name = $socUser->getName();
+            $user->email = $socUser->getEmail();
+            $user->password = bcrypt(str_random(10));
+            $user->save();
+        }
+        auth()->login($user);
+        return redirect('/');
+    }
+
+
+
     /**
      * Get a validator for an incoming registration request.
      *

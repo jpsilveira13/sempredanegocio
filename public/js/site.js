@@ -1,5 +1,23 @@
 $(document).ready(function(){
+    $('ul.pagination').hide();
 
+    (function(){
+
+        var loading_options = {
+            finishedMsg: "<div class='end-msg'>Não há mais anúncios!</div>",
+            msgText: "<div class='carregamento-anuncio'>Carregando anúncios...</div>",
+            img: "http://www.infinite-scroll.com/loading.gif"
+
+    };
+        $('#products').infinitescroll({
+
+            loading : loading_options,
+            navSelector : "ul.pagination",
+            nextSelector : "ul.pagination li.active + li a",
+            itemSelector : "#products .item",
+
+        });
+    })();
 
     //JS carregar fotos ;D
     var multiPhotoDisplay;

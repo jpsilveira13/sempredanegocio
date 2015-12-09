@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "24ca51179e3423b7e7490eb80813e009",
-    "content-hash": "308dd9cb8deb903fa824a4fa3257db5a",
+    "hash": "d74a41a996252c17c982a982f155f492",
+    "content-hash": "ae0f9936738421ca517fb6962b7cb287",
     "packages": [
         {
             "name": "artesaos/cidadesbr",
@@ -834,7 +834,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/42af855835f7aed5f54034fcdefb05b813d25efa",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/e9eeb64ce86db17a65cbd80a4756aeaadbc0d0b0",
                 "reference": "42af855835f7aed5f54034fcdefb05b813d25efa",
                 "shasum": ""
             },
@@ -1016,7 +1016,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/thephpleague/flysystem/zipball/3e97b4659b8057664d0d23b1491493d3501eaad2",
+                "url": "https://api.github.com/repos/thephpleague/flysystem/zipball/ce773193ce1d2ecb3818ca72ec91749ec708ff1f",
                 "reference": "3e97b4659b8057664d0d23b1491493d3501eaad2",
                 "shasum": ""
             },
@@ -3196,7 +3196,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/b2caaf8947aba5e002d42126723e9d69795f32b4",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/83498fee4d9272cc5c59630cc2be939accdcc74b",
                 "reference": "b2caaf8947aba5e002d42126723e9d69795f32b4",
                 "shasum": ""
             },
@@ -3388,7 +3388,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/diff/zipball/2b0112e42c338afa9ad9dfeb94d66f6d84c2f828",
+                "url": "https://api.github.com/repos/sebastianbergmann/diff/zipball/13edfd8706462032c2f52b4b862974dd46b71c9e",
                 "reference": "2b0112e42c338afa9ad9dfeb94d66f6d84c2f828",
                 "shasum": ""
             },

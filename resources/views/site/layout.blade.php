@@ -21,22 +21,10 @@
 </head>
 
 <body>
-<script>
-    window.fbAsyncInit = function() {
-        FB.init({
-            appId      : '190387111301918',
-            xfbml      : true,
-            version    : 'v2.5'
-        });
-    };
-
-    (function(d, s, id){
-        var js, fjs = d.getElementsByTagName(s)[0];
-        if (d.getElementById(id)) {return;}
-        js = d.createElement(s); js.id = id;
-        js.src = "//connect.facebook.net/en_US/sdk.js";
-        fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'facebook-jssdk'));
+<script type="text/javascript">
+    if (window.location.hash && window.location.hash == '#_=_') {
+        window.location.hash = '';
+    }
 </script>
 <header>
     <nav class="navbar navbar-default navbar-sempredanegocio navbar-static-top position-relative">
@@ -279,7 +267,7 @@
             <div class="clearfix"></div>
             <div class="modal-footer modal-footer-login">
                 <div class="btn-facebook" id="imgFacebook">
-                    <a href="{{URL('auth/facebook')}}"> <span class="icone-facebook">Login com Facebook</span></a>
+                    <a href="{{ route('social.login', ['facebook']) }}"> <span class="icone-facebook">Login com Facebook</span></a>
                 </div>
 
                 <span class="text">Você pode utilizar sua conta do Facebook para acessar com mais <strong>rapidez</strong> e <strong>praticidade</strong>.</span>
@@ -290,35 +278,24 @@
         </div>
     </div>
 </div>
-
-
-
-
 <!-- JS -->
-
 <script src="{{asset('js/jquery-2.1.4.min.js')}}"></script>
 <script src="{{asset('js/bootstrap.min.js')}}"></script>
 <script src="{{asset('js/npm.js')}}"></script>
-<script src="{{asset('js/site.js')}}"></script>
+
 <script src="{{asset('js/nouislider.min.js')}}"></script>
 <script src="{{asset('js/sweetalert.min.js')}}"></script>
-<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery.bootstrapvalidator/0.5.2/js/bootstrapValidator.min.js"></script>
+<script src="{{asset('js/infinitescroll.js')}}"></script>
+
 <!--<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAExt7vsJrLsnF3UQ7fk_ix51BderXpv6Q"
        type="text/javascript"></script> -->
-
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
-<script src="{{asset('js/ng-infinite-scroll.min.js')}}"></script>
-<script src="{{asset('js/siteangular.js')}}"></script>
 <script src="/vendor/artesaos/cidades/js/scripts.js"></script>
+<script src="{{asset('js/site.js')}}"></script>
 @if (session('status'))
     <script>
         swal("Parabéns!", "Seu anúncio foi criado com sucesso!", "success")
     </script>
-
-
 @endif
-
-
 </body>
 </html>
 

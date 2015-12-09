@@ -338,7 +338,7 @@
                         </div>
                     </div>
 
-                    <div class="<?=(Request::is('auth/login'))? 'show' : 'hide' ?>">
+                    <div class="<?php if(!Auth::user()!= null): echo 'show';else:echo 'hide'; endif ?>">
                         <div class="row">
                             <div class="col-md-12 col-lg-12">
                                 <h2><i class="fa fa-user"></i> Sua conta</h2>

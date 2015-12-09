@@ -1,10 +1,3 @@
-(function () {
-    var myApp = angular.module('myApp',['infinte-scroll']);
-
-    myApp.controller('ContentsController',[$scope,function($scope){
-
-
-
-    }]);
-
-}).call(this);
+/**
+ * Created by Joao Paulo on 08/12/2015.
+ */

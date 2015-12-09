@@ -12,7 +12,7 @@
         </div>
     </div>
     <div class="row">
-        <h2>Temos {{$adverts->count()}} anúncios cadastrados</h2>
+        <h2>Temos {{$countAdvert->count()}} anúncios cadastrados</h2>
 
     </div>
     <div class="col-md-11">
@@ -24,10 +24,10 @@
                             class="glyphicon glyphicon-th"></span>Grade</a>
             </div>
         </div>
-        <section class="sugestao-anuncio">
+        <section class="sugestao-anuncio" ng-controller="ContentsController">
             <h2>Sugestões de anúncios para você</h2>
 
-            <div id="products" class="row list-group" ng-controller="ContentsController">
+            <div id="products" class="row list-group">
                 @foreach($adverts as $advert)
                     <div class="item  col-xs-12 col-sm-6 col-lg-3 col-md-3 bloco-item">
                         <a class="item-total" href="{{url('/')}}/imovel/{{$advert->id}}/{{$advert->url_anuncio}}" >
@@ -83,6 +83,9 @@
                 @endforeach
             </div>
         </section>
+        <div class='text-center'>
+            {!! $adverts->render() !!}
+        </div>
     </div>
     <div class="col-lg-1 col-md-1 hidden-xs hidden-sm" >
         <div class="area-banner-lateral">

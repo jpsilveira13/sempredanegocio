@@ -20,10 +20,11 @@ class HomeController extends Controller
     public function index(){
 
 
-        $adverts = Advert::get();
-
+        $adverts = Advert::paginate(16);
+        $countAdvert = Advert::all();
         return view('site.pages.home',[
             'adverts' => $adverts,
+            'countAdvert' => $countAdvert
 
         ]);
 
