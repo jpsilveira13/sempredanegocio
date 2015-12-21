@@ -29,7 +29,7 @@ Route::get('anuncie', 'HomeController@anuncie');
 
 Route::post('anuncie','AdvertController@store');
 
-Route::get('imovel/{id}/{url_anuncio}',[
+Route::get('imovel/{tipo_anuncio}/{id}/{url_anuncio}',[
     'uses' => "HomeController@imovelInterno"
 
 
@@ -52,10 +52,17 @@ Route::get('/ajax-advcat',[
     'uses' => 'HomeController@getAdvSub'
 ]);
 
+Route::get('search-cidade/{query?}',[
+    'uses'=> 'HomeController@searchCidade'
+]);
+
+Route::get('search-imoveis/{query?}',[
+   'uses' => 'HomeController@scopeImoveis'
+
+]);
+
 Route::get('testes',[
-    'uses' => 'HomeController@testes'
-
-
+   'uses' => 'HomeController@testeImoveis'
 ]);
 
 /* Rotas login facebook */

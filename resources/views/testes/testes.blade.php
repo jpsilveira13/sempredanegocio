@@ -1,23 +1,27 @@
 @extends('site.layout')
 
 @section('content')
-    <br/><br/>
-    <div class="row">
-        <div class="colummns large-12">
-            <div class="row">
-                <div class="large-4 columns">
-                    <h4>Image Gallery</h4>
-                    <br/>
-                    <ul id="photos_clearing" class="clearing-thumbs" data-clearing>
-                    </ul>
-                    <br/>
-                    <label for='photos'>Add some pics?:</label>
-                    <input type="file" id="photos" name="photos[]" multiple/>
-                </div>
-            </div>
-        </div>
-    </div>
 
 
+    <input type="text" id="testando"value="">
+    <br />
+   <ul id="teste">
+       <li><a value="teste">Testando</a></li>
+       <li><a value="teste2">Testando2</a></li>
+       <li><a value="teste3">Testando3</a></li>
+       <li><a value="teste4">Testando4</a></li>
+       <li><a value="teste5">Testand5</a></li>
+   </ul>
 
+
+    <script>
+        alert('teste123');
+        $('#teste li a').click(function () {
+            var locationElemTeste = $('#testando');
+            var valorCampoTeste = $(this).attr('value');
+            locationElemTeste.val(valorCampoTeste);
+            locationElemTeste.attr('value',valorCampoTeste);
+            locationElemTeste.focus();
+        });
+    </script>
 @endsection

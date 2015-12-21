@@ -4,20 +4,14 @@ namespace sempredanegocio\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class AdvertImage extends Model
+class Cidade extends Model
 {
 
     protected $fillable = [
-        'advert_id',
-        'extension',
+        'nome',
+        'uf',
 
 
     ];
-
-    public function advertimage(){
-        return $this->belongsTo(Advert::class);
-
-    }
-
 
 }

@@ -137,13 +137,14 @@ return [
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
         'Artesaos\Providers\CidadesServiceProvider',
-        Bestmomo\Scafold\ScafoldServiceProvider::class,
+
         Laravel\Socialite\SocialiteServiceProvider::class,
         Illuminate\Html\HtmlServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
         /*
          * Application Service Providers...
          */
+        Bestmomo\Scafold\ScafoldServiceProvider::class,
         sempredanegocio\Providers\AppServiceProvider::class,
         sempredanegocio\Providers\AuthServiceProvider::class,
         sempredanegocio\Providers\EventServiceProvider::class,

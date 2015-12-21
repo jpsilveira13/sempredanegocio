@@ -11,6 +11,7 @@ class Advert extends Model
     protected $fillable = [
         'user_id',
         'advert_categories_id',
+        'tipo_anuncio',
         'estado',
         'cidade',
         'bairro',

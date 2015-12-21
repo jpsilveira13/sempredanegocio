@@ -5,9 +5,36 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="cache-control"   content="no-cache" />
+    <meta http-equiv="content-language" content="pt-br, en-US" />
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <meta name="copyright" content="© 2015 Sempre da Negócio" />
+    <meta name="description" content="...resumo da página..." />
+    <meta name="keywords" content="..palavras-chave do documento" />
+    <meta name="generator" content="PHP Storm" />
+    <meta name="rating" content="general" />
+    <meta http-equiv="content-script-type" content="text/javascript" />
+    <meta http-equiv="content-style-type" content="text/css" />
+    <meta name=”revisit-after” content='2 days' />
+    <meta name="robots" content="all" />
+
+    @if(isset($advert))
+        <meta property="og:site_name" content="Sempre da Negócio">
+        <meta property="og:title" content="{{$advert->anuncio_titulo}}">
+        <meta property="og:type" content="website">
+        <meta property="og:url" content="{{url('/')}}/imovel/{{$advert->tipo_anuncio}}/{{$advert->id}}/{{$advert->url_anuncio}}">
+        <meta property="og:image:width" content="484">
+        <meta property="og:image:height" content="252">
+        <meta property="og:image" content="<?php if($advert->images()->count() < 1): echo asset('images/no-image.jpg');
+        else: echo asset('gallery/'.$advert->images()->first()->extension); endif ?>">
+        <meta property="og:description" content="{{str_limit($advert->anuncio_descricao, $limit = 100, $end =" ...")}}">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    @endif
+
     <link rel="icon" href="{{ asset('images/favicon.png') }}" type="image/png"/>
     <title>{{ isset($title) ? $title : 'Sempre da negócio' }}</title>
-    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
     <!-- CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous">
     <link rel="stylesheet" href="{{ asset('css/site.css') }}">
@@ -16,11 +43,14 @@
     <link rel="stylesheet" href="{{ asset('css/nouislider.min.css') }}">
     <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/jquery.bootstrapvalidator/0.5.2/css/bootstrapValidator.min.css"/>
     <link rel="stylesheet" href="{{ asset('css/sweetalert.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('css/jquery-ui.css') }}"/>
+
 
 
 </head>
 
 <body>
+
 <script type="text/javascript">
     (function removeFacebookAppendedHash() {
         if (!window.location.hash || window.location.hash !== '#_=_')
@@ -112,16 +142,9 @@
         </div>
     </div>
 </footer>
-
-
 <a href="{{url('anuncie')}}" title="Anuncie" class="btn btn-anuncio <?=Request::is('anuncie') ? 'hide' : '' ?>" id="btAnuncie">Anuncie Agora</a>
-
 <!-- modal area site -->
-
 <!-- modal anuncio criado -->
-
-
-
 <div class="modal modal-login fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -141,7 +164,7 @@
                         <p id="mensagemEmailExistente" class="aviso" style="display: none;">O email informado já está cadastrado no Sempre da Negócio Imóveis. Faça seu login abaixo.</p>
                         <div class="rel">
                             <form class="form-horizontal" role="form" method="POST" action="{{ url('/auth/login') }}">
-                                <input type="hidden" name="_token" value="{{ csrf_token() }}" />
+                                <input type="hidden" name="_token" value="{!! csrf_token() !!}" />
                                 <input type="email" name="email" id="txtEmailUsuarioLogin" class="input input-block-level" placeholder="E-mail" data-toggle="tooltip" title="Este campo deve ser preenchido" autocapitalize="off" />
                                 <img id="imgLoadingEmail" src="http://cjs.zapcorp.com.br/Content/img/loader.gif" alt="Loading" class="loading hide" width="20" height="20" />
                         </div>
@@ -215,15 +238,21 @@
                     <div id="divMiniCadastro" class="cadastro-box no-show">
                         <p class="titulo">Não sou cadastrado</p>
                         <p class="desc">Preencha os campos abaixo para iniciar o cadastro.</p>
+                        <form class="form-horizontal" role="form" method="POST" action="{{ url('/auth/register') }}">
+                            <input type="hidden" name="_token" value="{{!! csrf_token() !!}}">
+                            <input id="txtNomeUsuarioCadastro" name="email" class="input input-block-level span3" type="email" placeholder="Informe seu email" value="{{old('email')}}">
+                            <div class="rel">
+                                <input type="password" name='password' id="txtEmailUsuarioCadastro"  class="input input-block-level span3" placeholder="Informe a senha" autocapitalize="off">
 
-                        <input id="txtNomeUsuarioCadastro" class="input input-block-level span3" type="text" placeholder="Nome e sobrenome">
-                        <div class="rel">
-                            <input type="email" id="txtEmailUsuarioCadastro" onkeyup="EnterMiniCadastro(event);" class="input input-block-level span3" placeholder="E-mail" autocapitalize="off">
-                            <img id="imgLoadingMiniCadastro" src="http://cjs.zapcorp.com.br/Content/img/loader.gif" alt="Loading" class="loading hide" width="20" height="20">
-                        </div>
-                        <a href="javascript:void(0);" id="btnCadastrar" class="pull-right" onclick="IrParaCadastroCompleto();">Cadastrar</a>
-                        <p class="info">Você será direcionado para completar seu cadastro com mais algumas informações.</p>
+                            </div>
+                            <div class="rel">
+                                <input type="password" id="txtEmailUsuarioCadastro"  class="input input-block-level span3" placeholder="Confirma a senha" autocapitalize="off">
+
+                            </div>
+                            <button href="javascript:void(0);" type="submit" id="btnCadastrar" class="btn btn-zap pull-right" onclick="IrParaCadastroCompleto();">Cadastrar</button>
+
                     </div>
+                    </form>
                 </div>
 
                 <div id="cadastro" class="cadastro" style="display: none;">
@@ -293,21 +322,32 @@
 <!-- JS -->
 <script src="{{asset('js/jquery-2.1.4.min.js')}}"></script>
 <script src="{{asset('js/bootstrap.min.js')}}"></script>
-<script src="{{asset('js/npm.js')}}"></script>
-
 <script src="{{asset('js/nouislider.min.js')}}"></script>
 <script src="{{asset('js/sweetalert.min.js')}}"></script>
 <script src="{{asset('js/infinitescroll.js')}}"></script>
+<script src="{{asset('js/typeahead.min.js')}}"></script>
+<script src="{{asset('js/bloodhound.min.js')}}"></script>
 
 <!--<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAExt7vsJrLsnF3UQ7fk_ix51BderXpv6Q"
        type="text/javascript"></script> -->
 <script src="/vendor/artesaos/cidades/js/scripts.js"></script>
 <script src="{{asset('js/site.js')}}"></script>
+<script src="{{asset('js/validator.min.js')}}"></script>
 @if (session('status'))
     <script>
         swal("Parabéns!", "Seu anúncio foi criado com sucesso!", "success")
     </script>
 @endif
+<script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-71383930-1', 'auto');
+    ga('send', 'pageview');
+
+</script>
 </body>
 </html>
 

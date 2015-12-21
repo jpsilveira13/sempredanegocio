@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Validator;
 use sempredanegocio\Models\User;
 use sempredanegocio\Http\Requests;
 use sempredanegocio\Http\Controllers\Controller;
@@ -48,16 +49,26 @@ class AdvertController extends Controller
         $data['url_anuncio'] = str_slug($data['anuncio_titulo']);
         $features = $request->get('caracteristicas');
         $images = $request->file('anuncio_images');
-
         unset($data['anuncio_images']);
         unset($data['caracteristicas']);
         $anuncio = Advert::create($data);
-        foreach($images as $image){
-            $renamed = md5(date('Ymdhms').$image->getClientOriginalName()).'.'.$image->getClientOriginalExtension();
-            $path = public_path().'/gallery/'.$renamed;
-            Image::make($image->getRealPath())->resize(603,362)->save($path);
-            $advertImage::create(['advert_id' => $anuncio->id,'extension' => $renamed]);
 
+        $rules = array('image' => 'required','mimes' => 'jpeg,jpg,png');
+        $validator = Validator::make($images,$rules);
+        $teste = "http://www.sempredanegocio.com.br/";
+
+
+        if($images){
+
+            foreach($images as $image){
+                $renamed = $teste.md5(date('Ymdhms').$image->getClientOriginalName()).'.'.$image->getClientOriginalExtension();
+                $path = public_path().'/gallery/'.$renamed;
+                Image::make($image->getRealPath())->resize(678,407)->encode('jpg',80)->save($path);
+
+                $advertImage::create(['advert_id' => $anuncio->id,'extension' => $renamed]);
+
+
+            }
         }
         $anuncio->features()->sync($features);
         if(Auth::user()) {

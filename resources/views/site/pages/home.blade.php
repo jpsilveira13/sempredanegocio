@@ -6,11 +6,7 @@
 @stop
 @section('content')
     <br />
-    <div class="row">
-        <div class="col-md-12 col-lg-12 hidden-sm hidden-xs banner-propaganda">
-            <img src="{{asset('images/bannerTeste2.jpg')}}"  alt="Propaganda" />
-        </div>
-    </div>
+
     <div class="row">
         <h2>Temos {{$countAdvert->count()}} anúncios cadastrados</h2>
 
@@ -30,12 +26,12 @@
             <div id="products" class="row list-group">
                 @foreach($adverts as $advert)
                     <div class="item  col-xs-12 col-sm-6 col-lg-3 col-md-3 bloco-item">
-                        <a class="item-total" href="{{url('/')}}/imovel/{{$advert->id}}/{{$advert->url_anuncio}}" >
+                        <a class="item-total" href="{{url('/')}}/imovel/{{$advert->tipo_anuncio}}/{{$advert->id}}/{{$advert->url_anuncio}}" >
                             <div class="thumbnail">
                                 @if(count($advert->images))
                                     <img class="group list-group-image content-img-sugestao" src="{{url('gallery/'.$advert->images()->first()->extension)}}" width="220" height="229" alt="titulo imagem" />
                                 @else
-                                    <img class="group list-group-image content-img-sugestao" src="http://imagens.zapcorp.com.br/imoveis/761283/zap296020/35549b74-f1f2-48cf-8c4a-aa82b84834ee_m.jpg" width="220" height="229" alt="titulo imagem" />
+                                    <img class="group list-group-image content-img-sugestao" src="{{url('images/no-image.jpg')}}" alt="titulo imagem" />
                                 @endif
                                 <div class="caption infos-suggest">
                                     <h4 class="group inner list-group-item-heading text-bairro">{{$advert->cidade}}<br />
@@ -66,7 +62,7 @@
                                     <div class="row mb4">
                                         <div class="col-xs-8 col-md-8 ">
                                             <div class="bottom-suggest">
-                                                <span class="val-imovel">R$ {{$advert->preco}}</span>
+                                                <span class="val-imovel">R$ {{number_format((float)$advert->preco,2)}}</span>
                                                 <span class="text-diaria">/ mês</span>
                                             </div>
                                         </div>
@@ -87,9 +83,19 @@
             {!! $adverts->render() !!}
         </div>
     </div>
-    <div class="col-lg-1 col-md-1 hidden-xs hidden-sm" >
-        <div class="area-banner-lateral">
-            <img src="{{asset('images/bannerTeste1.jpg')}}" alt="Banner teste 1"/>
+    <div id="barra-fixa-menu">
+        <div class="col-lg-1 col-md-1 hidden-xs hidden-sm" >
+            <div class="area-banner-lateral">
+                <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                <!-- banner lateral -->
+                <ins class="adsbygoogle"
+                     style="display:inline-block;width:120px;height:600px"
+                     data-ad-client="ca-pub-9034476199683173"
+                     data-ad-slot="6267840446"></ins>
+                <script>
+                    (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
+            </div>
         </div>
     </div>
 @endsection

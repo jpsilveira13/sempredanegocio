@@ -46,6 +46,26 @@ section{
 
 }
 
+
+.mt10{
+    margin-bottom: 10px;
+
+}
+
+.width-half{
+    width: 50%;
+
+}
+
+
+/* Alteração bootstrap */
+
+
+#budget-form .glyphicon-remove:before, #budget-form .glyphicon-ok:before{
+    display: none;
+
+}
+
 .btn-group .btn-default.active.focus, .btn-default.active:focus, .btn-default.active:hover, .btn-default:active.focus, .btn-default:active:focus, .btn-default:active:hover, .open>.dropdown-toggle.btn-default.focus, .open>.dropdown-toggle.btn-default:focus, .open>.dropdown-toggle.btn-default:hover, .btn-group .btn-default.focus, .btn-default:focus{
     color: #fff;
     background-color: #52264B;
@@ -98,9 +118,8 @@ a {
     text-decoration: none;
 }
 
-label, select, button, input[type="button"], input[type="submit"], input[type="radio"], input[type="checkbox"] {
-    cursor: pointer;
-}
+
+
 
 .no-padding{
     padding: 0;
@@ -125,6 +144,14 @@ label, select, button, input[type="button"], input[type="submit"], input[type="r
     margin-top: 0px !important;
     z-index: 10;
     top: 0;
+}
+
+.fixarLateral{
+    position: fixed;
+    margin-top: 0px !important;
+    z-index: 10;
+    top: 0;
+
 }
 
 
@@ -183,6 +210,7 @@ body{
     color: #444;
     background-color: #F7F4EC;
     -webkit-font-smoothing: antialiased;
+    word-wrap: break-word;
 
 }
 
@@ -385,6 +413,9 @@ header {
 
 /* banner meio */
 
+
+
+
 .subhead{
 
     text-align: left;
@@ -450,6 +481,12 @@ header {
 }
 
 /* menu fixo LATERAL*/
+
+
+.banner-propaganda{
+    max-height:90px;
+
+}
 
 #menu-fixo{
     border: 1px solid #ECECEC;
@@ -656,6 +693,10 @@ header {
     transition: all 0.5s;
 }
 
+
+
+
+
 .bottom-suggest .text-diaria {
     font-size: 12px;
     -webkit-transition: all 0.5s;
@@ -726,8 +767,9 @@ header {
 
 }
 
-#products{
+#products {
     position: relative;
+    padding-bottom: 56px;
 }
 
 #products .item.list-group-item .caption{
@@ -852,40 +894,226 @@ footer{
 /*          imoveis             */
 /********************************/
 
+.container-caixa-busca {
+    width: 100%;
+    display: inline-block;
+    background: #fff;
+}
 
-.container-filtros{
+.container-caixa-busca .centraliza-caixa-busca {
+    width: 100%;
+}
+
+.caixa-busca {
+    float: left;
+    width: 100%;
+    background-color: rgba(253,253,253,0.95);
+    box-shadow: 0 2px 3px rgba(0,0,0,0.35);
+    position: relative;
+    padding: 20px 0;
+}
+
+.caixa-busca-resultado {
+    box-shadow: none;
+}
+
+
+
+.caixa-busca form {
+    margin: 0;
+}
+
+
+
+.caixa-busca .nivel-busca {
+    display: block;
+    width: 100%;
+    padding: 0 20px;
+    box-sizing: border-box;
+    max-width: 960px;
+    margin: 0 auto;
+}
+
+.tipo-transacao {
+    float: left;
+    padding-right: 20px;
+}
+
+
+.tipo-transacao .buttons {
 
     width: 100%;
-    box-sizing: border-box;
-    display: none;
-    background: #fff!important;
-    box-shadow: inset 0 0 5px 1px rgba(0,0,0,0.16);
-    display: block;
-
-
 }
-.filtros-principais{
+
+.tipo-transacao .buttons .button:first-child {
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
+    padding-left: 19px;
+}
+
+.tipo-transacao .buttons .button {
+    float: left;
+    font-size: 16px;
+    font-weight: lighter;
+    padding: 12.5px 20px;
+    background-color: #ddd;
+    cursor: pointer;
+    border: 0;
+    position: relative;
+}
+
+.tipo-transacao .buttons .button:active, .tipo-transacao .buttons .button.active {
+    color: #fff;
+    background-color: #007aa5;
+    box-shadow: inset 3px 3px 7px rgba(0,0,0,0.35);
+}
+
+
+.tipo-imovel {
+    float: left;
+    padding-right: 20px;
+}
+
+.caixa-busca .nivel-busca label {
+    font-size: 12px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    cursor: default;
+    padding-left: 20px;
+}
+
+.tipo-imovel select {
+    width: 241px;
+    height: 45px;
+    padding: 0 0 0 20px;
+    line-height: 40px;
+}
+
+.tipo-imovel select option:nth-child(odd) {
+    background-color: #ddd;
+}
+
+.tipo-imovel select option {
+    background-color: #e5e5e5;
+}
+
+
+.local-busca {
+    float: left;
+    width: 315px;
+    position: relative;
+}
+
+
+.local-busca .ui-autocomplete-input {
+    float: left;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    width: 100%;
+    height: 43px;
+    font-size: 16px;
+    padding: 0 0 0 20px;
+    z-index: 1;
+    position: relative;
+}
+
+.container-tip {
+    margin-bottom: 10px;
+    position: relative;
+}
+
+.content-filtros {
+    float: left;
+    width: 100%;
+    box-sizing: border-box;
+    background-color: #fff;
+    box-shadow: inset 0 0 5px 1px rgba(0,0,0,0.35);
+}
+
+
+.content-filtros .filtros-principais {
     list-style: none;
     margin: 5px auto;
     padding: 0;
     max-width: 920px;
-
 }
 
-.container-filtros .filtros-principais>li {
+.content-filtros .filtros-principais>li{
     float: left;
     height: 35px;
     line-height: 35px;
+    text-transform: uppercase;
     font-size: 12px;
     color: #444;
     position: relative;
     cursor: pointer;
 }
 
-.filtros-principais>li .filtro:before {
-    font-size: 22px;
+
+.content-filtros .filtros-principais>li .filtro.faixa-preco {
+    width: 190px;
+    padding-left: 0;
+}
+
+.content-slider .box-busca {
     float: left;
-    padding: 0 10px 0 0;
+    width: 100%;
+    padding: 15px 20px;
+    box-sizing: border-box;
+}
+
+.content-slider .box-busca li {
+    float: left;
+    height: 35px;
+    line-height: 35px;
+}
+
+.content-slider .box-busca li input[type="text"] {
+    margin: 0;
+    border-radius: 4px;
+    height: 25px;
+}
+
+.content-slider .box-busca li:nth-child(2n) {
+    padding: 0 47px;
+    font-size: 10px;
+    line-height: 36px;
+    position: relative;
+}
+
+.content-slider .box-busca .spacer-slider .spacer-left {
+    left: 5px;
+}
+
+.content-slider .box-busca .spacer-slider .spacer-right {
+    right: 5px;
+}
+
+
+.content-slider .box-busca .spacer-slider .spacer-left, .content-slider .box-busca .spacer-slider .spacer-right {
+    width: 34px;
+    border-top: 1px solid #dcd8cd;
+    position: absolute;
+    top: 17px;
+}
+
+
+
+
+
+
+
+
+.content-filtros .filtros-principais>li .filtro.quartos{
+    width: 176px;
+
+}
+
+.content-filtros .filtros-principais>li .filtro.area{
+    width: 190px;
+    padding-right: 0;
+    padding-left: 10px;
+
 }
 
 .filtros-principais>li .filtro {
@@ -899,17 +1127,78 @@ footer{
     letter-spacing: -0.5px;
 }
 
-.filtros-principais>li .filtro:after {
+.content-filtros .filtros-principais>li .filtro:after {
     content: "";
-    border-right: 1px solid #d2d2d2;
+    border-right: 1px solid #dcd8cd;
     height: 20px;
     position: absolute;
     right: 0;
     top: 7.5px;
 }
 
+.content-filtros .filtros-principais>li .filtro:before {
+    font-size: 22px;
+    float: left;
+    padding: 0 10px 0 0;
+}
+
+
 .icone-tipo-temporada:before {
     content: "\e63a";
+}
+
+.content-filtros .filtros-principais>li .filtro .icone-seta-cheia-baixo {
+    display: inline-block;
+    font-size: 16px;
+    position: relative;
+    top: 2px;
+}
+
+.content-filtros .filtros-principais>li .content-filtro{
+    z-index: 1002;
+
+}
+
+
+.filtro-check .opcoes-check li {
+    padding-left: 9px;
+    height: 31px;
+    line-height: 31px;
+    /* float: left; */
+    font-size: 14px;
+    border-bottom: 1px solid #dcd8cd;
+}
+
+.filtro-check .opcoes-check li label {
+    float: left;
+    width: 100px;
+    width: 94px \9;
+    text-transform: lowercase;
+    margin-bottom: 0px;
+}
+
+.filtro-check .opcoes-check li label span {
+    display: inline-block;
+    text-indent: 3px;
+    position: relative;
+    top: -2px;
+
+}
+
+.filtro-check .titulo-check{
+    float: left;
+    width: 100%;
+    height: 31px;
+    line-height: 31px;
+    padding-left: 6px;
+    box-sizing: border-box;
+    background-color: #ddd;
+    cursor: default;
+
+}
+
+.content-filtros .filtros-principais>li .filtro.vagas, .content-filtros .filtros-principais>li .filtro.suites {
+    width: 172px;
 }
 
 .filtros-principais>li .tipo-imovel-temporada {
@@ -959,7 +1248,7 @@ footer{
 }
 .filtro-check {
     width: 129px;
-    background: #f5f5f5;
+    background-color: #f6f5f1;
     border: 1px solid #ddd;
     position: absolute;
     top: 36px;
@@ -967,16 +1256,106 @@ footer{
     border-radius: 4px;
 }
 
-.titulo-check {
+#listaCidades {
+    border-radius: 4px;
+    z-index: 1042;
+    position: absolute;
+    top: 72px;
+    left: 0;
+    cursor: default;
+    border: 1px solid #a6c9e2;
+    color: #222;
+    padding: 2px 5px;
+    display: none;
+    list-style: none;
+    width: 100%;
+    bottom: 0;
+    min-height: 159px;
+    background-color: #ddd;
+}
+
+#listaCidades li:nth-child(2n+0) {
+    background-color: #e5e5e5;
+}
+
+.focus-lista-cidade{
+    background: #007aa5;
+    color: #fff;
+    border: none;
+    border-radius: 0;
+    cursor: pointer;
+}
+
+#listaCidades li a{
+    text-decoration: none;
+    display: block;
+    padding: 2px 0.4em;
+    line-height: 1.5;
+    font-weight: normal;
+
+}
+
+.caixa-busca .rodape-busca {
     float: left;
     width: 100%;
-    height: 31px;
-    line-height: 31px;
-    padding-left: 6px;
-    box-sizing: border-box;
-    background: #ddd;
-    cursor: default;
+    padding-top: 10px;
 }
+
+.btn-spd{
+    color: #fff;
+    text-transform: uppercase;
+    font-size: 13px!important;
+    position: relative;
+    background-color: #5B2B4D!important;
+    text-align: center;
+
+}
+
+.mensagem-caixa-busca {
+    float: left;
+    line-height: 55px;
+    font-size: 16px;
+}
+
+.mensagem-caixa-busca .result-number {
+    height: 45px;
+}
+
+.content-buscar {
+    float: right;
+    position: relative;
+}
+
+
+.content-buscar .btn-spd {
+    font-size: 18px;
+    padding: 12.5px 35px;
+    margin-left: 22px;
+    float: right;
+}
+
+.content-buscar .content-mais-opcoes {
+    float: left;
+}
+
+.content-buscar .mais-opcoes-busca {
+    float: left;
+    font-size: 14px;
+    color: #5B2B4D;
+    line-height: 52px;
+    cursor: pointer;
+    position: relative;
+    z-index: 20;
+    height: 40px;
+}
+
+.content-buscar .mais-opcoes-busca .icone-seta-cheia-baixo {
+    float: right;
+    height: 34px;
+}
+
+
+
 
 .titulo-check:before {
     content: "";
@@ -984,7 +1363,7 @@ footer{
     height: 15px;
     background: #ddd;
     position: absolute;
-    top: -6px;
+    top: -8px;
     left: 20px;
     transform: rotate(42deg);
     -webkit-transform: rotate(42deg);
@@ -995,27 +1374,6 @@ footer{
     list-style: none;
     margin: 0;
 }
-
-.opcoes-check li {
-    width: 120px;
-    padding-left: 9px;
-    height: 31px;
-    line-height: 31px;
-    float: left;
-    font-size: 14px;
-    border-bottom: 1px solid #ebebeb;
-}
-
-
-
-
-.opcoes-check input[type="checkbox"] {
-    margin: 10px 5px 0 0;
-    float: left;
-    width: 15px;
-    height: 15px;
-}
-
 
 .opcoes-check li:hover, .opcoes-check li.option-selected {
     background: #472147;
@@ -1427,6 +1785,24 @@ input[type=text].input-slider-preco-esq, input[type=text].input-slider-esq, inpu
 
 /* Imovel interno */
 
+#estilo-checkbox-bootstrap .btn{
+    background-color: #fff;
+
+}
+
+
+#estilo-checkbox-bootstrap .btn-default:hover{
+    color: #fff;
+    background-color: #52264B;
+    border-color: #52264B;
+
+}
+
+
+.selected img {
+    opacity:0.5;
+}
+
 .btn {
     display: inline-block;
     padding: 8px 13px 8px 13px;
@@ -1514,6 +1890,7 @@ input[type=text].input-slider-preco-esq, input[type=text].input-slider-esq, inpu
 ul.unstyled {
     margin: 0;
     list-style: none;
+    padding: 0;
 }
 
 .informacoes-imovel li {
@@ -1537,6 +1914,30 @@ ul.unstyled {
     margin-bottom: 0;
     line-height: 21px;
 }
+
+.btcaract{
+    border: 1px solid #472144;
+    border-radius: 0px;
+    margin-right: 5px;
+
+}
+
+.btcaract .active{
+    color: #fff;
+    background-color: #52264B;
+    border-color: #52264B;
+
+}
+
+#estilo-checkbox-bootstrap .btn-default.active, .btn-default:active, .open>.dropdown-toggle.btn-default{
+    color: #fff;
+    background-color: #52264B;
+    border-color: #52264B;
+
+}
+
+
+
 
 .box-descricao-caract h3:nth-child(3) {
     margin-top: 20px;
@@ -2308,7 +2709,156 @@ input#images{display: none;}
         margin-bottom: 10px;
     }
 
+    /* parte imoveis */
 
+    .caixa-busca {
+        -webkit-transition: all 0.5s;
+        transition: all 0.5s;
+        padding: 10px 0;
+    }
+
+    .caixa-busca .nivel-busca {
+        padding: 0 10px;
+    }
+
+    .caixa-busca .tipo-transacao {
+        width: 100%;
+        padding: 0;
+        margin-bottom: 20px;
+    }
+    .caixa-busca .nivel-busca label {
+        padding-left: 10px;
+    }
+
+    .caixa-busca .tipo-transacao .buttons .button {
+        padding-right: 0;
+        padding-left: 0;
+        width: 33.3%;
+        font-size: 14px;
+    }
+
+    .caixa-busca .tipo-imovel {
+        width: 100%;
+        padding: 0;
+        margin-bottom: 10px;
+    }
+
+    .caixa-busca .local-busca {
+        width: 100%;
+        padding: 0;
+    }
+
+    .caixa-busca .nivel-busca label {
+        padding-left: 10px;
+    }
+    .content-filtros .filtros-principais {
+        margin-top: 15px;
+        padding: 0 10px;
+    }
+    .content-filtros .filtros-principais>li {
+        width: 47%;
+        height: 57px;
+        margin-bottom: 10px;
+        padding-top: 5px;
+        border: 1px solid #dcd8cd;
+    }
+
+    .content-filtros .filtros-principais>li .filtro {
+        width: 100% !important;
+        padding: 0;
+        text-align: center;
+        line-height: 27px;
+    }
+
+
+    .content-filtros .filtros-principais>li .filtro.faixa-preco {
+        letter-spacing: -1px;
+    }
+
+    .content-filtros .filtros-principais>li .filtro:before {
+        padding: 0;
+        width: 100%;
+    }
+    .content-filtros .filtros-principais>li .content-slider {
+        top: 64px;
+        left: -1px;
+        z-index: 1050;
+        width: 283px;
+    }
+    .content-filtros .filtros-principais>li:nth-child(2n) {
+        float: right;
+    }
+    .content-filtros .filtros-principais>li .filtro-check {
+        top: 64px;
+        left: -1px;
+        z-index: 1050;
+    }
+    .content-filtros .filtros-principais>li .filtro {
+        width: 100% !important;
+        padding: 0;
+        text-align: center;
+        line-height: 27px;
+    }
+
+    .content-filtros .filtros-principais>li .filtro:before {
+        padding: 0;
+        width: 100%;
+    }
+
+    .content-filtros .filtros-principais>li .content-slider {
+        top: 64px;
+        left: -1px;
+        z-index: 1050;
+        width: 283px;
+    }
+
+    .caixa-busca .tipo-imovel select {
+        width: 100%;
+    }
+
+    .caixa-busca .local-busca .ui-autocomplete-input {
+        width: 85%;
+        height: 45px;
+        box-sizing: border-box;
+    }
+
+    .caixa-busca .nivel-busca {
+        padding: 0 10px;
+    }
+
+    .rodape-busca {
+        height: auto;
+    }
+
+    .mensagem-caixa-busca {
+        width: 100%;
+        text-align: center;
+        height: auto;
+    }
+
+    .rodape-busca .content-buscar {
+        float: left;
+        width: 100%;
+        height: auto;
+        text-align: center;
+    }
+
+    .rodape-busca .content-buscar .btn-spd {
+        margin: 0;
+        float: none;
+    }
+
+    .rodape-busca .content-buscar .content-mais-opcoes {
+        width: 100%;
+        text-align: center;
+    }
+
+    .rodape-busca .content-buscar .content-mais-opcoes .mais-opcoes-busca {
+        float: none;
+        display: block;
+        width: 120px;
+        margin: 0 auto;
+    }
 
 }
 @media screen and (min-width: 980px){
@@ -2373,6 +2923,7 @@ input#images{display: none;}
     -webkit-border-radius: 0px;
     -o-border-radius: 0px;
     -ms-border-radius: 0px;
+    z-index:100;
 
 }
 .upload-imagem{
@@ -2408,16 +2959,42 @@ input#images{display: none;}
 .image-anuncio span{
     height: 100%;
     display: inline-block;
+    vertical-align: middle;
 
 }
 
 .image-anuncio img{
     position: relative;
-    top:-29px;
+    /* top: -29px; */
+    opacity: 1;
+    display: inline;
+    width: 80px;
+    height: 48px;
+    transform-origin: 50% 50% 0px;
 
 }
 
 
+.bts{
+    display: block;
+    overflow: hidden;
+    position: absolute;
+    top: 25px;
+    left: 82px;
+    z-index: 200;
+
+}
+
+
+.bt_rotate{
+    background: #f7f6f5 url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAMAAAAoLQ9TAAAAP1BM…gLBwkSG8IY1kZYdY7jprw5S/0Emz0S6Eial21Yi8a1sMDelcCmash5L4AAAAASUVORK5CYII=') center no-repeat;
+    border-radius: 3px;
+    display: block;
+    overflow: hidden;
+    width: 16px;
+    height: 16px;
+    text-indent: -9999px;
+}
 
 /* modal css login */
 
@@ -2448,7 +3025,19 @@ input#images{display: none;}
 
 .carregamento-anuncio{
 
-
+    position: absolute;
+    bottom: 0px;
+    left: 0;
+    right: 0;
+    margin: 0;
+    /* padding: 40px 0; */
+    z-index: 9999;
+    text-align: center;
+    /* margin-left: auto; */
+    display: block;
+    /* margin-right: auto; */
+    height: 46px;
+    padding-bottom: 12px;
 }
 
 #infscr-loading {
@@ -2471,7 +3060,41 @@ input#images{display: none;}
 }
 
 .end-msg{
-font-size: 1em;
+    font-size: 1em;
 
 }
+
+
+#slider-range, #slider-range2 {
+    width:300px;
+    margin-top:10px;
+}
+
+#slider-range2.ui-slider-horizontal {
+    border: 0 none;
+}
+#slider-range2.ui-slider-horizontal .ui-slider-range, #slider-range2.ui-slider-horizontal .ui-slider-handle {
+    background: url("http://unbug.ru/examples/jquery/slider/slide.png") repeat scroll 0 0 transparent;
+}
+#slider-range2.ui-slider-horizontal .ui-slider-range {
+    background-position: 0 -42px;
+    background-repeat: repeat-x;
+    height: 21px;
+}
+#slider-range2.ui-slider-horizontal .ui-slider-handle {
+    background-position: 0 0;
+    background-repeat: no-repeat;
+    border: 0 none;
+    height: 21px;
+    top: 0;
+    width: 21px;
+}
+#slider-range2.ui-slider-horizontal .ui-slider-handle:focus {
+    outline: 0 none;
+}
+#slider-range2.ui-slider-horizontal .ui-slider-handle + .ui-slider-handle {
+    background-position: -21px 0;
+}
+
+
 

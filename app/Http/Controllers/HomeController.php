@@ -5,6 +5,7 @@ namespace sempredanegocio\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Response;
+use sempredanegocio\Models\Cidade;
 use sempredanegocio\Http\Requests;
 use sempredanegocio\Http\Controllers\Controller;
 use sempredanegocio\Models\Advert;
@@ -12,7 +13,6 @@ use sempredanegocio\Models\AdvertCategory;
 use sempredanegocio\Models\Category;
 use sempredanegocio\Models\Feature;
 use sempredanegocio\Models\SubCategory;
-use sempredanegocio\Post;
 use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
@@ -20,7 +20,7 @@ class HomeController extends Controller
     public function index(){
 
 
-        $adverts = Advert::paginate(16);
+        $adverts = Advert::orderBy('id','desc')->paginate(16);
         $countAdvert = Advert::all();
         return view('site.pages.home',[
             'adverts' => $adverts,
@@ -31,13 +31,15 @@ class HomeController extends Controller
     }
 
     public  function imoveis(){
-        $imoveis = Post::orderBy(DB::raw('RAND()'))->get();
+        $adverts = Advert::orderBy('id','desc')->paginate(16);
+        $countAdvert = Advert::all();
 
 
         return view('site.pages.imoveis', [
             'title' => 'Sempredanegocio.com.br | Não perca tempo! Anuncie',
             'description' => 'Os melhores alugueis no melhor site.',
-            'imoveis' => $imoveis
+            'adverts' => $adverts,
+            'countAdvert' => $countAdvert
 
         ]);
 
@@ -68,7 +70,7 @@ class HomeController extends Controller
 
     }
 
-    public function imovelInterno($id){
+    public function imovelInterno($tipo_anuncio, $id, $url_anuncio){
         $advert = Advert::find($id);
 
 
@@ -92,13 +94,12 @@ class HomeController extends Controller
         $adv_id = Input::get('adv_id');
 
         $advertcategories = AdvertCategory::where('subcategory_id', '=',$adv_id)->get();
-       // dd($advertcategories);
+        // dd($advertcategories);
 
         return Response::json($advertcategories);
 
 
     }
-
 
     public function testes(){
 
@@ -106,6 +107,28 @@ class HomeController extends Controller
             'title' => 'Sempredanegocio.com.br | Não perca tempo! Anuncie.',
             'description' => 'Os melhores alugueis no melhor site.',
         ]);
+
+    }
+
+    public function searchCidade($query){
+        $result = null;
+        $result = Cidade::select('nome','uf')->where('nome','LIKE',$query.'%')->orderBy('nome','desc')->take(6)->distinct()->get();
+        return \Response::json($result);
+
+    }
+
+
+    public function testeImoveis(){
+        $result = null;
+
+        $result = Advert::where('cidade', '=', 'Uberaba')->where('numero_quarto','=','4')->take(16)->get();
+
+        return view('testes.testes', [
+            'title' => 'Sempredanegocio.com.br | Não perca tempo! Anuncie.',
+            'description' => 'Os melhores alugueis no melhor site.',
+            'result' => $result
+        ]);
+
 
     }
 

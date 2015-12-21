@@ -14,6 +14,7 @@ class CreateAdvertsTable extends Migration
     {
         Schema::create('adverts', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('tipo_anuncio');
             $table->char('estado',2);
             $table->string('cidade');
             $table->string('bairro');

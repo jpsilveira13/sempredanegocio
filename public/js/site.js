@@ -1,4 +1,209 @@
+// FUNÇÕES PARA MASCARAR CAMPOS:
+// adaptado por joão paulo da silveira ;D
+function mascaraCampo(o,f){
+    v_obj=o
+    v_fun=f
+    setTimeout("executaMascaraCampo()",1)
+}
+function executaMascaraCampo(){
+    v_obj.value=v_fun(v_obj.value)
+}
+
+function leech(v){
+    v=v.replace(/o/gi,"0")
+    v=v.replace(/i/gi,"1")
+    v=v.replace(/z/gi,"2")
+    v=v.replace(/e/gi,"3")
+    v=v.replace(/a/gi,"4")
+    v=v.replace(/s/gi,"5")
+    v=v.replace(/t/gi,"7")
+    return v
+}
+
+function mascSoNumeros(v){
+    return v.replace(/\D/g,"")
+}
+
+function mtel(v){
+    v=v.replace(/\D/g,"");             //Remove tudo o que nÃ£o Ã© dÃ­gito
+    v=v.replace(/^(\d{2})(\d)/g,"($1) $2"); //Coloca parÃªnteses em volta dos dois primeiros dÃ­gitos
+    v=v.replace(/(\d)(\d{4})$/,"$1-$2");    //Coloca hÃ­fen entre o quarto e o quinto dÃ­gitos
+    return v;
+}
+
+function mascTelefoneDDD2(v){
+    v=v.replace(/\D/g,"")                 //Remove tudo o que nï¿½o ï¿½ dï¿½gito
+    v=v.replace(/^(\d\d)(\d)/g,"($1) $2") //Coloca parï¿½nteses em volta dos dois primeiros dï¿½gitos
+    v=v.replace(/(\d{4})(\d)/,"$1-$2")    //Coloca hï¿½fen entre o quarto e o quinto dï¿½gitos
+    return v
+}
+
+function mascTelefoneDDD3(v){
+    v=v.replace(/\D/g,"")                 //Remove tudo o que nï¿½o ï¿½ dï¿½gito
+    v=v.replace(/^(\d\d\d)(\d)/g,"($1) $2") //Coloca parï¿½nteses em volta dos TRï¿½S primeiros dï¿½gitos
+    v=v.replace(/(\d{4})(\d)/,"$1-$2")    //Coloca hï¿½fen entre o quarto e o quinto dï¿½gitos
+    return v
+}
+function mascTelefone(v){
+
+    /* v=v.replace(/\D/g,"")                 //Remove tudo o que nï¿½o ï¿½ dï¿½gito
+     if (v.length < 11) {
+     v=v.replace(/^(\d\d\d)(\d)/g,"($1) $2") //Coloca parï¿½nteses em volta dos TRï¿½S primeiros dï¿½gitos
+     v=v.replace(/(\d{4})(\d)/,"$1-$2")    //Coloca hï¿½fen entre o quarto e o quinto dï¿½gitos
+     } else {
+     v=v.replace(/^(\d\d)(\d)/g,"($1) $2") //Coloca parï¿½nteses em volta dos dois primeiros dï¿½gitos
+     v=v.replace(/(\d{5})(\d)/,"$1-$2")    //Coloca hï¿½fen entre o quinto e o sexto dï¿½gitos
+     }
+     return v*/
+    v=v.replace(/\D/g,"");             //Remove tudo o que nÃ£o Ã© dÃ­gito
+    v=v.replace(/^(\d{2})(\d)/g,"($1) $2"); //Coloca parÃªnteses em volta dos dois primeiros dÃ­gitos
+    v=v.replace(/(\d)(\d{4})$/,"$1-$2");    //Coloca hÃ­fen entre o quarto e o quinto dÃ­gitos
+    return v;
+}
+function mascCPF(v){
+    v=v.replace(/\D/g,"")                    //Remove tudo o que nï¿½o ï¿½ dï¿½gito
+    v=v.replace(/(\d{3})(\d)/,"$1.$2")       //Coloca um ponto entre o terceiro e o quarto dï¿½gitos
+    v=v.replace(/(\d{3})(\d)/,"$1.$2")       //Coloca um ponto entre o terceiro e o quarto dï¿½gitos
+                                             //de novo (para o segundo bloco de nï¿½meros)
+    v=v.replace(/(\d{3})(\d{1,2})$/,"$1-$2") //Coloca um hï¿½fen entre o terceiro e o quarto dï¿½gitos
+    return v
+}
+
+function mascCEP(v){
+    v=v.replace(/D/g,"")                //Remove tudo o que nï¿½o ï¿½ dï¿½gito
+    v=v.replace(/^(\d{5})(\d)/,"$1-$2") //Esse ï¿½ tï¿½o fï¿½cil que nï¿½o merece explicaï¿½ï¿½es
+    return v
+}
+
+function mascCNPJ(v){
+    v=v.replace(/\D/g,"")                           //Remove tudo o que nï¿½o ï¿½ dï¿½gito
+    v=v.replace(/^(\d{2})(\d)/,"$1.$2")             //Coloca ponto entre o segundo e o terceiro dï¿½gitos
+    v=v.replace(/^(\d{2})\.(\d{3})(\d)/,"$1.$2.$3") //Coloca ponto entre o quinto e o sexto dï¿½gitos
+    v=v.replace(/\.(\d{3})(\d)/,".$1/$2")           //Coloca uma barra entre o oitavo e o nono dï¿½gitos
+    v=v.replace(/(\d{4})(\d)/,"$1-$2")              //Coloca um hï¿½fen depois do bloco de quatro dï¿½gitos
+    return v
+}
+
+function mascNumeroRomano(v){
+    v=v.toUpperCase()             //Maiï¿½sculas
+    v=v.replace(/[^IVXLCDM]/g,"") //Remove tudo o que nï¿½o for I, V, X, L, C, D ou M
+    //Essa ï¿½ complicada! Copiei daqui: http://www.diveintopython.org/refactoring/refactoring.html
+    while(v.replace(/^M{0,4}(CM|CD|D?C{0,3})(XC|XL|L?X{0,3})(IX|IV|V?I{0,3})$/,"")!="")
+        v=v.replace(/.$/,"")
+    return v
+}
+
+function mascData(v){
+    v=v.replace(/\D/g,"")                    //Remove tudo o que nï¿½o ï¿½ dï¿½gito
+    v=v.replace(/(\d{2})(\d)/,"$1/$2")       //Coloca uma barra entre o segundo e o terceiro dï¿½gitos
+    v=v.replace(/(\d{2})(\d)/,"$1/$2")       //Coloca uma barra entre o quarto  e o quinto dï¿½gitos
+                                             //de novo (para o segundo bloco de nï¿½meros)
+    return v
+}
+
+function mascHora(v){
+    v=v.replace(/\D/g,"")                    //Remove tudo o que nï¿½o ï¿½ dï¿½gito
+    v=v.replace(/(\d{2})(\d)/,"$1:$2")       //Coloca uma barra entre o segundo e o terceiro dï¿½gitos
+    v=v.replace(/(\d{2})(\d)/,"$1:$2")       //Coloca uma barra entre o quarto  e o quinto dï¿½gitos
+                                             //de novo (para o segundo bloco de nï¿½meros)
+    return v
+}
+
+function mascSite(v){
+
+    //Esse sem comentarios para que vocï¿½ entenda sozinho ;-)
+    v=v.replace(/^http:\/\/?/,"")
+    dominio=v
+    caminho=""
+    if(v.indexOf("/")>-1)
+        dominio=v.split("/")[0]
+    caminho=v.replace(/[^\/]*/,"")
+    dominio=dominio.replace(/[^\w\.\+-:@]/g,"")
+    caminho=caminho.replace(/[^\w\d\+-@:\?&=%\(\)\.]/g,"")
+    caminho=caminho.replace(/([\?&])=/,"$1")
+    if(caminho!="")dominio=dominio.replace(/\.+$/,"")
+    v="http://"+dominio+caminho
+    return v
+}
+
+function mvalor(v){
+    v=v.replace(/\D/g,"");//Remove tudo o que não é dígito
+    v=v.replace(/(\d)(\d{8})$/,"$1.$2");//coloca o ponto dos milhões
+    v=v.replace(/(\d)(\d{5})$/,"$1.$2");//coloca o ponto dos milhares
+
+    v=v.replace(/(\d)(\d{2})$/,"$1,$2");//coloca a virgula antes dos 2 últimos dígitos
+    return v;
+}
+
+function mascValorPonto(v){
+    v=v.replace(/[^1234567890.,]/g,""); //somente numeros, ponto e virgula
+    v=v.replace(/,/,"."); //se digitar virgula transforma em ponto.
+    return v;
+}
+
+function mascValorVirgula(v){
+    v=v.replace(/[^1234567890.,]/g,""); //somente numeros, ponto e virgula
+    v=v.replace(/\./,","); //se digitar ponto transforma em vï¿½rgula.
+    return v;
+}
+function mascValorDoisDecimais(v){
+    v=(mascSoNumeros(v));
+    if (v.length > 2) {
+        var i = Number(v);
+        i = (i/100) ;
+        return  i.toFixed(2);
+    } else {
+        return v
+    }
+
+}
+
+
 $(document).ready(function(){
+
+    $("#labelFaixaPreco").click(function () {
+        //$('.formularioBusca').css('display', 'block');
+        // ou pode também usar assim:
+        $('#divFaixaPreco').show('fast');
+
+    });
+    $('#divFaixaPreco').on('mouseleave', function () {
+        // this.style.display = 'none';
+        $(this).hide('fast');
+    });
+    $("#labelQuarto").click(function () {
+        //$('.formularioBusca').css('display', 'block');
+        // ou pode também usar assim:
+        $('#divQuartos').show('fast');
+
+    });
+    $('#divQuartos').on('mouseleave', function () {
+        // this.style.display = 'none';
+        $(this).hide('fast');
+    });
+
+    $("#labelSuite").click(function () {
+        //$('.formularioBusca').css('display', 'block');
+        // ou pode também usar assim:
+        $('#divSuite').show('fast');
+
+    });
+    $('#divSuite').on('mouseleave', function () {
+        // this.style.display = 'none';
+        $(this).hide('fast');
+    });
+    $("#labelVaga").click(function () {
+        //$('.formularioBusca').css('display', 'block');
+        // ou pode também usar assim:
+        $('#divVaga').show('fast');
+
+    });
+    $('#divVaga').on('mouseleave', function () {
+        // this.style.display = 'none';
+        $(this).hide('fast');
+    });
+
+
     $('ul.pagination').hide();
 
     (function(){
@@ -8,7 +213,7 @@ $(document).ready(function(){
             msgText: "<div class='carregamento-anuncio'>Carregando anúncios...</div>",
             img: "http://www.infinite-scroll.com/loading.gif"
 
-    };
+        };
         $('#products').infinitescroll({
 
             loading : loading_options,
@@ -45,26 +250,38 @@ $(document).ready(function(){
     //js fotos múltiplas anuncie
 
     multiPhotoDisplay = function(input) {
+
+
         var file, i, len, reader, ref;
+
         if (input.files && input.files[0]) {
+
             ref = input.files;
+
             for (i = 0, len = ref.length; i < len; i++) {
                 file = ref[i];
                 reader = new FileReader();
                 reader.onload = function(e) {
                     var image_html;
                     image_html =
-                        "<li>" +
+                        "<li class='ai_image'>" +
                         "<div class='image-anuncio'>" +
                         "<span></span>" +
                         "<img width=\"80\" height=\"38\" src=\"" + e.target.result + "\">" +
                         "</div>" +
+                        "<div class='bts'>"+
+                        "<a href='javascript:void(0)' class='bt-delete' title='excluir'></a>" +
+                        "<a href='javascript:void(0)' class='bt-rotate' title='rotate'></a>" +
+                        "</div>" +
                         "</li>";
-                    $('#photos_clearing').append(image_html);
-                    if ($('.pics-label.hide').length !== 0) {
-                        $('.pics-label').toggle('hide').removeClass('hide');
+                    var n = $( "#photos_clearing li" ).length;
+                    if(n > 4){
+                        alert('Número de upload no máximo 4');
+                        return;
+
+                    }else{
+                        $('#photos_clearing').append(image_html);
                     }
-                    return $(document).foundation('orbit','reflow');
                 };
                 reader.readAsDataURL(file);
             }
@@ -74,6 +291,34 @@ $(document).ready(function(){
             }
         }
     };
+
+    $(".bt-rotate").click(function(){
+        alert('teste')
+    });
+
+    $('#carrouselImovel').carousel({
+        interval: 4000
+    });
+
+    // handles the carousel thumbnails
+    $('[id^=carousel-selector-]').click( function(){
+        var id_selector = $(this).attr("id");
+        var id = id_selector.substr(id_selector.length -1);
+        id = parseInt(id);
+        $('#carrouselImovel').carousel(id);
+        $('[id^=carousel-selector-]').removeClass('selected');
+        $(this).addClass('selected');
+    });
+
+// when the carousel slides, auto update
+    $('#carrouselImovel').on('slid', function (e) {
+        var id = $('.item.active').data('slide-number');
+        id = parseInt(id);
+        $('[id^=carousel-selector-]').removeClass('selected');
+        $('[id=carousel-selector-'+id+']').addClass('selected');
+    });
+
+
 
     //js slider imovel
     (function(window, $, undefined) {
@@ -174,7 +419,59 @@ $(document).ready(function(){
 
     });
 
+    $(function() {
+        $( "#slider-range, #slider-range2" ).slider({
+            range: true,
+            min: 0,
+            max: 500,
+            values: [ 75, 300 ],
+            slide: function( event, ui ) {
+                $( "#amount" ).val( "$" + ui.values[ 0 ] + " - $" + ui.values[ 1 ] );
+            }
+        });
+        $( "#amount" ).val( "$" + $( "#slider-range" ).slider( "values", 0 ) +
+            " - $" + $( "#slider-range" ).slider( "values", 1 ) );
+    });
 
+    //buscar cidade
+    $('#location').on('keyup',function(e){
+        var minLetras = 2;
+        var textoPesquisa = $('#location').val();
+        var listaCidade = $("#listaCidades");
+
+        if(textoPesquisa.length >= minLetras ) {
+            listaCidade.show('fast');
+
+            $.get('/search-cidade/' + this.value, function (data) {
+                $('#listaCidades').html('');
+                $.each(data, function (index, cities) {
+                    $('#listaCidades').append('<li><a value="' + cities.nome + ' - '+cities.uf+'">' + cities.nome + ' - ' + cities.uf + '</a></li>');
+
+                });
+
+            });
+            if(listaCidade.is(":visible")){
+                $('body').on('click',function(){
+                    listaCidade.fadeOut();
+
+                });
+            }
+
+        }else{
+
+            listaCidade.hide();
+            listaCidade.html('');
+        }
+    });
+
+    $('#listaCidades li a').click(function(){
+        var locationElem = $('#location');
+        var valorCampo = $(this).attr('value');
+        locationElem.val(valorCampo);
+        locationElem.attr('value',valorCampo);
+        locationElem.focus();
+
+    });
 
     $(window).scroll(function(){
         if ($(this).scrollTop() > 300) {
@@ -517,6 +814,7 @@ $(document).ready(function(){
 
     $('#images').change(function(e) {
         var files = e.target.files;
+
         for (var i = 0; i <= files.length; i++) {
 
             // when i == files.length reorder and break
@@ -539,6 +837,36 @@ $(document).ready(function(){
         }// end for;
 
     });
+
+    var offset = $('#barra-fixa-menu').offset().top;
+    var meuMenu = $('#barra-fixa-menu');
+
+    var offsetLateral = $('#barra-fixa-lateral').offset().top;
+    var meuMenuLateral = $('#barra-fixa-lateral');
+
+    $(document).on('scroll', function () {
+        if (offsetLateral <= $(window).scrollTop()) {
+            meuMenuLateral.addClass('fixarLateral');
+
+        } else {
+            meuMenuLateral.removeClass('fixarLateral');
+
+        }
+    });
+
+
+
+    $(document).on('scroll', function () {
+        if (offset <= $(window).scrollTop()) {
+            meuMenu.addClass('fixar');
+
+        } else {
+            meuMenu.removeClass('fixar');
+
+        }
+    });
+
+    //validação formulário anuncio
 
     $('#sortable').sortable();
     $('#sortable').disableSelection();
