@@ -76,6 +76,7 @@ Route::get('auth/facebook/callback', 'SocialController@handleProviderCallback');
 Route::get('social/login/redirect/{provider}', ['uses' => 'Auth\AuthController@redirectToProvider', 'as' => 'social.login']);
 Route::get('social/login/{provider}', 'Auth\AuthController@handleProviderCallback');
 
+Route::post('imoveis','HomeController@searchSite');
 
 
 Route::controllers([
@@ -83,3 +84,14 @@ Route::controllers([
     'password' => 'Auth\PasswordController',
 
 ]);
+
+Route::group(['prefix' => 'admin', 'middleware'=>'auth'], function()
+{
+
+   Route::group(['prefix' => 'home'],function(){
+
+      Route::get('/', 'AdminController@home');
+
+   });
+
+});

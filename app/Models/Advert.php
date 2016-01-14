@@ -41,14 +41,14 @@ class Advert extends Model
     }
 
     public function user(){
-        return $this->hasOne(User::class);
+        return $this->belongsTo(User::class,'user_id','id');
 
     }
 
-  public function features(){
-      return $this->belongsToMany(Feature::class);
+    public function features(){
+        return $this->belongsToMany(Feature::class);
 
-  }
+    }
 
 
 }

@@ -41,62 +41,61 @@
                     </div>
                 </div><!-- box informações do imovel -->
                 <div class="box-default clearfix carrosel-fotos-imovel">
-                    <div class="row">
-                        <div class="col-md-12" id="slider">
 
-                            <div class="col-md-12" id="carousel-bounding-box">
-                                <div id="carrouselImovel" class="carousel slide">
-                                    <!-- main slider carousel items -->
-                                    <div class="carousel-inner">
-                                        @if($advert->images()->count() >0)
-                                            <?php $j = 0 ?>
-                                            @foreach($advert->images()->get() as $images)
-                                                <div class="<?php if($j==0){echo 'active';}?> item srle" data-slide-number="<?=$j?>">
-                                                    <img src="{{url('gallery/'.$images->extension)}}" class="img-responsive">
-                                                </div>
-                                                <?php $j++?>
-                                            @endforeach
-                                        @else
-                                            <div class="active item srle" data-slide-number="1">
-                                                <img src="{{url('images/noimage2.jpg')}}" class="img-responsive">
+                    <div class="col-md-12" id="slider">
+
+                        <div class="col-md-12" id="carousel-bounding-box">
+                            <div id="carrouselImovel" class="carousel slide">
+                                <!-- main slider carousel items -->
+                                <div class="carousel-inner">
+                                    @if($advert->images()->count() >0)
+                                        <?php $j = 0 ?>
+                                        @foreach($advert->images()->get() as $images)
+                                            <div class="<?php if($j==0){echo 'active';}?> item srle" data-slide-number="<?=$j?>">
+                                                <img src="{{url('gallery/'.$images->extension)}}" class="img-responsive">
                                             </div>
-                                        @endif
-                                    </div>
-                                    <!-- main slider carousel nav controls -->
-                                    <a class="carousel-control left" href="#carrouselImovel" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a>
-                                    <a class="carousel-control right" href="#carrouselImovel" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>
+                                            <?php $j++?>
+                                        @endforeach
+                                    @else
+                                        <div class="active item srle" data-slide-number="1">
+                                            <img src="{{url('images/noimage2.jpg')}}" class="img-responsive">
+                                        </div>
+                                    @endif
                                 </div>
+                                <!-- main slider carousel nav controls -->
+                                <a class="carousel-control left" href="#carrouselImovel" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a>
+                                <a class="carousel-control right" href="#carrouselImovel" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>
                             </div>
-
                         </div>
+
                     </div>
                     <!--/main slider carousel-->
 
                     <!-- thumb navigation carousel -->
-                        <div class="col-md-12 hidden-sm hidden-xs" id="slider-thumbs">
+                    <div class="col-md-12 hidden-sm hidden-xs" id="slider-thumbs">
 
-                            <!-- thumb navigation carousel items -->
-                            <ul class="list-inline mt10">
-                                @if($advert->images()->count() >0)
-                                    <?php $i=0?>
-                                    @foreach($advert->images()->get() as $images)
-                                        <li>
-                                            <a id="carousel-selector-<?=$i?>" class="<?php if($i==0){echo 'selected';}?>">
-                                                <img src="{{url('gallery/'.$images->extension)}}" width="80" height="60" class="img-responsive">
-                                            </a>
-                                        </li>
-                                        <?php $i++ ?>
-                                    @endforeach
-                                @else
+                        <!-- thumb navigation carousel items -->
+                        <ul class="list-inline mt10">
+                            @if($advert->images()->count() >0)
+                                <?php $i=0?>
+                                @foreach($advert->images()->get() as $images)
                                     <li>
-                                        <a id="carousel-selector-1" class="selected">
-                                            <img src="{{url('images/noimage2.jpg')}}" width="80" height="60" class="img-responsive">
+                                        <a id="carousel-selector-<?=$i?>" class="<?php if($i==0){echo 'selected';}?>">
+                                            <img src="{{url('gallery/'.$images->extension)}}" width="80" height="60" class="img-responsive">
                                         </a>
                                     </li>
-                                @endif
-                            </ul>
+                                    <?php $i++ ?>
+                                @endforeach
+                            @else
+                                <li>
+                                    <a id="carousel-selector-1" class="selected">
+                                        <img src="{{url('images/noimage2.jpg')}}" width="80" height="60" class="img-responsive">
+                                    </a>
+                                </li>
+                            @endif
+                        </ul>
 
-                        </div>
+                    </div>
                 </div>
                 <div class="box-default clearfix box-descricao-caract">
                     <h3>Descrição</h3>
@@ -147,9 +146,11 @@
                                 </li>
                             </ul>
                             <!-- telefone contato -->
+
+
                             <div id="phone" class="tab-phone tab-pane hide active" style="display: block;">
                                 <p class="text-aoligar">Ao ligar, diga que você viu esse anúncio no Sempre da Negócio.</p>
-                                <span id="number_tel" class="number tc">( 11 ) 2129-2200</span>
+                                <span id="number_tel" class="number tc">{{$advert->user->phone}}</span>
 
                                 <input type="hidden" id="hdnVerTelefoneAtivo" value="1">
                             </div>
@@ -219,7 +220,7 @@ Olá, Gostaria de ter mais informações sobre o imóvel Apartamento à venda, R
                     <center>
 
                         <img class="img-responsive center-block borda-image" width="140" height="140" src="<?php if($advert->images()->count() > 0):
-                        echo asset('gallery/'.$advert->images()->first()->extension); else: echo asset('images/noimage2.jpg'); endif?>" />
+                            echo asset('gallery/'.$advert->images()->first()->extension); else: echo asset('images/noimage2.jpg'); endif?>" />
                         {{$advert->rua}}, {{$advert->bairro}}, {{$advert->cidade}} - {{$advert->estado}}
 
                         <small>Sob consulta</small>

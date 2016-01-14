@@ -79,8 +79,5 @@ class AdvertController extends Controller
         }
 
     }
-
-
-
-
+    
 }

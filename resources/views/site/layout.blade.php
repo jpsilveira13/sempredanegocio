@@ -44,13 +44,9 @@
     <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/jquery.bootstrapvalidator/0.5.2/css/bootstrapValidator.min.css"/>
     <link rel="stylesheet" href="{{ asset('css/sweetalert.css') }}"/>
     <link rel="stylesheet" href="{{ asset('css/jquery-ui.css') }}"/>
-
-
-
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,800' rel='stylesheet' type='text/css'>
 </head>
-
-<body>
-
+<body class="<?=Request::is('/') ? 'pt0' : '' ?>">
 <script type="text/javascript">
     (function removeFacebookAppendedHash() {
         if (!window.location.hash || window.location.hash !== '#_=_')
@@ -68,57 +64,51 @@
         document.body.scrollLeft = scroll.left;
     }());
 </script>
-<header>
-    <nav class="navbar navbar-default navbar-sempredanegocio navbar-static-top position-relative">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand text-uppercase no-padding logo-topo" href="/">
-                    <img src="{{asset('images/logo.png')}}" class="img-responsive menu-logo-display" title="Sempre Da Negócio" alt="Sempre Da Negócio"/>
-                </a>
-            </div>
-            <div id="navbar" class="collapse navbar-collapse">
 
-                <ul class="nav navbar-nav navbar-right">
-                    @if(auth()->guest())
-                        @if(!Request::is('auth/login'))
-                            <li><a href="#loginModal" id="modalLogin" class="" data-toggle="modal" data-target="#loginModal"><span class="glyphicon glyphicon-user"></span> Iniciar Sessão</a></li>
-                            <li><a href="#loginModal" id="modalLogin" class="" data-toggle="modal" data-target="#loginModal"><span class="glyphicon glyphicon-heart"></span> Favoritos</a></li>
-                        @endif
-                    @else
-                        <li class="dropdown">
-                            @if(auth()->user()->avatar)
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><span class="user-menu-icon" style="background-image: url('<?=auth()->user()->avatar?>');"></span><span class="align-div-menu">{{ auth()->user()->name }}</span> <span class="caret  align-div-menu"></span></a>
-                            @else
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><span class="user-menu-icon glyphicon glyphicon-user"></span><span>{{ auth()->user()->name }}</span><span class="caret"></span></a>
-                            @endif
-                            <ul class="dropdown-menu" role="menu">
-                                <li><a href="{{ url('/auth/logout') }}">Acessar o Painel</a></li>
-                                <li class="divider"></li>
-                                <li><a href="{{ url('/auth/logout') }}">Sair</a></li>
-                            </ul>
-                        </li>
-                        <li><a href="#" id=""><span class="user-menu-icon glyphicon glyphicon-heart"></span> Favoritos</a></li>
-                    @endif
-                </ul>
-            </div><!--/.nav-collapse -->
+<nav id="mainNav" class="navbar navbar-default navbar-fixed-top affix-top <?=Request::is('/') ? '' : 'bg-branco' ?>">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button style="margin-top: 14px" type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="page-scroll" href="{{asset('/')}}"><img class="img-responsive" src="{{url('images/logo312x33.png')}}" alt="Sempre da Negócio" title="Sempre da Negócio "/> </a>
         </div>
-    </nav>
-</header>
-<div id="menu-anuncio-fixo" class="jumbotron1 subhead <?=Request::is('anuncie') ? 'hide' : '' ?>">
-    <div class="container">
-        <h1>Não perca tempo!</h1>
-        <p>Anuncie agora no maior portal de aluguéis do BRASIL.</p>
-         <span class="label-free">
-             <a href="{{asset('anuncie')}}" id="btn-orange" class="btn btn-anuncio"> Anuncie Agora </a>
-         </span>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="navbar-collapse collapse" id="bs-example-navbar-collapse-1" aria-expanded="false" style="height: 1px;">
+            <ul class="nav navbar-nav navbar-right">
+                <li class="new-ads"><a href="{{asset('anuncie')}}" class="btn btn-ads btn-azul"><span class="glyphicon glyphicon-file"></span> Anuncie</a></li>
+                @if(auth()->guest())
+                    @if(!Request::is('auth/login'))
+                        <li><a href="#loginModal" id="modalLogin" class="" data-toggle="modal" data-target="#loginModal"><span class="glyphicon glyphicon-user"></span> Iniciar Sessão</a></li>
+                        <li><a href="#loginModal" id="modalLogin" class="" data-toggle="modal" data-target="#loginModal"><span class="glyphicon glyphicon-heart"></span> Favoritos</a></li>
+                    @endif
+                @else
+                    <li class="dropdown">
+                        @if(auth()->user()->avatar)
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><span class="user-menu-icon" style="background-image: url('<?=auth()->user()->avatar?>');"></span><span class="align-div-menu">{{ auth()->user()->name }}</span> <span class="caret  align-div-menu"></span></a>
+                        @else
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><span class="user-menu-icon glyphicon glyphicon-user"></span><span>{{ auth()->user()->name }}</span><span class="caret"></span></a>
+                        @endif
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="{{ url('/auth/logout') }}">Acessar o Painel</a></li>
+                            <li class="divider"></li>
+                            <li><a href="{{ url('/auth/logout') }}">Sair</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#" id=""><span class="user-menu-icon glyphicon glyphicon-heart"></span> Favoritos</a></li>
+                @endif
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
     </div>
-</div>
+    <!-- /.container-fluid -->
+</nav>
+<div class="clearfix"></div>
 <section>
     <div class="container">
         <div class="row no-margin">
@@ -129,15 +119,23 @@
         </div>
     </div>
 </section>
-
+<div class="clearfix"></div>
 <footer>
     <div class="row">
         <div class="container">
             <div class="col-md-12">
+                <div class="social-area pull-left mt15">
+                    <a><i class="fa fa-facebook fa-2x"></i></a>
+                    <a><i class="fa fa-twitter fa-2x"></i></a>
+                    <a><i class="fa fa-instagram fa-2x"></i></a>
+                    <a><i class="fa fa-whatsapp fa-2x"></i></a>
+                    <a><i class="fa fa-envelope fa-2x"></i></a>
+                </div>
                 <div class="footer-texto text-center">
-                    <p>Sempre da Negócio  © Todos os direitos reservados. Uma empresa do grupo <strong>Inovar</strong></p>
+                    <p>Copyright © 2016. Todos os direitos reservados.</p>
 
                 </div>
+
             </div>
         </div>
     </div>
@@ -155,6 +153,16 @@
             <div class="modal-body">
 
                 <span id="mensagemLoginSalvarBusca" class="alerta-zero alerta-imput-busca alerta-login-busca" style="display: block;">Realize seu login para adicionar o imóvel à sua lista de imóveis preferidos.</span>
+                @if (count($errors) > 0)
+                    <div class="alert alert-danger">
+                        <strong>Whoops!</strong> Houve um erro ao cadastrar e logar no sistema.<br><br>
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
 
                 <div id="login" class="login">
 
@@ -164,7 +172,7 @@
                         <p id="mensagemEmailExistente" class="aviso" style="display: none;">O email informado já está cadastrado no Sempre da Negócio Imóveis. Faça seu login abaixo.</p>
                         <div class="rel">
                             <form class="form-horizontal" role="form" method="POST" action="{{ url('/auth/login') }}">
-                                <input type="hidden" name="_token" value="{!! csrf_token() !!}" />
+                                {!! csrf_field() !!}
                                 <input type="email" name="email" id="txtEmailUsuarioLogin" class="input input-block-level" placeholder="E-mail" data-toggle="tooltip" title="Este campo deve ser preenchido" autocapitalize="off" />
                                 <img id="imgLoadingEmail" src="http://cjs.zapcorp.com.br/Content/img/loader.gif" alt="Loading" class="loading hide" width="20" height="20" />
                         </div>
@@ -239,14 +247,16 @@
                         <p class="titulo">Não sou cadastrado</p>
                         <p class="desc">Preencha os campos abaixo para iniciar o cadastro.</p>
                         <form class="form-horizontal" role="form" method="POST" action="{{ url('/auth/register') }}">
-                            <input type="hidden" name="_token" value="{{!! csrf_token() !!}}">
+                            {!! csrf_field() !!}
+                            <input type="text" class="form-control" class="input input-block-level span3" placeholder="Informe seu Nome" name="name" value="{{ old('name') }}">
                             <input id="txtNomeUsuarioCadastro" name="email" class="input input-block-level span3" type="email" placeholder="Informe seu email" value="{{old('email')}}">
+
                             <div class="rel">
                                 <input type="password" name='password' id="txtEmailUsuarioCadastro"  class="input input-block-level span3" placeholder="Informe a senha" autocapitalize="off">
 
                             </div>
                             <div class="rel">
-                                <input type="password" id="txtEmailUsuarioCadastro"  class="input input-block-level span3" placeholder="Confirma a senha" autocapitalize="off">
+                                <input type="password" id="txtEmailUsuarioCadastro"  name="password_confirmation" class="input input-block-level span3" placeholder="Confirma a senha" autocapitalize="off">
 
                             </div>
                             <button href="javascript:void(0);" type="submit" id="btnCadastrar" class="btn btn-zap pull-right" onclick="IrParaCadastroCompleto();">Cadastrar</button>
@@ -327,9 +337,10 @@
 <script src="{{asset('js/infinitescroll.js')}}"></script>
 <script src="{{asset('js/typeahead.min.js')}}"></script>
 <script src="{{asset('js/bloodhound.min.js')}}"></script>
+<script src="{{asset('js/jquery.easing.min.js')}}"></script>
+<script src="{{asset('js/jquery.fittext.js')}}"></script>
+<script src="{{asset('js/wow.min.js')}}"></script>
 
-<!--<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAExt7vsJrLsnF3UQ7fk_ix51BderXpv6Q"
-       type="text/javascript"></script> -->
 <script src="/vendor/artesaos/cidades/js/scripts.js"></script>
 <script src="{{asset('js/site.js')}}"></script>
 <script src="{{asset('js/validator.min.js')}}"></script>

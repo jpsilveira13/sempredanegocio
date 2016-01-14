@@ -21,17 +21,19 @@ class HomeController extends Controller
 
 
         $adverts = Advert::orderBy('id','desc')->paginate(16);
+        $anuncieSubCat = SubCategory::get();
         $countAdvert = Advert::all();
         return view('site.pages.home',[
             'adverts' => $adverts,
-            'countAdvert' => $countAdvert
-
+            'countAdvert' => $countAdvert,
+            'anunciesubcats' => $anuncieSubCat,
         ]);
 
     }
 
     public  function imoveis(){
         $adverts = Advert::orderBy('id','desc')->paginate(16);
+        $anuncieSubCat = SubCategory::get();
         $countAdvert = Advert::all();
 
 
@@ -39,7 +41,8 @@ class HomeController extends Controller
             'title' => 'Sempredanegocio.com.br | Não perca tempo! Anuncie',
             'description' => 'Os melhores alugueis no melhor site.',
             'adverts' => $adverts,
-            'countAdvert' => $countAdvert
+            'countAdvert' => $countAdvert,
+            'anunciesubcats' => $anuncieSubCat
 
         ]);
 
@@ -132,5 +135,25 @@ class HomeController extends Controller
 
     }
 
+    public function searchSite(){
+        $transacao = Input::get('transacao');
+        $cidade = Input::get('cidade');
 
+        //$categoria = Input::get('categoria');
+
+        //$resultSub = SubCategory::select('name')->where('name','=',$categoria);
+        if($transacao == 'venda') {
+
+            $resultado = Advert::where('cidade', '=', $cidade)->where('tipo_anuncio', '=', $transacao)->get();
+
+            return view('resultado/imoveis', compact('resultado'));
+        }
+        if ($transacao == 'aluga') {
+
+            $resultado = Advert::where('cidade', '=', $cidade)->where('tipo_anuncio', '=', $transacao)->get();
+            return view('resultado/imoveis', compact('resultado'));
+        }
+
+
+    }
 }

@@ -159,8 +159,181 @@ function mascValorDoisDecimais(v){
 }
 
 
+
+
 $(document).ready(function(){
 
+    /* FUNÇÃO CONTADOR SITE */
+
+    (function ($) {
+        $.fn.countTo = function (options) {
+            options = options || {};
+
+            return $(this).each(function () {
+                // set options for current element
+                var settings = $.extend({}, $.fn.countTo.defaults, {
+                    from:            $(this).data('from'),
+                    to:              $(this).data('to'),
+                    speed:           $(this).data('speed'),
+                    refreshInterval: $(this).data('refresh-interval'),
+                    decimals:        $(this).data('decimals')
+                }, options);
+
+                // how many times to update the value, and how much to increment the value on each update
+                var loops = Math.ceil(settings.speed / settings.refreshInterval),
+                    increment = (settings.to - settings.from) / loops;
+
+                // references & variables that will change with each update
+                var self = this,
+                    $self = $(this),
+                    loopCount = 0,
+                    value = settings.from,
+                    data = $self.data('countTo') || {};
+
+                $self.data('countTo', data);
+
+                // if an existing interval can be found, clear it first
+                if (data.interval) {
+                    clearInterval(data.interval);
+                }
+                data.interval = setInterval(updateTimer, settings.refreshInterval);
+
+                // initialize the element with the starting value
+                render(value);
+
+                function updateTimer() {
+                    value += increment;
+                    loopCount++;
+
+                    render(value);
+
+                    if (typeof(settings.onUpdate) == 'function') {
+                        settings.onUpdate.call(self, value);
+                    }
+
+                    if (loopCount >= loops) {
+                        // remove the interval
+                        $self.removeData('countTo');
+                        clearInterval(data.interval);
+                        value = settings.to;
+
+                        if (typeof(settings.onComplete) == 'function') {
+                            settings.onComplete.call(self, value);
+                        }
+                    }
+                }
+
+                function render(value) {
+                    var formattedValue = settings.formatter.call(self, value, settings);
+                    $self.text(formattedValue);
+                }
+            });
+        };
+
+        $.fn.countTo.defaults = {
+            from: 0,               // the number the element should start at
+            to: 0,                 // the number the element should end at
+            speed: 1000,           // how long it should take to count between the target numbers
+            refreshInterval: 100,  // how often the element should be updated
+            decimals: 0,           // the number of decimal places to show
+            formatter: formatter,  // handler for formatting the value before rendering
+            onUpdate: null,        // callback method for every time the element is updated
+            onComplete: null       // callback method for when the element finishes updating
+        };
+
+        function formatter(value, settings) {
+            return value.toFixed(settings.decimals);
+        }
+    }(jQuery));
+    $('.item-count').countTo({
+        formatter: function (value, options) {
+            return value.toFixed(options.decimals);
+        },
+        onUpdate: function (value) {
+            console.debug(this);
+        },
+        onComplete: function (value) {
+            console.debug(this);
+        }
+    });
+    /* FIM CONTADOR */
+    (function($) {
+        "use strict"; // Start of use strict
+
+        // jQuery for page scrolling feature - requires jQuery Easing plugin
+        $('a.page-scroll').bind('click', function(event) {
+            var $anchor = $(this);
+            $('html, body').stop().animate({
+                scrollTop: ($($anchor.attr('href')).offset().top - 50)
+            }, 1250, 'easeInOutExpo');
+            event.preventDefault();
+        });
+
+        // Highlight the top nav as scrolling occurs
+        $('body').scrollspy({
+            target: '.navbar-fixed-top',
+            offset: 51
+        })
+
+        // Closes the Responsive Menu on Menu Item Click
+        $('.navbar-collapse ul li a').click(function() {
+            $('.navbar-toggle:visible').click();
+        });
+
+        // Fit Text Plugin for Main Header
+        $("h1").fitText(
+            1.2, {
+                minFontSize: '35px',
+                maxFontSize: '65px'
+            }
+        );
+
+        // Offset for Main Navigation
+        $('#mainNav').affix({
+            offset: {
+                top: 100
+            }
+        })
+
+        // Initialize WOW.js Scrolling Animations
+        new WOW().init();
+
+    })(jQuery); // End of use strict
+
+    var cbpAnimatedHeader = (function() {
+
+        var docElem = document.documentElement,
+            header = document.querySelector( '.navbar-default' ),
+            didScroll = false,
+            changeHeaderOn = 300;
+
+        function init() {
+            window.addEventListener( 'scroll', function( event ) {
+                if( !didScroll ) {
+                    didScroll = true;
+                    setTimeout( scrollPage, 250 );
+                }
+            }, false );
+        }
+
+        function scrollPage() {
+            var sy = scrollY();
+            if ( sy >= changeHeaderOn ) {
+                classie.add( header, 'navbar-shrink' );
+            }
+            else {
+                classie.remove( header, 'navbar-shrink' );
+            }
+            didScroll = false;
+        }
+
+        function scrollY() {
+            return window.pageYOffset || docElem.scrollTop;
+        }
+
+        init();
+
+    })();
     $("#labelFaixaPreco").click(function () {
         //$('.formularioBusca').css('display', 'block');
         // ou pode também usar assim:
@@ -435,23 +608,36 @@ $(document).ready(function(){
 
     //buscar cidade
     $('#location').on('keyup',function(e){
-        var minLetras = 2;
+        var minLetras = 4;
         var textoPesquisa = $('#location').val();
         var listaCidade = $("#listaCidades");
-
         if(textoPesquisa.length >= minLetras ) {
             listaCidade.show('fast');
 
             $.get('/search-cidade/' + this.value, function (data) {
                 $('#listaCidades').html('');
                 $.each(data, function (index, cities) {
-                    $('#listaCidades').append('<li><a value="' + cities.nome + ' - '+cities.uf+'">' + cities.nome + ' - ' + cities.uf + '</a></li>');
+                    $('#listaCidades').append('<li><a value="' + cities.nome + '">' + cities.nome + ' - ' + cities.uf + '</a></li>');
+                    $('#listaCidades li a').on('click',function(){
 
+                        var locationElem = $('#location');
+
+
+                        var valorCampo = $(this).attr('value');
+                        locationElem.val(valorCampo);
+                        locationElem.attr('value',valorCampo);
+                        locationElem.focus();
+
+
+                    });
                 });
 
             });
+
             if(listaCidade.is(":visible")){
+
                 $('body').on('click',function(){
+
                     listaCidade.fadeOut();
 
                 });
@@ -462,16 +648,22 @@ $(document).ready(function(){
             listaCidade.hide();
             listaCidade.html('');
         }
-    });
-
-    $('#listaCidades li a').click(function(){
-        var locationElem = $('#location');
-        var valorCampo = $(this).attr('value');
-        locationElem.val(valorCampo);
-        locationElem.attr('value',valorCampo);
-        locationElem.focus();
 
     });
+
+    //js area pesquisar
+
+    $("#btn-pesquisa").on('click',function(e){
+        e.preventDefault();
+
+        $("#menu-total").fadeIn("fast");
+
+
+    });
+
+
+
+
 
     $(window).scroll(function(){
         if ($(this).scrollTop() > 300) {
@@ -877,6 +1069,8 @@ $(document).ready(function(){
         reorderImages();
 
     });
+
+
 
 });
 
