@@ -10,7 +10,7 @@ class Advert extends Model
 
     protected $fillable = [
         'user_id',
-        'advert_categories_id',
+        'subcategories_id',
         'tipo_anuncio',
         'estado',
         'cidade',
@@ -29,6 +29,7 @@ class Advert extends Model
         'url_anuncio'
 
     ];
+
 
     public function images(){
 

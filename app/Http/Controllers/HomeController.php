@@ -20,31 +20,37 @@ class HomeController extends Controller
     public function index(){
 
 
-        $adverts = Advert::orderBy('id','desc')->paginate(16);
-        $anuncieSubCat = SubCategory::get();
-        $countAdvert = Advert::all();
+
+        $category = Category::get();
+
         return view('site.pages.home',[
-            'adverts' => $adverts,
-            'countAdvert' => $countAdvert,
-            'anunciesubcats' => $anuncieSubCat,
+
+            'categories' => $category,
         ]);
 
     }
 
-    public  function imoveis(){
-        $adverts = Advert::orderBy('id','desc')->paginate(16);
-        $anuncieSubCat = SubCategory::get();
-        $countAdvert = Advert::all();
+    //pega a url dinamicamente e compara se existe ou nao.
+    public function tipocategoria($name_url){
+
+        $categoria_id = Category::select('id')->where('name_url', $name_url)->first();
 
 
-        return view('site.pages.imoveis', [
-            'title' => 'Sempredanegocio.com.br | Não perca tempo! Anuncie',
-            'description' => 'Os melhores alugueis no melhor site.',
-            'adverts' => $adverts,
-            'countAdvert' => $countAdvert,
-            'anunciesubcats' => $anuncieSubCat
+        if($categoria_id != null){
+            $adverts = Advert::join('subcategories', 'adverts.subcategories_id', '=', 'subcategories.id')->where('subcategories.category_id',$categoria_id->id)->select('adverts.*')->paginate(15);
+            $advertsCount = Advert::join('subcategories', 'adverts.subcategories_id', '=', 'subcategories.id')->where('subcategories.category_id',$categoria_id->id)->select('adverts.*')->count();
 
-        ]);
+            return view('site.pages.anuncios', [
+                'title' => 'Sempredanegocio.com.br | Não perca tempo! Anuncie',
+                'description' => 'Os melhores alugueis no melhor site.',
+                'adverts' => $adverts,
+                'advertsCount' => $advertsCount
+
+            ]);
+        }else{
+            return view('error.error404');
+
+        }
 
     }
 
@@ -73,11 +79,11 @@ class HomeController extends Controller
 
     }
 
-    public function imovelInterno($tipo_anuncio, $id, $url_anuncio){
+    public function anuncioInterno($tipo_anuncio, $id, $url_anuncio){
         $advert = Advert::find($id);
 
 
-        return view('site.pages.imovel', [
+        return view('site.pages.anuncio', [
             'title' => 'Sempredanegocio.com.br | Não perca tempo! Anuncie.',
             'description' => 'Os melhores alugueis no melhor site.',
             'advert' => $advert
@@ -104,14 +110,21 @@ class HomeController extends Controller
 
     }
 
-    public function testes(){
+    public function searchCep(){
+        $cep = Input::get('cep');
 
-        return view('testes.testes', [
-            'title' => 'Sempredanegocio.com.br | Não perca tempo! Anuncie.',
-            'description' => 'Os melhores alugueis no melhor site.',
-        ]);
+        $reg = simplexml_load_file("http://cep.republicavirtual.com.br/web_cep.php?formato=xml&cep=" . $cep);
+
+        $dados['sucesso'] = (string) $reg->resultado;
+        $dados['rua']     = (string) $reg->tipo_logradouro . ' ' . $reg->logradouro;
+        $dados['bairro']  = (string) $reg->bairro;
+        $dados['cidade']  = (string) $reg->cidade;
+        $dados['estado']  = (string) $reg->uf;
+
+        return \Response::json($dados);
 
     }
+
 
     public function searchCidade($query){
         $result = null;
@@ -135,25 +148,28 @@ class HomeController extends Controller
 
     }
 
-    public function searchSite(){
+    public function searchAnuncio(){
+        $anunciesubcats = SubCategory::get();
         $transacao = Input::get('transacao');
         $cidade = Input::get('cidade');
 
-        //$categoria = Input::get('categoria');
 
-        //$resultSub = SubCategory::select('name')->where('name','=',$categoria);
-        if($transacao == 'venda') {
+        $categoria = Input::get('categoria');
 
-            $resultado = Advert::where('cidade', '=', $cidade)->where('tipo_anuncio', '=', $transacao)->get();
+        if($cidade != null ){
 
-            return view('resultado/imoveis', compact('resultado'));
+        $queryAnuncios = Advert::join('subcategories', 'adverts.subcategories_id', '=', 'subcategories.id')->where('subcategories.category_id',$categoria)->where('cidade','=',$cidade)->where('tipo_anuncio','=',$transacao)->select('adverts.*')->paginate(16);
+
+        $queryCount = Advert::join('subcategories', 'adverts.subcategories_id', '=', 'subcategories.id')->where('subcategories.category_id',$categoria)->where('cidade','=',$cidade)->where('tipo_anuncio','=',$transacao)->count();
+
+        return view('resultado/anuncio', compact('queryAnuncios','anunciesubcats','queryCount'));
+        }else{
+            $queryAnuncios = Advert::join('subcategories', 'adverts.subcategories_id', '=', 'subcategories.id')->where('subcategories.category_id',$categoria)->where('tipo_anuncio','=',$transacao)->select('adverts.*')->paginate(16);
+
+            $queryCount = Advert::join('subcategories', 'adverts.subcategories_id', '=', 'subcategories.id')->where('subcategories.category_id',$categoria)->where('tipo_anuncio','=',$transacao)->count();
+            return view('resultado/anuncio', compact('queryAnuncios','anunciesubcats','queryCount'));
+
         }
-        if ($transacao == 'aluga') {
-
-            $resultado = Advert::where('cidade', '=', $cidade)->where('tipo_anuncio', '=', $transacao)->get();
-            return view('resultado/imoveis', compact('resultado'));
-        }
-
 
     }
 }

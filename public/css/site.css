@@ -64,7 +64,7 @@ cores:
 }
 
 
-[class^="icone-"]:before,[class*=" icone-"]:before{font-family:'Site-ZAP';speak:none;font-style:normal;font-weight:normal;font-variant:normal;text-transform:none;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}.icone-escudo:before{content:"\e642"}.icone-pacotes:before{content:"\e643"}.icone-cidade:before{content:"\e63f"}.icone-montanha:before{content:"\e640"}.icone-praia:before{content:"\e641"}.icone-data-atualizacao:before{content:"\e639"}.icone-tipo-temporada:before{content:"\e63a"}.icone-vagas:before{content:"\e634"}.icone-suites:before{content:"\e635"}.icone-quartos:before{content:"\e636"}.icone-hospedes:before{content:"\e60c"}.icone-faixa-preco:before{content:"\e637"}.icone-area:before{content:"\e638"}.icone-facebook2:before{content:"\e63b"}.icone-google-plus2:before{content:"\e63e"}.icone-twitter2:before{content:"\e63c"}.icone-facebook:before{content:"\e631"}.icone-twitter:before{content:"\e632"}.icone-google-plus:before{content:"\e607"}.icone-youtube:before{content:"\e627"}.icone-like:before{content:"\e608"}.icone-meh:before{content:"\e609"}.icone-dislike:before{content:"\e60a"}.icone-salvar-busca:before{content:"\e62b"}.icone-alerta:before{content:"\e60b"}.icone-busca:before{content:"\e63d"}.icone-chat-vazado:before{content:"\e60d"}.icone-chat:before{content:"\e60e"}.icone-imprimir:before{content:"\e62c"}.icone-android:before{content:"\e604"}.icone-apple:before{content:"\e605"}.icone-fechar-modal:before{content:"\e606"}.icone-check:before{content:"\e60f"}.icone-seta-light-cima:before{content:"\e62e"}.icone-seta-light-baixo:before{content:"\e62f"}.icone-share:before{content:"\e25a"}.icone-favoritada:before{content:"\e601"}.icone-nao-favoritada:before{content:"\e603"}.icone-menu:before{content:"\e630"}.icone-foto:before{content:"\e617"}.icone-tour-virtual:before{content:"\e618"}.icone-video:before{content:"\e619"}.icone-distancia-ate:before{content:"\e61a"}.icone-visao-lista:before{content:"\e61b"}.icone-visao-galeria:before{content:"\e61c"}.icone-gps-fixed:before{content:"\e61d"}.icone-informacao:before{content:"\e61e"}.icone-informacao2:before{content:"\e633"}.icone-alerta-reportar:before{content:"\e61f"}.icone-limpar:before{content:"\e626"}.icone-seta-simples-baixo:before{content:"\e620"}.icone-seta-simples-cima:before{content:"\e621"}.icone-seta-simples-esq:before{content:"\e622"}.icone-seta-simples-dir:before{content:"\e623"}.icone-seta-cheia-baixo:before{content:"\e624"}.icone-seta-cheia-cima:before{content:"\e625"}.icone-lead:before{content:"\e610"}.icone-e-mail:before{content:"\e611"}.icone-telefone:before{content:"\e612"}.icone-editar:before{content:"\e613"}.icone-remover:before{content:"\e614"}.icone-smartphone:before{content:"\e62d"}.icone-seta-indice-baixo:before{content:"\e615"}.icone-seta-indice-cima:before{content:"\e616"}.icone-seta-resultados:before{content:"\e628"}.icone-seta-cheia-esq:before{content:"\e629"}.icone-seta-cheia-dir:before{content:"\e62a"}
+[class^="icone-"]:before,[class*=" icone-"]:before{font-family:'Site-ZAP';speak:none;font-style:normal;font-weight:normal;font-variant:normal;text-transform:none;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}.icone-escudo:before{content:"\e642"}.icone-pacotes:before{content:"\e643"}.icone-:before{content:"\e63f"}.icone-montanha:before{content:"\e640"}.icone-praia:before{content:"\e641"}.icone-data-atualizacao:before{content:"\e639"}.icone-tipo-temporada:before{content:"\e63a"}.icone-vagas:before{content:"\e634"}.icone-suites:before{content:"\e635"}.icone-quartos:before{content:"\e636"}.icone-hospedes:before{content:"\e60c"}.icone-faixa-preco:before{content:"\e637"}.icone-area:before{content:"\e638"}.icone-facebook2:before{content:"\e63b"}.icone-google-plus2:before{content:"\e63e"}.icone-twitter2:before{content:"\e63c"}.icone-facebook:before{content:"\e631"}.icone-twitter:before{content:"\e632"}.icone-google-plus:before{content:"\e607"}.icone-youtube:before{content:"\e627"}.icone-like:before{content:"\e608"}.icone-meh:before{content:"\e609"}.icone-dislike:before{content:"\e60a"}.icone-salvar-busca:before{content:"\e62b"}.icone-alerta:before{content:"\e60b"}.icone-busca:before{content:"\e63d"}.icone-chat-vazado:before{content:"\e60d"}.icone-chat:before{content:"\e60e"}.icone-imprimir:before{content:"\e62c"}.icone-android:before{content:"\e604"}.icone-apple:before{content:"\e605"}.icone-fechar-modal:before{content:"\e606"}.icone-check:before{content:"\e60f"}.icone-seta-light-cima:before{content:"\e62e"}.icone-seta-light-baixo:before{content:"\e62f"}.icone-share:before{content:"\e25a"}.icone-favoritada:before{content:"\e601"}.icone-nao-favoritada:before{content:"\e603"}.icone-menu:before{content:"\e630"}.icone-foto:before{content:"\e617"}.icone-tour-virtual:before{content:"\e618"}.icone-video:before{content:"\e619"}.icone-distancia-ate:before{content:"\e61a"}.icone-visao-lista:before{content:"\e61b"}.icone-visao-galeria:before{content:"\e61c"}.icone-gps-fixed:before{content:"\e61d"}.icone-informacao:before{content:"\e61e"}.icone-informacao2:before{content:"\e633"}.icone-alerta-reportar:before{content:"\e61f"}.icone-limpar:before{content:"\e626"}.icone-seta-simples-baixo:before{content:"\e620"}.icone-seta-simples-cima:before{content:"\e621"}.icone-seta-simples-esq:before{content:"\e622"}.icone-seta-simples-dir:before{content:"\e623"}.icone-seta-cheia-baixo:before{content:"\e624"}.icone-seta-cheia-cima:before{content:"\e625"}.icone-lead:before{content:"\e610"}.icone-e-mail:before{content:"\e611"}.icone-telefone:before{content:"\e612"}.icone-editar:before{content:"\e613"}.icone-remover:before{content:"\e614"}.icone-smartphone:before{content:"\e62d"}.icone-seta-indice-baixo:before{content:"\e615"}.icone-seta-indice-cima:before{content:"\e616"}.icone-seta-resultados:before{content:"\e628"}.icone-seta-cheia-esq:before{content:"\e629"}.icone-seta-cheia-dir:before{content:"\e62a"}
 
 /* ALTERA��ES BOOTSTRAP */
 
@@ -1905,15 +1905,13 @@ input[type=text].input-slider-preco-esq, input[type=text].input-slider-esq, inpu
 
 }
 
+
+
 .input-large{
     width: 70%;
 
 }
 
-#cidade{
-    display: none;
-
-}
 
 .anuncio-area-mapa{
 
@@ -3055,16 +3053,7 @@ input#images{display: none;}
     }
 
 }
-@media screen and (min-width: 980px){
 
-
-}
-
-
-@media screen and(max-width: 667px){
-
-
-}
 @media screen and (max-width: 640px){
 
     .anuncio-area-mapa{
@@ -3083,25 +3072,13 @@ input#images{display: none;}
         margin-top: 17px;
 
     }
-    #menu-anuncio-responsivo{
-        display: block!important;
 
-    }
-
-    #menu-anuncio{
-        display: none!important;
-
-    }
 }
 
 
 /********************************/
 /*      fim Media Queries       */
 /********************************/
-#menu-anuncio-responsivo{
-    display: none;
-
-}
 
 #menu-anuncio{
     display: block;

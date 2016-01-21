@@ -22,8 +22,8 @@
             Facilitamos sua busca pelo anúncio ideal com os melhores preços em centenas de sites.
         </p>
         <div class="row hero-search-box">
-            <form class="" method="POST" action="imoveis">
-                <input type="hidden" name="_token" value="{{ csrf_token() }}" />
+            <form class="" method="GET" action="anuncio">
+
                 <div class="col-md-2 col-sm-2 search-input">
                     <select name="transacao" class="form-control input-lg search-second">
 
@@ -34,8 +34,8 @@
                 <div class="col-md-4 col-sm-4 search-input">
                     <select  name="categoria" class="form-control input-lg search-second">
                         <option selected=""> Qual o tipo?</option>
-                        @foreach($anunciesubcats as $anunciesubcat)
-                            <option value="{{$anunciesubcat->id}}" id="{{$anunciesubcat->id}}">{{$anunciesubcat->name}}</option>
+                        @foreach($categories as $category)
+                            <option value="{{$category->id}}" id="{{$category->id}}">{{$category->name}}</option>
                         @endforeach
                     </select>
                 </div>
@@ -159,7 +159,7 @@
             <div class="col-md-3">
                 <div class="item-counter">
                     <span class="item-icon"><i class="fa fa-users"></i></span>
-                    <div data-refresh-interval="100" data-speed="10000" data-to="7000" data-from="0" class="item-count">7000 ML</div>
+                    <div data-refresh-interval="100" data-speed="10000" data-to="7000" data-from="0" class="item-count">7000</div>
                     <span class="item-info">Usuários ativos</span>
                 </div>
             </div>

@@ -20,6 +20,11 @@ class SubCategory extends Model
 
     }
 
+    public function features(){
+        return $this->hasMany(Feature::class);
+
+    }
+
     public function advertCategory(){
         return $this->hasMany(AdvertCategory::class);
 

@@ -18,6 +18,7 @@ class CreateUsersTable extends Migration
             $table->string('social')->default('normal');
             $table->string('avatar');
             $table->string('name');
+            $table->string('tipo');
             $table->string('email')->unique()->nullable();
             $table->string('password', 60)->nullable();
             $table->string('phone')->nullable();

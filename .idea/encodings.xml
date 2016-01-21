@@ -5,9 +5,9 @@
     <file url="file://$PROJECT_DIR$/public/js/site.js" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/resources/views/site/layout.blade.php" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/resources/views/site/pages/anuncie.blade.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/resources/views/site/pages/anuncios.blade.php" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/resources/views/site/pages/categorias_home.blade.php" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/resources/views/site/pages/home.blade.php" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/resources/views/site/pages/imoveis.blade.php" charset="UTF-8" />
     <file url="PROJECT" charset="UTF-8" />
   </component>
 </project>

@@ -3,19 +3,24 @@
 <head>
 
     <meta charset="utf-8">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta http-equiv="cache-control"   content="no-cache" />
+    <meta name=”revisit-after” content='1 days' />
+    <meta name="classification" content="Internet" />
+    <meta name="description" content="Anuncie Grátis para Todo Brasil. Venda Tudo o que quiser hoje! Encontre em Sua Região - Anuncie,Venda ou Alugue Rápido. Seja seu carro, sua casa, equipamentos e eletrônicos. " />
+    <meta name="keywords" content="Classificados, Anúncios grátis, à venda, usados, Imóveis, Carros, Motos, sempredanegocio.com.br, Sempre da Negócio, sempre da negocio, apartamentos, alugar, comprar, aluguel casa, aluguel casa temporada  " />
+    <meta name="robots" content="ALL" />
+    <meta name="distribution" content="Global" />
+    <meta name="copyright" content="© 2016 Sempre da Negócio" />
+    <meta name="rating" content="General" />
     <meta http-equiv="content-language" content="pt-br, en-US" />
-    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
-    <meta name="copyright" content="© 2015 Sempre da Negócio" />
-    <meta name="description" content="...resumo da página..." />
-    <meta name="keywords" content="..palavras-chave do documento" />
+
     <meta name="generator" content="PHP Storm" />
     <meta name="rating" content="general" />
     <meta http-equiv="content-script-type" content="text/javascript" />
     <meta http-equiv="content-style-type" content="text/css" />
-    <meta name=”revisit-after” content='2 days' />
+
     <meta name="robots" content="all" />
 
     @if(isset($advert))
@@ -33,7 +38,7 @@
     @endif
 
     <link rel="icon" href="{{ asset('images/favicon.png') }}" type="image/png"/>
-    <title>{{ isset($title) ? $title : 'Sempre da negócio' }}</title>
+    <title>{{ isset($title) ? $title : 'sempredanegocio.com.br - Anúncios Classificados Grátis no Brasil: Carros, Motos, Casas, Apartamentos e outros produtos | Sempre da negócio o maior do Brasil!' }}</title>
     <meta name="csrf-token" content="{{ csrf_token() }}" />
     <!-- CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous">
@@ -95,7 +100,7 @@
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><span class="user-menu-icon glyphicon glyphicon-user"></span><span>{{ auth()->user()->name }}</span><span class="caret"></span></a>
                         @endif
                         <ul class="dropdown-menu" role="menu">
-                            <li><a href="{{ url('/auth/logout') }}">Acessar o Painel</a></li>
+                            <li><a href="{{ url('/admin/home') }}">Acessar o Painel</a></li>
                             <li class="divider"></li>
                             <li><a href="{{ url('/auth/logout') }}">Sair</a></li>
                         </ul>
@@ -344,6 +349,7 @@
 <script src="/vendor/artesaos/cidades/js/scripts.js"></script>
 <script src="{{asset('js/site.js')}}"></script>
 <script src="{{asset('js/validator.min.js')}}"></script>
+<script src="{{asset('js/lazyload.js')}}"></script>
 @if (session('status'))
     <script>
         swal("Parabéns!", "Seu anúncio foi criado com sucesso!", "success")

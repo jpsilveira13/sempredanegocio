@@ -12,9 +12,7 @@
                     <h5 class="sessao-texto-pesquisa">Tipo de imóvel</h5>
                     <select  name="categoria" class="search-results-select search-results-select-img">
                         <option selected="selected">Selecionar</option>
-                        @foreach($anunciesubcats as $anunciesubcat)
-                            <option value="{{$anunciesubcat->id}}" id="{{$anunciesubcat->id}}">{{$anunciesubcat->name}}</option>
-                        @endforeach
+
                     </select>
                 </section>
                 <section class="clearfix sessao-area-filtro bg-branco ">
@@ -88,8 +86,8 @@
         <div class="col-md-12">
             <div class="search-results">
                 <mark class="search-results-count">
-                    <strong class="search-results-header-counter">{{$countAdvert->count()}}</strong>
-
+                    <strong class="search-results-header-counter"></strong>
+                    {{$advertsCount}}
                 </mark>
                 <h1 class="search-title"> Anúncios cadastrados</h1>
             </div>
@@ -144,9 +142,7 @@
                         <h5 class="sessao-texto-pesquisa">Tipo de imóvel</h5>
                         <select  name="categoria" class="search-results-select search-results-select-img">
                             <option selected="selected">Selecionar</option>
-                            @foreach($anunciesubcats as $anunciesubcat)
-                                <option value="{{$anunciesubcat->id}}" id="{{$anunciesubcat->id}}">{{$anunciesubcat->name}}</option>
-                            @endforeach
+
                         </select>
                     </section>
                     <section class="clearfix sessao-area-filtro bg-branco ">
@@ -218,12 +214,12 @@
                         <div id="products" class="list-group">
                             @foreach($adverts as $advert)
                                 <div class="item  col-xs-12 col-sm-6 col-lg-4 col-md-4 bloco-item">
-                                    <a class="item-total" href="{{url('/')}}/imovel/{{$advert->tipo_anuncio}}/{{$advert->id}}/{{str_slug($advert->url_anuncio)}}" >
+                                    <a class="item-total" href="{{url('/')}}/anuncio/{{$advert->tipo_anuncio}}/{{$advert->id}}/{{str_slug($advert->url_anuncio)}}" >
                                         <div class="thumbnail">
                                             @if(count($advert->images))
-                                                <img class="group list-group-image content-img-sugestao" src="{{url('gallery/'.$advert->images()->first()->extension)}}" width="220" height="229" alt="titulo imagem" />
+                                                <img class="group list-group-image content-img-sugestao lazy" src="{{url('gallery/'.$advert->images()->first()->extension)}}" width="220" height="229" alt="titulo imagem" />
                                             @else
-                                                <img class="group list-group-image content-img-sugestao" src="{{url('images/no-image.jpg')}}" alt="titulo imagem" />
+                                                <img class="group list-group-image content-img-sugestao lazy" src="{{url('images/no-image.jpg')}}" alt="titulo imagem" />
                                             @endif
                                             <div class="caption infos-suggest">
                                                 <h4 class="group inner list-group-item-heading text-bairro">{{$advert->cidade}}<br />

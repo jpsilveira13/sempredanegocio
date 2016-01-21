@@ -14,6 +14,8 @@ class CreateFeaturesTable extends Migration
     {
         Schema::create('features', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('subcategory_id')->unsigned();
+            $table->foreign('subcategory_id')->references('id')->on('subcategories');
             $table->string('name');
             $table->timestamps();
         });

@@ -377,7 +377,7 @@ $(document).ready(function(){
     });
 
 
-    $('ul.pagination').hide();
+    //$('ul.pagination').hide();
 
     (function(){
 
@@ -549,18 +549,6 @@ $(document).ready(function(){
 
     })(window, jQuery);
 
-    //js slider imovel
-
-
-    //js mudança do campo select
-    $('#uf').ufs({
-        onChange: function(uf){
-            $('#cidade').cidades({uf: uf});
-            $('#cidade').show('fast');
-        }
-    });
-
-
     $('#category_id').on('change',function(e){
 
         var cat_id = e.target.value;
@@ -590,6 +578,29 @@ $(document).ready(function(){
 
         });
 
+    });
+
+    //procurar pelo cep
+
+    $('#cep').blur(function(){
+        /* Configura a requisição AJAX */
+        $.ajax({
+            url : 'consultar_cep', /* URL que será chamada */
+            type : 'GET', /* Tipo da requisição */
+            data: 'cep=' + $('#cep').val(), /* dado que será enviado via POST */
+            dataType: 'json', /* Tipo de transmissão */
+            success: function(data){
+                if(data.sucesso == 1){
+                    $('#rua').val(data.rua);
+                    $('#bairro').val(data.bairro);
+                    $('#cidade').val(data.cidade);
+                    $('#estado').val(data.estado);
+                    $('#numero').focus();
+                    $('.teste').removeClass('hide').addClass('show');
+                }
+            }
+        });
+        return false;
     });
 
     $(function() {
@@ -662,6 +673,12 @@ $(document).ready(function(){
     });
 
 
+    //lazyload
+
+    $("img.lazy").lazyload({
+        effect : "fadeIn"
+    });
+
 
 
 
@@ -702,301 +719,6 @@ $(document).ready(function(){
 
     });
 
-    //js anuncie
-
-    $('.openCategoriaImoveis').click(function(){
-
-        var id = $(this).attr('id');
-        $('#categoria').attr('value', id);
-        if($('.categoria-imoveis').hasClass('hide')){
-            $('.categoria-imoveis').removeClass('hide').addClass('show');
-
-        }else{
-            $('.categoria-imoveis').removeClass('show');
-            $('.categoria-imoveis').addClass('hide');
-
-        }
-        //Apagando valores do input
-        $('#apartmento_type').attr('value','');
-        $('#casa_type').attr('value','');
-        $('#terreno_type').attr('value','');
-        $('#temporada_type').attr('value','');
-        $('#subcategoria').attr('value', '');
-        $('#pecas_type').attr('value', '');
-
-        //removendo o efeito da categoria principal
-        $('.openCategoriaImoveis').addClass('selected-menu');
-        $('.openCategoriaVeiculos').removeClass('selected-menu');
-    });
-
-    $('.openCategoriaVeiculos').click(function(){
-
-        var id = $(this).attr('id');
-        $('#categoria').attr('value', id);
-        if($('.categoria-veiculos').hasClass('hide')){
-            $('.categoria-veiculos').removeClass('hide').addClass('show');
-
-        }else{
-            $('.categoria-veiculos').removeClass('show');
-            $('.categoria-veiculos').addClass('hide');
-
-        }
-        //Cria o evento de sumir as subcategorias dos imoveis
-        if($('.categoria-imoveis').hasClass('show')){
-            $('.categoria-imoveis').removeClass('show').addClass('hide');
-
-        }
-        if($('.subcategoria-ap').hasClass('show')){
-
-            $('.subcategoria-ap').removeClass('show').addClass('hide');
-
-        }
-        if($('.subcategoria-cs').hasClass('show')){
-
-            $('.subcategoria-cs').removeClass('show').addClass('hide');
-
-        }
-        if($('.subcategoria-temp ').hasClass('show')){
-
-            $('.subcategoria-temp ').removeClass('show').addClass('hide');
-
-        }
-        if($('.subcategoria-tr ').hasClass('show')){
-
-            $('.subcategoria-tr ').removeClass('show').addClass('hide');
-
-        }
-
-        if($('.subcategoria-lancamentos ').hasClass('show')){
-
-            $('.subcategoria-lancamentos ').removeClass('show').addClass('hide');
-
-        }
-
-
-        //Apagando valores do input
-        $('#apartmento_type').attr('value','');
-        $('#casa_type').attr('value','');
-        $('#terreno_type').attr('value','');
-        $('#temporada_type').attr('value','');
-        $('#subcategoria').attr('value', '');
-
-
-        //removendo o efeito da categoria principal
-        $('.openCategoriaVeiculos').addClass('selected-menu');
-        $('.openCategoriaImoveis').removeClass('selected-menu');
-
-
-    });
-
-    $('.subcategoria-car .item').click(function(){
-        var id = $(this).attr('id');
-        $('#subcategoria').attr('value', id);
-        $('#pecas_type').attr('value','');
-
-
-        if ( $(this).hasClass('selected-menu') ) {
-            $(this).removeClass('selected-menu');
-        } else {
-            $('.subcategoria-car ul li.selected-menu').removeClass('selected-menu');
-            $(this).addClass('selected-menu');
-
-        }
-
-        if($(this).hasClass('categoria-ap')){
-            $('.subcategoria-ap').addClass('show').removeClass('hide');
-            $('.subcategoria-cs').removeClass('show').addClass('hide');
-            $('.subcategoria-tr').removeClass('show'.addClass('hide'));
-            $('.subcategoria-temp').removeClass('show').addClass('hide');
-            $('.subcategoria-lancamentos').removeClass('show').addClass('hide');
-
-        }else if($(this).hasClass('categoria-cs')){
-            $('.subcategoria-cs').addClass('show').removeClass('hide');
-            $('.subcategoria-ap').removeClass('show').addClass('hide');
-            $('.subcategoria-tr').removeClass('show').addClass('hide');
-            $('.subcategoria-temp').removeClass('show').addClass('hide');
-            $('.subcategoria-lancamentos').removeClass('show').addClass('hide');
-        } else if($(this).hasClass('categoria-al')){
-            $('.subcategoria-ap').removeClass('show').addClass('hide');
-            $('.subcategoria-tr').removeClass('show').addClass('hide');
-            $('.subcategoria-temp').removeClass('show').addClass('hide');
-            $('.subcategoria-lancamentos').removeClass('show').addClass('hide');
-            $('.subcategoria-cs').removeClass('show').addClass('hide');
-            $('#apartamento_type').attr('value','');
-            $('#casa_type').attr('value','');
-            $('#terreno_type').attr('value','');
-            $('#temporada_type').attr('value','');
-        }else if($(this).hasClass('categoria-tr')){
-            $('.subcategoria-tr').addClass('show').removeClass('hide');
-            $('.subcategoria-ap').removeClass('show').addClass('hide');
-            $('.subcategoria-temp').removeClass('show').addClass('hide');
-            $('.subcategoria-cs').removeClass('show').addClass('hide');
-            $('.subcategoria-lancamentos').removeClass('show').addClass('hide');
-
-        }else if($(this).hasClass('categoria-lj')) {
-            $('.subcategoria-tr').removeClass('show').addClass('hide');
-            $('.subcategoria-ap').removeClass('show').addClass('hide');
-            $('.subcategoria-temp').removeClass('show').addClass('hide');
-            $('.subcategoria-al').removeClass('show').addClass('hide');
-            $('.subcategoria-cs').removeClass('show').addClass('hide');
-            $('.subcategoria-lancamentos').removeClass('show');
-            $('#apartamento_type').attr('value','');
-            $('#casa_type').attr('value','');
-            $('#terreno_type').attr('value','');
-            $('#temporada_type').attr('value','');
-
-        }else if($(this).hasClass('categoria-temp')){
-            $('.subcategoria-temp').addClass('show').removeClass('hide');
-            $('.subcategoria-tr').removeClass('show').addClass('hide');
-            $('.subcategoria-ap').removeClass('show').addClass('hide');
-            $('.subcategoria-cs').removeClass('show').addClass('hide');
-            $('.subcategoria-lancamentos').removeClass('show');
-        }else if($(this).hasClass('categoria-lancamentos')) {
-
-            $('.subcategoria-lancamentos').addClass('show').removeClass('hide');
-            $('.subcategoria-ap').removeClass('show').addClass('hide');
-            $('.subcategoria-cs').removeClass('show').addClass('hide');
-            $('.subcategoria-tr').removeClass('show').addClass('hide');
-            $('.subcategoria-temp').removeClass('show').addClass('hide');
-
-        }
-    });
-
-    $('.categoria-imoveis .item').click(function(){
-        var id = $(this).attr('id');
-        $('#subcategoria').attr('value', id);
-        $('#apartamento_type').attr('value','');
-        $('#casa_type').attr('value','');
-        $('#terreno_type').attr('value','');
-        $('#temporada_type').attr('value','');
-
-        if ( $(this).hasClass('selected-menu') ) {
-            $(this).removeClass('selected-menu');
-        } else {
-            $('.categoria-imoveis ul li.selected-menu').removeClass('selected-menu');
-            $(this).addClass('selected-menu');
-
-        }
-
-        if($(this).hasClass('categoria-ap')){
-            $('.subcategoria-ap').addClass('show').removeClass('hide');
-            $('.subcategoria-cs').removeClass('show').addClass('hide');
-            $('.subcategoria-tr').removeClass('show'.addClass('hide'));
-            $('.subcategoria-temp').removeClass('show').addClass('hide');
-            $('.subcategoria-lancamentos').removeClass('show').addClass('hide');
-
-        }else if($(this).hasClass('categoria-cs')){
-            $('.subcategoria-cs').addClass('show').removeClass('hide');
-            $('.subcategoria-ap').removeClass('show').addClass('hide');
-            $('.subcategoria-tr').removeClass('show').addClass('hide');
-            $('.subcategoria-temp').removeClass('show').addClass('hide');
-            $('.subcategoria-lancamentos').removeClass('show').addClass('hide');
-        } else if($(this).hasClass('categoria-al')){
-            $('.subcategoria-ap').removeClass('show').addClass('hide');
-            $('.subcategoria-tr').removeClass('show').addClass('hide');
-            $('.subcategoria-temp').removeClass('show').addClass('hide');
-            $('.subcategoria-lancamentos').removeClass('show').addClass('hide');
-            $('.subcategoria-cs').removeClass('show').addClass('hide');
-            $('#apartamento_type').attr('value','');
-            $('#casa_type').attr('value','');
-            $('#terreno_type').attr('value','');
-            $('#temporada_type').attr('value','');
-        }else if($(this).hasClass('categoria-tr')){
-            $('.subcategoria-tr').addClass('show').removeClass('hide');
-            $('.subcategoria-ap').removeClass('show').addClass('hide');
-            $('.subcategoria-temp').removeClass('show').addClass('hide');
-            $('.subcategoria-cs').removeClass('show').addClass('hide');
-            $('.subcategoria-lancamentos').removeClass('show').addClass('hide');
-
-        }else if($(this).hasClass('categoria-lj')) {
-            $('.subcategoria-tr').removeClass('show').addClass('hide');
-            $('.subcategoria-ap').removeClass('show').addClass('hide');
-            $('.subcategoria-temp').removeClass('show').addClass('hide');
-            $('.subcategoria-al').removeClass('show').addClass('hide');
-            $('.subcategoria-cs').removeClass('show').addClass('hide');
-            $('.subcategoria-lancamentos').removeClass('show');
-            $('#apartamento_type').attr('value','');
-            $('#casa_type').attr('value','');
-            $('#terreno_type').attr('value','');
-            $('#temporada_type').attr('value','');
-
-        }else if($(this).hasClass('categoria-temp')){
-            $('.subcategoria-temp').addClass('show').removeClass('hide');
-            $('.subcategoria-tr').removeClass('show').addClass('hide');
-            $('.subcategoria-ap').removeClass('show').addClass('hide');
-            $('.subcategoria-cs').removeClass('show').addClass('hide');
-            $('.subcategoria-lancamentos').removeClass('show');
-        }else if($(this).hasClass('categoria-lancamentos')) {
-
-            $('.subcategoria-lancamentos').addClass('show').removeClass('hide');
-            $('.subcategoria-ap').removeClass('show').addClass('hide');
-            $('.subcategoria-cs').removeClass('show').addClass('hide');
-            $('.subcategoria-tr').removeClass('show').addClass('hide');
-            $('.subcategoria-temp').removeClass('show').addClass('hide');
-
-        }
-    });
-
-    $('.subcategoria-ap .item').click(function(){
-        if ( $(this).hasClass('selected-menu') ) {
-            $(this).removeClass('selected-menu');
-        } else {
-            $('.subcategoria-ap ul li.selected-menu').removeClass('selected-menu');
-            $(this).addClass('selected-menu');
-        }
-
-        var id = $(this).attr('id');
-        $('#apartamento_type').attr('value',id);
-
-    });
-    $('.subcategoria-cs .item').click(function(){
-        if ( $(this).hasClass('selected-menu') ) {
-            $(this).removeClass('selected-menu');
-        } else {
-            $('.subcategoria-cs ul li.selected-menu').removeClass('selected-menu');
-            $(this).addClass('selected-menu');
-        }
-
-        var id = $(this).attr('id');
-        $('#casa_type').attr('value',id);
-
-    });
-    $('.subcategoria-tr .item').click(function(){
-        if ( $(this).hasClass('selected-menu') ) {
-            $(this).removeClass('selected-menu');
-        } else {
-            $('.subcategoria-tr ul li.selected-menu').removeClass('selected-menu');
-            $(this).addClass('selected-menu');
-        }
-
-        var id = $(this).attr('id');
-        $('#terreno_type').attr('value',id);
-
-    });
-    $('.subcategoria-temp .item').click(function(){
-        if ( $(this).hasClass('selected-menu') ) {
-            $(this).removeClass('selected-menu');
-        } else {
-            $('.subcategoria-temp ul li.selected-menu').removeClass('selected-menu');
-            $(this).addClass('selected-menu');
-        }
-
-        var id = $(this).attr('id');
-        $('#temporada_type').attr('value',id);
-
-    });
-    $('.subcategoria-lancamentos .item').click(function(){
-        if ( $(this).hasClass('selected-menu') ) {
-            $(this).removeClass('selected-menu');
-        } else {
-            $('.subcategoria-lancamentos ul li.selected-menu').removeClass('selected-menu');
-            $(this).addClass('selected-menu');
-        }
-
-        var id = $(this).attr('id');
-        $('#lancamento_type').attr('value',id);
-
-    });
 
 //js página imoveis barra fixa pesquisar
 

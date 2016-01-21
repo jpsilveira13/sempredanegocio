@@ -8,7 +8,9 @@ class Category extends Model
 {
 
     protected $fillable = [
+        'id',
         'name',
+        'name_url'
 
 
     ];
@@ -17,6 +19,8 @@ class Category extends Model
         return $this->hasMany(SubCategory::class);
 
     }
+
+
 
 
 

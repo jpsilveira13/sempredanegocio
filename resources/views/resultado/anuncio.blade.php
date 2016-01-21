@@ -10,8 +10,11 @@
             <div class="area-pesquisa">
                 <section class="clearfix sessao-area-filtro bg-branco">
                     <h5 class="sessao-texto-pesquisa">Tipo de imóvel</h5>
+
                     <select  name="categoria" class="search-results-select search-results-select-img">
+
                         <option selected="selected">Selecionar</option>
+
                         @foreach($anunciesubcats as $anunciesubcat)
                             <option value="{{$anunciesubcat->id}}" id="{{$anunciesubcat->id}}">{{$anunciesubcat->name}}</option>
                         @endforeach
@@ -79,7 +82,7 @@
                 </section>
 
             </div>
-        </div>
+        </div>d
     </div>
 </div>
 <div class="clearfix"></div>
@@ -88,10 +91,10 @@
         <div class="col-md-12">
             <div class="search-results">
                 <mark class="search-results-count">
-                    <strong class="search-results-header-counter">{{$countAdvert->count()}}</strong>
+                    <strong class="search-results-header-counter">{{$queryCount}}</strong>
 
                 </mark>
-                <h1 class="search-title"> Anúncios cadastrados</h1>
+                <h1 class="search-title"> Anúncios Encontrados</h1>
             </div>
         </div>
         <div class="col-md-12">
@@ -216,45 +219,45 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div id="products" class="list-group">
-                            @foreach($adverts as $advert)
+                            @foreach($queryAnuncios as $queryAnuncio)
                                 <div class="item  col-xs-12 col-sm-6 col-lg-4 col-md-4 bloco-item">
-                                    <a class="item-total" href="{{url('/')}}/imovel/{{$advert->tipo_anuncio}}/{{$advert->id}}/{{str_slug($advert->url_anuncio)}}" >
+                                    <a class="item-total" href="{{url('/')}}/imovel/{{$queryAnuncio->tipo_anuncio}}/{{$queryAnuncio->id}}/{{str_slug($queryAnuncio->url_anuncio)}}" >
                                         <div class="thumbnail">
-                                            @if(count($advert->images))
-                                                <img class="group list-group-image content-img-sugestao" src="{{url('gallery/'.$advert->images()->first()->extension)}}" width="220" height="229" alt="titulo imagem" />
+                                            @if(count($queryAnuncio->images))
+                                                <img class="group list-group-image content-img-sugestao" src="{{url('gallery/'.$queryAnuncio->images()->first()->extension)}}" width="220" height="229" alt="titulo imagem" />
                                             @else
                                                 <img class="group list-group-image content-img-sugestao" src="{{url('images/no-image.jpg')}}" alt="titulo imagem" />
                                             @endif
                                             <div class="caption infos-suggest">
-                                                <h4 class="group inner list-group-item-heading text-bairro">{{$advert->cidade}}<br />
-                                                    {{$advert->estado}}
+                                                <h4 class="group inner list-group-item-heading text-bairro">{{$queryAnuncio->cidade}}<br />
+                                                    {{$queryAnuncio->estado}}
                                                 </h4>
                                                 <p class="group inner list-group-item-text">
                                                 <ul class="list-infos unstyled clearfix no-padding" id="tooltip-config">
-                                                    <li class="icone-quartos zaptip" data-original-title="Quantidade de quartos" data-toggle="tooltip">{{$advert->numero_quarto}}</li>
-                                                    <li class="icone-suites zaptip" data-original-title="Quantidade de suítes" data-toggle="tooltip">{{$advert->numero_suite}}</li>
-                                                    <li class="icone-vagas zaptip" data-original-title="Quantidade de vagas" data-toggle="tooltip">{{$advert->numero_garagem}}</li>
+                                                    <li class="icone-quartos zaptip" data-original-title="Quantidade de quartos" data-toggle="tooltip">{{$queryAnuncio->numero_quarto}}</li>
+                                                    <li class="icone-suites zaptip" data-original-title="Quantidade de suítes" data-toggle="tooltip">{{$queryAnuncio->numero_suite}}</li>
+                                                    <li class="icone-vagas zaptip" data-original-title="Quantidade de vagas" data-toggle="tooltip">{{$queryAnuncio->numero_garagem}}</li>
                                                     <li class="icone-hospedes zaptip" data-original-title="Quantidade de pessoas" data-toggle="tooltip">12</li>
 
                                                 </ul>
                                                 <!-- essa div só ficara visivel quando for lista -->
                                                 <div class="col-xs-12 col-md-12 list-item-nav2">
                                                     <p class="lead description-anuncio">
-                                                        {{str_limit($advert->anuncio_descricao,$limit = 42, $end=" ...")}}
+                                                        {{str_limit($queryAnuncio->anuncio_descricao,$limit = 42, $end=" ...")}}
                                                     </p>
                                                 </div>
 
                                                 <div class="row list-group-hidden">
                                                     <div class="col-xs-12 col-md-12">
                                                         <p class="lead description-anuncio">
-                                                            {{str_limit($advert->anuncio_descricao,$limit = 42, $end=" ...")}}
+                                                            {{str_limit($queryAnuncio->anuncio_descricao,$limit = 42, $end=" ...")}}
                                                         </p>
                                                     </div>
                                                 </div>
                                                 <div class="row mb4">
                                                     <div class="col-xs-8 col-md-8 ">
                                                         <div class="bottom-suggest">
-                                                            <span class="val-imovel">R$ {{number_format((float)$advert->preco,2)}}</span>
+                                                            <span class="val-imovel">R$ {{number_format((float)$queryAnuncio->preco,2)}}</span>
                                                             <span class="text-diaria">/ mês</span>
                                                         </div>
                                                     </div>
@@ -272,7 +275,7 @@
                         </div>
                     </div>
                     <div class='text-center'>
-                        {!! $adverts->render() !!}
+                        {!! $queryAnuncios->appends(\Input::except('page'))->render()!!}
                     </div>
                 </div>
             </div>

@@ -13,7 +13,7 @@
 
 
 Route::get('/', function(){
-   return view('layout');
+    return view('layout');
 });
 
 Route::get('/', [
@@ -22,27 +22,23 @@ Route::get('/', [
 ]);
 
 
-/* imoveis routes */
-Route::get('imoveis', 'HomeController@imoveis');
+/* anuncios routes */
+
 
 Route::get('anuncie', 'HomeController@anuncie');
 
 Route::post('anuncie','AdvertController@store');
 
-Route::get('imovel/{tipo_anuncio}/{id}/{url_anuncio}',[
-    'uses' => "HomeController@imovelInterno"
 
-
-]);
 
 Route::get('anuncie',[
 
-   'uses' => 'HomeController@anuncieCategoria'
+    'uses' => 'HomeController@anuncieCategoria'
 ]);
 
 Route::get('/ajax-subcat',[
 
-   'uses' => 'HomeController@getCategories'
+    'uses' => 'HomeController@getCategories'
 ]);
 
 /* rotas ajax */
@@ -57,26 +53,23 @@ Route::get('search-cidade/{query?}',[
 ]);
 
 Route::get('search-imoveis/{query?}',[
-   'uses' => 'HomeController@scopeImoveis'
+    'uses' => 'HomeController@scopeImoveis'
 
 ]);
+
+Route::get('/consultar_cep','HomeController@searchCep');
 
 Route::get('testes',[
-   'uses' => 'HomeController@testeImoveis'
+    'uses' => 'HomeController@testeImoveis'
 ]);
 
-/* Rotas login facebook */
-Route::get('auth/facebook/', 'SocialController@redirectToProvider');
-Route::get('auth/facebook/callback', 'SocialController@handleProviderCallback');
 
 
-//Controlador para o login
 
 
-Route::get('social/login/redirect/{provider}', ['uses' => 'Auth\AuthController@redirectToProvider', 'as' => 'social.login']);
-Route::get('social/login/{provider}', 'Auth\AuthController@handleProviderCallback');
 
-Route::post('imoveis','HomeController@searchSite');
+
+Route::get('anuncio','HomeController@searchAnuncio');
 
 
 Route::controllers([
@@ -85,13 +78,46 @@ Route::controllers([
 
 ]);
 
-Route::group(['prefix' => 'admin', 'middleware'=>'auth'], function()
+
+
+
+//Controlador para o login
+Route::get('social/login/redirect/{provider}', ['uses' => 'Auth\AuthController@redirectToProvider', 'as' => 'social.login']);
+Route::get('social/login/{provider}', 'Auth\AuthController@handleProviderCallback');
+
+Route::group(['prefix' => 'admin', 'middleware'=>'auth','where'=>['id'=>'[0-9]+']], function()
 {
 
-   Route::group(['prefix' => 'home'],function(){
+    Route::group(['prefix' => 'home'],function(){
 
-      Route::get('/', 'AdminController@home');
+        Route::get('/',['as'=>'home', 'uses'=> 'AdminController@home']);
 
-   });
+
+    });
+
+    Route::group(['prefix' => 'usuarios'],function() {
+
+        Route::get('/',['as'=>'usuarios', 'uses' => 'UserController@index']);
+
+    });
+
+    Route::group(['prefix' => 'anuncios'],function() {
+
+        Route::get('/',['as'=>'anuncios', 'uses' => 'AdvertController@index']);
+
+    });
+
 
 });
+
+Route::get('/{url_name?}', 'HomeController@tipocategoria');
+
+Route::get('anuncio/{tipo_anuncio}/{id}/{url_anuncio}',[
+    'uses' => "HomeController@anuncioInterno"
+
+
+]);
+
+//procura cep
+
+
