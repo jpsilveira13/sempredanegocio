@@ -16,6 +16,7 @@ class CreateAdvertsTable extends Migration
             $table->increments('id');
             $table->string('tipo_anuncio');
             $table->char('estado',2);
+            $table->integer('status')->default(1);
             $table->string('cidade');
             $table->string('bairro');
             $table->string('rua');
@@ -32,8 +33,8 @@ class CreateAdvertsTable extends Migration
             $table->string('url_anuncio');
             $table->integer('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users');
-            $table->integer('advert_categories_id')->unsigned();
-            $table->foreign('advert_categories_id')->references('id')->on('adverts_categories');
+            $table->integer('subcategories_id')->unsigned();
+            $table->foreign('subcategories_id')->references('id')->on('subcategories');
 
             $table->timestamps();
         });

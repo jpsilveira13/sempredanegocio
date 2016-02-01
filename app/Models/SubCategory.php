@@ -10,8 +10,6 @@ class SubCategory extends Model
     protected $fillable = [
         'category_id',
         'name',
-
-
     ];
 
 
@@ -27,6 +25,11 @@ class SubCategory extends Model
 
     public function advertCategory(){
         return $this->hasMany(AdvertCategory::class);
+
+    }
+
+    public function advert(){
+        return $this->hasMany(Advert::class);
 
     }
 

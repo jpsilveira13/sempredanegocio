@@ -9,41 +9,42 @@
             <div class="side-left">
                 <div class="box-default clearfix imovel-area-detalhe">
                     <h1 class="pull-left">
-                        <span class="subtitle">Flat para Alugar</span>
+                        <span class="subtitle">{{$advert->subcategory->name}} {{$advert->tipo_anuncio}}</span>
                         {{$advert->rua}}
                         <br />
                         <span class="logradouro">{{$advert->bairro}}, {{$advert->cidade}} - {{$advert->estado}}</span>
                     </h1>
                     <div class="pull-right posvalue-imovel">
                         <span class="value-ficha">
-                                <span class="subtitle">Valor de Locacao</span>
-                                R$ {{$advert->preco}}
+                                <span class="subtitle">@if($advert->tipo_anuncio == 'aluga')Valor de Locação @else Valor de Venda @endif</span>
+                            @if($advert->preco == 0)
+                                --
+                            @else
+                                R$ {{number_format((float)$advert->preco,2,",",".")}}
+                            @endif
                         </span>
                     </div>
                 </div><!-- box informações endereço -->
-
                 <div class="box-default informacoes-imovel clearfix">
                     <div class="pull-left">
                         <ul class="unstyled no-padding">
-                            <li>{{$advert->numero_quarto}}<span class="text-info">quarto</span></li>
-                            <li>{{$advert->numero_suite}}<span class="text-info">suíte</span></li>
-                            <li>{{$advert->area_construida}}<span class="text-info">Área Útil (m²)</span></li>
-                            <li>{{$advert->area_construida}}<span class="text-info">Área Total (m²)</span></li>
+                            <li>@if($advert->numero_quarto == 0) -- @else{{$advert->numero_quarto}}@endif<span class="text-info">quarto</span></li>
+                            <li>@if($advert->numero_suite == 0) -- @else{{$advert->numero_suite}}@endif<span class="text-info">suíte</span></li>
+                            <li>@if($advert->area_construida) -- @else{{$advert->area_construida}}@endif<span class="text-info">Área Útil (m²)</span></li>
+                            <li>@if($advert->area_construida) -- @else{{$advert->area_construida}}@endif<span class="text-info">Área Total (m²)</span></li>
                         </ul>
                     </div>
                     <div class="pull-right">
                         <ul class="unstyled no-padding">
                             <li>
-                                R$ {{number_format((float)$advert->valor_iptu,2)}}
+                                @if($advert->valor_iptu == 0) -- @else{{number_format((float)$advert->valor_iptu,2,",",".")}}@endif
                                 <span class="text-info">IPTU</span>
                             </li>
                         </ul>
                     </div>
                 </div><!-- box informações do imovel -->
                 <div class="box-default clearfix carrosel-fotos-imovel">
-
                     <div class="col-md-12" id="slider">
-
                         <div class="col-md-12" id="carousel-bounding-box">
                             <div id="carrouselImovel" class="carousel slide">
                                 <!-- main slider carousel items -->
@@ -105,15 +106,21 @@
                         </p>
                     </div>
                     <h3>Características</h3>
-                    <div id="caracteristicaOferta">
-                        <p></p>
-                        <p>
-                            <strong>Características do Imóvel:</strong>
 
-                            @foreach($advert->features()->get() as $feature)
-                                {{$feature->name}},
-                            @endforeach
-                        </p>
+                    <div id="caracteristicaOferta">
+                        @if($advert->features()->count() > 0)
+                            <p></p>
+                            <p>
+                                <strong>Características do Imóvel:</strong>
+
+                                @foreach($advert->features()->get() as $feature)
+                                    {{$feature->name}},
+                                @endforeach
+                                @else
+                                    <strong>Não há característica cadastradas.</strong>
+                                @endif
+
+                            </p>
                     </div>
                 </div>
                 <div class="box-default clearfix">
@@ -171,7 +178,7 @@ Olá, Gostaria de ter mais informações sobre o imóvel Apartamento à venda, R
                                             <label>Desejo receber notícias e ofertas do Sempre dá negócio e de seus parceiros</label>
                                         </div>
                                         <input type="reset" class="btn-link" value="Limpar" id="btnLimpar">
-                                        <a href="javascript:void();" id="lnkEnviarMensagem" class="pull-right btn btn-zap contact icone-e-mail" onclick="return enviarMensagem('/FichaCampanha/Enviar');">Enviar e-mail</a>
+                                        <a href='#' id="lnkEnviarMensagem" class="pull-right btn btn-zap contact icone-e-mail" onclick="return enviarMensagem('/FichaCampanha/Enviar');">Enviar e-mail</a>
                                     </form>
                                 </div>
                             </div>
@@ -184,17 +191,17 @@ Olá, Gostaria de ter mais informações sobre o imóvel Apartamento à venda, R
                     </div>
                     <div class="clearfix"></div>
                 </div><!-- fim contratar anunciante -->
+
                 <aside class="box-default clearfix outras-informacoes">
                     <span class="title">Outras informações</span>
 
-                    Atualizado há 16 dias
+                    <!-- Atualizado há 16 dias -->
                     <div class="pull-left content-anunciante">
                         <a href="#" class="pull-left logo">
-                            <img src="http://img.zapcorp.com.br/201303/13/int/3597/img_421_3597_logo.jpg" alt="CAUCASO CONSTRUTORA LTDA">
+                            <img src="" alt="{{$advert->user->name}}" width="88" height="52">
                         </a>
                         <div class="pull-left anunciante">
-                            <a href="#">Outras ofertas de: CAUCASO CONSTRUTORA LTDA</a>
-
+                            <a href="#" class="fontsize13px">Outras ofertas de: {{$advert->user->name}}</a>
                         </div>
                     </div>
                 </aside>
@@ -430,45 +437,34 @@ Olá, Gostaria de ter mais informações sobre o imóvel Apartamento à venda, R
                         <div class="tab-pane active">
                             <div class="text">
                                 <p>Descreva qual foi o problema encontrado na oferta:</p>
-                                <p>Casa, 3 quartos, Locacao, Rua Marcilio Conrado<br><span class="logradouro">Riacho Grande, Sao Bernardo do Campo - SP - 7821710</span></p>
+                                <p>{{$advert->subcategory->name}}, @if($advert->numero_quarto > 0) {{$advert->numero_quarto}} quartos @endif, {{$advert->tipo_anuncio}}, {{$advert->rua}}<br><span class="logradouro">{{$advert->cidade}}, {{$advert->estado}}</span></p>
                             </div>
 
-                            <form class="denuncie-form">
-                                <div class="hide">
-                                    <span class="pull-left">Você é:</span>
-                                    <input type="radio" id="denunciaAnunciante" name="tipoDenunciante" class="pull-left">
-                                    <label for="denunciaAnunciante" class="pull-left lbl-radio">Anunciante</label>
-
-                                    <input type="radio" id="denunciaConsumidor" name="tipoDenunciante" class="pull-left" checked="">
-                                    <label for="denunciaConsumidor" class="pull-left lbl-radio">Consumidor</label>
-                                </div>
-
-                                <div class="toggle-mensagem hide">
-                                    <p>Você gostaria de:<br> Entrar em contato com nosso <a href="#">atendimento online</a>? (das 8h às 18h)</p>
-                                </div>
-
-                                <select id="selTipoProblema" class="input-block-level"><option selected="selected" value="0">Tipo de problema</option><option value="1">Imóvel já comercializado</option><option value="2">Preço incorreto</option><option value="3">Sem retorno do anunciante</option><option value="4">Telefone não atende</option><option value="5">Foto incorreta</option><option value="6">Endereço/mapa incorreto</option><option value="7">Não respondeu o e-mail em 48h</option><option value="9">Detalhe do empreendimento incorreto</option><option value="10">Imóvel em construção</option><option value="11">Imóvel inexistente</option><option value="12">Oferta repetida</option><option value="13">Qualidade do atendimento recebido</option><option value="14">Publicação sem autorização</option></select>
+                            <form class="denuncie-form" action="" id="denunciaForm">
+                                <input type="hidden" name="user_id" value="{{$advert->id}}" />
+                                <input type="hidden" name="url_site" value="{{Request::url()}}" />
+                                <select id="selTipoProblema" name="motivo" class="input-block-level"><option selected="selected" value="">Tipo de problema</option><option value="Imóvel já comercializado">Imóvel já comercializado</option><option value="Preço incorreto">Preço incorreto</option><option value="Sem retorno do anunciante">Sem retorno do anunciante</option><option value="Telefone não atende">Telefone não atende</option><option value="Foto incorreta">Foto incorreta</option><option value="Endereço/mapa incorreto">Endereço/mapa incorreto</option><option value="Não respondeu o e-mail em 48h">Não respondeu o e-mail em 48h</option><option value="Detalhe do empreendimento incorreto">Detalhe do empreendimento incorreto</option><option value="Imóvel em construção">Imóvel em construção</option><option value="Imóvel inexistente">Imóvel inexistente</option><option value="Oferta repetida">Oferta repetida</option><option value="ualidade do atendimento recebido">Qualidade do atendimento recebido</option><option value="Publicação sem autorização">Publicação sem autorização</option></select>
                                 <br />
                                 <p id="msgTipoProblema" class="text-error" style="display: none;">* Selecione o Tipo de problema</p>
 
-                                <textarea id="txtDescricaoProblema" class="input-block-level" rows="4" placeholder="Descrição do problema"></textarea>
-                                <p id="msgDescricao" class="text-error" style="display: none;">* Digite a Descrição do problema</p>
+                                <textarea id="txtDescricaoProblema"  name="descricao" class="input-block-level" rows="4" placeholder="Descrição do problema"></textarea>
+                                <p id="1_error" class="text-error" style="display: none;">* Digite a Descrição do problema</p>
 
-                                <input id="txtNomeDenuncie" class="input-block-level" type="text" value="" placeholder="Nome">
-                                <p id="msgNome" class="text-error" style="display: none;">* Digite seu Nome</p>
+                                <input id="txtNomeDenuncie" required name='nome' class="input-block-level" type="text" placeholder="Nome">
+                                <p id="2_error" class="text-error" style="display: none;">* Digite seu Nome</p>
 
-                                <input id="txtEmailDenuncie" class="input-block-level" type="email" value="" placeholder="E-mail">
-                                <p id="msgEmailInvalido" class="text-error" style="display: none;">* Digite um E-mail válido</p>
+                                <input id="txtEmailDenuncie" required class="input-block-level" type="email" name="email" placeholder="E-mail">
+                                <p id="3_error" class="text-error" style="display: none;">* Digite um E-mail válido</p>
 
                                 <div class="center-button" id="divEnviarDenuncie">
                                     <button id="btnCancelar" class="btn-link" data-dismiss="modal">Cancelar</button>
-                                    <button id="btnEnviar" type="button" class="btn btn-zap">Enviar</button>
+                                    <button id="btnEnviar" type="submit" class="btn btn-zap">Enviar</button>
                                 </div>
                             </form>
                         </div>
 
                         <!-- Tela Enviando -->
-                        <div id="divEnviandoDenuncie" class="tab-pane tab-absolute" style="display: none;">
+                        <div id="divEnviandoDenuncie" class="tab-pane tab-absolute">
                             <div class="text-center">
                                 ENVIANDO MENSAGEM...
                                 <div class="loader"></div>
@@ -476,7 +472,7 @@ Olá, Gostaria de ter mais informações sobre o imóvel Apartamento à venda, R
                         </div>
 
                         <!-- Sucesso -->
-                        <div id="divSucessoDenuncie" class="tab-pane tab-absolute" style="display: none;">
+                        <div id="divSucessoDenuncie" class="sucesso-modal tab-pane tab-absolute">
                             <div class="text-center">
                                 <p>Denúncia enviada com sucesso.<br> Vamos analisar a informação que você nos encaminhou.</p>
                                 <div id="btnFecharDenuncie" data-dismiss="modal" class="center-button btn-fechar-denuncie">
@@ -486,7 +482,7 @@ Olá, Gostaria de ter mais informações sobre o imóvel Apartamento à venda, R
                         </div>
 
                         <!-- Erro -->
-                        <div id="divErroDenuncie" class="tab-pane tab-absolute" style="display: none;">
+                        <div id="divErroDenuncie" class="tab-pane tab-absolute">
                             <div class="need-info text-center">
                                 <span class="text text-error"><strong>Mensagem não enviada!</strong></span>
                                 <p>Infelizmente não conseguimos enviar sua mensagem.</p>

@@ -15,8 +15,6 @@
     <meta name="copyright" content="© 2016 Sempre da Negócio" />
     <meta name="rating" content="General" />
     <meta http-equiv="content-language" content="pt-br, en-US" />
-
-    <meta name="generator" content="PHP Storm" />
     <meta name="rating" content="general" />
     <meta http-equiv="content-script-type" content="text/javascript" />
     <meta http-equiv="content-style-type" content="text/css" />
@@ -86,15 +84,18 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="navbar-collapse collapse" id="bs-example-navbar-collapse-1" aria-expanded="false" style="height: 1px;">
             <ul class="nav navbar-nav navbar-right">
-                <li class="new-ads"><a href="{{asset('anuncie')}}" class="btn btn-ads btn-azul"><span class="glyphicon glyphicon-file"></span> Anuncie</a></li>
+
                 @if(auth()->guest())
                     @if(!Request::is('auth/login'))
+                        <li class="new-ads"><a href="#loginModal" id="modalLogin" data-toggle="modal" data-target="#loginModal" class="btn btn-ads btn-azul"><span class="glyphicon glyphicon-file"></span> Anuncie</a></li>
                         <li><a href="#loginModal" id="modalLogin" class="" data-toggle="modal" data-target="#loginModal"><span class="glyphicon glyphicon-user"></span> Iniciar Sessão</a></li>
                         <li><a href="#loginModal" id="modalLogin" class="" data-toggle="modal" data-target="#loginModal"><span class="glyphicon glyphicon-heart"></span> Favoritos</a></li>
                     @endif
                 @else
+                    <li class="new-ads"><a href="{{url('anuncie')}}" id="modalLogin" class="btn btn-ads btn-azul"><span class="glyphicon glyphicon-file"></span> Anuncie</a></li>
                     <li class="dropdown">
                         @if(auth()->user()->avatar)
+
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><span class="user-menu-icon" style="background-image: url('<?=auth()->user()->avatar?>');"></span><span class="align-div-menu">{{ auth()->user()->name }}</span> <span class="caret  align-div-menu"></span></a>
                         @else
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><span class="user-menu-icon glyphicon glyphicon-user"></span><span>{{ auth()->user()->name }}</span><span class="caret"></span></a>
@@ -119,8 +120,6 @@
         <div class="row no-margin">
             @yield('categories')
             @yield('content')
-
-
         </div>
     </div>
 </section>
@@ -138,9 +137,7 @@
                 </div>
                 <div class="footer-texto text-center">
                     <p>Copyright © 2016. Todos os direitos reservados.</p>
-
                 </div>
-
             </div>
         </div>
     </div>
@@ -178,8 +175,8 @@
                         <div class="rel">
                             <form class="form-horizontal" role="form" method="POST" action="{{ url('/auth/login') }}">
                                 {!! csrf_field() !!}
-                                <input type="email" name="email" id="txtEmailUsuarioLogin" class="input input-block-level" placeholder="E-mail" data-toggle="tooltip" title="Este campo deve ser preenchido" autocapitalize="off" />
-                                <img id="imgLoadingEmail" src="http://cjs.zapcorp.com.br/Content/img/loader.gif" alt="Loading" class="loading hide" width="20" height="20" />
+                                <input type="email" name="email" value="{{ old('email') }}" id="txtEmailUsuarioLogin" class="input input-block-level" placeholder="E-mail" title="Este campo deve ser preenchido" autocapitalize="off" />
+
                         </div>
 
                         <input type="password" id="txtSenhaUsuario" name="password" class="input input-block-level" placeholder="Senha" data-toggle="tooltip" title="Este campo deve ser preenchido">
@@ -296,28 +293,6 @@
                         <button id="btnCancelarCadastro" onclick="CancelarCadastro();" class="btn-link">Cancelar</button>
                         <button id="btnConfirmarCadastro" class="btn btn-zap">Finalizar Cadastro</button>
                     </p>
-
-                    <div class="auth-loading hide">
-                        <p class="message">
-                            <img src="http://cjs.zapcorp.com.br/Content/img/loader.gif" alt="Loading">
-                            <span>Finalizando seu cadastro…<br> Aguarde!</span>
-                        </p>
-                    </div>
-
-                    <div class="error-distance hide">
-                        <div class="message">
-                            <span class="icone-fechar-modal"></span>
-                            <span class="text">Infelizmente não conseguimos<br> concluir seu cadastro.</span>
-                        </div>
-                    </div>
-
-                    <div class="saved-distance hide">
-                        <div class="message">
-                            <span class="icone-check"></span>
-                            <span class="text">Cadastro criado com sucesso!</span>
-                        </div>
-                    </div>
-
                 </div>
             </div>
             <div class="clearfix"></div>
@@ -347,9 +322,10 @@
 <script src="{{asset('js/wow.min.js')}}"></script>
 
 <script src="/vendor/artesaos/cidades/js/scripts.js"></script>
-<script src="{{asset('js/site.js')}}"></script>
+
 <script src="{{asset('js/validator.min.js')}}"></script>
 <script src="{{asset('js/lazyload.js')}}"></script>
+<script src="{{asset('js/site.js')}}"></script>
 @if (session('status'))
     <script>
         swal("Parabéns!", "Seu anúncio foi criado com sucesso!", "success")
@@ -364,6 +340,32 @@
     ga('create', 'UA-71383930-1', 'auto');
     ga('send', 'pageview');
 
+</script>
+<script>
+    $('#propriedade1').empty();
+    $('#divSubCategory').on('change', function (e) {
+        var sub_id = e.target.value;
+        $('#propriedade1').empty();
+        //if verifica qual subcategoria foi escolhida
+        if(sub_id == 10 || sub_id == 20 || sub_id == 60 || sub_id == 70 || sub_id == 80) {
+            $('<div class="row"><div class="col-md-4 col-lg-4 col-sm-6 col-xs-12">' +
+                    '<div class="form-group has-feedback"> ' +
+                    '<label>Número de quartos *</label> ' +
+                    '<select class="form-control" required data-error="Seleciona uma opção" required="required" name="numero_quarto"> ' +
+                    '<option value="">Escolher</option><option value="1">1</option><option value="2">2</option><option value="3">3</option> <option value="4">4</option> <option value="5">5 ou mais</option>' +
+                    '</select><span class="form-control-feedback" aria-hidden="true"></span><div class="help-block with-errors"></div></div> </div><div class="col-md-4 col-lg-4 col-sm-6 col-xs-12"><div class="form-group has-feedback"><label>Vagas de garagem *</label> <select required data-error="Seleciona uma opção" required="required" class="form-control" name="numero_garagem"> <option value="">Escolher</option><option value="1">1</option> <option value="2">2</option> <option value="3">3</option> <option value="4">4</option><option value="5">5 ou mais</option> </select> <span class="form-control-feedback" aria-hidden="true"></span> <div class="help-block with-errors"></div> </div> </div> <div class="col-md-4 col-lg-4 col-sm-6 col-xs-12"><div class="form-group has-feedback"> <label>Quantas suítes *</label> <select required data-error="Seleciona uma opção" class="form-control" name="numero_suite"> <option value="">Escolher</option> <option value="1">1</option><option value="2">2</option> <option value="3">3</option> <option value="4">4</option> <option value="5">5 ou mais</option></select> <span class="form-control-feedback" aria-hidden="true"></span><div class="help-block with-errors"></div></div></div></div><div class="row"><div class="col-md-4 col-lg-4 col-sm-6 col-xs-12"> <div class="form-group has-feedback"> <label>Área Construída: *</label> <div class="input-group"> <input class="form-control" onkeypress="mascaraCampo(this, mascSoNumeros)" maxlength="7" required placeholder="Ex.: 150" type="text" data-error="Campo não pode ser vazio"  name="area_construida"><div class="input-group-addon">m²</div></div><span class="form-control-feedback" aria-hidden="true"></span><div class="help-block with-errors"></div></div></div><div class="col-md-4 col-lg-4 col-sm-6 col-xs-12"><div class="form-group has-feedback"><label>Condomínio: *</label><div class="input-group"><div class="input-group-addon">R$</div><input class="form-control" maxlength="10" onkeypress="mascaraCampo(this,mvalor)"  data-error="Campo não pode ser vazio" placeholder="Ex.: 150" type="text"  name="valor_condominio"></div><span class="form-control-feedback" aria-hidden="true"></span><div class="help-block with-errors"></div></div></div><div class="col-md-4 col-lg-4 col-sm-6 col-xs-12"><div class="form-group has-feedback"><label>IPTU: *</label><div class="input-group"><div class="input-group-addon">R$</div><input  class="form-control" maxlength="7" onkeypress="mascaraCampo(this,mvalor)" data-error="Campo não pode ser vazio" placeholder="Ex.: 150" type="text"  name="valor_iptu"></div><span class="form-control-feedback" aria-hidden="true"></span> <div class="help-block with-errors"></div></div></div></div>').appendTo('#propriedade1');
+        }else if(sub_id == 30 || sub_id == 40){
+            $('<div class="row"><div class="col-md-3 col-lg-3 col-sm-6 col-xs-12"><div class="form-group has-feedback"><label>Vagas de garagem *</label> <select required data-error="Seleciona uma opção" required="required" class="form-control" name="numero_garagem"> <option value="">Escolher</option><option value="1">1</option> <option value="2">2</option> <option value="3">3</option> <option value="4">4</option><option value="5">5 ou mais</option> </select> <span class="form-control-feedback" aria-hidden="true"></span> <div class="help-block with-errors"></div> </div> </div><div class="col-md-3 col-lg-3 col-sm-6 col-xs-12"> <div class="form-group has-feedback"> <label>Área Construída: *</label> <div class="input-group"> <input class="form-control" onkeypress="mascaraCampo(this, mascSoNumeros)" maxlength="7" required placeholder="Ex.: 150" type="text" data-error="Campo não pode ser vazio"  name="area_construida"><div class="input-group-addon">m²</div></div><span class="form-control-feedback" aria-hidden="true"></span><div class="help-block with-errors"></div></div></div><div class="col-md-3 col-lg-3 col-sm-6 col-xs-12"><div class="form-group has-feedback"><label>Condomínio: *</label><div class="input-group"><div class="input-group-addon">R$</div><input class="form-control" maxlength="10" onkeypress="mascaraCampo(this,mvalor)"  data-error="Campo não pode ser vazio" placeholder="Ex.: 150" type="text"  name="valor_condominio"></div><span class="form-control-feedback" aria-hidden="true"></span><div class="help-block with-errors"></div></div></div><div class="col-md-3 col-lg-3 col-sm-6 col-xs-12"><div class="form-group has-feedback"><label>IPTU: *</label><div class="input-group"><div class="input-group-addon">R$</div><input class="form-control" maxlength="7" onkeypress="mascaraCampo(this,mvalor)" data-error="Campo não pode ser vazio" placeholder="Ex.: 150" type="text"  name="valor_iptu"></div><span class="form-control-feedback" aria-hidden="true"></span> <div class="help-block with-errors"></div></div></div></div>').appendTo('#propriedade1');
+        }else if(sub_id == 90 || sub_id == 50){
+            $('<div class="row"><div class="col-md-4 col-lg-4 col-sm-6 col-xs-12">' +
+                    '<div class="form-group has-feedback"> ' +
+                    '<label>Número de quartos *</label> ' +
+                    '<select class="form-control" required data-error="Seleciona uma opção" required="required" name="numero_quarto"> ' +
+                    '<option value="">Escolher</option><option value="1">1</option><option value="2">2</option><option value="3">3</option> <option value="4">4</option> <option value="5">5 ou mais</option>' +
+                    '</select><span class="form-control-feedback" aria-hidden="true"></span><div class="help-block with-errors"></div></div> </div><div class="col-md-4 col-lg-4 col-sm-6 col-xs-12"><div class="form-group has-feedback"><label>Vagas de garagem *</label> <select required data-error="Seleciona uma opção" required="required" class="form-control" name="numero_garagem"> <option value="">Escolher</option><option value="1">1</option> <option value="2">2</option> <option value="3">3</option> <option value="4">4</option><option value="5">5 ou mais</option> </select> <span class="form-control-feedback" aria-hidden="true"></span> <div class="help-block with-errors"></div> </div> </div> <div class="col-md-4 col-lg-4 col-sm-6 col-xs-12"><div class="form-group has-feedback"> <label>Banheiros *</label> <select required data-error="Seleciona uma opção" class="form-control" name="numero_suite"> <option value="">Escolher</option> <option value="1">1</option><option value="2">2</option> <option value="3">3</option> <option value="4">4</option> <option value="5">5 ou mais</option></select> <span class="form-control-feedback" aria-hidden="true"></span><div class="help-block with-errors"></div></div></div></div><div class="row"><div class="col-md-4 col-lg-4 col-sm-6 col-xs-12"> <div class="form-group has-feedback"> <label>Acomodações: *</label> <div class="input-group"> <input class="form-control" onkeypress="mascaraCampo(this, mascSoNumeros)" maxlength="2" required placeholder="Ex.: 99" type="text" data-error="Campo não pode ser vazio"  name="acomodacoes"></div><span class="form-control-feedback" aria-hidden="true"></span><div class="help-block with-errors"></div></div></div><div class="col-md-3 col-lg-3 col-sm-6 col-xs-12"> <div class="form-group has-feedback"> <label>Área Construída: *</label> <div class="input-group"> <input class="form-control" onkeypress="mascaraCampo(this, mascSoNumeros)" maxlength="7" required placeholder="Ex.: 150" type="text" data-error="Campo não pode ser vazio"  name="area_construida"><div class="input-group-addon">m²</div></div><span class="form-control-feedback" aria-hidden="true"></span><div class="help-block with-errors"></div></div></div></div>').appendTo('#propriedade1');
+
+        }
+    });
 </script>
 </body>
 </html>

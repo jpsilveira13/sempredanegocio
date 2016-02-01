@@ -1,6 +1,7 @@
 @extends('site.layout')
 
 @section('content')
+
     <div class="row">
         <div class="col-md-12 col-lg-12">
             <div class="area-anuncio-total">
@@ -46,13 +47,13 @@
                                     <select class="form-control" id="category_id">
                                         <option>Selecione uma categoria</option>
                                         @foreach($anunciecats as $anunciecat)
-                                            <option value="{{$anunciecat->id}}" id="{{$anunciecat->id}}">{{$anunciecat->name}}</option>
+                                            <option value="{{$anunciecat->id}}" @if(old('anunciecat')== $anunciecat->name) selected="selected" @endif id="{{$anunciecat->id}}">{{$anunciecat->name}}</option>
                                         @endforeach
                                     </select>
                                 </div>
                             </div>
                             <!-- subcategory -->
-                            <div id="divSubCategory" class="center-block col-sm-4 col-md-4 col-xs-12">
+                            <div id="divSubCategory" class="center-block col-sm-4 col-md-4 col-xs-12 teste">
                                 <div class="form-group">
                                     <label for="Subcategoria">Seleciona a Subcategoria</label>
                                     <select class="form-control" id="subcategory" name="subcategories_id">
@@ -77,35 +78,35 @@
                         <div class="col-md-6 col-lg-6 anuncio-area-localizacao">
                             <div class="form-group has-feedback">
                                 <label>CEP: *</label><br />
-                                <input type="text" class="form-control input-large" id='cep' data-error="Campo não pode ser vazio" placeholder="CEP" name="cep" required maxlength="8"/>
+                                <input type="text" onkeypress="mascaraCampo(this,mascCEP)" class="form-control input-large" id='cep' data-error="Campo não pode ser vazio" placeholder="CEP" value="{{old('cep')}}" name="cep" required maxlength="9"/>
                                 <span class="form-control-feedback" aria-hidden="true"></span>
                                 <div class="help-block with-errors"></div>
                             </div>
-                            <div class="form-group has-feedback teste hide">
+                            <div class="form-group has-feedback localizacao hide">
                                 <label>Estado: *</label><br />
-                                <input type="text"  data-minlength="1" class="form-control input-large" id="estado" data-error="Campo não pode ser vazio" required  name="estado" required disabled />
+                                <input type="text"  data-minlength="1" class="form-control input-large" id="estado" data-error="Campo não pode ser vazio" required  name="estado" value="{{old('estado')}}" required readonly />
                                 <span class="form-control-feedback"></span>
                             </div>
-                            <div class="form-group has-feedback teste hide">
+                            <div class="form-group has-feedback localizacao hide">
                                 <label>Cidade: *</label><br />
-                                <input type="text"  data-minlength="1" class="form-control input-large" id="cidade" data-error="Campo não pode ser vazio" required  name="cidade" required disabled />
+                                <input type="text"  data-minlength="1" class="form-control input-large" id="cidade" data-error="Campo não pode ser vazio" required  name="cidade" value="{{old('cidade')}}" required readonly />
                                 <span class="form-control-feedback"></span>
                             </div>
-                            <div class="form-group has-feedback teste hide">
+                            <div class="form-group has-feedback localizacao hide">
                                 <label>Zona/Bairro: *</label><br />
-                                <input type="text"  data-minlength="1" class="form-control input-large" id="bairro" data-error="Campo não pode ser vazio" required placeholder="Nome do bairro ou zona*" name="bairro" required disabled />
+                                <input type="text"  data-minlength="1" class="form-control input-large" id="bairro" data-error="Campo não pode ser vazio" required placeholder="Nome do bairro ou zona*" value="{{old('bairro')}}" name="bairro" required readonly />
                                 <span class="form-control-feedback"></span>
                             </div>
 
-                            <div class="form-group has-feedback hide">
+                            <div class="form-group has-feedback localizacao hide">
                                 <label>Nome da rua: *</label><br />
-                                <input type="text" class="form-control input-large" id='rua' data-error="Campo não pode ser vazio" placeholder="Ex.: Av. Paulista" name="rua" required disabled />
+                                <input type="text" class="form-control input-large" id='rua' value="{{old('rua')}}" data-error="Campo não pode ser vazio" placeholder="Ex.: Av. Paulista" name="rua" required readonly />
                                 <span class="form-control-feedback" aria-hidden="true"></span>
                                 <div class="help-block with-errors"></div>
                             </div>
                             <div class="form-group">
                                 <label>Número da casa/prédio: *</label><br />
-                                <input maxlength="6" onkeypress="mascaraCampo(this, mascSoNumeros)" type="text" class="form-control input-small" id="numero" placeholder="Ex.: 9999" name="numero" required data-error="Campo não pode ser vazio" />
+                                <input maxlength="6" onkeypress="mascaraCampo(this, mascSoNumeros)" type="text" class="form-control input-small" id="numero" placeholder="Ex.: 9999" value="{{old('numero')}}" name="numero" required data-error="Campo não pode ser vazio" />
                                 <span class="form-control-feedback" aria-hidden="true"></span>
                                 <div class="help-block with-errors"></div>
                             </div>
@@ -123,87 +124,88 @@
                             <hr />
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-md-4 col-lg-4 col-sm-6 col-xs-12">
-                            <div class="form-group has-feedback">
-                                <label>Número de quartos *</label>
-                                <select class="form-control" required data-error="Seleciona uma opção" required="required" name="numero_quarto">
-                                    <option value="">Escolher</option>
-                                    <option value="1">1</option>
-                                    <option value="2">2</option>
-                                    <option value="3">3</option>
-                                    <option value="4">4</option>
-                                    <option value="5">5 ou mais</option>
-                                </select>
-                                <span class="form-control-feedback" aria-hidden="true"></span>
-                                <div class="help-block with-errors"></div>
-                            </div>
-                        </div>
-                        <div class="col-md-4 col-lg-4 col-sm-6 col-xs-12">
-                            <div class="form-group has-feedback">
-                                <label>Vagas de garagem *</label>
-                                <select required data-error="Seleciona uma opção" required="required" class="form-control" name="numero_garagem">
-                                    <option value="">Escolher</option>
-                                    <option value="1">1</option>
-                                    <option value="2">2</option>
-                                    <option value="3">3</option>
-                                    <option value="4">4</option>
-                                    <option value="5">5 ou mais</option>
-                                </select>
-                                <span class="form-control-feedback" aria-hidden="true"></span>
-                                <div class="help-block with-errors"></div>
-                            </div>
-                        </div>
-                        <div class="col-md-4 col-lg-4 col-sm-6 col-xs-12">
-                            <div class="form-group has-feedback">
-                                <label>Quantas suítes *</label>
-                                <select required data-error="Seleciona uma opção" class="form-control" name="numero_suite">
-                                    <option value="">Escolher</option>
-                                    <option value="1">1</option>
-                                    <option value="2">2</option>
-                                    <option value="3">3</option>
-                                    <option value="4">4</option>
-                                    <option value="5">5 ou mais</option>
-                                </select>
-                                <span class="form-control-feedback" aria-hidden="true"></span>
-                                <div class="help-block with-errors"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-4 col-lg-4 col-sm-6 col-xs-12">
-                            <div class="form-group has-feedback">
-                                <label>Área Construída: *</label>
+                    <div id="propriedade1">
+                        <div class="row">
+                            <div class="col-md-4 col-lg-4 col-sm-6 col-xs-12">
+                                <div class="form-group has-feedback">
+                                    <label>Número de quartos *</label>
+                                    <select class="form-control" required data-error="Seleciona uma opção" required="required" name="numero_quarto">
+                                        <option value="">Escolher</option>
+                                        @for($i = 0; $i<5;$i++)
 
-                                <div class="input-group">
-                                    <input class="form-control" onkeypress="mascaraCampo(this, mascSoNumeros)" maxlength="7" required placeholder="Ex.: 150" type="tel" data-error="Campo não pode ser vazio"  name="area_construida">
-                                    <div class="input-group-addon">m²</div>
+                                            <option value="{{$i}}">{{$i}}</option>
+                                        @endfor
+                                    </select>
+                                    <span class="form-control-feedback" aria-hidden="true"></span>
+                                    <div class="help-block with-errors"></div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-lg-4 col-sm-6 col-xs-12">
+                                <div class="form-group has-feedback">
+                                    <label>Vagas de garagem *</label>
+                                    <select required data-error="Seleciona uma opção" required="required" class="form-control" name="numero_garagem">
+                                        <option value="">Escolher</option>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5 ou mais</option>
+                                    </select>
+                                    <span class="form-control-feedback" aria-hidden="true"></span>
+                                    <div class="help-block with-errors"></div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-lg-4 col-sm-6 col-xs-12">
+                                <div class="form-group has-feedback">
+                                    <label>Quantas suítes *</label>
+                                    <select required data-error="Seleciona uma opção" class="form-control" name="numero_suite">
+                                        <option value="">Escolher</option>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5 ou mais</option>
+                                    </select>
+                                    <span class="form-control-feedback" aria-hidden="true"></span>
+                                    <div class="help-block with-errors"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4 col-lg-4 col-sm-6 col-xs-12">
+                                <div class="form-group has-feedback">
+                                    <label>Área Construída: *</label>
 
+                                    <div class="input-group">
+                                        <input class="form-control" onkeypress="mascaraCampo(this, mascSoNumeros)" maxlength="7" required placeholder="Ex.: 150" type="text" data-error="Campo não pode ser vazio"  name="area_construida">
+                                        <div class="input-group-addon">m²</div>
+
+                                    </div>
+                                    <span class="form-control-feedback" aria-hidden="true"></span>
+                                    <div class="help-block with-errors"></div>
                                 </div>
-                                <span class="form-control-feedback" aria-hidden="true"></span>
-                                <div class="help-block with-errors"></div>
                             </div>
-                        </div>
-                        <div class="col-md-4 col-lg-4 col-sm-6 col-xs-12">
-                            <div class="form-group has-feedback">
-                                <label>Condomínio: *</label>
-                                <div class="input-group">
-                                    <div class="input-group-addon">R$</div>
-                                    <input class="form-control" maxlength="10" onkeypress="mascaraCampo(this,mvalor)"  data-error="Campo não pode ser vazio" placeholder="Ex.: 150" type="tel"  name="valor_condominio">
+                            <div class="col-md-4 col-lg-4 col-sm-6 col-xs-12">
+                                <div class="form-group has-feedback">
+                                    <label>Condomínio: *</label>
+                                    <div class="input-group">
+                                        <div class="input-group-addon">R$</div>
+                                        <input class="form-control" maxlength="10" onkeypress="mascaraCampo(this,mvalor)"  data-error="Campo não pode ser vazio" placeholder="Ex.: 150" type="text"  name="valor_condominio">
+                                    </div>
+                                    <span class="form-control-feedback" aria-hidden="true"></span>
+                                    <div class="help-block with-errors"></div>
                                 </div>
-                                <span class="form-control-feedback" aria-hidden="true"></span>
-                                <div class="help-block with-errors"></div>
                             </div>
-                        </div>
-                        <div class="col-md-4 col-lg-4 col-sm-6 col-xs-12">
-                            <div class="form-group has-feedback">
-                                <label>IPTU: *</label>
-                                <div class="input-group">
-                                    <div class="input-group-addon">R$</div>
-                                    <input  class="form-control" maxlength="7" onkeypress="mascaraCampo(this,mvalor)" data-error="Campo não pode ser vazio" placeholder="Ex.: 150" type="tel"  name="valor_iptu">
+                            <div class="col-md-4 col-lg-4 col-sm-6 col-xs-12">
+                                <div class="form-group has-feedback">
+                                    <label>IPTU: *</label>
+                                    <div class="input-group">
+                                        <div class="input-group-addon">R$</div>
+                                        <input  class="form-control" maxlength="7" onkeypress="mascaraCampo(this,mvalor)" data-error="Campo não pode ser vazio" placeholder="Ex.: 150" type="text"  name="valor_iptu">
+                                    </div>
+                                    <span class="form-control-feedback" aria-hidden="true"></span>
+                                    <div class="help-block with-errors"></div>
                                 </div>
-                                <span class="form-control-feedback" aria-hidden="true"></span>
-                                <div class="help-block with-errors"></div>
                             </div>
                         </div>
                     </div>
@@ -211,14 +213,7 @@
                     <div class="row">
                         <div id="estilo-checkbox-bootstrap" class="col-md-12 col-lg-12 col-sm-6 col-xs-12">
                             <label>Características</label><br />
-                            <div class="btn-group" data-toggle="buttons">
-                                @foreach($anunciecaracts as $anunciecaract)
-                                    <label class="btn btn-default btcaract mt10" style="width: 204px;margin-left: 47px;">
-                                        <input type="checkbox" aria-required="false" class="material_checkbox" name="caracteristicas[]"  value="{{$anunciecaract->id}}"> {{$anunciecaract->name}}
-
-                                    </label>
-                                @endforeach
-                            </div>
+                            <div id="listCaract"></div>
                         </div>
                     </div>
                     <div class="row">
@@ -243,7 +238,7 @@
                         <div class="col-md-12 col-lg-12 col-xs-12">
                             <div class="form-group has-feedback">
                                 <label>Descrição : *</label>
-                                <textarea class="form-control" maxlength="300" required data-error="Ops! Excedeu o limite do mínimo ou do máximo de caracteres" rows="12" name="anuncio_descricao" placeholder="Ex.: Apartamento bem equipado"></textarea>
+                                <textarea class="form-control" maxlength="300" required data-error="Ops! Excedeu o limite do mínimo ou do máximo de caracteres" rows="12" name="anuncio_descricao" placeholder="Ex.: Apartamento bem equipado">{{old('anuncio_descricao')}}</textarea>
                                 <span class="form-control-feedback" aria-hidden="true"></span>
                                 <div class="help-block with-errors"></div>
                                 <span class="help-block">Número máximo de caracteres 300.</span>
@@ -254,7 +249,7 @@
                         <div class="col-md-2 col-lg-2 col-xs-12">
                             <div class="form-group has-feedback">
                                 <label>Preço : *</label>
-                                <input type="text" class="form-control" onkeypress="mascaraCampo(this,mvalor)" required data-error="Campo não pode ser vazio" maxlength="14" name="preco" placeholder="Ex.: 150.00" />
+                                <input type="text" value="{{old('preco')}}" class="form-control" onkeypress="mascaraCampo(this,mvalor)" required data-error="Campo não pode ser vazio" maxlength="14" name="preco" placeholder="Ex.: 150.00" />
                                 <span class="form-control-feedback" aria-hidden="true"></span>
                                 <div class="help-block with-errors"></div>
 
@@ -287,67 +282,44 @@
                             <ul id="photos_clearing" class="clearing-thumbs upload-imagem no-padding" data-clearing></ul>
                         </div>
                     </div>
-                    <div class="<?php if(!Auth::user()!= null): echo 'show';else:echo 'hide'; endif ?>">
+                    <div class="">
                         <div class="row">
                             <div class="col-md-12 col-lg-12">
                                 <h2><i class="fa fa-user"></i> Sua conta</h2>
                                 <hr />
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-md-6 col-lg-6 col-sm-6 col-xs-12">
-                                <div class="form-group has-feedback">
-                                    <label>Nome: *</label>
-                                    <input type="text" name='nome-usuario' data-minlength="6" required data-error="Número de caracteres tem que ser maior que 6" class="form-control" />
-                                    <span class=" form-control-feedback" aria-hidden="true"></span>
-                                    <div class="help-block with-errors"></div>
-                                </div>
-                            </div>
-                            <div class="col-md-6 col-lg-6 col-sm-6 col-xs-12">
-                                <div class="form-group has-feedback">
-                                    <label>Telefone: *</label>
-                                    <input type="tel" name='telefone-usuario' maxlength="15" onkeypress="mascaraCampo(this, mtel)" required  data-error="Campo não pode ser vazio" maxlength="15"  class="form-control" />
-                                    <span class="form-control-feedback" aria-hidden="true"></span>
-                                    <div class="help-block with-errors"></div>
-                                </div>
-                            </div>
-                        </div>
+                        <div class="col-md-6 col-lg-6">
+                            <div class="row">
 
-                        <div class="row">
-                            <div class="col-md-6 col-lg-6 col-sm-6 col-xs-12">
-                                <div class="form-group has-feedback">
-                                    <label  for="inputEmail">Email: *</label>
-                                    <input type="email" id="inputEmail" name='email-usuario' required  data-error="Campo não pode ser vazio" class="form-control" />
-                                    <span class="form-control-feedback" aria-hidden="true"></span>
-                                    <div class="help-block with-errors"></div>
+                                <div class="col-md-6 col-lg-6 col-sm-6 col-xs-12">
+                                    <div class="form-group has-feedback">
+                                        <label>Nome: *</label>
+                                        <input type="text" name='nome-usuario' value="{{Auth::user()->name}}" data-minlength="6" required data-error="Número de caracteres tem que ser maior que 6" class="form-control" />
+                                        <span class=" form-control-feedback" aria-hidden="true"></span>
+                                        <div class="help-block with-errors"></div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-lg-6 col-sm-6 col-xs-12">
+                                    <div class="form-group has-feedback">
+                                        <label>Telefone: *</label>
+                                        <input type="tel" name='telefone-usuario' maxlength="15" onkeypress="mascaraCampo(this, mtel)" required  data-error="Campo não pode ser vazio" maxlength="15"  class="form-control" />
+                                        <span class="form-control-feedback" aria-hidden="true"></span>
+                                        <div class="help-block with-errors"></div>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="col-md-6 col-lg-6 col-sm-6 col-xs-12">
-                                <div class="form-group has-feedback">
-                                    <label>Verificar email: *</label>
-                                    <input type="email"  id="verifica-email" data-match="#inputEmail" required  data-error="Whoops, confirmação de email diferente." name='verifica-email' class="form-control" />
-                                    <span class="form-control-feedback" aria-hidden="true"></span>
-                                    <div class="help-block with-errors"></div>
+                            <div class="row">
+                                <div class="col-md-6 col-lg-6 col-sm-6 col-xs-12">
+                                    <div class="form-group has-feedback">
+                                        <label  for="inputEmail">Email: *</label>
+                                        <input type="email" id="inputEmail" value='{{Auth::user()->email}}' name='email-usuario' required  data-error="Campo não pode ser vazio" class="form-control" />
+                                        <span class="form-control-feedback" aria-hidden="true"></span>
+                                        <div class="help-block with-errors"></div>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6 col-lg-6 col-sm-6 col-xs-12">
-                                <div class="form-group has-feedback">
-                                    <label for="inputPassword">Senha: *</label>
-                                    <input type="password" id="inputPassword"  required data-error="Campo não pode ser vazio" name='senha-usuario' class="form-control" />
-                                    <span class="form-control-feedback" aria-hidden="true"></span>
-                                    <div class="help-block with-errors"></div>
-                                </div>
-                            </div>
-                            <div class="col-md-6 col-lg-6 col-sm-6 col-xs-12">
-                                <div class="form-group has-feedback">
-                                    <label>Verificar Senha: *</label>
-                                    <input data-match="#inputPassword" required  data-error="Whoops, confirmação de senha diferente." type="password" id="verifica-senha" name='verifica-senha' class="form-control" />
-                                    <span class="form-control-feedback" aria-hidden="true"></span>
-                                    <div class="help-block with-errors"></div>
-                                </div>
-                            </div>
+
                             <div>
                                 <label>
                                     <input type="checkbox" > Quero receber novidades do sempre da negócio
@@ -356,13 +328,13 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-6 col-lg-6">
+                        <div class="col-md-12 col-lg-12">
                             <div class="alert alert-success">
                                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
                                 <strong>Atenção:</strong> Ao publicar um anúncio você concorda e aceita os Termos de Uso do SEMPRE DA NEGÓCIO.
                             </div>
                         </div>
-                        <div class="col-md-6 col-lg-6">
+                        <div class="col-md-12 col-lg-12">
                             <button id="btn-orange" type="submit" class="btn btn-large text-right">Publicar agora</button>
                         </div>
                     </div>

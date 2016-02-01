@@ -1,3 +1,5 @@
-/**
- * Created by Joao Paulo on 11/01/2016.
- */
+$(document).ready(function () {
+    $('#changeStatus').on('click', function () {
+
+    })
+});

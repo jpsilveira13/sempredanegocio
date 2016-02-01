@@ -25,9 +25,14 @@ class UserController extends Controller
 
             return redirect()->route('home');
         }else{
-            $users = $this->userModel->orderBy('id','desc')->paginate(30);
+            $users = $this->userModel->orderBy('tipo','asc')->paginate(30);
             return view('admin.user.index',compact('users'));
         }
+    }
+
+    public function edit(){
+        return view('admin.user.edit');
+
     }
 
 

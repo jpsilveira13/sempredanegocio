@@ -250,8 +250,8 @@
                                                 <div class="row mb4">
                                                     <div class="col-xs-8 col-md-8 ">
                                                         <div class="bottom-suggest">
-                                                            <span class="val-imovel">R$ {{number_format((float)$advert->preco,2)}}</span>
-                                                            <span class="text-diaria">/ mês</span>
+                                                            <span class="val-imovel">R$ {{number_format((float)$advert->preco,2,",",".")}}</span>
+                                                            <span class="text-diaria">@if($advert->tipo_anuncio == 'aluga')/ mês @elseif($advert->tipo_anuncio == 'venda') / venda @endif</span>
                                                         </div>
                                                     </div>
                                                     <div class="col-xs-4 col-md-4 fr">

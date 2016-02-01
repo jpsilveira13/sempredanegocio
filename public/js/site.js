@@ -84,15 +84,6 @@ function mascCNPJ(v){
     return v
 }
 
-function mascNumeroRomano(v){
-    v=v.toUpperCase()             //Maiï¿½sculas
-    v=v.replace(/[^IVXLCDM]/g,"") //Remove tudo o que nï¿½o for I, V, X, L, C, D ou M
-    //Essa ï¿½ complicada! Copiei daqui: http://www.diveintopython.org/refactoring/refactoring.html
-    while(v.replace(/^M{0,4}(CM|CD|D?C{0,3})(XC|XL|L?X{0,3})(IX|IV|V?I{0,3})$/,"")!="")
-        v=v.replace(/.$/,"")
-    return v
-}
-
 function mascData(v){
     v=v.replace(/\D/g,"")                    //Remove tudo o que nï¿½o ï¿½ dï¿½gito
     v=v.replace(/(\d{2})(\d)/,"$1/$2")       //Coloca uma barra entre o segundo e o terceiro dï¿½gitos
@@ -157,11 +148,39 @@ function mascValorDoisDecimais(v){
     }
 
 }
-
-
-
-
+//Começo jquery Site
 $(document).ready(function(){
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+
+    //salvar denuncia
+
+    $( "#denunciaForm" ).submit(function( event ) {
+        event.preventDefault();
+        var $form = $( this ),
+            data = $form.serialize(),
+            url = "/form-denuncia";
+
+        var posting = $.post( url, { formData: data } );
+
+        posting.done(function( data ) {
+            if(data.fail) {
+                $.each(data.errors, function( index, value ) {
+                    $('text-error').show('fast');
+                });
+                $('#successMessage').empty();
+            }
+            if(data.success) {
+
+                $('#denunciaForm')[0].reset();
+
+                $('#divSucessoDenuncie .denuncie-modal .tab-absolute').show('fast');
+            } //success
+        }); //done
+    });
 
     /* FUNÇÃO CONTADOR SITE */
 
@@ -554,11 +573,13 @@ $(document).ready(function(){
         var cat_id = e.target.value;
 
         $('#divSubCategory').show('fast');
+        $('#divAdvertSubcategory').hide('fast');
         $.get('/ajax-subcat?cat_id=' + cat_id, function(data){
             $('#subcategory').empty();
             $.each(data, function(index, subcatObj){
 
                 $('#subcategory').append('<option value="'+subcatObj.id+'" id="'+subcatObj.id+'" >'+subcatObj.name+'</option>');
+
             });
 
         });
@@ -568,19 +589,33 @@ $(document).ready(function(){
     $('#subcategory').on('change',function(e){
         var adv_id = e.target.value;
 
-        $('#divAdvertSubcategory').show('fast');
+        $('#divAdvertSubcategory').hide('fast');
         $.get('/ajax-advcat?adv_id=' + adv_id, function(data){
             $('#advertcategory').empty();
-            $.each(data, function(index, advCatObj){
+            if(data.advert.length != 0){
+                for(var i = 0, len = data.advert.length; i < len; i++) {
 
-                $('#advertcategory').append('<option value="'+advCatObj.id+'" id="'+advCatObj.id+'" >'+advCatObj.name+'</option>');
-            });
+                    $('#advertcategory').append('<option value="' + data.advert[i].id + '" id="' + data.advert[i].id + '" >' + data.advert[i].name + '</option>');
+                }
+                $('#divAdvertSubcategory').show('fast');
+            }
+
+            var caractList = $('#listCaract');
+            var html = '<div class="btn-group" data-toggle="buttons">';
+            for(var j = 0, lenj = data.features.length;j<lenj;j++){
+
+                html+= '<label class="btn btn-default btcaract mt10" style="width: 204px;margin-left: 47px;"><input type="checkbox" aria-required="false" class="material_checkbox" name="caracteristicas[]" value="'+data.features[j].id+'">'+data.features[j].name+'</label>'
+            }
+            html+='</div>';
+            caractList.html(html);
 
         });
 
     });
 
-    //procurar pelo cep
+
+
+//procurar pelo cep
 
     $('#cep').blur(function(){
         /* Configura a requisição AJAX */
@@ -596,13 +631,21 @@ $(document).ready(function(){
                     $('#cidade').val(data.cidade);
                     $('#estado').val(data.estado);
                     $('#numero').focus();
-                    $('.teste').removeClass('hide').addClass('show');
+                    $('.localizacao').removeClass('hide').addClass('shows');
+                }
+                if(data.sucesso == 2){
+
+                    $('#rua').val('').removeAttr('disabled').focus();
+
+                    $('#bairro').val('').removeAttr('disabled');
+                    $('#cidade').val(data.cidade);
+                    $('#estado').val(data.estado);
+                    $('.localizacao').removeClass('hide').addClass('shows');
                 }
             }
         });
         return false;
     });
-
     $(function() {
         $( "#slider-range, #slider-range2" ).slider({
             range: true,
@@ -617,34 +660,27 @@ $(document).ready(function(){
             " - $" + $( "#slider-range" ).slider( "values", 1 ) );
     });
 
-    //buscar cidade
+//buscar cidade
     $('#location').on('keyup',function(e){
         var minLetras = 4;
         var textoPesquisa = $('#location').val();
         var listaCidade = $("#listaCidades");
         if(textoPesquisa.length >= minLetras ) {
             listaCidade.show('fast');
-
             $.get('/search-cidade/' + this.value, function (data) {
                 $('#listaCidades').html('');
                 $.each(data, function (index, cities) {
                     $('#listaCidades').append('<li><a value="' + cities.nome + '">' + cities.nome + ' - ' + cities.uf + '</a></li>');
                     $('#listaCidades li a').on('click',function(){
-
                         var locationElem = $('#location');
-
-
                         var valorCampo = $(this).attr('value');
                         locationElem.val(valorCampo);
                         locationElem.attr('value',valorCampo);
                         locationElem.focus();
-
-
                     });
                 });
 
             });
-
             if(listaCidade.is(":visible")){
 
                 $('body').on('click',function(){
@@ -653,35 +689,25 @@ $(document).ready(function(){
 
                 });
             }
-
         }else{
-
             listaCidade.hide();
             listaCidade.html('');
         }
 
     });
-
-    //js area pesquisar
+//js area pesquisar
 
     $("#btn-pesquisa").on('click',function(e){
         e.preventDefault();
 
         $("#menu-total").fadeIn("fast");
-
-
     });
 
-
-    //lazyload
+//lazyload
 
     $("img.lazy").lazyload({
         effect : "fadeIn"
     });
-
-
-
-
     $(window).scroll(function(){
         if ($(this).scrollTop() > 300) {
             $('#btAnuncie').fadeIn();
@@ -689,9 +715,7 @@ $(document).ready(function(){
             $('#btAnuncie').fadeOut();
         }
     });
-
-
-    //js modal evento
+//js modal evento
     $('#list').click(function(event){event.preventDefault();
         $('#products .item').addClass('list-group-item').removeClass('bloco-item');
         $('#products .list-infos').addClass('list-item-nav');
@@ -706,25 +730,20 @@ $(document).ready(function(){
     });
 
 
-    //js quadrado texto
+//js quadrado texto
 
     $("#tooltip-config li").tooltip({
         placement : 'top'
     });
 
-    //js página imovel interno
+//js página imovel interno
 
     $('#liTelefone').click(function(){
         $('#phone').removeClass('hide').addClass('show');
 
     });
 
-
-//js página imoveis barra fixa pesquisar
-
-
-
-    //multiple images anuncio
+//multiple images anuncio
 
     $('#images').change(function(e) {
         var files = e.target.files;
@@ -752,47 +771,17 @@ $(document).ready(function(){
 
     });
 
-    var offset = $('#barra-fixa-menu').offset().top;
-    var meuMenu = $('#barra-fixa-menu');
-
-    var offsetLateral = $('#barra-fixa-lateral').offset().top;
-    var meuMenuLateral = $('#barra-fixa-lateral');
-
-    $(document).on('scroll', function () {
-        if (offsetLateral <= $(window).scrollTop()) {
-            meuMenuLateral.addClass('fixarLateral');
-
-        } else {
-            meuMenuLateral.removeClass('fixarLateral');
-
-        }
-    });
-
-
-
-    $(document).on('scroll', function () {
-        if (offset <= $(window).scrollTop()) {
-            meuMenu.addClass('fixar');
-
-        } else {
-            meuMenu.removeClass('fixar');
-
-        }
-    });
-
-    //validação formulário anuncio
+//validação formulário anuncio
 
     $('#sortable').sortable();
     $('#sortable').disableSelection();
 
-    //sortable events
+//sortable events
     $('#sortable').on('sortbeforestop',function(event){
 
         reorderImages();
 
     });
-
-
 
 });
 

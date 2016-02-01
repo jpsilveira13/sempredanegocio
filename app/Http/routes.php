@@ -25,23 +25,26 @@ Route::get('/', [
 /* anuncios routes */
 
 
-Route::get('anuncie', 'HomeController@anuncie');
+Route::group(['middleware'=>'auth'], function() {
+    Route::get('anuncie', 'HomeController@anuncie');
+    Route::post('anuncie','AdvertController@store');
+    Route::get('anuncie',[
 
-Route::post('anuncie','AdvertController@store');
+        'uses' => 'HomeController@anuncieCategoria'
+    ]);
+
+});
 
 
 
-Route::get('anuncie',[
+/* rotas ajax */
 
-    'uses' => 'HomeController@anuncieCategoria'
-]);
+Route::post('/form-denuncia', 'HomeController@denuncia');
 
 Route::get('/ajax-subcat',[
 
     'uses' => 'HomeController@getCategories'
 ]);
-
-/* rotas ajax */
 
 Route::get('/ajax-advcat',[
 
@@ -62,22 +65,12 @@ Route::get('/consultar_cep','HomeController@searchCep');
 Route::get('testes',[
     'uses' => 'HomeController@testeImoveis'
 ]);
-
-
-
-
-
-
-
 Route::get('anuncio','HomeController@searchAnuncio');
-
-
 Route::controllers([
     'auth' => 'Auth\AuthController',
     'password' => 'Auth\PasswordController',
 
 ]);
-
 
 
 
@@ -88,9 +81,14 @@ Route::get('social/login/{provider}', 'Auth\AuthController@handleProviderCallbac
 Route::group(['prefix' => 'admin', 'middleware'=>'auth','where'=>['id'=>'[0-9]+']], function()
 {
 
+    //ajax url
+
+    Route::get('/altera-status/{query?}','HomeController@alterStatus');
+
     Route::group(['prefix' => 'home'],function(){
 
         Route::get('/',['as'=>'home', 'uses'=> 'AdminController@home']);
+
 
 
     });
@@ -98,12 +96,13 @@ Route::group(['prefix' => 'admin', 'middleware'=>'auth','where'=>['id'=>'[0-9]+'
     Route::group(['prefix' => 'usuarios'],function() {
 
         Route::get('/',['as'=>'usuarios', 'uses' => 'UserController@index']);
-
+        Route::get('/editar/{id}',['as'=>'admin.user.edit', 'uses' => 'UserController@edit']);
     });
 
     Route::group(['prefix' => 'anuncios'],function() {
 
         Route::get('/',['as'=>'anuncios', 'uses' => 'AdvertController@index']);
+        Route::get('/editar/{id}',['as'=>'admin.anuncios.edit', 'uses' => 'AdvertController@edit']);
 
     });
 

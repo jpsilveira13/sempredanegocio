@@ -102,6 +102,16 @@ table {
     color: #049cdb;
 }
 
+.vertical-middle{
+    vertical-align: middle!important;
+}
+
+
+.background-style{
+    background-size: 100% 100%;
+
+}
+
 /* Small Sizes */
 @media (max-width: 480px) {
     .table-action thead {

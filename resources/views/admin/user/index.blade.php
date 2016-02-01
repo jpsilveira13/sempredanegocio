@@ -36,37 +36,37 @@
         <tbody>
         @foreach($users as $user)
             <tr>
-                <td><label><input type="checkbox"></label></td>
-                <td>{{$user->id}}</td>
+                <td class="vertical-middle"><label><input type="checkbox"></label></td>
+                <td class="vertical-middle">{{$user->id}}</td>
                 <td>
-                    @if(count($user->avatar))
-                        <img width="80" height="80" style="background-image:{{$user->avatar}} "/>
+                    @if($user->social == 'Facebook')
+                        <img width="80" height="80" class="background-style" style="background-image:url('{{$user->avatar}}') "/>
                     @else
-                        <img src="{{url('images/no-img.jpg')}}" alt="" width="80" height="80" />"
+                        <img src="{{url('images/no-img.jpg')}}" alt="" width="80" height="80" />
                     @endif
                 </td>
-                <td>{{$user->name}}</td>
-                <td>{{ date("d/m/Y H:i:s", strtotime($user->created_at)) }}</td>
-                <td class="t-status t-active">Ativo</td>
-                <td  width="5%" class="text-center">
+                <td class="vertical-middle">{{$user->name}}</td>
+                <td class="vertical-middle">{{ date("d/m/Y H:i:s", strtotime($user->created_at)) }}</td>
+                @if($user->status == 1)
+                    <td class="t-status t-active vertical-middle">Ativo</td>
+                @else
+                    <td class="t-status t-inactive vertical-middle">Inativo</td>
+                @endif
+                <td  width="5%" class="text-center vertical-middle">
                     <div class="dropdown">
                         <a href="javascript:;" class="btn btn-xs btn-primary" data-toggle="dropdown"><i class="fa fa-plus"></i></a>
-                        <ul class="dropdown-menu pull-right">
+                        <ul id="" class="dropdown-menu pull-right">
                             <li>
-                                <a href=""><i class="fa fa-fw fa-gear"></i>Visualizar/Editar</a>
-                            </li>
-                            <li class="divider"></li>
-                            <li>
-                                <a href=""><i class="fa fa-camera-retro"></i> Cadastrar\Visualizar</a>
+                                <a href=""><i class="fa fa-fw fa-gear"></i>Visualizar</a>
                             </li>
 
                             <li class="divider"></li>
                             <li>
-                                <a class="remover" href=""><i class="fa fa-trash-o"></i> Remover Produto</a>
+                                <a id="changeStatus"class="remover" value="{{$user->id}}" href=""><i class="fa fa-power-off"></i> @if($user->status == 1) Desativar @else  Ativar @endif</a>
                             </li>
                             <li class="divider"></li>
                             <li>
-                                <a class="fechar" href="javascript:void(0)"><i class="fa fa-fw fa-power-off"></i> Fechar</a>
+                                <a class="fechar" href="javascript:void(0)"><i class="fa fa-fw fa-times"></i>Fechar</a>
                             </li>
                         </ul>
                     </div>

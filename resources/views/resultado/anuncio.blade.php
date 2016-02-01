@@ -206,13 +206,9 @@
                                 <option value="1">2+</option>
                                 <option value="1">3+</option>
                                 <option value="1">4+</option>
-
                             </select>
                         </label>
-
-
                     </section>
-
                 </div>
             </div>
             <div class="col-md-10 col-sm-12">
@@ -221,7 +217,7 @@
                         <div id="products" class="list-group">
                             @foreach($queryAnuncios as $queryAnuncio)
                                 <div class="item  col-xs-12 col-sm-6 col-lg-4 col-md-4 bloco-item">
-                                    <a class="item-total" href="{{url('/')}}/imovel/{{$queryAnuncio->tipo_anuncio}}/{{$queryAnuncio->id}}/{{str_slug($queryAnuncio->url_anuncio)}}" >
+                                    <a class="item-total" href="{{url('/')}}/anuncio/{{$queryAnuncio->tipo_anuncio}}/{{$queryAnuncio->id}}/{{str_slug($queryAnuncio->url_anuncio)}}" >
                                         <div class="thumbnail">
                                             @if(count($queryAnuncio->images))
                                                 <img class="group list-group-image content-img-sugestao" src="{{url('gallery/'.$queryAnuncio->images()->first()->extension)}}" width="220" height="229" alt="titulo imagem" />
@@ -257,8 +253,8 @@
                                                 <div class="row mb4">
                                                     <div class="col-xs-8 col-md-8 ">
                                                         <div class="bottom-suggest">
-                                                            <span class="val-imovel">R$ {{number_format((float)$queryAnuncio->preco,2)}}</span>
-                                                            <span class="text-diaria">/ mês</span>
+                                                            <span class="val-imovel">R$ {{number_format((float)$queryAnuncio->preco,2,",",".")}}</span>
+                                                            <span class="text-diaria">@if($queryAnuncio->tipo_anuncio == 'aluga') / mês @else  @endif </span>
                                                         </div>
                                                     </div>
                                                     <div class="col-xs-4 col-md-4 fr">

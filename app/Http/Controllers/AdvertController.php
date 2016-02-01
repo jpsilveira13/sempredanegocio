@@ -38,26 +38,16 @@ class AdvertController extends Controller
 
     }
 
-
     /* salvar anúncio */
     public function store(Request $request, AdvertImage $advertImage, User $user){
 
         $data = $request->all();
-        if(Auth::user()){
-            $data['user_id'] = Auth::user()->id;
-
-        }else{
-            $user = new User();
-            $user->name         = $request->get('nome-usuario');
-            $user->phone        = $request->get('telefone-usuario');
-            $user->email        = $request->get('email-usuario');
-            $password           = $request->get('password');
-            $user->password     = bcrypt($password);
-            $user->social       = "Site";
-            $user->save();
-            $data['user_id']    = $user->id;
-
-        }
+        $data['user_id']    = Auth::user()->id;
+        $user               = User::find($data['user_id']);
+        $user->name         = $request->get('nome-usuario');
+        $user->phone        = $request->get('telefone-usuario');
+        $user->email        = $request->get('email-usuario');
+        $user->update();
 
         $data['url_anuncio'] = str_slug($data['anuncio_titulo']);
         $features = $request->get('caracteristicas');
@@ -74,17 +64,21 @@ class AdvertController extends Controller
         }
 
         $anuncio->features()->sync($features);
+        return redirect('/')->with('status', 'Anúncio inserido com sucesso!');
 
-
-        if(Auth::user()) {
+        /*if(Auth::user()) {
             return redirect('/')->with('status', 'Anúncio inserido com sucesso!');
         }else{
             auth()->login($user);
             return redirect('/')->with('status', 'Anúncio inserido com sucesso!');
-        }
+        } */
 
     }
 
+    public function edit(){
+        return view('admin.anuncios.edit');
+
+    }
 
 
 }

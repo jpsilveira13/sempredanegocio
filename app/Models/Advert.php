@@ -13,6 +13,7 @@ class Advert extends Model
         'subcategories_id',
         'tipo_anuncio',
         'estado',
+        'status',
         'cidade',
         'bairro',
         'rua',
@@ -36,8 +37,8 @@ class Advert extends Model
         return $this->hasMany('sempredanegocio\Models\AdvertImage');
     }
 
-    public function advertcategory(){
-        return $this->belongsTo(AdvertCategory::class);
+    public function subcategory(){
+        return $this->belongsTo(SubCategory::class,'subcategories_id','id');
 
     }
 

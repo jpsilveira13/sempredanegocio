@@ -5,12 +5,14 @@ namespace sempredanegocio\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Response;
+use Illuminate\Support\Facades\Validator;
 use sempredanegocio\Models\Cidade;
 use sempredanegocio\Http\Requests;
 use sempredanegocio\Http\Controllers\Controller;
 use sempredanegocio\Models\Advert;
 use sempredanegocio\Models\AdvertCategory;
 use sempredanegocio\Models\Category;
+use sempredanegocio\Models\Complaint;
 use sempredanegocio\Models\Feature;
 use sempredanegocio\Models\SubCategory;
 use Illuminate\Support\Facades\DB;
@@ -103,11 +105,18 @@ class HomeController extends Controller
         $adv_id = Input::get('adv_id');
 
         $advertcategories = AdvertCategory::where('subcategory_id', '=',$adv_id)->get();
-        // dd($advertcategories);
+        $features = Feature::where('subcategory_id','=',$adv_id)->get();
 
-        return Response::json($advertcategories);
+        return Response::json(['advert' => $advertcategories,'features' => $features]);
 
 
+    }
+
+    public function getSubCaract(){
+        $sub_id = Input::get('subcategories_id');
+
+        $subcaract = Feature::where('subcategories_id','=',$sub_id);
+        return Response::json($subcaract);
     }
 
     public function searchCep(){
@@ -148,6 +157,42 @@ class HomeController extends Controller
 
     }
 
+    public function denuncia(){
+        $inputData = Input::get('formData');
+
+        parse_str($inputData, $formFields);
+        $userData = array(
+            'user_id'            => $formFields['user_id'],
+            'url_site'           =>  $formFields['url_site'],
+            'motivo'             =>  $formFields['motivo'],
+            'descricao'          =>  $formFields['descricao'],
+            'nome'               =>  $formFields['nome'],
+            'email'              =>  $formFields['email'],
+
+        );
+        $rules = array(
+            'nome'      =>  'required',
+            'email'     =>  'required',
+            'motivo'    =>  'required',
+        );
+        $validator = Validator::make($userData,$rules);
+        if($validator->fails())
+            return Response::json(array(
+                'fail' => true,
+                'errors' => $validator->getMessageBag()->toArray()
+            ));
+        else {
+
+            if(Complaint::create($userData)) {
+                //return success  message
+                return Response::json(array(
+                    'success' => true
+                ));
+            }
+        }
+
+    }
+
     public function searchAnuncio(){
         $anunciesubcats = SubCategory::get();
         $transacao = Input::get('transacao');
@@ -170,6 +215,14 @@ class HomeController extends Controller
             return view('resultado/anuncio', compact('queryAnuncios','anunciesubcats','queryCount'));
 
         }
+
+    }
+
+    public function alterStatus($query){
+
+        $status = $query;
+
+        dd($status);
 
     }
 }
