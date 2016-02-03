@@ -96,9 +96,9 @@
                     <li class="dropdown">
                         @if(auth()->user()->avatar)
 
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><span class="user-menu-icon" style="background-image: url('<?=auth()->user()->avatar?>');"></span><span class="align-div-menu">{{ auth()->user()->name }}</span> <span class="caret  align-div-menu"></span></a>
+                            <a href="#" class="dropdown-toggle pt12 pb0" data-toggle="dropdown" role="button" aria-expanded="false"><span class="user-menu-icon" style="background-image: url('<?=auth()->user()->avatar?>');"></span><span class="align-div-menu">Olá, {{ strstr(auth()->user()->name,' ',true)  }}</span> <span class="caret  align-div-menu"></span></a>
                         @else
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><span class="user-menu-icon glyphicon glyphicon-user"></span><span>{{ auth()->user()->name }}</span><span class="caret"></span></a>
+                            <a href="#" class="dropdown-toggle pt12" data-toggle="dropdown" role="button" aria-expanded="false"><span class="user-menu-icon glyphicon glyphicon-user"></span><span>{{ strstr(auth()->user()->name,' ',true)}}</span><span class="caret"></span></a>
                         @endif
                         <ul class="dropdown-menu" role="menu">
                             <li><a href="{{ url('/admin/home') }}">Acessar o Painel</a></li>
@@ -106,7 +106,7 @@
                             <li><a href="{{ url('/auth/logout') }}">Sair</a></li>
                         </ul>
                     </li>
-                    <li><a href="#" id=""><span class="user-menu-icon glyphicon glyphicon-heart"></span> Favoritos</a></li>
+                    <li><a href="#" id="" class="pt12"><span class="user-menu-icon glyphicon glyphicon-heart"></span> Favoritos</a></li>
                 @endif
             </ul>
         </div>
@@ -173,13 +173,13 @@
                         <p id="mensagemPadrao" class="desc">Se você já é um usuário do Sempre da Negócio, pode fazer seu login abaixo.</p>
                         <p id="mensagemEmailExistente" class="aviso" style="display: none;">O email informado já está cadastrado no Sempre da Negócio Imóveis. Faça seu login abaixo.</p>
                         <div class="rel">
-                            <form class="form-horizontal" role="form" method="POST" action="{{ url('/auth/login') }}">
+                            <form class="form-horizontal mt43res" role="form" method="POST" action="{{ url('/auth/login') }}">
                                 {!! csrf_field() !!}
                                 <input type="email" name="email" value="{{ old('email') }}" id="txtEmailUsuarioLogin" class="input input-block-level" placeholder="E-mail" title="Este campo deve ser preenchido" autocapitalize="off" />
 
                         </div>
 
-                        <input type="password" id="txtSenhaUsuario" name="password" class="input input-block-level" placeholder="Senha" data-toggle="tooltip" title="Este campo deve ser preenchido">
+                        <input type="password" id="txtSenhaUsuario" name="password" class="input input-block-level mb60res" placeholder="Senha" data-toggle="tooltip" title="Este campo deve ser preenchido">
 
                         <div class="forgot-pass">
                             <a href="{{ url('/password/email') }}" id="lnkEsqueciSenhaLogin" class="" onclick="">Esqueci minha senha</a>
@@ -261,7 +261,7 @@
                                 <input type="password" id="txtEmailUsuarioCadastro"  name="password_confirmation" class="input input-block-level span3" placeholder="Confirma a senha" autocapitalize="off">
 
                             </div>
-                            <button href="javascript:void(0);" type="submit" id="btnCadastrar" class="btn btn-zap pull-right" onclick="IrParaCadastroCompleto();">Cadastrar</button>
+                            <button href="javascript:void(0);" type="submit" id="btnCadastrar" class="btn btn-zap pull-right mb8res" onclick="IrParaCadastroCompleto();">Cadastrar</button>
 
                     </div>
                     </form>

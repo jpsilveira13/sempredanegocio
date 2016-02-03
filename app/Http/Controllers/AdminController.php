@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use sempredanegocio\Http\Requests;
 use sempredanegocio\Models\Advert;
+use sempredanegocio\Models\Complaint;
 use sempredanegocio\Models\User;
 
 
@@ -19,8 +20,9 @@ class AdminController extends Controller
 
         if($user->tipo == "admin"){
             $queryCountTotal = Advert::all()->count();
+            $countTickert = Complaint::all()->count();
 
-            return view('admin.principal.index',compact('queryCountTotal'));
+            return view('admin.principal.index',compact('queryCountTotal','countTickert'));
         }else{
             $id_user =  Auth::user()->id;
 

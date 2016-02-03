@@ -187,7 +187,14 @@ Olá, Gostaria de ter mais informações sobre o imóvel Apartamento à venda, R
                     <div class="btn-fav-ficha add hand btnFavorito11102">
                         <div class="iconeFavorito addicon pull-left icone-favoritada"></div>
                         <!--<img src="http://cjs.zapcorp.com.br/Content/img/loader.gif" alt="" class="favbar-load pull-left" width="25" height="25"> -->
-                        <a href="#loginModal" id="modalLogin" class="" data-toggle="modal" data-target="#loginModal"><span class="pull-left">Adicionar à minha lista</span></a>
+                        @if(auth()->guest())
+                            @if(!Request::is('auth/login'))
+                                <a href="#loginModal" id="modalLogin" class="" data-toggle="modal" data-target="#loginModal"><span class="pull-left">Adicionar à minha lista</span></a>
+                            @endif
+                        @else
+                            <a href="#" id="modalLogin" class=""><span class="pull-left">Adicionar à minha lista</span></a>
+
+                        @endif
                     </div>
                     <div class="clearfix"></div>
                 </div><!-- fim contratar anunciante -->
@@ -226,7 +233,7 @@ Olá, Gostaria de ter mais informações sobre o imóvel Apartamento à venda, R
                 <div class="modal-body">
                     <center>
 
-                        <img class="img-responsive center-block borda-image" width="140" height="140" src="<?php if($advert->images()->count() > 0):
+                        <img class="img-responsive center-block borda-image lazy" width="140" height="140" data-original="<?php if($advert->images()->count() > 0):
                             echo asset('gallery/'.$advert->images()->first()->extension); else: echo asset('images/noimage2.jpg'); endif?>" />
                         {{$advert->rua}}, {{$advert->bairro}}, {{$advert->cidade}} - {{$advert->estado}}
 
@@ -255,174 +262,6 @@ Olá, Gostaria de ter mais informações sobre o imóvel Apartamento à venda, R
             </div>
         </div>
     </div>
-    <!-- modal login -->
-    <div class="modal modal-login fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">X</button>
-                    <h4 class="modal-title" id="myModalLabel">Acessar Sempre da Negócio</h4>
-                </div>
-                <div class="modal-body">
-
-                    <span id="mensagemLoginSalvarBusca" class="alerta-zero alerta-imput-busca alerta-login-busca" style="display: block;">Realize seu login para adicionar o imóvel à sua lista de imóveis preferidos.</span>
-
-                    <div id="login" class="login">
-
-                        <div id="divLogin" class="login-box">
-                            <p class="titulo">Já sou cadastrado</p>
-                            <p id="mensagemPadrao" class="desc">Se você já é um usuário do Sempre da Negócio, pode fazer seu login abaixo.</p>
-                            <p id="mensagemEmailExistente" class="aviso" style="display: none;">O email informado já está cadastrado no Sempre da Negócio Imóveis. Faça seu login abaixo.</p>
-                            <div class="rel">
-                                <input type="email" id="txtEmailUsuarioLogin" class="input input-block-level" placeholder="E-mail" data-toggle="tooltip" title="Este campo deve ser preenchido" autocapitalize="off">
-                                <img id="imgLoadingEmail" src="http://cjs.zapcorp.com.br/Content/img/loader.gif" alt="Loading" class="loading hide" width="20" height="20">
-                            </div>
-
-                            <input type="password" id="txtSenhaUsuario" onkeyup="EnterLogin(event);" class="input input-block-level" placeholder="Senha" data-toggle="tooltip" title="Este campo deve ser preenchido">
-
-                            <div class="forgot-pass">
-                                <a href="#" id="lnkEsqueciSenhaLogin" class="" onclick="ExibirRecuperacaoSenha()">Esqueci minha senha</a>
-                            </div>
-                            <button id="btnLogin" onclick="EfetuarLogin();" class="btn btn-zap pull-right">Entrar</button>
-
-                            <div id="senhaInvalida" class="error-distance hide">
-                                <div class="message">
-                                    <span class="icone-fechar-modal"></span>
-                                    <span class="text">E-mail ou senha inválidos.<br> Tente novamente.</span>
-                                </div>
-                            </div>
-
-                            <div id="erroLogin" class="error-distance hide">
-                                <div class="message">
-                                    <span class="icone-fechar-modal"></span>
-                                    <span class="text">Não foi possível logar.<br> Tente mais tarde.</span>
-                                </div>
-                            </div>
-
-                            <div class="auth-loading hide">
-                                <div class="message">
-                                    <img src="http://cjs.zapcorp.com.br/Content/img/loader.gif" alt="Autenticando...">
-                                    <span>Autenticando…<br> Aguarde!</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div id="divRecuperacaoSenha" class="login-box hide" style="display: none;">
-                            <p class="titulo">Recuperar senha</p>
-                            <p class="desc">Digite o e-mail cadastrado para receber o lembrete de senha.</p>
-
-                            <div class="rel">
-                                <input type="email" id="txtEmailEnviar" onkeyup="EnterRecuperacao(event);" class="input input-block-level" placeholder="E-mail" autocapitalize="off">
-                                <img id="imgLoadingRecuperarSenha" src="http://cjs.zapcorp.com.br/Content/img/loader.gif" alt="Loading" class="loading hide" width="20" height="20">
-                            </div>
-
-                            <div class="forgot-pass">
-                                <a href="#" id="lnkEsqueciSenhaRecuperacao" class="" onclick="ExibirLogin();">« Voltar para login</a>
-                            </div>
-                            <button id="btnRecuperarSenha" onclick="EnviarEsqueciMinhaSenha();" class="btn btn-zap pull-right">Enviar</button>
-
-                            <div class="auth-loading hide">
-                                <div class="message">
-                                    <img src="http://cjs.zapcorp.com.br/Content/img/loader.gif" alt="Enviando…">
-                                    <span>Enviando…<br> Aguarde!</span>
-                                </div>
-                            </div>
-
-                            <div class="error-distance hide">
-                                <div class="message">
-                                    <span class="icone-fechar-modal"></span>
-                                    <span class="text">Não foi possível<br> enviar sua senha.</span>
-                                </div>
-                            </div>
-
-                            <div class="saved-distance hide">
-                                <div class="message">
-                                    <span class="icone-check"></span>
-                                    <span class="text">Senha enviada ao<br> e-mail cadastrado.</span>
-                                </div>
-                            </div>
-
-                        </div>
-
-                        <div id="divMiniCadastro" class="cadastro-box no-show">
-                            <p class="titulo">Não sou cadastrado</p>
-                            <p class="desc">Ainda não está no Sempre da Negócio? Preencha os campos abaixo para iniciar o cadastro.</p>
-
-                            <input id="txtNomeUsuarioCadastro" class="input input-block-level span3" type="text" placeholder="Nome e sobrenome">
-                            <div class="rel">
-                                <input type="email" id="txtEmailUsuarioCadastro" onkeyup="EnterMiniCadastro(event);" class="input input-block-level span3" placeholder="E-mail" autocapitalize="off">
-                                <img id="imgLoadingMiniCadastro" src="http://cjs.zapcorp.com.br/Content/img/loader.gif" alt="Loading" class="loading hide" width="20" height="20">
-                            </div>
-                            <a href="javascript:void(0);" id="btnCadastrar" class="pull-right" onclick="IrParaCadastroCompleto();">Cadastrar</a>
-                            <p class="info">Você será direcionado para completar seu cadastro com mais algumas informações.</p>
-                        </div>
-                    </div>
-
-                    <div id="cadastro" class="cadastro" style="display: none;">
-                        <p class="desc">Preencha as informações para criar seu cadastro no Sempre da Negócio e ter acesso a sua conta</p>
-
-                        <p class="aviso">O email informado não está cadastrado no Sempre da Negócio. Faça seu cadastro no formulário abaixo ou tente fazer <a href="#" onclick="ExibirLogin();">login novamente</a>.</p>
-
-                        <input id="txtNomeCadastro" class="input input-block-level span4" type="text" placeholder="Nome e sobrenome" maxlength="100">
-                        <div class="rel">
-                            <input type="email" id="txtEmailCadastro" class="input input-block-level span4" placeholder="Seu e-mail" maxlength="100" autocapitalize="off">
-                            <img id="imgLoadingCadastro" src="http://cjs.zapcorp.com.br/Content/img/loader.gif" alt="Loading" class="loading hide" width="20" height="20">
-                        </div>
-                        <input type="email" id="txtConfirmaEmailCadastro" class="input input-block-level span4" placeholder="Confirme o seu e-mail" maxlength="100" autocapitalize="off">
-
-                        <p class="input-group">
-                            <input id="txtSenhaCadastro" class="input input-block-level span4" type="password" placeholder="Senha" maxlength="12">
-                            <span>A senha deve conter entre 6 e 12 caracteres.</span>
-                        </p>
-
-                        <input id="txtConfirmaSenhaCadastro" onkeyup="EnterCadastro(event);" class="input input-block-level span4" type="password" placeholder="Confirme a senha" maxlength="12">
-
-                        <label class="checkbox clear">
-                            <input id="chkNovidades" type="checkbox" checked="checked" value="">Desejo receber novidades</label>
-
-                        <p class="mt10 text-right">
-                            <button id="btnCancelarCadastro" onclick="CancelarCadastro();" class="btn-link">Cancelar</button>
-                            <button id="btnConfirmarCadastro" class="btn btn-zap">Finalizar Cadastro</button>
-                        </p>
-
-                        <div class="auth-loading hide">
-                            <p class="message">
-                                <img src="http://cjs.zapcorp.com.br/Content/img/loader.gif" alt="Loading">
-                                <span>Finalizando seu cadastro…<br> Aguarde!</span>
-                            </p>
-                        </div>
-
-                        <div class="error-distance hide">
-                            <div class="message">
-                                <span class="icone-fechar-modal"></span>
-                                <span class="text">Infelizmente não conseguimos<br> concluir seu cadastro.</span>
-                            </div>
-                        </div>
-
-                        <div class="saved-distance hide">
-                            <div class="message">
-                                <span class="icone-check"></span>
-                                <span class="text">Cadastro criado com sucesso!</span>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-                <div class="clearfix"></div>
-                <div class="modal-footer modal-footer-login">
-                    <div class="btn-facebook" id="imgFacebook">
-                        <span class="icone-facebook">Login com Facebook</span>
-                    </div>
-
-                    <span class="text">Você pode utilizar sua conta do Facebook para acessar com mais <strong>rapidez</strong> e <strong>praticidade</strong>.</span>
-                </div>
-                <div class="modal-footer modal-footer-cadastro text-center">
-                    Ao me cadastrar confirmo que li e concordo com os <a href="" target="_blank">Termos de Uso</a>
-                </div>
-            </div>
-        </div>
-    </div>
-
     <!-- modal denuncia -->
     <div class="modal fade denuncie-modal" id="denuncieModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog">

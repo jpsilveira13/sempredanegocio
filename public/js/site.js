@@ -177,7 +177,7 @@ $(document).ready(function(){
 
                 $('#denunciaForm')[0].reset();
 
-                $('#divSucessoDenuncie .denuncie-modal .tab-absolute').show('fast');
+                $('#divSucessoDenuncie .sucesso-modal .tab-absolute').show('fast');
             } //success
         }); //done
     });
@@ -399,22 +399,27 @@ $(document).ready(function(){
     //$('ul.pagination').hide();
 
     (function(){
-
         var loading_options = {
             finishedMsg: "<div class='end-msg'>Não há mais anúncios!</div>",
             msgText: "<div class='carregamento-anuncio'>Carregando anúncios...</div>",
             img: "http://www.infinite-scroll.com/loading.gif"
-
         };
         $('#products').infinitescroll({
-
             loading : loading_options,
             navSelector : "ul.pagination",
             nextSelector : "ul.pagination li.active + li a",
             itemSelector : "#products .item",
-
+        },function(arrayOfNewElems){
+//callback
+            $("img.lazy").lazyload({
+                effect: "fadeIn"
+            });
         });
     })();
+
+    $("img.lazy").lazyload({
+        effect: "fadeIn"
+    });
 
     //JS carregar fotos ;D
     var multiPhotoDisplay;
@@ -702,15 +707,12 @@ $(document).ready(function(){
 
         $("#menu-total").fadeIn("fast");
     });
-
 //lazyload
 
-    $("img.lazy").lazyload({
-        effect : "fadeIn"
-    });
     $(window).scroll(function(){
         if ($(this).scrollTop() > 300) {
             $('#btAnuncie').fadeIn();
+
         } else {
             $('#btAnuncie').fadeOut();
         }

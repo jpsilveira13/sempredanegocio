@@ -160,9 +160,17 @@ section{
 
 }
 
+.mt43res{
+    margin-top: 43px;
+}
+
+.mb60res{
+    margin-bottom: 60px!important;
+
+}
 
 .mb0{
-    margin-bottom: 0px!important;
+    margin-bottom: 0!important;
 
 }
 
@@ -175,6 +183,11 @@ section{
     margin-bottom: 48px;
 
 }
+
+.pb0{
+    padding-bottom: 0!important;
+}
+
 
 .fontsize13px{
     font-size: 13px!important;
@@ -201,6 +214,12 @@ section{
 
 }
 
+
+.height148{
+    height:148px;
+
+}
+
 .width-half{
     width: 50%;
 
@@ -219,6 +238,11 @@ section{
 .pt0{
     padding-top: 0px!important;
 
+}
+
+.pt12{
+    padding-top: 12px!important;
+    padding-bottom: 0px;
 }
 
 .height52px{
@@ -243,7 +267,10 @@ section{
 /* Alteração bootstrap */
 
 
-
+.navbar-default .navbar-nav>.open>a, .navbar-default .navbar-nav>.open>a:focus, .navbar-default .navbar-nav>.open>a:hover {
+    color: #000;
+    background-color: rgba(255, 255, 255, 0.6);
+}
 
 .navbar-nav>li{
 
@@ -881,13 +908,38 @@ body{
 }
 
 
+.selecao-categoria figure:hover img{
+    -moz-transform: scale(1.1);
+    -webkit-transform: scale(1.1);
+    -o-transform: scale(1.1);
+    -ms-transform: scale(1.1);
+    transform: scale(1.1);
 
-.thumbnail .item-total:hover .  {
+}
+
+.transition-img{
+    -webkit-transition: all 0.25s ease-in-out;
+    transition: all 0.25s ease-in-out;
+
+}
+
+.thumbnail .item-total:hover{
     color: #007c32;
     -webkit-transition: all 0.5s;
     transition: all 0.5s;
 }
 
+
+
+.thumbnail:hover img{
+
+    moz-transform: scale(1.1);
+    -webkit-transform: scale(1.1);
+    -o-transform: scale(1.1);
+    -ms-transform: scale(1.1);
+    transform: scale(1.1);
+
+}
 
 
 .item.list-group-item
@@ -2485,6 +2537,7 @@ input.span1, textarea.span1 {
     box-sizing: border-box;
     border-radius: 3px;
     margin: 0;
+    height: 300px;
     position: relative;
 }
 
@@ -2542,17 +2595,6 @@ input.span1, textarea.span1 {
 
 .error-distance .message {
     background: #fde9e9;
-}
-
-.modal-login .login-box {
-    float: left;
-    width: 50%;
-    background-color: #f6f5f1;
-    padding: 12px 10px;
-    box-sizing: border-box;
-    border-radius: 3px;
-    margin: 0;
-    position: relative;
 }
 
 .modal-login .cadastro-box {
@@ -2736,8 +2778,6 @@ input#images{display: none;}
 
 
 
-
-
 /********************************/
 /*   Media Queries breakpoints  */
 /********************************/
@@ -2746,6 +2786,7 @@ input#images{display: none;}
     /* media página imovel */
     .side-left, .side-right, .box-default, .container-financiamento .tool, .posvalue-imovel, .release-header>.pull-left, .container-conheca .tab-content-big, .container-conheca .tab-content-small, .check-ofertas {
         width: 100%;
+        height:auto ;
     }
     .side-left {
         display: -webkit-flex;
@@ -2753,6 +2794,12 @@ input#images{display: none;}
         -webkit-flex-flow: column;
         flex-flow: column;
     }
+
+    .modal-login .login-box{
+        height:auto;
+
+    }
+
 
     .imovel-area-detalhe h1 {
         max-width: 100%;
@@ -2813,10 +2860,28 @@ input#images{display: none;}
         width: 100%;
     }
 
-    #divMiniCadastro{
-        display: none;
+    .modal-login .cadastro-box{
+        float: none;
+        width: 100%;
+        padding: 0;
 
     }
+
+    .mb8res{
+        margin-bottom: 8px;
+
+    }
+
+    .mb60res{
+        margin-bottom: 8px!important;
+
+    }
+
+    .mt43res{
+
+        margin-top: 0;
+    }
+
 
     .denuncie-modal .text {
         width: 100%;
@@ -3006,6 +3071,8 @@ input#images{display: none;}
         margin-top: 17px;
 
     }
+
+
 
 }
 

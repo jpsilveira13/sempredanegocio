@@ -11,8 +11,9 @@
                 <section class="clearfix sessao-area-filtro bg-branco">
                     <h5 class="sessao-texto-pesquisa">Tipo de imóvel</h5>
                     <select  name="categoria" class="search-results-select search-results-select-img">
-                        <option selected="selected">Selecionar</option>
-
+                        @foreach($subcategories as $subcategory)
+                            <option name="{{$subcategory->id}}">{{$subcategory->name}}</option>
+                        @endforeach
                     </select>
                 </section>
                 <section class="clearfix sessao-area-filtro bg-branco ">
@@ -141,8 +142,9 @@
                     <section class="clearfix sessao-area-filtro bg-branco">
                         <h5 class="sessao-texto-pesquisa">Tipo de imóvel</h5>
                         <select  name="categoria" class="search-results-select search-results-select-img">
-                            <option selected="selected">Selecionar</option>
-
+                            @foreach($subcategories as $subcategory)
+                                <option name="{{$subcategory->id}}">{{$subcategory->name}}</option>
+                            @endforeach
                         </select>
                     </section>
                     <section class="clearfix sessao-area-filtro bg-branco ">
@@ -217,9 +219,10 @@
                                     <a class="item-total" href="{{url('/')}}/anuncio/{{$advert->tipo_anuncio}}/{{$advert->id}}/{{str_slug($advert->url_anuncio)}}" >
                                         <div class="thumbnail">
                                             @if(count($advert->images))
-                                                <img class="group list-group-image content-img-sugestao lazy" src="{{url('gallery/'.$advert->images()->first()->extension)}}" width="220" height="229" alt="titulo imagem" />
+
+                                                <img class="group list-group-image content-img-sugestao lazy transition-img"  data-original="{{url('gallery/'.$advert->images()->first()->extension)}}" width="220" height="229" alt="titulo imagem" />
                                             @else
-                                                <img class="group list-group-image content-img-sugestao lazy" src="{{url('images/no-image.jpg')}}" alt="titulo imagem" />
+                                                <img class="group list-group-image content-img-sugestao lazy transition-img" src="{{url('images/no-image.jpg')}}" alt="titulo imagem" />
                                             @endif
                                             <div class="caption infos-suggest">
                                                 <h4 class="group inner list-group-item-heading text-bairro">{{$advert->cidade}}<br />
@@ -264,7 +267,9 @@
                                         </div>
                                     </a>
                                 </div>
+
                             @endforeach
+
                         </div>
                     </div>
                     <div class='text-center'>

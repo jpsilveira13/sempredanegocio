@@ -57,27 +57,29 @@
         </div>
         <div class="row no-margin">
             <div class="container">
-                <div class="col-md-3 col-sm-6">
-                    <figure class="">
-                        <img class="mb10" src="{{url('images/img-imoveis.png')}}" alt="Imóveis" title="Área Imóveis" width="167" height="130" />
-                        <figcaption>
-                            <p class="hero-description">Imóveis</p>
-                            <p class="hero-description fontsize13px">Encontre mais de 200.000 imóveis de sua região em um único lugar. </p>
-                        </figcaption>
-                    </figure>
+                <div class="col-md-3 col-sm-6 selecao-categoria">
+                    <a href="{{asset('/imoveis')}}">
+                        <figure class="">
+                            <img class="mb10 transition-img" src="{{url('images/img-imoveis.png')}}" alt="Imóveis" title="Área Imóveis" width="167" height="130" />
+                            <figcaption>
+                                <p class="hero-description">Imóveis</p>
+                                <p class="hero-description fontsize13px">Encontre mais de 200.000 imóveis de sua região em um único lugar. </p>
+                            </figcaption>
+                        </figure>
+                    </a>
                 </div>
-                <div class="col-md-3 col-sm-6">
+                <div class="col-md-3 col-sm-6 selecao-categoria">
                     <figure class="">
-                        <img class="mb10" src="{{url('images/img-veiculos.png')}}" alt="Veículos" title="Área Veículos" width="167" height="130" />
+                        <img class="mb10 transition-img height148" src="{{url('images/img-veiculos.png')}}" alt="Veículos" title="Área Veículos" width="167" height="130" />
                         <figcaption>
                             <p class="hero-description"> Veículos </p>
                             <p class="hero-description fontsize13px">Encontre o veículo do seu sonho, buscamos anúncios em mais de 30 sites de classificados pelo Brasil. </p>
                         </figcaption>
                     </figure>
                 </div>
-                <div class="col-md-3 col-sm-6">
+                <div class="col-md-3 col-sm-6 selecao-categoria">
                     <figure class="">
-                        <img class="mb10" src="{{url('images/img-eletronicos.png')}}" alt="Eletrônicos" title="Área Eletrônicos" width="167" height="130" />
+                        <img class="mb10 transition-img height148" src="{{url('images/img-eletronicos.png')}}" alt="Eletrônicos" title="Área Eletrônicos" width="167" height="130" />
                         <figcaption>
                             <p class="hero-description">Eletrônicos</p>
                             <p class="hero-description fontsize13px">Nós pesquisamos para você os melhores preços para economizar tempo e dinheiro. </p>
@@ -86,7 +88,7 @@
                 </div>
                 <div class="col-md-3 col-sm-6">
                     <figure class="">
-                        <img class="mb10" src="{{url('images/img-equipamentos.png')}}" alt="Equipamentos" title="Área Equipamentos" width="167" height="130" />
+                        <img class="mb10 transition-img height148" src="{{url('images/img-equipamentos.png')}}" alt="Equipamentos" title="Área Equipamentos" width="167" height="130" />
                         <figcaption>
                             <p class="hero-description">Equipamentos </p>
                             <p class="hero-description fontsize13px">Somos o único portal com área exclusiva para locação e venda de máquinas e equipamentos.</p>
@@ -152,7 +154,7 @@
             <div class="col-md-3">
                 <div class="item-counter">
                     <span class="item-icon"><i class="fa fa fa-home "></i></span>
-                    <div data-refresh-interval="100" data-speed="10000" data-to="87000" data-from="0" class="item-count">87000 ML</div>
+                    <div data-refresh-interval="100" data-speed="10000" data-to="87000" data-from="0" class="item-count">87000</div>
                     <span class="item-info">Transações realizadas</span>
                 </div>
             </div>
@@ -166,15 +168,12 @@
             <div class="col-md-3">
                 <div class="item-counter">
                     <span class="item-icon"><i class="fa fa-database"></i></span>
-                    <div data-refresh-interval="100" data-speed="6000" data-to="109120" data-from="0" class="item-count">109120 </div>ML
+                    <div data-refresh-interval="100" data-speed="6000" data-to="109120" data-from="0" class="item-count">109120 </div>
                     <span class="item-info">Visitantes mês</span>
                 </div>
             </div>
         </div>
     </div>
 </div>
-
-
-
 
 @endsection
