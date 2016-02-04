@@ -4,139 +4,138 @@
 </div><!-- fechamento da div row que esta dentro do layout -->
 </div><!-- fechamento da container  que esta dentro do layout -->
 @if(count($queryAnuncios) > 0)
-<div id="menu-total" class="sidebar-left hide">
-    <div id="menu-teste" class="left">
-        <div class="col-md-2 col-sm-2">
-            <div class="area-pesquisa">
-                <section class="clearfix sessao-area-filtro bg-branco">
-                    <h5 class="sessao-texto-pesquisa">Tipo de imóvel</h5>
-                    <select  name="categoria" class="search-results-select search-results-select-img">
-                        @foreach($subcategories as $subcategory)
-                            <option name="{{$subcategory->id}}">{{$subcategory->name}}</option>
-                        @endforeach
-                    </select>
-                </section>
-                <section class="clearfix sessao-area-filtro bg-branco ">
-                    <h5 class="sessao-texto-pesquisa">Preço</h5>
-                    <label class="sessao-area-filtro-label preco-corrente">
-                        Mínimo
-                        <input type="text" placeholder="0" value="" class="search-results-input" data-mask-currency="true">
-                    </label>
-                    <label class="sessao-area-filtro-label preco-corrente">
-                        Máximo
-                        <input type="text" placeholder="0" value="" class="search-results-input" data-mask-currency="true">
-                    </label>
-                </section>
-                <section class="clearfix sessao-area-filtro bg-branco ">
-                    <h5 class="sessao-texto-pesquisa">Área</h5>
-                    <label class="sessao-area-filtro-label area-corrente">
-                        Mínimo
-                        <input type="text" placeholder="0" value="" class="search-results-input" data-mask-currency="true">
-                    </label>
-                    <label class="sessao-area-filtro-label area-corrente">
-                        Máximo
-                        <input type="text" placeholder="0" value="" class="search-results-input" data-mask-currency="true">
-                    </label>
-                </section>
-                <section class="clearfix sessao-area-filtro bg-branco ">
-                    <h5 class="sessao-texto-pesquisa hidden">Cômodos</h5>
-                    <label class="sessao-texto-pesquisa sessao-area-filtro-label-numeric fontsize11px">
-                        Quartos
-                        <select class="search-results-select numeric-select">
-                            <option selected="selected">-</option>
-                            <option value="1">1+</option>
-                            <option value="1">2+</option>
-                            <option value="1">3+</option>
-                            <option value="1">4+</option>
-
+    <div id="menu-total" class="sidebar-left hide">
+        <div id="menu-teste" class="left">
+            <div class="col-md-2 col-sm-2">
+                <div class="area-pesquisa">
+                    <section class="clearfix sessao-area-filtro bg-branco">
+                        <h5 class="sessao-texto-pesquisa">Tipo de imóvel</h5>
+                        <select  name="categoria" class="search-results-select search-results-select-img">
+                            @foreach($subcategories as $subcategory)
+                                <option name="{{$subcategory->id}}">{{$subcategory->name}}</option>
+                            @endforeach
                         </select>
-                    </label>
-                    <label class="sessao-texto-pesquisa sessao-area-filtro-label-numeric fontsize11px">
-                        Banheiros
-                        <select class="search-results-select numeric-select">
-                            <option selected="selected">-</option>
-                            <option value="1">1+</option>
-                            <option value="1">2+</option>
-                            <option value="1">3+</option>
-                            <option value="1">4+</option>
+                    </section>
+                    <section class="clearfix sessao-area-filtro bg-branco ">
+                        <h5 class="sessao-texto-pesquisa">Preço</h5>
+                        <label class="sessao-area-filtro-label preco-corrente">
+                            Mínimo
+                            <input type="text" placeholder="0" value="" class="search-results-input" data-mask-currency="true">
+                        </label>
+                        <label class="sessao-area-filtro-label preco-corrente">
+                            Máximo
+                            <input type="text" placeholder="0" value="" class="search-results-input" data-mask-currency="true">
+                        </label>
+                    </section>
+                    <section class="clearfix sessao-area-filtro bg-branco ">
+                        <h5 class="sessao-texto-pesquisa">Área</h5>
+                        <label class="sessao-area-filtro-label area-corrente">
+                            Mínimo
+                            <input type="text" placeholder="0" value="" class="search-results-input" data-mask-currency="true">
+                        </label>
+                        <label class="sessao-area-filtro-label area-corrente">
+                            Máximo
+                            <input type="text" placeholder="0" value="" class="search-results-input" data-mask-currency="true">
+                        </label>
+                    </section>
+                    <section class="clearfix sessao-area-filtro bg-branco ">
+                        <h5 class="sessao-texto-pesquisa hidden">Cômodos</h5>
+                        <label class="sessao-texto-pesquisa sessao-area-filtro-label-numeric fontsize11px">
+                            Quartos
+                            <select class="search-results-select numeric-select">
+                                <option selected="selected">-</option>
+                                <option value="1">1+</option>
+                                <option value="1">2+</option>
+                                <option value="1">3+</option>
+                                <option value="1">4+</option>
 
-                        </select>
-                    </label>
-                    <label class="sessao-texto-pesquisa sessao-area-filtro-label-numeric fontsize11px" >
-                        Vagas
-                        <select class="search-results-select numeric-select">
-                            <option selected="selected">-</option>
-                            <option value="1">1+</option>
-                            <option value="1">2+</option>
-                            <option value="1">3+</option>
-                            <option value="1">4+</option>
+                            </select>
+                        </label>
+                        <label class="sessao-texto-pesquisa sessao-area-filtro-label-numeric fontsize11px">
+                            Banheiros
+                            <select class="search-results-select numeric-select">
+                                <option selected="selected">-</option>
+                                <option value="1">1+</option>
+                                <option value="1">2+</option>
+                                <option value="1">3+</option>
+                                <option value="1">4+</option>
 
-                        </select>
-                    </label>
+                            </select>
+                        </label>
+                        <label class="sessao-texto-pesquisa sessao-area-filtro-label-numeric fontsize11px" >
+                            Vagas
+                            <select class="search-results-select numeric-select">
+                                <option selected="selected">-</option>
+                                <option value="1">1+</option>
+                                <option value="1">2+</option>
+                                <option value="1">3+</option>
+                                <option value="1">4+</option>
+
+                            </select>
+                        </label>
 
 
-                </section>
+                    </section>
 
+                </div>
             </div>
         </div>
     </div>
-</div>
-<div class="clearfix"></div>
-<div class="row no-margin">
-    <div class="container">
-        <div class="col-md-12">
-            <div class="search-results">
-                <mark class="search-results-count">
-                    <strong class="search-results-header-counter">{{$queryCount}}</strong>
+    <div class="clearfix"></div>
+    <div class="row no-margin">
+        <div class="container">
+            <div class="col-md-12">
+                <div class="search-results">
+                    <mark class="search-results-count">
+                        <strong class="search-results-header-counter">{{$queryCount}}</strong>
 
-                </mark>
-                <h1 class="search-title"> Anúncios Encontrados</h1>
+                    </mark>
+                    <h1 class="search-title"> Anúncios Encontrados</h1>
+                </div>
             </div>
-        </div>
-        <div class="col-md-12">
-            <button id="btn-pesquisa" class="center-block btn-search">
-                Filtros
-            </button>
-        </div>
-        <div class="col-md-6 hidden-sm hidden-xs">
-            <div class="well well-sm">
-                <strong>Exibir como </strong>
-                <div class="btn-group">
-                    <a href="#" id="list" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-th-list">
+            <div class="col-md-12">
+                <button id="btn-pesquisa" class="center-block btn-search">
+                    Filtros
+                </button>
+            </div>
+            <div class="col-md-6 hidden-sm hidden-xs">
+                <div class="well well-sm">
+                    <strong>Exibir como </strong>
+                    <div class="btn-group">
+                        <a href="#" id="list" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-th-list">
                  </span>Lista</a> <a href="#" id="grid" class="btn btn-default btn-sm"><span
-                                class="glyphicon glyphicon-th"></span>Grade</a>
+                                    class="glyphicon glyphicon-th"></span>Grade</a>
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <div class="col-md-6 pull-right hidden-sm hidden-xs">
-            <form action="{{URL::current()}}" class="pull-right">
-                <div class="select2-container pull-right " style="margin-top:9px">
-                    <select class="select2-choice" id="sortby">
-                        <option value="Relevancia" selected="selected">
-                            Relevância
+            <div class="col-md-6 pull-right hidden-sm hidden-xs">
+                <form action="{{URL::current()}}" class="pull-right">
+                    <div class="select2-container pull-right " style="margin-top:9px">
+                        <select class="select2-choice" id="sortby">
+                            <option value="Relevancia" selected="selected">
+                                Relevância
 
-                        </option>
-                        <option  value="DataAtualizacao">
-                            Data Atualização
+                            </option>
+                            <option  value="DataAtualizacao">
+                                Data Atualização
 
-                        </option>
-                        <option  value="Valor">
-                            Valor
+                            </option>
+                            <option  value="Valor">
+                                Valor
 
-                        </option>
-                        <option  value="Area">
-                            Área
+                            </option>
+                            <option  value="Area">
+                                Área
 
-                        </option>
-                    </select>
-                </div>
-                <label class="control-label pull-right sort" for="sortby">Ordenar por</label>
-            </form>
-        </div>
-        <div class="clearfix"></div>
-        <div class="row">
-
+                            </option>
+                        </select>
+                    </div>
+                    <label class="control-label pull-right sort" for="sortby">Ordenar por</label>
+                </form>
+            </div>
+            <div class="clearfix"></div>
+            <div class="row">
                 <div class="col-md-2 col-sm-2 hidden-sm hidden-xs">
                     <div class="area-pesquisa">
                         <section class="clearfix sessao-area-filtro bg-branco">
@@ -275,9 +274,9 @@
                         </div>
                     </div>
                 </div>
+            </div>
+
         </div>
-
     </div>
-</div>
 
-@endsection
+    @endsection

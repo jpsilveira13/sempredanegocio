@@ -30,8 +30,8 @@
                         <ul class="unstyled no-padding">
                             <li>@if($advert->numero_quarto == 0) -- @else{{$advert->numero_quarto}}@endif<span class="text-info">quarto</span></li>
                             <li>@if($advert->numero_suite == 0) -- @else{{$advert->numero_suite}}@endif<span class="text-info">suíte</span></li>
-                            <li>@if($advert->area_construida) -- @else{{$advert->area_construida}}@endif<span class="text-info">Área Útil (m²)</span></li>
-                            <li>@if($advert->area_construida) -- @else{{$advert->area_construida}}@endif<span class="text-info">Área Total (m²)</span></li>
+                            <li>@if($advert->area_construida == 0) -- @else{{$advert->area_construida}}@endif<span class="text-info">Área Útil (m²)</span></li>
+                            <li>@if($advert->area_construida == 0) -- @else{{$advert->area_construida}}@endif<span class="text-info">Área Total (m²)</span></li>
                         </ul>
                     </div>
                     <div class="pull-right">

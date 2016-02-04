@@ -137,7 +137,7 @@ class HomeController extends Controller
 
     public function searchCidade($query){
         $result = null;
-        $result = Cidade::select('nome','uf')->where('nome','LIKE',$query.'%')->orderBy('nome','desc')->take(6)->distinct()->get();
+        $result = Cidade::select('nome','uf')->where('nome','LIKE',$query.'%')->orderBy('nome','desc')->take(8)->distinct()->get();
         return \Response::json($result);
 
     }

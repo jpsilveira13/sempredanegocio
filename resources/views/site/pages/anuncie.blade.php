@@ -201,7 +201,7 @@
                                     <label>IPTU: *</label>
                                     <div class="input-group">
                                         <div class="input-group-addon">R$</div>
-                                        <input  class="form-control" maxlength="7" onkeypress="mascaraCampo(this,mvalor)" data-error="Campo não pode ser vazio" placeholder="Ex.: 150" type="text"  name="valor_iptu">
+                                        <input class="form-control" maxlength="7" onkeypress="mascaraCampo(this,mvalor)" data-error="Campo não pode ser vazio" placeholder="Ex.: 150" type="text"  name="valor_iptu">
                                     </div>
                                     <span class="form-control-feedback" aria-hidden="true"></span>
                                     <div class="help-block with-errors"></div>
