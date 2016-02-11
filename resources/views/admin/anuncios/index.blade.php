@@ -61,6 +61,10 @@
                             </li>
                             <li class="divider"></li>
                             <li>
+                                <a target="_blank" href="{{url('/anuncio')}}/{{$advert->tipo_anuncio}}/{{$advert->id}}/{{$advert->url_anuncio}}"><i class="fa fa-eye"></i> Ver anúncio</a>
+                            </li>
+                            <li class="divider"></li>
+                            <li>
                                 <a class="fechar" href="javascript:void(0)"><i class="fa fa-fw fa-times"></i>Fechar</a>
                             </li>
                         </ul>

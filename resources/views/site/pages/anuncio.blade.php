@@ -40,6 +40,10 @@
                                 @if($advert->valor_iptu == 0) -- @else{{number_format((float)$advert->valor_iptu,2,",",".")}}@endif
                                 <span class="text-info">IPTU</span>
                             </li>
+                            <li>
+                                @if($advert->valor_condominio == 0) -- @else{{number_format((float)$advert->valor_condominio,2,",",".")}}@endif
+                                <span class="text-info">Condomínio</span>
+                            </li>
                         </ul>
                     </div>
                 </div><!-- box informações do imovel -->
@@ -157,7 +161,7 @@
 
                             <div id="phone" class="tab-phone tab-pane hide active" style="display: block;">
                                 <p class="text-aoligar">Ao ligar, diga que você viu esse anúncio no Sempre da Negócio.</p>
-                                <span id="number_tel" class="number tc">{{$advert->user->phone}}</span>
+                                <span id="number_tel" class="number tc">@if(count($advert->user->phone) > 0){{$advert->user->phone}}@else -- @endif</span>
 
                                 <input type="hidden" id="hdnVerTelefoneAtivo" value="1">
                             </div>
@@ -199,6 +203,12 @@ Olá, Gostaria de ter mais informações sobre o imóvel Apartamento à venda, R
                     <div class="clearfix"></div>
                 </div><!-- fim contratar anunciante -->
 
+                <aside class="box-default clearfix outras-informacoes">
+                    <span class="title">Mapa do Imóvel</span>
+                    <div class="anuncio-area-mapa larMapa center-block">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d60081.57254231143!2d-47.93496225!3d-19.750978449999998!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1spt-BR!2sbr!4v1447264947839" width="100%" height="100%" frameborder="0" style="border:0" allowfullscreen=""></iframe>
+                    </div>
+                </aside>
                 <aside class="box-default clearfix outras-informacoes">
                     <span class="title">Outras informações</span>
 

@@ -130,7 +130,7 @@
                         <span class="user-menu-icon" style="background-image: url('<?=auth()->user()->avatar?>');"></span>
                         <span class="align-div-menu">{{auth()->user()->name}}</span>
 
-                        <b class="caret"></b>
+                        <b class="caret mt18neg"></b>
                     </a>
                 @endif
                 <ul class="dropdown-menu">

@@ -37,7 +37,7 @@ class AuthController extends Controller
 
 
     public function getLogin() {
-        return redirect('/');
+        return redirect('/anuncie');
     }
 
     public function redirectToProvider($provider){
@@ -60,7 +60,7 @@ class AuthController extends Controller
             $user->save();
         }
         auth()->login($user);
-        return redirect('/admin/home');
+        return redirect('/anuncie');
     }
 
 

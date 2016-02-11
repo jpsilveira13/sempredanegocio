@@ -149,10 +149,6 @@ function mascValorDoisDecimais(v){
 
 }
 
-function search(){
-    alert('teste');
-}
-
 //Começo jquery Site
 $(document).ready(function(){
     $.ajaxSetup({
@@ -162,9 +158,27 @@ $(document).ready(function(){
     });
 
 
-    $("#num_vagas").change(function () {
-        search();
+    /*function search() {
+
+        $.ajax({
+            // url para o arquivo json.php
+            url: "/search-imoveis",
+            // dataType json
+            dataType: "json",
+            // função para de sucesso
+            success: function (data) {
+                console.log(data);
+                // vamos gerar um html e guardar nesta variável
+                var html = "";
+            }
+        });//termina o ajax
     });
+
+    jQuery("#numVagas").change(function () {
+        search();
+    }); */
+
+    /*$("#campotexto").keyup(search()); */
 
     //salvar denuncia
 
@@ -329,42 +343,51 @@ $(document).ready(function(){
 
     })(jQuery); // End of use strict
 
-    var cbpAnimatedHeader = (function() {
 
-        var docElem = document.documentElement,
-            header = document.querySelector( '.navbar-default' ),
-            didScroll = false,
-            changeHeaderOn = 300;
+    $("#labelFaixaPreco").click(function () {
+        //$('.formularioBusca').css('display', 'block');
+        // ou pode também usar assim:
+        $('#divFaixaPreco').show('fast');
 
-        function init() {
-            window.addEventListener( 'scroll', function( event ) {
-                if( !didScroll ) {
-                    didScroll = true;
-                    setTimeout( scrollPage, 250 );
-                }
-            }, false );
-        }
+    });
+    $('#divFaixaPreco').on('mouseleave', function () {
+        // this.style.display = 'none';
+        $(this).hide('fast');
+    });
+    $("#labelQuarto").click(function () {
+        //$('.formularioBusca').css('display', 'block');
+        // ou pode também usar assim:
+        $('#divQuartos').show('fast');
 
-        function scrollPage() {
-            var sy = scrollY();
-            if ( sy >= changeHeaderOn ) {
-                classie.add( header, 'navbar-shrink' );
-            }
-            else {
-                classie.remove( header, 'navbar-shrink' );
-            }
-            didScroll = false;
-        }
+    });
+    $('#divQuartos').on('mouseleave', function () {
+        // this.style.display = 'none';
+        $(this).hide('fast');
+    });
 
-        function scrollY() {
-            return window.pageYOffset || docElem.scrollTop;
-        }
+    $("#labelSuite").click(function () {
+        //$('.formularioBusca').css('display', 'block');
+        // ou pode também usar assim:
+        $('#divSuite').show('fast');
 
-        init();
+    });
+    $('#divSuite').on('mouseleave', function () {
+        // this.style.display = 'none';
+        $(this).hide('fast');
+    });
+    $("#labelVaga").click(function () {
+        //$('.formularioBusca').css('display', 'block');
+        // ou pode também usar assim:
+        $('#divVaga').show('fast');
 
-    })();
+    });
+    $('#divVaga').on('mouseleave', function () {
+        // this.style.display = 'none';
+        $(this).hide('fast');
+    });
 
-    $('ul.pagination').hide();
+
+    //$('ul.pagination').hide();
 
     (function(){
         var loading_options = {
@@ -380,7 +403,7 @@ $(document).ready(function(){
         },function(arrayOfNewElems){
 //callback
             $("img.lazy").lazyload({
-                effect: "fadeIn"
+                effect: "fadeIn",
 
             });
         });
@@ -388,7 +411,6 @@ $(document).ready(function(){
 
     $("img.lazy").lazyload({
         effect: "fadeIn",
-
 
     });
 
@@ -459,6 +481,10 @@ $(document).ready(function(){
             }
         }
     };
+
+    $(".bt-rotate").click(function(){
+        alert('teste')
+    });
 
     $('#carrouselImovel').carousel({
         interval: 4000
@@ -585,6 +611,8 @@ $(document).ready(function(){
 
     });
 
+
+
 //procurar pelo cep
 
     $('#cep').blur(function(){
@@ -616,7 +644,6 @@ $(document).ready(function(){
         });
         return false;
     });
-
 
 //buscar cidade
     $('#location').on('keyup',function(e){
@@ -660,7 +687,7 @@ $(document).ready(function(){
 
         $("#menu-total").fadeIn("fast");
     });
-
+//lazyload
 
     $(window).scroll(function(){
         if ($(this).scrollTop() > 300) {
@@ -728,15 +755,7 @@ $(document).ready(function(){
 
 //validação formulário anuncio
 
-    $('#sortable').sortable();
-    $('#sortable').disableSelection();
 
-//sortable events
-    $('#sortable').on('sortbeforestop',function(event){
-
-        reorderImages();
-
-    });
 
 });
 

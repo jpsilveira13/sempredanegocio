@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Validator;
+use Psy\Util\Json;
 use sempredanegocio\Models\Cidade;
 use sempredanegocio\Http\Requests;
 use sempredanegocio\Http\Controllers\Controller;
@@ -143,7 +144,7 @@ class HomeController extends Controller
     }
 
 
-    public function testeImoveis(){
+   /* public function testeImoveis(){
         $result = null;
 
         $result = Advert::where('cidade', '=', 'Uberaba')->where('numero_quarto','=','4')->take(16)->get();
@@ -155,7 +156,7 @@ class HomeController extends Controller
         ]);
 
 
-    }
+    } */
 
     public function denuncia(){
         $inputData = Input::get('formData');
@@ -193,22 +194,48 @@ class HomeController extends Controller
 
     }
 
+    //search imoveis
+
+    public function scopeImoveis(){
+        $query = Advert::query();
+        $min_price = Input::has('min_price') ? Input::get('min_price'): null;
+        $max_price = Input::has('max_price') ? Input::get('max_price'): null;
+
+        if(isset($min_price) && isset($max_price)){
+            $query->where('preco','>=',$min_price)->where('preco','<=',$max_price);
+
+        }
+        if(\Input::get('num_quartos')){
+            $query->where('numero_quarto',\Input::get('num_quartos'));
+
+        }
+        if(\Input::get('num_banheiros')){
+            $query->where('num_suite',\Input::get('num_banheiros'));
+
+        }
+        if(\Input::get('num_vagas')){
+            $query->where('numero_garagem',\Input::get('num_vagas'));
+
+        }
+
+        \Response::json($query);
+
+    }
+
+    //search anuncio
     public function searchAnuncio(){
         $categoria = Input::get('categoria');
         $subcategories = SubCategory::where('category_id',$categoria)->get();
         $transacao = Input::get('transacao');
         $cidade = Input::get('cidade');
 
-
-
-
         if($cidade != null ){
 
-        $queryAnuncios = Advert::join('subcategories', 'adverts.subcategories_id', '=', 'subcategories.id')->where('subcategories.category_id',$categoria)->where('cidade','=',$cidade)->where('tipo_anuncio','=',$transacao)->where('status','=','1')->select('adverts.*')->paginate(16);
+            $queryAnuncios = Advert::join('subcategories', 'adverts.subcategories_id', '=', 'subcategories.id')->where('subcategories.category_id',$categoria)->where('cidade','=',$cidade)->where('tipo_anuncio','=',$transacao)->where('status','=','1')->select('adverts.*')->paginate(16);
 
-        $queryCount = Advert::join('subcategories', 'adverts.subcategories_id', '=', 'subcategories.id')->where('subcategories.category_id',$categoria)->where('cidade','=',$cidade)->where('tipo_anuncio','=',$transacao)->where('status','=','1')->count();
+            $queryCount = Advert::join('subcategories', 'adverts.subcategories_id', '=', 'subcategories.id')->where('subcategories.category_id',$categoria)->where('cidade','=',$cidade)->where('tipo_anuncio','=',$transacao)->where('status','=','1')->count();
 
-        return view('resultado/anuncio', compact('queryAnuncios','anunciesubcats','queryCount','subcategories'));
+            return view('resultado/anuncio', compact('queryAnuncios','anunciesubcats','queryCount','subcategories'));
         }else{
             $queryAnuncios = Advert::join('subcategories', 'adverts.subcategories_id', '=', 'subcategories.id')->where('subcategories.category_id',$categoria)->where('tipo_anuncio','=',$transacao)->select('adverts.*')->paginate(16);
 

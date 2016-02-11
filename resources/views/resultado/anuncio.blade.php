@@ -20,29 +20,29 @@
                         <h5 class="sessao-texto-pesquisa">Preço</h5>
                         <label class="sessao-area-filtro-label preco-corrente">
                             Mínimo
-                            <input type="text" placeholder="0" value="" class="search-results-input" data-mask-currency="true">
+                            <input type="text" placeholder="0" value="" name="min_price" class="search-results-input" data-mask-currency="true">
                         </label>
                         <label class="sessao-area-filtro-label preco-corrente">
                             Máximo
-                            <input type="text" placeholder="0" value="" class="search-results-input" data-mask-currency="true">
+                            <input type="text" placeholder="0" value="" name="max_price" class="search-results-input" data-mask-currency="true">
                         </label>
                     </section>
                     <section class="clearfix sessao-area-filtro bg-branco ">
                         <h5 class="sessao-texto-pesquisa">Área</h5>
                         <label class="sessao-area-filtro-label area-corrente">
                             Mínimo
-                            <input type="text" placeholder="0" value="" class="search-results-input" data-mask-currency="true">
+                            <input type="text" placeholder="0" value="" name="min_area" class="search-results-input" data-mask-currency="true">
                         </label>
                         <label class="sessao-area-filtro-label area-corrente">
                             Máximo
-                            <input type="text" placeholder="0" value="" class="search-results-input" data-mask-currency="true">
+                            <input type="text" placeholder="0" value="" name="max_area" class="search-results-input" data-mask-currency="true">
                         </label>
                     </section>
                     <section class="clearfix sessao-area-filtro bg-branco ">
                         <h5 class="sessao-texto-pesquisa hidden">Cômodos</h5>
                         <label class="sessao-texto-pesquisa sessao-area-filtro-label-numeric fontsize11px">
                             Quartos
-                            <select class="search-results-select numeric-select">
+                            <select name="num_quartos" class="search-results-select numeric-select">
                                 <option selected="selected">-</option>
                                 <option value="1">1+</option>
                                 <option value="1">2+</option>
@@ -53,7 +53,7 @@
                         </label>
                         <label class="sessao-texto-pesquisa sessao-area-filtro-label-numeric fontsize11px">
                             Banheiros
-                            <select class="search-results-select numeric-select">
+                            <select name="num_banheiros" class="search-results-select numeric-select">
                                 <option selected="selected">-</option>
                                 <option value="1">1+</option>
                                 <option value="1">2+</option>
@@ -64,7 +64,7 @@
                         </label>
                         <label class="sessao-texto-pesquisa sessao-area-filtro-label-numeric fontsize11px" >
                             Vagas
-                            <select class="search-results-select numeric-select">
+                            <select id="num_vagas" name="num_vagas" class="search-results-select numeric-select">
                                 <option selected="selected">-</option>
                                 <option value="1">1+</option>
                                 <option value="1">2+</option>
@@ -73,10 +73,7 @@
 
                             </select>
                         </label>
-
-
                     </section>
-
                 </div>
             </div>
         </div>
@@ -151,7 +148,7 @@
                             <h5 class="sessao-texto-pesquisa">Preço</h5>
                             <label class="sessao-area-filtro-label preco-corrente">
                                 Mínimo
-                                <input type="text" placeholder="0" value="" class="search-results-input" data-mask-currency="true">
+                                <input id="campoTexto" type="text" placeholder="0" value="" class="search-results-input" data-mask-currency="true">
                             </label>
                             <label class="sessao-area-filtro-label preco-corrente">
                                 Máximo
@@ -173,7 +170,7 @@
                             <h5 class="sessao-texto-pesquisa hidden">Cômodos</h5>
                             <label class="sessao-texto-pesquisa sessao-area-filtro-label-numeric fontsize11px">
                                 Quartos
-                                <select class="search-results-select numeric-select">
+                                <select  class="search-results-select numeric-select">
                                     <option selected="selected">-</option>
                                     <option value="1">1+</option>
                                     <option value="1">2+</option>
@@ -195,7 +192,7 @@
                             </label>
                             <label class="sessao-texto-pesquisa sessao-area-filtro-label-numeric fontsize11px" >
                                 Vagas
-                                <select class="search-results-select numeric-select">
+                                <select id="numVagas" name="num_vagas" class="search-results-select numeric-select">
                                     <option selected="selected">-</option>
                                     <option value="1">1+</option>
                                     <option value="1">2+</option>

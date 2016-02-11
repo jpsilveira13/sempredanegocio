@@ -220,7 +220,7 @@
                                         <div class="thumbnail">
                                             @if(count($advert->images))
 
-                                                <img class="group list-group-image content-img-sugestao lazy transition-img"  data-original="{{url('gallery/'.$advert->images()->first()->extension)}}" width="220" height="229" alt="titulo imagem" />
+                                                <img class="group list-group-image content-img-sugestao lazy transition-img" data-original="{{url('gallery/'.$advert->images()->first()->extension)}}" width="220" height="229" alt="titulo imagem" />
                                             @else
                                                 <img class="group list-group-image content-img-sugestao lazy transition-img" src="{{url('images/no-image.jpg')}}" alt="titulo imagem" />
                                             @endif

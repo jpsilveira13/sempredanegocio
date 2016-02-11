@@ -112,12 +112,6 @@ table {
 
 }
 
-.mt18neg{
-
-    margin-top: -18px;
-}
-
-
 /* Small Sizes */
 @media (max-width: 480px) {
     .table-action thead {

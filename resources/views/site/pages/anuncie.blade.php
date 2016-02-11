@@ -190,7 +190,7 @@
                                     <label>Condomínio: *</label>
                                     <div class="input-group">
                                         <div class="input-group-addon">R$</div>
-                                        <input class="form-control" maxlength="10" onkeypress="mascaraCampo(this,mvalor)"  data-error="Campo não pode ser vazio" placeholder="Ex.: 150" type="text"  name="valor_condominio">
+                                        <input class="form-control" maxlength="10" onkeypress="mascaraCampo(this,mvalor)"  data-error="Campo não pode ser vazio" placeholder="Ex.: 150" type="text" id="valor_condomio" name="valor_condominio">
                                     </div>
                                     <span class="form-control-feedback" aria-hidden="true"></span>
                                     <div class="help-block with-errors"></div>
@@ -201,7 +201,7 @@
                                     <label>IPTU: *</label>
                                     <div class="input-group">
                                         <div class="input-group-addon">R$</div>
-                                        <input class="form-control" maxlength="7" onkeypress="mascaraCampo(this,mvalor)" data-error="Campo não pode ser vazio" placeholder="Ex.: 150" type="text"  name="valor_iptu">
+                                        <input class="form-control" maxlength="7" onkeypress="mascaraCampo(this,mvalor)" data-error="Campo não pode ser vazio" placeholder="Ex.: 150" type="text" id="valor_iptu" name="valor_iptu">
                                     </div>
                                     <span class="form-control-feedback" aria-hidden="true"></span>
                                     <div class="help-block with-errors"></div>
@@ -249,7 +249,7 @@
                         <div class="col-md-2 col-lg-2 col-xs-12">
                             <div class="form-group has-feedback">
                                 <label>Preço : *</label>
-                                <input type="text" value="{{old('preco')}}" class="form-control" onkeypress="mascaraCampo(this,mvalor)" required data-error="Campo não pode ser vazio" maxlength="14" name="preco" placeholder="Ex.: 150.00" />
+                                <input type="text" value="{{old('preco')}}" class="form-control" onkeypress="mascaraCampo(this,mvalor)" required data-error="Campo não pode ser vazio" maxlength="14" id="preco" name="preco" placeholder="Ex.: 150.00" />
                                 <span class="form-control-feedback" aria-hidden="true"></span>
                                 <div class="help-block with-errors"></div>
 
@@ -303,7 +303,7 @@
                                 <div class="col-md-6 col-lg-6 col-sm-6 col-xs-12">
                                     <div class="form-group has-feedback">
                                         <label>Telefone: *</label>
-                                        <input type="tel" name='telefone-usuario' maxlength="15" onkeypress="mascaraCampo(this, mtel)" required  data-error="Campo não pode ser vazio" maxlength="15"  class="form-control" />
+                                        <input type="tel" name='telefone-usuario' maxlength="15" onkeypress="mascaraCampo(this, mtel)" required  data-error="Campo não pode ser vazio" maxlength="15" value="{{Auth::user()->phone}}"  class="form-control" />
                                         <span class="form-control-feedback" aria-hidden="true"></span>
                                         <div class="help-block with-errors"></div>
                                     </div>
