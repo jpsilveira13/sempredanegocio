@@ -53,4 +53,7 @@ class Advert extends Model
     }
 
 
+
+
+
 }

@@ -16,21 +16,10 @@ Route::get('/', function(){
     return view('layout');
 });
 
-Route::get('teste', function(){
-    $data = [
-      'title'=> 'Benvindo',
-        'content'=> 'Super Benvindo poney branco :D'
+Route::get('/email',[
+   'uses' => 'HomeController@sendEmailTest'
 
-    ];
-
-    Mail::send('testes.testes',$data,function($message){
-       $message->to('suporte@sempredanegocio.com.br','Joao')->subject('BVem vindo');
-
-
-    });
-});
-
-
+]);
 
 Route::get('/', [
 

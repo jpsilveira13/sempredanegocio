@@ -13,8 +13,9 @@ class EventServiceProvider extends ServiceProvider
      * @var array
      */
     protected $listen = [
-        'sempredanegocio\Events\SomeEvent' => [
-            'sempredanegocio\Listeners\EventListener',
+        'sempredanegocio\Events\UsuarioInserido' => [
+            'sempredanegocio\Handlers\Events\EmailUsuarioInserido',
+
         ],
     ];
 

@@ -2,6 +2,8 @@
 
 namespace sempredanegocio\Http\Controllers\Auth;
 
+use Illuminate\Support\Facades\Event;
+use sempredanegocio\Events\UsuarioInserido;
 use sempredanegocio\Models\User;
 use Validator;
 use sempredanegocio\Http\Controllers\Controller;
@@ -52,12 +54,13 @@ class AuthController extends Controller
         if(!$user){
             $user = new User();
             $user->idsocial = $socUser->getId();
-            $user->social = "Facebook";
+            $user->social = "facebook";
             $user->avatar = $socUser->getAvatar();
             $user->name = $socUser->getName();
             $user->email = $socUser->getEmail();
             $user->password = bcrypt(str_random(10));
             $user->save();
+            \Event::fire(new UsuarioInserido($user));
         }
         auth()->login($user);
         return redirect('/anuncie');
@@ -88,11 +91,17 @@ class AuthController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
+            $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
+
         ]);
+
+        \Event::fire(new UsuarioInserido($user));
+
+        return $user;
+
     }
 
     public function getLogout()

@@ -33,6 +33,18 @@ class HomeController extends Controller
 
     }
 
+    public function sendEmailTest()
+    {
+
+        \Mail::send('emails.teste', ['msg' => 'hello'], function ($message) {
+            $message->from('suporte@sempredanegocio.com.br', 'João Paulo');
+
+            $message->to('samotinho@gmail.com', 'Pedro 2')->subject('My Test Email!');
+        });
+
+        var_dump('sent');
+    }
+
     //pega a url dinamicamente e compara se existe ou nao.
     public function tipocategoria($name_url){
 
@@ -122,6 +134,7 @@ class HomeController extends Controller
 
     public function searchCep(){
         $cep = Input::get('cep');
+
 
         $reg = simplexml_load_file("http://cep.republicavirtual.com.br/web_cep.php?formato=xml&cep=" . $cep);
 
