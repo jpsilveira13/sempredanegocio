@@ -3,6 +3,7 @@
 @section('content')
 </div><!-- fechamento da div row que esta dentro do layout -->
 </div><!-- fechamento da container  que esta dentro do layout -->
+
 @if(count($queryAnuncios) > 0)
     <div id="menu-total" class="sidebar-left hide">
         <div id="menu-teste" class="left">
@@ -11,7 +12,9 @@
                     <section class="clearfix sessao-area-filtro bg-branco">
                         <h5 class="sessao-texto-pesquisa">Tipo de imóvel</h5>
                         <select  name="categoria" class="search-results-select search-results-select-img">
+                            <options value="" selected>Seleciona uma opção</options>
                             @foreach($subcategories as $subcategory)
+
                                 <option name="{{$subcategory->id}}">{{$subcategory->name}}</option>
                             @endforeach
                         </select>
@@ -20,7 +23,7 @@
                         <h5 class="sessao-texto-pesquisa">Preço</h5>
                         <label class="sessao-area-filtro-label preco-corrente">
                             Mínimo
-                            <input type="text" placeholder="0" value="" name="min_price" class="search-results-input" data-mask-currency="true">
+                            <input type="text" placeholder="0" value="" name="min_price"  class="search-results-input" data-mask-currency="true">
                         </label>
                         <label class="sessao-area-filtro-label preco-corrente">
                             Máximo
@@ -107,7 +110,7 @@
             </div>
 
             <div class="col-md-6 pull-right hidden-sm hidden-xs">
-                <form action="{{URL::current()}}" class="pull-right">
+                <form method=""  class="pull-right ajax">
                     <div class="select2-container pull-right " style="margin-top:9px">
                         <select class="select2-choice" id="sortby">
                             <option value="Relevancia" selected="selected">
@@ -133,81 +136,104 @@
             </div>
             <div class="clearfix"></div>
             <div class="row">
-                <div class="col-md-2 col-sm-2 hidden-sm hidden-xs">
-                    <div class="area-pesquisa">
-                        <section class="clearfix sessao-area-filtro bg-branco">
-                            <h5 class="sessao-texto-pesquisa">Tipo de imóvel</h5>
-                            <select  name="categoria" class="search-results-select search-results-select-img">
-                                <option selected="selected">Selecionar</option>
-                                @foreach($subcategories as $subcategory)
-                                    <option value="{{$subcategory->id}}" id="{{$subcategory->id}}">{{$subcategory->name}}</option>
-                                @endforeach
-                            </select>
-                        </section>
-                        <section class="clearfix sessao-area-filtro bg-branco ">
-                            <h5 class="sessao-texto-pesquisa">Preço</h5>
-                            <label class="sessao-area-filtro-label preco-corrente">
-                                Mínimo
-                                <input id="campoTexto" type="text" placeholder="0" value="" class="search-results-input" data-mask-currency="true">
-                            </label>
-                            <label class="sessao-area-filtro-label preco-corrente">
-                                Máximo
-                                <input type="text" placeholder="0" value="" class="search-results-input" data-mask-currency="true">
-                            </label>
-                        </section>
-                        <section class="clearfix sessao-area-filtro bg-branco ">
-                            <h5 class="sessao-texto-pesquisa">Área</h5>
-                            <label class="sessao-area-filtro-label area-corrente">
-                                Mínimo
-                                <input type="text" placeholder="0" value="" class="search-results-input" data-mask-currency="true">
-                            </label>
-                            <label class="sessao-area-filtro-label area-corrente">
-                                Máximo
-                                <input type="text" placeholder="0" value="" class="search-results-input" data-mask-currency="true">
-                            </label>
-                        </section>
-                        <section class="clearfix sessao-area-filtro bg-branco ">
-                            <h5 class="sessao-texto-pesquisa hidden">Cômodos</h5>
-                            <label class="sessao-texto-pesquisa sessao-area-filtro-label-numeric fontsize11px">
-                                Quartos
-                                <select  class="search-results-select numeric-select">
-                                    <option selected="selected">-</option>
-                                    <option value="1">1+</option>
-                                    <option value="1">2+</option>
-                                    <option value="1">3+</option>
-                                    <option value="1">4+</option>
+                <form action=""  id="formSearchImoveis" class="ajax">
+                    <div id="nav-lateral" class="col-md-2 col-sm-2">
+                        <button id="btn-close-nav" type="button" class="close">X</button>
+                        <div class="area-pesquisa">
+                            <section class="clearfix sessao-area-filtro bg-branco ">
+                                <h5 class="sessao-texto-pesquisa">Localização</h5>
+                                <div class="input-group">
+                                    <input name="cidade" id="location" value="{{\Input::get('cidade')}}"  autocomplete="off" type="text" class="form-control search-results-input escolhaAcomodacao pl3" placeholder="Incluir Cidade">
+                                    <ul id="listaCidades" class="lista-cidade-search"></ul>
+                                </div>
+                            </section>
+                            <section class="clearfix sessao-area-filtro bg-branco">
+                                <h5 class="sessao-texto-pesquisa">Tipo de imóvel</h5>
+                                <select  name="subcategoria" class="search-results-select search-results-select-img escolhaAcomodacao">
+                                    <option value="">Seleciona uma opção</option>
+                                    @foreach($subcategories as $subcategory)
+                                        <option value="{{$subcategory->id}}" id="{{$subcategory->id}}">{{$subcategory->name}}</option>
+                                    @endforeach
+                                </select>
+                            </section>
+                            <section class="clearfix sessao-area-filtro bg-branco ">
+                                <h5 class="sessao-texto-pesquisa">Modalidade</h5>
+                                <select  name="tipo_anuncio" class="search-results-select search-results-select-img escolhaAcomodacao">
+                                    <option value="">Seleciona uma opção</option>
+                                    @if(\Input::get('transacao') == 'venda')
+                                        <option value="venda" selected>Comprar</option>
+                                        <option value="aluga">Alugar</option>
+                                    @else
+                                        <option value="venda">Comprar</option>
+                                        <option value="aluga" selected>Alugar</option>
+                                    @endif
 
                                 </select>
-                            </label>
-                            <label class="sessao-texto-pesquisa sessao-area-filtro-label-numeric fontsize11px">
-                                Banheiros
-                                <select class="search-results-select numeric-select">
-                                    <option selected="selected">-</option>
-                                    <option value="1">1+</option>
-                                    <option value="1">2+</option>
-                                    <option value="1">3+</option>
-                                    <option value="1">4+</option>
+                            </section>
+                            <section class="clearfix sessao-area-filtro bg-branco ">
+                                <h5 class="sessao-texto-pesquisa">Preço</h5>
+                                <label class="sessao-area-filtro-label preco-corrente">
+                                    Mínimo
+                                    <input type="text" placeholder="0" name="min_price" id="min_price" onkeypress="mascaraCampo(this, mvalor2)"  class="search-results-input escolhaAcomodacao" data-mask-currency="true">
+                                </label>
+                                <label class="sessao-area-filtro-label preco-corrente">
+                                    Máximo
+                                    <input onkeypress="mascaraCampo(this, mvalor2)" type="text" name="max_price" placeholder="0"  class="search-results-input escolhaAcomodacao" data-mask-currency="true">
+                                </label>
+                            </section>
+                            <section class="clearfix sessao-area-filtro bg-branco ">
+                                <h5 class="sessao-texto-pesquisa">Área</h5>
+                                <label class="sessao-area-filtro-label area-corrente">
+                                    Mínimo
+                                    <input type="text" onkeypress="mascaraCampo(this, mvalor2)" name="min_area" placeholder="0" value="" class="search-results-input escolhaAcomodacao" data-mask-currency="true">
+                                </label>
+                                <label class="sessao-area-filtro-label area-corrente">
+                                    Máximo
+                                    <input type="text" name="max_area" onkeypress="mascaraCampo(this, mvalor2)" placeholder="0" value="" class="search-results-input escolhaAcomodacao" data-mask-currency="true">
+                                </label>
+                            </section>
+                            <section class="clearfix sessao-area-filtro bg-branco ">
+                                <h5 class="sessao-texto-pesquisa hidden">Cômodos</h5>
+                                <label class="sessao-texto-pesquisa sessao-area-filtro-label-numeric fontsize11px">
+                                    Quartos
+                                    <select  name="num_quartos" id="numQuartos" class="search-results-select numeric-select escolhaAcomodacao">
+                                        <option selected="selected" value="0">-</option>
+                                        <option value="1">1+</option>
+                                        <option value="2">2+</option>
+                                        <option value="3">3+</option>
+                                        <option value="4">4+</option>
 
-                                </select>
-                            </label>
-                            <label class="sessao-texto-pesquisa sessao-area-filtro-label-numeric fontsize11px" >
-                                Vagas
-                                <select id="numVagas" name="num_vagas" class="search-results-select numeric-select">
-                                    <option selected="selected">-</option>
-                                    <option value="1">1+</option>
-                                    <option value="1">2+</option>
-                                    <option value="1">3+</option>
-                                    <option value="1">4+</option>
-                                </select>
-                            </label>
-                        </section>
+                                    </select>
+                                </label>
+                                <label class="sessao-texto-pesquisa sessao-area-filtro-label-numeric fontsize11px">
+                                    Banheiros
+                                    <select name="num_banheiros" id="numBanheiros" class="search-results-select numeric-select escolhaAcomodacao">
+                                        <option selected="selected" value="0">-</option>
+                                        <option value="1">1+</option>
+                                        <option value="2">2+</option>
+                                        <option value="3">3+</option>
+                                        <option value="4">4+</option>
+
+                                    </select>
+                                </label>
+                                <label class="sessao-texto-pesquisa sessao-area-filtro-label-numeric fontsize11px" >
+                                    Vagas
+                                    <select id="numVagas" name="num_vagas" class="search-results-select numeric-select escolhaAcomodacao">
+                                        <option selected="selected" value="0">-</option>
+                                        <option value="1">1+</option>
+                                        <option value="2">2+</option>
+                                        <option value="3">3+</option>
+                                        <option value="4">4+</option>
+                                    </select>
+                                </label>
+                            </section>
+                        </div>
                     </div>
-                </div>
-                <div class="col-md-10 col-sm-12">
-                    <div class="row">
-                        <div class="col-md-12">
-
+                    <div class="col-md-10 col-sm-12">
+                        <div class="before"></div>
+                        <div class="row" id="resultSearch">
                             <div id="products" class="list-group">
+
                                 @foreach($queryAnuncios as $queryAnuncio)
                                     <div class="item  col-xs-12 col-sm-6 col-lg-4 col-md-4 bloco-item">
                                         <a class="item-total" href="{{url('/')}}/anuncio/{{$queryAnuncio->tipo_anuncio}}/{{$queryAnuncio->id}}/{{str_slug($queryAnuncio->url_anuncio)}}" >
@@ -226,8 +252,6 @@
                                                         <li class="icone-quartos zaptip" data-original-title="Quantidade de quartos" data-toggle="tooltip">{{$queryAnuncio->numero_quarto}}</li>
                                                         <li class="icone-suites zaptip" data-original-title="Quantidade de suítes" data-toggle="tooltip">{{$queryAnuncio->numero_suite}}</li>
                                                         <li class="icone-vagas zaptip" data-original-title="Quantidade de vagas" data-toggle="tooltip">{{$queryAnuncio->numero_garagem}}</li>
-                                                        <li class="icone-hospedes zaptip" data-original-title="Quantidade de pessoas" data-toggle="tooltip">12</li>
-
                                                     </ul>
                                                     <!-- essa div só ficara visivel quando for lista -->
                                                     <div class="col-xs-12 col-md-12 list-item-nav2">
@@ -261,19 +285,21 @@
                                         </a>
                                     </div>
                                 @endforeach
+                                <div class='text-center'>
+                                    {!! $queryAnuncios->appends(\Input::except('page'))->render()!!}
+                                </div>
                             </div>
                             @else
                                 Nao achou nenhum resultado ;/
                             @endif
                         </div>
-                        <div class='text-center'>
-                            {!! $queryAnuncios->appends(\Input::except('page'))->render()!!}
-                        </div>
+
                     </div>
                 </div>
-            </div>
-
+            </form>
         </div>
+
+    </div>
     </div>
 
     @endsection

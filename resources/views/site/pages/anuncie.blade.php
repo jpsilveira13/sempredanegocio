@@ -313,7 +313,11 @@
                                 <div class="col-md-6 col-lg-6 col-sm-6 col-xs-12">
                                     <div class="form-group has-feedback">
                                         <label  for="inputEmail">Email: *</label>
-                                        <input type="email" id="inputEmail" value='{{Auth::user()->email}}' name='email-usuario' required  data-error="Campo não pode ser vazio" class="form-control" />
+                                        @if(Auth::user()->email)
+                                            <input type="email" id="inputEmail" value='{{Auth::user()->email}}' name='email' required  data-error="Campo não pode ser vazio" readonly class="form-control" />
+                                        @else
+                                            <input type="email" id="inputEmail" value='' name='email' required  data-error="Campo não pode ser vazio" class="form-control" />
+                                        @endif
                                         <span class="form-control-feedback" aria-hidden="true"></span>
                                         <div class="help-block with-errors"></div>
                                     </div>

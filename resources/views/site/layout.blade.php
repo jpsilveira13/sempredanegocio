@@ -311,6 +311,7 @@
 </div>
 <!-- JS -->
 <script src="{{asset('js/jquery-2.1.4.min.js')}}"></script>
+
 <script src="{{asset('js/bootstrap.min.js')}}"></script>
 <script src="{{asset('js/nouislider.min.js')}}"></script>
 <script src="{{asset('js/sweetalert.min.js')}}"></script>
@@ -320,12 +321,11 @@
 <script src="{{asset('js/jquery.easing.min.js')}}"></script>
 <script src="{{asset('js/jquery.fittext.js')}}"></script>
 <script src="{{asset('js/wow.min.js')}}"></script>
-
 <script src="/vendor/artesaos/cidades/js/scripts.js"></script>
-
 <script src="{{asset('js/validator.min.js')}}"></script>
 <script src="{{asset('js/lazyload.js')}}"></script>
 <script src="{{asset('js/site.js')}}"></script>
+<script src="{{asset('js/menudinamico.js')}}"></script>
 @if (session('status'))
     <script>
         swal("Parabéns!", "Seu anúncio foi criado com sucesso!", "success")
@@ -337,7 +337,7 @@
             m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
     })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-    ga('create', 'UA-71383930-1', 'auto');
+    ga('create', 'UA-74055821-1', 'auto');
     ga('send', 'pageview');
 
 </script>

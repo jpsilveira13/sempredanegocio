@@ -53,7 +53,7 @@
 <div class="col-md-12 no-padding counter" style="padding: 0;">
     <div class="bg-fundo bg1">
         <div class="row no-margin">
-            <h2 class="hero-title mt36 mb17">O Sempre da Negócio compara os preços em centenas de sites para você</h2>
+            <h2 class="hero-title mt36 mb17">O Sempre da Negócio compara os preços em centenas de portais para você</h2>
         </div>
         <br />
         <div class="row no-margin">
@@ -64,47 +64,52 @@
                             <img class="mb10 transition-img" src="{{url('images/img-imoveis.png')}}" alt="Imóveis" title="Área Imóveis" width="167" height="130" />
                             <figcaption>
                                 <p class="hero-description">Imóveis</p>
-                                <p class="hero-description fontsize13px">Encontre mais de 200.000 imóveis de sua região em um único lugar. </p>
+                                <p class="hero-description fontsize13px">Encontre mais de 9.123 imóveis de sua região em um único lugar. </p>
                             </figcaption>
                         </figure>
                     </a>
                 </div>
                 <div class="col-md-3 col-sm-6 selecao-categoria">
-                    <figure class="">
-                        <img class="mb10 transition-img height148" src="{{url('images/img-veiculos.png')}}" alt="Veículos" title="Área Veículos" width="167" height="130" />
-                        <figcaption>
-                            <p class="hero-description"> Veículos </p>
-                            <p class="hero-description fontsize13px">Encontre o veículo do seu sonho, buscamos anúncios em mais de 30 sites de classificados pelo Brasil. </p>
-                        </figcaption>
-                    </figure>
+                    <a href="#">
+                        <figure class="">
+                            <img class="mb10 transition-img height148" src="{{url('images/img-veiculos.png')}}" alt="Veículos" title="Área Veículos" width="167" height="130" />
+                            <figcaption>
+                                <p class="hero-description"> Veículos </p>
+                                <p class="hero-description fontsize13px">Em Breve </p>
+                            </figcaption>
+                        </figure>
+                    </a>
                 </div>
                 <div class="col-md-3 col-sm-6 selecao-categoria">
-                    <figure class="">
-                        <img class="mb10 transition-img height148" src="{{url('images/img-eletronicos.png')}}" alt="Eletrônicos" title="Área Eletrônicos" width="167" height="130" />
-                        <figcaption>
-                            <p class="hero-description">Eletrônicos</p>
-                            <p class="hero-description fontsize13px">Nós pesquisamos para você os melhores preços para economizar tempo e dinheiro. </p>
-                        </figcaption>
-                    </figure>
+                    <a href="#">
+                        <figure class="">
+                            <img class="mb10 transition-img height148" src="{{url('images/img-eletronicos.png')}}" alt="Eletrônicos" title="Área Eletrônicos" width="167" height="130" />
+                            <figcaption>
+                                <p class="hero-description">Eletrônicos</p>
+                                <p class="hero-description fontsize13px">Em Breve </p>
+                            </figcaption>
+                        </figure>
+                    </a>
                 </div>
-                <div class="col-md-3 col-sm-6">
-                    <figure class="">
-                        <img class="mb10 transition-img height148" src="{{url('images/img-equipamentos.png')}}" alt="Equipamentos" title="Área Equipamentos" width="167" height="130" />
-                        <figcaption>
-                            <p class="hero-description">Equipamentos </p>
-                            <p class="hero-description fontsize13px">Somos o único portal com área exclusiva para locação e venda de máquinas e equipamentos.</p>
-                        </figcaption>
-                    </figure>
+                <div class="col-md-3 col-sm-6 selecao-categoria">
+                    <a href="">
+                        <figure class="">
+                            <img class="mb10 transition-img height148" src="{{url('images/img-equipamentos.png')}}" alt="Equipamentos" title="Área Equipamentos" width="167" height="130" />
+                            <figcaption>
+                                <p class="hero-description">Equipamentos </p>
+                                <p class="hero-description fontsize13px">Em Breve</p>
+                            </figcaption>
+                        </figure>
+                    </a>
                 </div>
             </div>
         </div>
     </div>
-
 </div>
 <div class="col-md-12 no-padding counter pt0">
     <div class="bg-fundo bg2">
         <div class="row no-margin">
-            <h2 class="hero-title mt36 mb48 corAzul">SAIBA POR QUE O "SEMPRE DA NEGÓCIO", É A MELHOR FERRAMENTA PARA VOCÊ DIVULGAR SEUS ANÚNCIOS</h2>
+            <h2 class="hero-title mt36 mb48 corAzul">A MELHOR FERRAMENTA PARA VOCÊ DIVULGAR SEUS ANÚNCIOS</h2>
         </div>
         <div class="row no-margin">
             <div class="container">
@@ -148,28 +153,28 @@
             <div class="col-md-3">
                 <div class="item-counter">
                     <span class="item-icon"><i class="fa fa-database"></i></span>
-                    <div data-refresh-interval="100" data-speed="10000" data-to="212180" data-from="0" class="item-count">212180</div>
+                    <div data-refresh-interval="100" data-speed="10000" data-to="9200" data-from="0" class="item-count">9200</div>
                     <span class="item-info">Anúncios Cadastrados</span>
                 </div>
             </div>
             <div class="col-md-3">
                 <div class="item-counter">
                     <span class="item-icon"><i class="fa fa fa-home "></i></span>
-                    <div data-refresh-interval="100" data-speed="10000" data-to="87000" data-from="0" class="item-count">87000</div>
-                    <span class="item-info">Transações realizadas</span>
+                    <div data-refresh-interval="100" data-speed="10000" data-to="5200" data-from="0" class="item-count">5200</div>
+                    <span class="item-info">Imagens Cadastradas</span>
                 </div>
             </div>
             <div class="col-md-3">
                 <div class="item-counter">
                     <span class="item-icon"><i class="fa fa-users"></i></span>
-                    <div data-refresh-interval="100" data-speed="10000" data-to="7000" data-from="0" class="item-count">7000</div>
+                    <div data-refresh-interval="100" data-speed="10000" data-to="1000" data-from="0" class="item-count">1000</div>
                     <span class="item-info">Usuários ativos</span>
                 </div>
             </div>
             <div class="col-md-3">
                 <div class="item-counter">
                     <span class="item-icon"><i class="fa fa-database"></i></span>
-                    <div data-refresh-interval="100" data-speed="6000" data-to="109120" data-from="0" class="item-count">109120 </div>
+                    <div data-refresh-interval="100" data-speed="6000" data-to="25800" data-from="0" class="item-count">25800 </div>
                     <span class="item-info">Visitantes mês</span>
                 </div>
             </div>

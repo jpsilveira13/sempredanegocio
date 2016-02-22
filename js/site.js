@@ -92,30 +92,7 @@ function mascData(v){
     return v
 }
 
-function mascHora(v){
-    v=v.replace(/\D/g,"")                    //Remove tudo o que nï¿½o ï¿½ dï¿½gito
-    v=v.replace(/(\d{2})(\d)/,"$1:$2")       //Coloca uma barra entre o segundo e o terceiro dï¿½gitos
-    v=v.replace(/(\d{2})(\d)/,"$1:$2")       //Coloca uma barra entre o quarto  e o quinto dï¿½gitos
-                                             //de novo (para o segundo bloco de nï¿½meros)
-    return v
-}
 
-function mascSite(v){
-
-    //Esse sem comentarios para que vocï¿½ entenda sozinho ;-)
-    v=v.replace(/^http:\/\/?/,"")
-    dominio=v
-    caminho=""
-    if(v.indexOf("/")>-1)
-        dominio=v.split("/")[0]
-    caminho=v.replace(/[^\/]*/,"")
-    dominio=dominio.replace(/[^\w\.\+-:@]/g,"")
-    caminho=caminho.replace(/[^\w\d\+-@:\?&=%\(\)\.]/g,"")
-    caminho=caminho.replace(/([\?&])=/,"$1")
-    if(caminho!="")dominio=dominio.replace(/\.+$/,"")
-    v="http://"+dominio+caminho
-    return v
-}
 
 function mvalor(v){
     v=v.replace(/\D/g,"");//Remove tudo o que não é dígito
@@ -123,6 +100,12 @@ function mvalor(v){
     v=v.replace(/(\d)(\d{5})$/,"$1.$2");//coloca o ponto dos milhares
 
     v=v.replace(/(\d)(\d{2})$/,"$1,$2");//coloca a virgula antes dos 2 últimos dígitos
+    return v;
+}
+
+function mvalor2(v){
+    v=v.replace(/\D/g,"");//Remove tudo o que não é dígito
+
     return v;
 }
 
@@ -158,29 +141,10 @@ $(document).ready(function(){
     });
 
 
-    /*function search() {
-
-        $.ajax({
-            // url para o arquivo json.php
-            url: "/search-imoveis",
-            // dataType json
-            dataType: "json",
-            // função para de sucesso
-            success: function (data) {
-                console.log(data);
-                // vamos gerar um html e guardar nesta variável
-                var html = "";
-            }
-        });//termina o ajax
-    });
-
-    jQuery("#numVagas").change(function () {
-        search();
-    }); */
-
     /*$("#campotexto").keyup(search()); */
 
     //salvar denuncia
+
 
     $( "#denunciaForm" ).submit(function( event ) {
         event.preventDefault();
@@ -288,17 +252,7 @@ $(document).ready(function(){
             return value.toFixed(settings.decimals);
         }
     }(jQuery));
-    $('.item-count').countTo({
-        formatter: function (value, options) {
-            return value.toFixed(options.decimals);
-        },
-        onUpdate: function (value) {
-            console.debug(this);
-        },
-        onComplete: function (value) {
-            console.debug(this);
-        }
-    });
+
     /* FIM CONTADOR */
     (function($) {
         "use strict"; // Start of use strict
@@ -343,48 +297,6 @@ $(document).ready(function(){
 
     })(jQuery); // End of use strict
 
-
-    $("#labelFaixaPreco").click(function () {
-        //$('.formularioBusca').css('display', 'block');
-        // ou pode também usar assim:
-        $('#divFaixaPreco').show('fast');
-
-    });
-    $('#divFaixaPreco').on('mouseleave', function () {
-        // this.style.display = 'none';
-        $(this).hide('fast');
-    });
-    $("#labelQuarto").click(function () {
-        //$('.formularioBusca').css('display', 'block');
-        // ou pode também usar assim:
-        $('#divQuartos').show('fast');
-
-    });
-    $('#divQuartos').on('mouseleave', function () {
-        // this.style.display = 'none';
-        $(this).hide('fast');
-    });
-
-    $("#labelSuite").click(function () {
-        //$('.formularioBusca').css('display', 'block');
-        // ou pode também usar assim:
-        $('#divSuite').show('fast');
-
-    });
-    $('#divSuite').on('mouseleave', function () {
-        // this.style.display = 'none';
-        $(this).hide('fast');
-    });
-    $("#labelVaga").click(function () {
-        //$('.formularioBusca').css('display', 'block');
-        // ou pode também usar assim:
-        $('#divVaga').show('fast');
-
-    });
-    $('#divVaga').on('mouseleave', function () {
-        // this.style.display = 'none';
-        $(this).hide('fast');
-    });
 
 
     //$('ul.pagination').hide();
@@ -612,7 +524,10 @@ $(document).ready(function(){
     });
 
 
+    var answer = true;
+    if((((3 * 90) === 270) || !(false && (!false)) || "bex".toUpperCase() === "BEX")){
 
+    }
 //procurar pelo cep
 
     $('#cep').blur(function(){
@@ -667,11 +582,8 @@ $(document).ready(function(){
 
             });
             if(listaCidade.is(":visible")){
-
                 $('body').on('click',function(){
-
                     listaCidade.fadeOut();
-
                 });
             }
         }else{
@@ -682,11 +594,22 @@ $(document).ready(function(){
     });
 //js area pesquisar
 
-    $("#btn-pesquisa").on('click',function(e){
-        e.preventDefault();
 
-        $("#menu-total").fadeIn("fast");
+    var btnPesquisar = $('#btn-pesquisa');
+    var menuLateral = $('#nav-lateral');
+    btnPesquisar.click(function(){
+
+        menuLateral.addClass('na-lef-pos');
+
+
     });
+
+    $('#btn-close-nav').on('click', function () {
+
+        menuLateral.removeClass('na-lef-pos');
+    });
+
+
 //lazyload
 
     $(window).scroll(function(){
@@ -696,6 +619,24 @@ $(document).ready(function(){
         } else {
             $('#btAnuncie').fadeOut();
         }
+    });
+
+    $(window).scroll(function(){
+        if ($(this).scrollTop() > 400){
+            $('.item-count').countTo({
+                formatter: function (value, options) {
+                    return value.toFixed(options.decimals);
+                },
+                onUpdate: function (value) {
+                    console.debug(this);
+                },
+                onComplete: function (value) {
+                    console.debug(this);
+                }
+            });
+
+        }
+
     });
 //js modal evento
     $('#list').click(function(event){event.preventDefault();

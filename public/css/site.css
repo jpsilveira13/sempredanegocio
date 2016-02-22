@@ -1309,7 +1309,6 @@ footer{
     border-right: solid 1px #eee;
     width: 190px;
     box-sizing: border-box;
-    position: absolute;
     top: 0;
     left: 0;
     bottom: 0;
@@ -1909,7 +1908,7 @@ input[type=text].input-slider-preco-esq, input[type=text].input-slider-esq, inpu
 
     height: 293px;
     background-color: black;
-    width: 450px;
+
 }
 
 

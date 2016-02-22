@@ -4,11 +4,8 @@ namespace sempredanegocio\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Event;
-use Illuminate\Support\Facades\Input;
-use Illuminate\Support\Facades\Redirect;
-use Illuminate\Support\Facades\Validator;
 
+use Illuminate\Support\Facades\Validator;
 use sempredanegocio\Models\User;
 use sempredanegocio\Http\Requests;
 use sempredanegocio\Http\Controllers\Controller;
@@ -41,7 +38,7 @@ class AdvertController extends Controller
     }
 
     /* salvar anúncio */
-    public function store(Request $request, AdvertImage $advertImage, User $user){
+    public function store(Requests\AdvertSaveRequest $request, AdvertImage $advertImage, User $user){
 
 
 
@@ -50,7 +47,7 @@ class AdvertController extends Controller
         $user               = User::find($data['user_id']);
         $user->name         = $request->get('nome-usuario');
         $user->phone        = $request->get('telefone-usuario');
-        $user->email        = $request->get('email-usuario');
+        $user->email        = $request->get('email');
         $user->update();
 
         $data['url_anuncio'] = str_slug($data['anuncio_titulo']);
@@ -60,6 +57,7 @@ class AdvertController extends Controller
         $data['preco'] = str_replace(",",".",str_replace(".","",$data['preco']));
         $features = $request->get('caracteristicas');
         $images = $request->file('anuncio_images');
+
         unset($data['anuncio_images']);
         unset($data['caracteristicas']);
         $anuncio = Advert::create($data);
@@ -80,11 +78,7 @@ class AdvertController extends Controller
                 'email' => $user->email,
                 'tipo_anuncio' => $anuncio->tipo_anuncio,
                 'url_anuncio' => $anuncio->url_anuncio
-
-
-
             ];
-
             \Mail::send('emails.anuncioInserido', $dataSend, function($message) use ($dataSend)
             {
                 $message->from('naoresponder@sempredanegocio.com.br', 'Sempre da Negócio');
