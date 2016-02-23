@@ -157,19 +157,19 @@ class HomeController extends Controller
     }
 
 
-   /* public function testeImoveis(){
-        $result = null;
+    /* public function testeImoveis(){
+         $result = null;
 
-        $result = Advert::where('cidade', '=', 'Uberaba')->where('numero_quarto','=','4')->take(16)->get();
+         $result = Advert::where('cidade', '=', 'Uberaba')->where('numero_quarto','=','4')->take(16)->get();
 
-        return view('testes.testes', [
-            'title' => 'Sempredanegocio.com.br | Não perca tempo! Anuncie.',
-            'description' => 'Os melhores alugueis no melhor site.',
-            'result' => $result
-        ]);
+         return view('testes.testes', [
+             'title' => 'Sempredanegocio.com.br | Não perca tempo! Anuncie.',
+             'description' => 'Os melhores alugueis no melhor site.',
+             'result' => $result
+         ]);
 
 
-    } */
+     } */
 
     public function denuncia(){
         $inputData = Input::get('formData');
@@ -260,7 +260,8 @@ class HomeController extends Controller
 
         }
 
-        return $query->with('images')->paginate(18);
+        return Response::json($query->where('status','>','0')->with('images')->paginate(18));
+
 
     }
 

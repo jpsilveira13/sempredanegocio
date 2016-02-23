@@ -132,6 +132,8 @@ function mascValorDoisDecimais(v){
 
 }
 
+
+
 //Começo jquery Site
 $(document).ready(function(){
     $.ajaxSetup({
@@ -140,7 +142,9 @@ $(document).ready(function(){
         }
     });
 
-
+    $(document).ready(function(){
+        $('.dropdown-toggle').dropdown();
+    })
     /*$("#campotexto").keyup(search()); */
 
     //salvar denuncia
@@ -377,9 +381,9 @@ $(document).ready(function(){
                         "</div>" +
                         "</li>";
                     var n = $( "#photos_clearing li" ).length;
-                    if(n > 4){
+                    if(n > 24){
                         alert('Número de upload no máximo 4');
-                        return;
+                        return false;
 
                     }else{
                         $('#photos_clearing').append(image_html);

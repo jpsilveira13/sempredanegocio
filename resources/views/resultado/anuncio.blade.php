@@ -93,7 +93,7 @@
                     <h1 class="search-title"> Anúncios Encontrados</h1>
                 </div>
             </div>
-            <div class="col-md-12">
+            <div class="col-md-12 hidden-md hidden-lg">
                 <button id="btn-pesquisa" class="center-block btn-search">
                     Filtros
                 </button>
@@ -137,7 +137,7 @@
             <div class="clearfix"></div>
             <div class="row">
                 <form action=""  id="formSearchImoveis" class="ajax">
-                    <div id="nav-lateral" class="col-md-2 col-sm-2">
+                    <div id="nav-lateral" class="col-md-2 col-sm-2 no-padding">
                         <button id="btn-close-nav" type="button" class="close">X</button>
                         <div class="area-pesquisa">
                             <section class="clearfix sessao-area-filtro bg-branco ">
@@ -286,7 +286,7 @@
                                     </div>
                                 @endforeach
                                 <div class='text-center'>
-                                    {!! $queryAnuncios->appends(\Input::except('page'))->render()!!}
+                                    {{ $queryAnuncios->appends(\Input::except('page'))->render()}}
                                 </div>
                             </div>
                             @else

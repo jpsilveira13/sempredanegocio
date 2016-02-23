@@ -519,9 +519,6 @@ body{
         margin-top: 6px;
     }
 
-    #btn-pesquisa{
-        display: none;
-    }
 
     .navbar-default {
         border-color: rgba(255,255,255,.3);
@@ -1516,9 +1513,11 @@ footer{
     cursor: pointer;
 }
 
-.before{
-    text-align: center;
-    margin-top: 33px;
+
+.before img{
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 4%;
 
 }
 
@@ -2854,13 +2853,7 @@ input#images{display: none;}
 /*   Media Queries breakpoints  */
 /********************************/
 
-@media only screen and (max-width: 959px){
-    /* media página imovel */
-    .side-left, .side-right, .box-default, .container-financiamento .tool, .posvalue-imovel, .release-header>.pull-left, .container-conheca .tab-content-big, .container-conheca .tab-content-small, .check-ofertas {
-        width: 100%;
-        height:auto ;
-    }
-
+@media only screen and (max-width:1000px){
     #nav-lateral{
         position: fixed;
         top: 0px;
@@ -2871,6 +2864,26 @@ input#images{display: none;}
         overflow-x: auto;
         display: none;
         background-color: rgba(0, 0, 0, 0.6)
+    }
+
+    .area-pesquisa{
+
+        width: 172px;
+
+    }
+
+    #btn-pesquisa{
+        display: block;
+    }
+}
+
+
+
+@media only screen and (max-width: 959px){
+    /* media página imovel */
+    .side-left, .side-right, .box-default, .container-financiamento .tool, .posvalue-imovel, .release-header>.pull-left, .container-conheca .tab-content-big, .container-conheca .tab-content-small, .check-ofertas {
+        width: 100%;
+        height:auto ;
     }
 
 
@@ -3398,13 +3411,6 @@ input#images{display: none;}
 }
 
 
-
-/* testeee */
-@media(max-width:768px) {
-    #menu-teste{
-        display: block;
-    }
-}
 #menu-teste{
     height: 100%;
     width: 250px;

@@ -8,6 +8,7 @@ $(document).ready(function(){
         }else{
             var filters = $('#formSearchImoveis').serialize();
         }
+
         console.log(filters);
         $.ajax({
 
@@ -17,9 +18,10 @@ $(document).ready(function(){
             beforeSend: function(){
                 $('#resultSearch').fadeTo('slow',0.5);
                 $('#resultSearch').empty();
-                $('.before').show().append('<img src="../images/loadingSearch.gif" />');
+                $('.before').show().append('<img class="img-responsive" src="../images/loadingSearch.gif" />');
             },
             success: function (data) {
+                console.log(data);
 
                 $("html, body").animate({ scrollTop: 0 }, "slow");
                 $(".before").empty();
@@ -70,7 +72,6 @@ $(document).ready(function(){
     jQuery(".escolhaAcomodacao").change(function () {
         search();
     });
-
 
 });
 

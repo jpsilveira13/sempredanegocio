@@ -95,12 +95,15 @@
                     <li class="new-ads"><a href="{{url('anuncie')}}" id="modalLogin" class="btn btn-ads btn-azul"><span class="glyphicon glyphicon-file"></span> Anuncie</a></li>
                     <li class="dropdown">
                         @if(auth()->user()->avatar)
-
-                            <a href="#" class="dropdown-toggle pt12 pb0" data-toggle="dropdown" role="button" aria-expanded="false"><span class="user-menu-icon" style="background-image: url('<?=auth()->user()->avatar?>');"></span><span class="align-div-menu">Olá, {{ strstr(auth()->user()->name,' ',true)  }}</span> <span class="caret  align-div-menu"></span></a>
+                            <a href="#" class="dropdown-toggle pt12 pb0" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                <span class="user-menu-icon" style="background-image: url('<?=auth()->user()->avatar?>');"></span>
+                                <span class="align-div-menu">Olá, {{ strstr(auth()->user()->name,' ',true)  }}</span>
+                                <span class="caret  align-div-menu"></span>
+                            </a>
                         @else
-                            <a href="#" class="dropdown-toggle pt12" data-toggle="dropdown" role="button" aria-expanded="false"><span class="user-menu-icon glyphicon glyphicon-user"></span><span>{{ strstr(auth()->user()->name,' ',true)}}</span><span class="caret"></span></a>
+                            <a href="#" class="dropdown-toggle pt12" data-toggle="dropdown" role="button" aria-expanded="false" ><span class="user-menu-icon glyphicon glyphicon-user"></span><span>{{ strstr(auth()->user()->name,' ',true)}}</span><span class="caret"></span></a>
                         @endif
-                        <ul class="dropdown-menu" role="menu">
+                        <ul class="dropdown-menu">
                             <li><a href="{{ url('/admin/home') }}">Acessar o Painel</a></li>
                             <li class="divider"></li>
                             <li><a href="{{ url('/auth/logout') }}">Sair</a></li>

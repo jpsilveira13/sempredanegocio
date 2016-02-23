@@ -109,7 +109,7 @@
 <div class="col-md-12 no-padding counter pt0">
     <div class="bg-fundo bg2">
         <div class="row no-margin">
-            <h2 class="hero-title mt36 mb48 corAzul">A MELHOR FERRAMENTA PARA VOCÊ DIVULGAR SEUS ANÚNCIOS</h2>
+            <h2 class="hero-title mt36 mb48 corAzul"> É O MELHOR PORTAL PARA VOCÊ DIVULGAR SEUS ANÚNCIOS</h2>
         </div>
         <div class="row no-margin">
             <div class="container">
@@ -153,28 +153,28 @@
             <div class="col-md-3">
                 <div class="item-counter">
                     <span class="item-icon"><i class="fa fa-database"></i></span>
-                    <div data-refresh-interval="100" data-speed="10000" data-to="9200" data-from="0" class="item-count">9200</div>
+                    <div data-refresh-interval="100" data-speed="10000" data-to="9123" data-from="0" class="item-count">9123</div>
                     <span class="item-info">Anúncios Cadastrados</span>
                 </div>
             </div>
             <div class="col-md-3">
                 <div class="item-counter">
                     <span class="item-icon"><i class="fa fa fa-home "></i></span>
-                    <div data-refresh-interval="100" data-speed="10000" data-to="5200" data-from="0" class="item-count">5200</div>
+                    <div data-refresh-interval="100" data-speed="10000" data-to="52129" data-from="0" class="item-count">52129</div>
                     <span class="item-info">Imagens Cadastradas</span>
                 </div>
             </div>
             <div class="col-md-3">
                 <div class="item-counter">
                     <span class="item-icon"><i class="fa fa-users"></i></span>
-                    <div data-refresh-interval="100" data-speed="10000" data-to="1000" data-from="0" class="item-count">1000</div>
+                    <div data-refresh-interval="100" data-speed="10000" data-to="892" data-from="0" class="item-count">892</div>
                     <span class="item-info">Usuários ativos</span>
                 </div>
             </div>
             <div class="col-md-3">
                 <div class="item-counter">
                     <span class="item-icon"><i class="fa fa-database"></i></span>
-                    <div data-refresh-interval="100" data-speed="6000" data-to="25800" data-from="0" class="item-count">25800 </div>
+                    <div data-refresh-interval="100" data-speed="6000" data-to="25791" data-from="0" class="item-count">25791 </div>
                     <span class="item-info">Visitantes mês</span>
                 </div>
             </div>
