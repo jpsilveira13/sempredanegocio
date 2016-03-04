@@ -27,7 +27,8 @@
     <meta name="keywords" content="Classificados, Anúncios grátis, à venda, usados, Imóveis, Carros, Motos, sempredanegocio.com.br, Sempre da Negócio, sempre da negocio, apartamentos, alugar, comprar, aluguel casa, aluguel casa temporada  " />
     <meta name="robots" content="ALL" />
     <meta name="copyright" content="© 2016 Sempre da Negócio" />
-    <link rel="icon" href="{{ asset('images/favicon.png') }}" type="image/png"/>
+
+    <link rel="icon" href="{{ asset('images/favicon.ico') }}" type="image/x-icon">
     <meta name="csrf-token" content="{{ csrf_token() }}" />
     <meta name="google-site-verification" content="wma-4TJAj_E1sgTjCKRH5unqj224KpxXv131FaQ4xjY" />
 

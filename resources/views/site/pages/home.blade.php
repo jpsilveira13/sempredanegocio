@@ -53,7 +53,7 @@
 <div class="col-md-12 no-padding counter" style="padding: 0;">
     <div class="bg-fundo bg1">
         <div class="row no-margin">
-            <h2 class="hero-title mt36 mb17">O Sempre da Negócio compara os preços em centenas de portais para você</h2>
+            <h2 class="hero-title mt36 mb17">O SEMPRE DA NEGÓCIO COMPARA OS PREÇOS EM CENTENAS DE SITES PARA VOCÊ</h2>
         </div>
         <br />
         <div class="row no-margin">

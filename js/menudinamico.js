@@ -1,12 +1,15 @@
 var paginaAtual = 1;
+var temMaisUma = true;
 var continuaScroll = true;
-function scrollPagina(page) {
 
+function scrollPagina(page) {
+    page = paginaAtual;
     if (continuaScroll) {
         if(page){
-            var filters = $('#formSearchImoveis').serialize() + "&page=" + paginaAtual;
+            var filters = $('#formSearchImoveis').serialize() + "&page=" + page;
         }else{
             var filters = $('#formSearchImoveis').serialize();
+
         }
 
         continuaScroll = false;
@@ -14,20 +17,21 @@ function scrollPagina(page) {
         $.ajax ({
             url : "search-imoveis",
             type: 'GET',
+            cache: false,
             data: filters,
-            beforeSend: function(){
+            beforeSend: function(data){
 
-                if(paginaAtual == 1){
-
+                if(page == 1 ){
                     $('#resultSearch').fadeTo('slow',0.5);
                     $('#products').empty();
                     $("html, body").animate({scrollTop: 0}, "slow");
                     $('.before').show().append('<img class="img-responsive" src="../images/loadingSearch.gif" />');
 
                 }
+
             },
             success: function(data) {
-
+               // console.log(data.data);
                 if (data.data.length != 0) {
                     $('#loading-page').css('display','block');
                     continuaScroll = true;
@@ -37,6 +41,7 @@ function scrollPagina(page) {
                     var html = '';
                     var totalAnuncio = data.total;
                     var data = data.data;
+
                     var len = data.length;
 
                     $('.search-results-header-counter').html(totalAnuncio);
@@ -86,12 +91,22 @@ function scrollPagina(page) {
 
 $(window).scroll(function() {
     if($(window).scrollTop() + $(window).height() == $(document).height()){
+        if(temMaisUma){
+            paginaAtual = 0;
+            temMaisUma = false;
+            scrollPagina(paginaAtual);
+        }
 
+        if(paginaAtual == 0){
+            temMaisuma = false;
+            paginaAtual++;
+        }
         scrollPagina(paginaAtual);
     }
 });
 
 jQuery(".escolhaAcomodacao").change(function () {
     paginaAtual = 1;
+    continuaScroll = true;
     scrollPagina();
 });
