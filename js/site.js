@@ -104,9 +104,9 @@ function mvalor(v){
 }
 
 function mvalor2(v){
-    v=v.replace(/\D/g,"");//Remove tudo o que não é dígito
-
+    v=v.replace(/[^1234567890],./g,""); //somente numeros, ponto e virgula
     return v;
+
 }
 
 function mascValorPonto(v){
@@ -305,7 +305,7 @@ $(document).ready(function(){
 
     //$('ul.pagination').hide();
 
-    (function(){
+    /*(function(){
         var loading_options = {
             finishedMsg: "<div class='end-msg'>Não há mais anúncios!</div>",
             msgText: "<div class='carregamento-anuncio'>Carregando anúncios...</div>",
@@ -323,7 +323,7 @@ $(document).ready(function(){
 
             });
         });
-    })();
+    })(); */
 
     $("img.lazy").lazyload({
         effect: "fadeIn",

@@ -66,7 +66,7 @@
                         <section class="clearfix sessao-area-filtro bg-branco ">
                             <h5 class="sessao-texto-pesquisa">Localização</h5>
                             <div class="input-group">
-                                <input name="cidade" id="location" value="" autocomplete="on" type="text" class="form-control search-results-input escolhaAcomodacao pl3" placeholder="Incluir Cidade">
+                                <input name="cidade" id="location" value="" autocomplete="off" type="text" class="form-control search-results-input escolhaAcomodacao pl3" placeholder="Incluir Cidade">
                                 <ul id="listaCidades" class="lista-cidade-search"></ul>
                             </div>
                         </section>
@@ -82,8 +82,8 @@
                         <section class="clearfix sessao-area-filtro bg-branco ">
                             <h5 class="sessao-texto-pesquisa">Modalidade</h5>
                             <select  name="tipo_anuncio" class="search-results-select search-results-select-img escolhaAcomodacao">
-                                <option value="">Seleciona uma opção</option>
-                                <option value="venda" selected>Comprar</option>
+                                <option value="" selected>Seleciona uma opção</option>
+                                <option value="venda" >Comprar</option>
                                 <option value="aluga">Alugar</option>
                             </select>
                         </section>
@@ -204,13 +204,11 @@
                                             </div>
                                         </a>
                                     </div>
-
                                 @endforeach
-
                             </div>
-                        </div>
-                        <div class='text-center'>
-                            {!! $adverts->render() !!}
+                            <div class='text-center'>
+                                <div id="loading-page"><img alt="Loading..." src="http://www.infinite-scroll.com/loading.gif"><div><div class="carregamento-anuncio">Carregando anúncios...</div></div></div>
+                            </div>
                         </div>
                     </div>
                 </div>

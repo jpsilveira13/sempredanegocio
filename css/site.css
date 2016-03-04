@@ -1293,7 +1293,7 @@ footer{
 
 .area-pesquisa .search-results-input{
     text-align: right;
-    padding-left: 22px;
+    /* padding-left: 22px; */
     -webkit-box-shadow: 0 1px 1px 0 rgba(0,0,0,0.2) inset;
     box-shadow: 0 1px 1px 0 rgba(0,0,0,0.2) inset;
     border-radius: 0;
@@ -1301,12 +1301,11 @@ footer{
     width: 100%;
     box-sizing: border-box;
     margin-bottom: 0;
-
     transition-delay: 0s;
     transition-duration: 0.3s;
     transition-property: all;
     transition-timing-function: ease-out;
-
+    padding: 5px 3px 5px 0;
 }
 
 .search-results-header-counter{
@@ -1388,7 +1387,7 @@ footer{
     width: 49%;
 }
 
-.preco-corrente:before {
+/*.preco-corrente:before {
     content: "R$";
     position: absolute;
     top: 27px;
@@ -1401,7 +1400,9 @@ footer{
     position: absolute;
     top: 27px;
     left: 5px;
-}
+} */
+
+
 
 
 
@@ -1509,7 +1510,7 @@ footer{
     line-height: 1.5;
     font-weight: normal;
     text-align: left;
-    font-size: 14px;
+    font-size: 0.9em;
     cursor: pointer;
 }
 
@@ -3387,7 +3388,12 @@ input#images{display: none;}
 }
 
 #infscr-loading {
+
+}
+
+#loading-page{
     position: absolute;
+    display: none;
     bottom: 0;
     left: 0;
     right: 0;
@@ -3397,9 +3403,10 @@ input#images{display: none;}
     text-align: center;
     /* margin-left: auto; */
     /* margin-right: auto; */
+
 }
 
-#infscr-loading img{
+#loading-page img{
     margin-left: auto;
     margin-right: auto;
 

@@ -145,6 +145,7 @@
                                     <label>Vagas de garagem *</label>
                                     <select required data-error="Seleciona uma opção" required="required" class="form-control" name="numero_garagem">
                                         <option value="">Escolher</option>
+                                        <option value="0">Nenhum</option>
                                         <option value="1">1</option>
                                         <option value="2">2</option>
                                         <option value="3">3</option>
@@ -157,9 +158,10 @@
                             </div>
                             <div class="col-md-4 col-lg-4 col-sm-6 col-xs-12">
                                 <div class="form-group has-feedback">
-                                    <label>Quantas suítes *</label>
+                                    <label>Quantos banheiros *</label>
                                     <select required data-error="Seleciona uma opção" class="form-control" name="numero_suite">
                                         <option value="">Escolher</option>
+                                        <option value="0">Nenhum</option>
                                         <option value="1">1</option>
                                         <option value="2">2</option>
                                         <option value="3">3</option>
@@ -238,10 +240,10 @@
                         <div class="col-md-12 col-lg-12 col-xs-12">
                             <div class="form-group has-feedback">
                                 <label>Descrição : *</label>
-                                <textarea class="form-control" maxlength="300" required data-error="Ops! Excedeu o limite do mínimo ou do máximo de caracteres" rows="12" name="anuncio_descricao" placeholder="Ex.: Apartamento bem equipado">{{old('anuncio_descricao')}}</textarea>
+                                <textarea class="form-control" required data-error="Ops! Excedeu o limite do mínimo ou do máximo de caracteres" rows="12" name="anuncio_descricao" placeholder="Ex.: Apartamento bem equipado">{{old('anuncio_descricao')}}</textarea>
                                 <span class="form-control-feedback" aria-hidden="true"></span>
                                 <div class="help-block with-errors"></div>
-                                <span class="help-block">Número máximo de caracteres 300.</span>
+                                <span class="help-block">Campo não pode ser vazio</span>
                             </div>
                         </div>
                     </div>

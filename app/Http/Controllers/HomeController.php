@@ -51,7 +51,7 @@ class HomeController extends Controller
         $categoria_id = Category::select('id')->where('name_url', $name_url)->first();
         $subcategories = SubCategory::where('category_id',$categoria_id->id)->get();
         if($categoria_id != null){
-            $adverts = Advert::join('subcategories', 'adverts.subcategories_id', '=', 'subcategories.id')->where('subcategories.category_id',$categoria_id->id)->select('adverts.*')->paginate(18);
+            $adverts = Advert::join('subcategories', 'adverts.subcategories_id', '=', 'subcategories.id')->where('subcategories.category_id',$categoria_id->id)->where('status','=','1')->orderBy(DB::raw('RAND()'))->select('adverts.*')->paginate(18);
             $advertsCount = Advert::join('subcategories', 'adverts.subcategories_id', '=', 'subcategories.id')->where('subcategories.category_id',$categoria_id->id)->select('adverts.*')->count();
 
             return view('site.pages.anuncios', [
@@ -214,10 +214,8 @@ class HomeController extends Controller
 
         $min_area = Input::has('min_area') ? Input::get('min_area'): null;
         $max_area = Input::has('max_area') ? Input::get('max_area'): null;
-        //$min_price =  preg_replace("/[^\d]/", "", Input::get('min_price'));;
-        $max_price =  \Input::get('max_price');
-        $min_price =  \Input::get('min_price');
-
+        $max_price = str_replace(".","",str_replace(",","",\Input::get('max_price')));
+        $min_price =  str_replace(".","",str_replace(",","",\Input::get('min_price')));
 
         if(\Input::get('subcategoria')){
 
@@ -225,7 +223,6 @@ class HomeController extends Controller
 
 
         }
-
         if(\Input::get('cidade')){
             $query->where('cidade',\Input::get('cidade'));
 
@@ -235,8 +232,6 @@ class HomeController extends Controller
             $query->where('tipo_anuncio',\Input::get('tipo_anuncio'));
 
         }
-
-
 
         if($min_price && $max_price){
             $query->where('preco','>=',$min_price)->where('preco','<=',$max_price);
@@ -274,13 +269,13 @@ class HomeController extends Controller
 
         if($cidade != null ){
 
-            $queryAnuncios = Advert::join('subcategories', 'adverts.subcategories_id', '=', 'subcategories.id')->where('subcategories.category_id',$categoria)->where('cidade','=',$cidade)->where('tipo_anuncio','=',$transacao)->where('status','=','1')->select('adverts.*')->paginate(18);
+            $queryAnuncios = Advert::join('subcategories', 'adverts.subcategories_id', '=', 'subcategories.id')->where('subcategories.category_id',$categoria)->where('cidade','=',$cidade)->where('tipo_anuncio','=',$transacao)->where('status','=','1')->orderBy(DB::raw('RAND()'))->select('adverts.*')->paginate(18);
 
             $queryCount = Advert::join('subcategories', 'adverts.subcategories_id', '=', 'subcategories.id')->where('subcategories.category_id',$categoria)->where('cidade','=',$cidade)->where('tipo_anuncio','=',$transacao)->where('status','=','1')->count();
 
             return view('resultado/anuncio', compact('queryAnuncios','anunciesubcats','queryCount','subcategories'));
         }else{
-            $queryAnuncios = Advert::join('subcategories', 'adverts.subcategories_id', '=', 'subcategories.id')->where('subcategories.category_id',$categoria)->where('tipo_anuncio','=',$transacao)->select('adverts.*')->paginate(18);
+            $queryAnuncios = Advert::join('subcategories', 'adverts.subcategories_id', '=', 'subcategories.id')->where('subcategories.category_id',$categoria)->where('tipo_anuncio','=',$transacao)->where('status','=','1')->orderBy(DB::raw('RAND()'))->select('adverts.*')->paginate(18);
 
             $queryCount = Advert::join('subcategories', 'adverts.subcategories_id', '=', 'subcategories.id')->where('subcategories.category_id',$categoria)->where('tipo_anuncio','=',$transacao)->count();
             return view('resultado/anuncio', compact('queryAnuncios','anunciesubcats','queryCount','subcategories'));

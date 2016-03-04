@@ -4,6 +4,7 @@
 </div><!-- fechamento da div row que esta dentro do layout -->
 </div><!-- fechamento da container  que esta dentro do layout -->
 
+
 @if(count($queryAnuncios) > 0)
     <div id="menu-total" class="sidebar-left hide">
         <div id="menu-teste" class="left">
@@ -23,11 +24,11 @@
                         <h5 class="sessao-texto-pesquisa">Preço</h5>
                         <label class="sessao-area-filtro-label preco-corrente">
                             Mínimo
-                            <input type="text" placeholder="0" value="" name="min_price"  class="search-results-input" data-mask-currency="true">
+                            <input type="text" placeholder="R$" value="" name="min_price"  class="search-results-input" data-mask-currency="true">
                         </label>
                         <label class="sessao-area-filtro-label preco-corrente">
                             Máximo
-                            <input type="text" placeholder="0" value="" name="max_price" class="search-results-input" data-mask-currency="true">
+                            <input type="text" placeholder="R$" value="" name="max_price" class="search-results-input" data-mask-currency="true">
                         </label>
                     </section>
                     <section class="clearfix sessao-area-filtro bg-branco ">
@@ -174,22 +175,22 @@
                                 <h5 class="sessao-texto-pesquisa">Preço</h5>
                                 <label class="sessao-area-filtro-label preco-corrente">
                                     Mínimo
-                                    <input type="text" placeholder="0" name="min_price" id="min_price" onkeypress="mascaraCampo(this, mvalor2)"  class="search-results-input escolhaAcomodacao" data-mask-currency="true">
+                                    <input type="text" placeholder="R$" name="min_price" id="min_price" onkeypress="mascaraCampo(this, mvalor2)"  class="search-results-input escolhaAcomodacao" data-mask-currency="true">
                                 </label>
                                 <label class="sessao-area-filtro-label preco-corrente">
                                     Máximo
-                                    <input onkeypress="mascaraCampo(this, mvalor2)" type="text" name="max_price" placeholder="0"  class="search-results-input escolhaAcomodacao" data-mask-currency="true">
+                                    <input onkeypress="mascaraCampo(this, mvalor2)" type="text" name="max_price" placeholder="R$"  class="search-results-input escolhaAcomodacao" data-mask-currency="true">
                                 </label>
                             </section>
                             <section class="clearfix sessao-area-filtro bg-branco ">
                                 <h5 class="sessao-texto-pesquisa">Área</h5>
                                 <label class="sessao-area-filtro-label area-corrente">
                                     Mínimo
-                                    <input type="text" onkeypress="mascaraCampo(this, mvalor2)" name="min_area" placeholder="0" value="" class="search-results-input escolhaAcomodacao" data-mask-currency="true">
+                                    <input type="text" onkeypress="mascaraCampo(this, mvalor2)" name="min_area" placeholder="m²" value="" class="search-results-input escolhaAcomodacao" data-mask-currency="true">
                                 </label>
                                 <label class="sessao-area-filtro-label area-corrente">
                                     Máximo
-                                    <input type="text" name="max_area" onkeypress="mascaraCampo(this, mvalor2)" placeholder="0" value="" class="search-results-input escolhaAcomodacao" data-mask-currency="true">
+                                    <input type="text" name="max_area" onkeypress="mascaraCampo(this, mvalor2)" placeholder="m²" value="" class="search-results-input escolhaAcomodacao" data-mask-currency="true">
                                 </label>
                             </section>
                             <section class="clearfix sessao-area-filtro bg-branco ">
@@ -285,17 +286,18 @@
                                         </a>
                                     </div>
                                 @endforeach
-                                <div class='text-center'>
-                                    {{ $queryAnuncios->appends(\Input::except('page'))->render()}}
-                                </div>
+
+                            </div>
+                            <div class='text-center'>
+                                <div id="loading-page"><img alt="Loading..." src="http://www.infinite-scroll.com/loading.gif"><div><div class="carregamento-anuncio">Carregando anúncios...</div></div></div><br /><br />
                             </div>
                             @else
                                 Nao achou nenhum resultado ;/
                             @endif
                         </div>
-
                     </div>
-                </div>
+
+            </div>
             </form>
         </div>
 
