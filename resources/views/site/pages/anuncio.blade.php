@@ -243,7 +243,7 @@ Olá, Gostaria de ter mais informações sobre o imóvel Apartamento à venda, R
                 <div class="modal-body">
                     <center>
 
-                        <img class="img-responsive center-block borda-image lazy" width="140" height="140" data-original="<?php if($advert->images()->count() > 0):
+                        <img class="img-responsive center-block borda-image" width="140" height="140" data-original="<?php if($advert->images()->count() > 0):
                             echo asset('gallery/'.$advert->images()->first()->extension); else: echo asset('images/noimage2.jpg'); endif?>" />
                         {{$advert->rua}}, {{$advert->bairro}}, {{$advert->cidade}} - {{$advert->estado}}
 

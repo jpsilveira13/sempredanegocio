@@ -49,8 +49,12 @@ class HomeController extends Controller
     public function tipocategoria($name_url){
 
         $categoria_id = Category::select('id')->where('name_url', $name_url)->first();
-        $subcategories = SubCategory::where('category_id',$categoria_id->id)->get();
-        if($categoria_id != null){
+
+        if(empty($categoria_id)){
+            return view('error.error404');
+
+        }else{
+            $subcategories = SubCategory::where('category_id',$categoria_id->id)->get();
             $adverts = Advert::join('subcategories', 'adverts.subcategories_id', '=', 'subcategories.id')->where('subcategories.category_id',$categoria_id->id)->where('status','=','1')->orderBy(DB::raw('RAND()'))->select('adverts.*')->paginate(18);
             $advertsCount = Advert::join('subcategories', 'adverts.subcategories_id', '=', 'subcategories.id')->where('subcategories.category_id',$categoria_id->id)->select('adverts.*')->count();
 
@@ -62,10 +66,8 @@ class HomeController extends Controller
                 'subcategories' => $subcategories
 
             ]);
-        }else{
-            return view('error.error404');
-
         }
+
 
     }
 
@@ -96,13 +98,18 @@ class HomeController extends Controller
 
     public function anuncioInterno($tipo_anuncio, $id, $url_anuncio){
         $advert = Advert::find($id);
+        if(empty($advert)){
+            return view('error.error404');
 
+        }else{
+            return view('site.pages.anuncio', [
+                'title' => 'Sempredanegocio.com.br | Não perca tempo! Anuncie.',
+                'description' => 'Os melhores alugueis no melhor site.',
+                'advert' => $advert
+            ]);
 
-        return view('site.pages.anuncio', [
-            'title' => 'Sempredanegocio.com.br | Não perca tempo! Anuncie.',
-            'description' => 'Os melhores alugueis no melhor site.',
-            'advert' => $advert
-        ]);
+        }
+
     }
 
     public  function getCategories(){

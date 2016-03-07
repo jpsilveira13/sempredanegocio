@@ -114,7 +114,7 @@ Route::group(['prefix' => 'admin', 'middleware'=>'auth','where'=>['id'=>'[0-9]+'
 
 });
 
-Route::get('/{url_name?}', 'HomeController@tipocategoria');
+Route::get('/{url_name}', 'HomeController@tipocategoria');
 
 Route::get('anuncio/{tipo_anuncio}/{id}/{url_anuncio}',[
     'uses' => "HomeController@anuncioInterno"

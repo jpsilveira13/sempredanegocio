@@ -158,6 +158,9 @@
     <p id="yellow">4</p>
 </div>
 <p id="click">Ooops, Página não encontrada!</p>
+<br />
+<br />
+<p><a href="{{asset('/')}}"> Clica aqui</a> é seja redirecionado a página home do site.</p>
 <div id="directional">
     <div id="top">
         <div class="touche inline-block" id="up">

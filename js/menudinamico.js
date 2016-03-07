@@ -43,7 +43,6 @@ function scrollPagina(page) {
                     var data = data.data;
 
                     var len = data.length;
-
                     $('.search-results-header-counter').html(totalAnuncio);
                     for (var i = 0; i < len; i++) {
                         html += '<div class="item col-xs-12 col-sm-6 col-lg-4 col-md-4 bloco-item"><a class="item-total" href="/anuncio/' + data[i].tipo_anuncio + '/' + data[i].id + '/' + data[i].url_anuncio + '"><div class="thumbnail">';
