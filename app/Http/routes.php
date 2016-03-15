@@ -45,6 +45,8 @@ Route::group(['middleware'=>'auth'], function() {
 /* rotas ajax */
 
 Route::post('/form-denuncia', 'HomeController@denuncia');
+Route::post('/form-amigo', 'HomeController@formAmigo');
+Route::post('/form-anuncio', 'HomeController@formContato');
 
 Route::get('/ajax-subcat',[
 

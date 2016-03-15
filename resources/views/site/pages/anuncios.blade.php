@@ -10,7 +10,7 @@
         <div class="col-md-12">
             <div class="search-results">
                 <mark class="search-results-count">
-                    <strong class="search-results-header-counter">{{$advertsCount}}</strong>
+                    <strong class="search-results-header-counter">{{number_format((float)$advertsCount,0,".",".")}}</strong>
 
                 </mark>
                 <h1 class="search-title"> Anúncios Encontrados</h1>
@@ -57,6 +57,18 @@
                 <label class="control-label pull-right sort" for="sortby">Ordenar por</label>
             </form>
         </div>
+        <div class="col-md-12 col-xs-12 col-sm-12 center-block">
+            <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+            <!-- header responsivo imoveis -->
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-client="ca-pub-9276435422488602"
+                 data-ad-slot="7022965179"
+                 data-ad-format="auto"></ins>
+            <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        </div>
         <div class="clearfix"></div>
         <div class="row">
             <form action=""  id="formSearchImoveis" class="ajax">
@@ -65,10 +77,10 @@
                     <div class="area-pesquisa">
                         <section class="clearfix sessao-area-filtro bg-branco ">
                             <h5 class="sessao-texto-pesquisa">Localização</h5>
-                            <div class="input-group">
-                                <input name="cidade" id="location" value="" autocomplete="off" type="text" class="form-control search-results-input escolhaAcomodacao pl3" placeholder="Incluir Cidade">
-                                <ul id="listaCidades" class="lista-cidade-search"></ul>
-                            </div>
+
+                            <input name="cidade" id="location" value="" autocomplete="off" type="text" class="form-control search-results-input  pl3" placeholder="Incluir Cidade">
+                            <ul id="listaCidades" class="lista-cidade-search"></ul>
+
                         </section>
                         <section class="clearfix sessao-area-filtro bg-branco">
                             <h5 class="sessao-texto-pesquisa">Tipo de imóvel</h5>
@@ -151,7 +163,24 @@
                     <div class="row" id="resultSearch">
                         <div class="col-md-12">
                             <div id="products" class="list-group">
+                                <?php $contador = 0; ?>
                                 @foreach($adverts as $advert)
+                                    <?php $contador+=1;?>
+                                    @if($contador > 12)
+                                        <?php $contador = 0;?>
+                                        <div class="item  col-xs-12 col-sm-12 col-lg-12 col-md-12 bloco-item">
+                                            <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                                            <!-- imoveis -->
+                                            <ins class="adsbygoogle"
+                                                 style="display:block"
+                                                 data-ad-client="ca-pub-9276435422488602"
+                                                 data-ad-slot="4429425578"
+                                                 data-ad-format="auto"></ins>
+                                            <script>
+                                                (adsbygoogle = window.adsbygoogle || []).push({});
+                                            </script>
+                                        </div>
+                                    @endif
                                     <div class="item  col-xs-12 col-sm-6 col-lg-4 col-md-4 bloco-item">
                                         <a class="item-total" href="{{url('/')}}/anuncio/{{$advert->tipo_anuncio}}/{{$advert->id}}/{{str_slug($advert->url_anuncio)}}" >
                                             <div class="thumbnail">

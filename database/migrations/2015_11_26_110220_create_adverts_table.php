@@ -31,6 +31,7 @@ class CreateAdvertsTable extends Migration
             $table->text('anuncio_descricao');
             $table->decimal('preco');
             $table->string('url_anuncio');
+            $table->tinyInteger('active');
             $table->integer('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users');
             $table->integer('subcategories_id')->unsigned();

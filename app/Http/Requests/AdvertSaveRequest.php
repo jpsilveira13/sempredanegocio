@@ -30,15 +30,11 @@ class AdvertSaveRequest extends Request
             'bairro' => 'required',
             'rua' => 'required',
             'numero' => 'numeric',
-            'numero_quarto' => 'required',
-            'numero_garagem' => 'required',
-            'numero_suite' => 'required',
-            'area_construida' => 'required',
-            'valor_condominio' => 'required',
-            'valor_iptu' => 'required',
-            'anuncio_titulo' => 'required|min:6|max:200',
+            'numero_quarto' => 'numeric',
+            'numero_garagem' => 'numeric',
+            'numero_suite' => 'numeric',
+            'anuncio_titulo' => 'required|min:6|max:252',
             'anuncio_descricao' => 'required|min:10',
-            'preco' => 'required',
             'nome-usuario' => 'required',
             'telefone-usuario' => 'required',
 
@@ -55,21 +51,14 @@ class AdvertSaveRequest extends Request
     public function messages()
     {
         return [
-            'tipo_anuncio.required'      => 'Seleciona o campo Alugo ou Vendo',
-            'estado.required'            => 'O campo estado não pode ser vazio',
-            'cidade.required'            => 'O campo cidade não pode ser vazio',
-            'bairro.required'            => 'O campo bairro não pode ser vazio',
-            'rua.required'               => 'O campo rua não pode ser vazio',
-            'numero.numeric' => 'O campo rua tem que ser números',
-            'numero_quarto.required' => 'O campo números de quartos não pode ser vazio',
-            'numero_garagem.required' => 'O campo números de garagem não pode ser vazio',
-            'numero_suite.required' => 'O campo número de banheiros não pode ser vazio',
-            'area_construida.required' => 'O campo área construída não pode ser vazio',
-            'valor_condominio.required' => 'O campo condomínio não pode ser vazio',
-            'valor_iptu.required' => 'O campo iptu não pode ser vazio',
-            'anuncio_images.required' => "Não houve upload de imagem",
-            'anuncio_images.max' => "Imagem tem que ter no máximo 3 mb de tamanho",
-            'anuncio_images.mimes' => "Isso não é um formato de imagem."
+            'tipo_anuncio.required'         => 'Seleciona o campo Alugo ou Vendo',
+            'numero.numeric'                => 'O campo rua tem que ser números',
+            'numero_quarto.numeric'         => 'O campo números de quartos tem que ser números',
+            'numero_garagem.numeric'        => 'O campo números de garagem tem que ser números',
+            'numero_suite.numeric'          => 'O campo número de banheiros tem que ser números',
+            'anuncio_images.required'       => "Não houve upload de imagem",
+            'anuncio_images.max'            => "Imagem tem que ter no máximo 3 mb de tamanho",
+            'anuncio_images.mimes'          => "Isso não é um formato de imagem."
 
         ];
     }

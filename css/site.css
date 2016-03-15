@@ -137,13 +137,13 @@ cores:
 
 }
 .well{
-    background-color: #EEE;
+    background-color: #f7f4ec;
     border: none;
 
 }
 
 section{
-    background-color: #EEE;
+    background-color: #f7f4ec;
 
 }
 
@@ -457,7 +457,7 @@ body{
     font-size: 14px;
     line-height: 20px;
     color: #444;
-    background-color: #EEE;
+    background-color: #f7f4ec;
     -webkit-font-smoothing: antialiased;
     word-wrap: break-word;
     padding-top: 70px;
@@ -902,6 +902,7 @@ body{
     -moz-border-radius: 0px;
     border-radius: 0px;
     height:380px;
+    box-shadow: 0 2px 3px rgba(0,0,0,0.35);
 
 }
 
@@ -996,6 +997,7 @@ body{
 
 .infos-suggest .text-bairro {
     font-size: 1.1em;
+    text-transform: uppercase;
 }
 
 
@@ -1048,7 +1050,7 @@ body{
 
 .bottom-suggest .val-imovel {
     font-size: 1.1em;
-    color: #000;
+    color: #0A5489;
     -webkit-transition: all 0.5s;
     transition: all 0.5s;
     font-weight: 600;
@@ -1225,6 +1227,10 @@ footer{
 
 }
 
+.bb-white{
+    border-bottom: 1px solid #fff;
+
+}
 .footer-texto i{
     display: inline-block;
     float: right;
@@ -1263,8 +1269,8 @@ footer{
 
 .search-results{
 
-    padding-top: 2px;
-    padding-bottom: 9px;
+    margin-top: 10px;
+    margin-bottom: 10px;
 
 }
 
@@ -1280,7 +1286,7 @@ footer{
 .search-title{
     line-height: 1.2;
     font-size: 30px!important;
-    color: #000;
+    color: #ef1e24;
     clear: none;
     overflow: hidden;
     max-width: 100%;
@@ -1310,6 +1316,7 @@ footer{
 
 .search-results-header-counter{
     font-weight: 600;
+    color: #0A5489;
 
 }
 .mark,mark{
@@ -1319,14 +1326,13 @@ footer{
 
 .area-pesquisa{
     border-right: solid 1px #eee;
-    width: 190px;
+    box-shadow: 0 2px 3px rgba(0,0,0,0.35);
     box-sizing: border-box;
     top: 0;
     left: 0;
     bottom: 0;
     background-color: #fff;
     min-height: 190px;
-    overflow-x: auto;
 
 }
 
@@ -1339,10 +1345,19 @@ footer{
 
 
 .sessao-texto-pesquisa{
-    color: #333;
+    color: #0A5489;
     font-size: 14px;
     margin: 0 0 11px;
     font-weight: 700;
+
+}
+
+.text-error-search{
+    text-align: center;
+    font-size: 2.2em;
+    font-weight: 800;
+    margin-bottom: 0;
+    color: #034F85;
 
 }
 
@@ -1485,9 +1500,9 @@ footer{
     padding: 2px 5px;
     display: none;
     list-style: none;
-    width: 96%;
+    width: 250px;
     bottom: 0;
-    min-height: 235px;
+    min-height: 270px;
     background-color: #fff;
 }
 
@@ -1510,8 +1525,10 @@ footer{
     line-height: 1.5;
     font-weight: normal;
     text-align: left;
-    font-size: 0.9em;
+    font-size: 1em;
     cursor: pointer;
+    margin-bottom: 5px;
+    margin-top: 5px;
 }
 
 
@@ -1524,10 +1541,9 @@ footer{
 
 .lista-cidade-search{
     top: 33px!important;
-    width: 100%!important;;
-    left: 0px!important;;
-    border-top-right-radius: 0px!important;;
-    border-top-left-radius: 0px!important;;
+    left: 0px!important;
+    border-top-right-radius: 0px!important;
+    border-top-left-radius: 0px!important;
 
 }
 
@@ -2072,6 +2088,7 @@ input[type=text].input-slider-preco-esq, input[type=text].input-slider-esq, inpu
     text-transform: uppercase;
     margin: 0 0 10px;
     line-height: 12px;
+    font-weight: 600;
 }
 
 
@@ -2090,6 +2107,7 @@ input[type=text].input-slider-preco-esq, input[type=text].input-slider-esq, inpu
     text-transform: uppercase;
     margin-bottom: 7px;
     line-height: 12px;
+    color: #0A5489;
 
 }
 
@@ -2240,6 +2258,7 @@ ul.thumbnails-carousel li {
 
 .bar-actions .share-social {
     margin: 0 40px;
+    margin-left: 0;
 }
 
 .bar-actions .share-social .icone-social {
@@ -2309,6 +2328,7 @@ span#number_tel {
     border-radius: 5px;
     font-weight: bold;
     margin: 0 0 10px;
+    color: #0A5489;
 }
 
 .tab-pane .number {
@@ -2422,7 +2442,27 @@ input.span1, textarea.span1 {
     left: 0;
     right: 0;
     background-color: #fff;
-    padding: 29%
+    padding-top: 64px;
+    height:274px;
+}
+
+#divSucessoAmigo,#divSucessoAnuncio{
+    display: none;
+
+}
+
+.text-success{
+    display: block;
+    font-size: 18px;
+    line-height: 21px;
+    font-weight: bold;
+
+}
+
+
+.subline {
+    font-size: 12px;
+    color: #979797;
 }
 
 .btn-link {
@@ -2869,13 +2909,36 @@ input#images{display: none;}
 
     .area-pesquisa{
 
-        width: 172px;
+        width: 69%;
 
     }
 
     #btn-pesquisa{
         display: block;
     }
+}
+
+#toTop
+{
+    position: fixed;
+    bottom: 10px;
+    right: 30px;
+
+    overflow: hidden;
+
+    width: 38px;
+    height: 38px;
+
+    cursor: pointer;
+    text-align: center;
+    text-indent: -99999px;
+
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    background: url('../images/top-button.png');
+
+    -khtml-border-radius: 5px;
 }
 
 
@@ -2889,11 +2952,15 @@ input#images{display: none;}
 
 
     #btn-close-nav{
-        font-size: 11em;
+        font-size: 7em;
         color: #034F85;
         opacity: 1;
         text-shadow: none;
         display: block;
+        position: absolute;
+        right: 0px;
+        height: 100%;
+        bottom: 116px;
 
     }
 
@@ -3211,6 +3278,10 @@ input#images{display: none;}
     .search-title{
 
         font-size: 1.1em!important;
+    }
+    .text-estilo-center{
+
+        text-align: center!important;
     }
 
     .anuncio-area-mapa{

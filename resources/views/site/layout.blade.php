@@ -122,7 +122,15 @@
 </section>
 <div class="clearfix"></div>
 <footer>
-
+    <div class="row">
+        <div class="container">
+            <div class="col-md-12 bb-white">
+                <div class="text-center footer-texto">
+                    <p>Telefone para contato: <strong>(34) 99938-8993</strong> / Email: marketing@sempredanegocio.com.br </p>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="row">
         <div class="container">
             <div class="col-md-12">
@@ -131,16 +139,17 @@
                     <a><i class="fa fa-twitter fa-2x"></i></a>
                     <a><i class="fa fa-instagram fa-2x"></i></a>
                     <a><i class="fa fa-whatsapp fa-2x"></i></a>
-                    <a><i class="fa fa-envelope fa-2x"></i></a>
+                    <a href="mailto:marketing@sempredanegocio.com.br"><i class="fa fa-envelope fa-2x"></i></a>
                 </div>
-                <div class="footer-texto text-center">
+                <div class="footer-texto text-right text-estilo-center">
                     <p>Copyright © 2016. Todos os direitos reservados.</p>
                 </div>
             </div>
         </div>
     </div>
 </footer>
-<a href="{{url('anuncie')}}" title="Anuncie" class="btn btn-anuncio <?=Request::is('anuncie') ? 'hide' : '' ?>" id="btAnuncie">Anuncie Agora</a>
+<!--<a href="{{url('anuncie')}}" title="Anuncie" class="btn btn-anuncio <?=Request::is('anuncie') ? 'hide' : '' ?>" id="btAnuncie">Anuncie Agora</a> -->
+<a href="#" title="Ir para o topo" class="hide" id="toTop">Topo</a>
 <!-- modal area site -->
 <!-- modal anuncio criado -->
 <div class="modal modal-login fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">

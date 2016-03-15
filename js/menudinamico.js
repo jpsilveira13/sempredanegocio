@@ -1,7 +1,10 @@
+
 var paginaAtual = 1;
 var temMaisUma = true;
 var continuaScroll = true;
-
+function formatNumber (num) {
+    return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.")
+}
 function scrollPagina(page) {
     page = paginaAtual;
     if (continuaScroll) {
@@ -19,7 +22,7 @@ function scrollPagina(page) {
             type: 'GET',
             cache: false,
             data: filters,
-            beforeSend: function(data){
+            beforeSend: function(){
 
                 if(page == 1 ){
                     $('#resultSearch').fadeTo('slow',0.5);
@@ -30,8 +33,19 @@ function scrollPagina(page) {
                 }
 
             },
+            complete: function (data) {
+
+                var total = data.responseJSON.total;
+                if(total == 0){
+                    $('.search-results-header-counter').html(total);
+                    $(".before").empty();
+                    $('#resultSearch').fadeTo('slow', 1);
+                    $('.before').show().append('<h1 class="text-error-search">Nenhum resultado foi encontrado!</h1><img class="img-responsive" src="../images/404erro.png" />');
+
+
+                }
+            },
             success: function(data) {
-               // console.log(data.data);
                 if (data.data.length != 0) {
                     $('#loading-page').css('display','block');
                     continuaScroll = true;
@@ -39,12 +53,20 @@ function scrollPagina(page) {
                     $(".before").empty();
                     $('#resultSearch').fadeTo('slow', 1);
                     var html = '';
-                    var totalAnuncio = data.total;
+                    var totalAnuncio = formatNumber(data.total);
+
                     var data = data.data;
+
 
                     var len = data.length;
                     $('.search-results-header-counter').html(totalAnuncio);
+                    var cont = 0;
                     for (var i = 0; i < len; i++) {
+                        cont++;
+                        if(cont > 12 ){
+                            cont = 0;
+                            html+='<div class="item col-xs-12 col-sm-12 col-lg-12 col-md-12 bloco-item"><script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script><ins class="adsbygoogle"style="display:block" data-ad-client="ca-pub-9276435422488602" data-ad-slot="4429425578" data-ad-format="auto"></ins>  <script> (adsbygoogle = window.adsbygoogle || []).push({}) </script></div>';
+                        }
                         html += '<div class="item col-xs-12 col-sm-6 col-lg-4 col-md-4 bloco-item"><a class="item-total" href="/anuncio/' + data[i].tipo_anuncio + '/' + data[i].id + '/' + data[i].url_anuncio + '"><div class="thumbnail">';
                         //Validação se existe imagem ou nao
                         if (data[i].images[0]) {
@@ -78,7 +100,7 @@ function scrollPagina(page) {
 
                     continuaScroll = false;
                     $('#loading-page').css('display','none');
-                    $('#products').append('<p style="clear:both; text-align:center"><br /><br />FIM DE ANÚNCIOS ;/</p>');
+                    $('#products').append('<div class="teste"> <p style="clear:both; text-align:center"><br /><br />FIM DE ANÚNCIOS ;/</p></div>');
                 }
             }
 
@@ -108,4 +130,14 @@ jQuery(".escolhaAcomodacao").change(function () {
     paginaAtual = 1;
     continuaScroll = true;
     scrollPagina();
+});
+
+$("#listaCidades li a").livequery(function(){
+    $(this).click(function(){
+
+        paginaAtual = 1;
+        continuaScroll = true;
+        scrollPagina();
+    });
+
 });

@@ -64,7 +64,7 @@
                             <img class="mb10 transition-img" src="{{url('images/img-imoveis.png')}}" alt="Imóveis" title="Área Imóveis" width="167" height="130" />
                             <figcaption>
                                 <p class="hero-description">Imóveis</p>
-                                <p class="hero-description fontsize13px">Encontre mais de 9.123 imóveis de sua região em um único lugar. </p>
+                                <p class="hero-description fontsize13px">Encontre mais de <strong>{{number_format((float)$advertCount,0,".",".")}}</strong> imóveis de sua região em um único lugar. </p>
                             </figcaption>
                         </figure>
                     </a>
@@ -153,21 +153,21 @@
             <div class="col-md-3">
                 <div class="item-counter">
                     <span class="item-icon"><i class="fa fa-database"></i></span>
-                    <div data-refresh-interval="100" data-speed="10000" data-to="9123" data-from="0" class="item-count">9123</div>
+                    <div data-refresh-interval="100" data-speed="6000" data-to="{{$advertCount}}" data-from="0" class="item-count">{{$advertCount}}</div>
                     <span class="item-info">Anúncios Cadastrados</span>
                 </div>
             </div>
             <div class="col-md-3">
                 <div class="item-counter">
                     <span class="item-icon"><i class="fa fa fa-home "></i></span>
-                    <div data-refresh-interval="100" data-speed="10000" data-to="52129" data-from="0" class="item-count">52129</div>
+                    <div data-refresh-interval="100" data-speed="6000" data-to="{{$imageCount}}" data-from="0" class="item-count">{{$imageCount}}</div>
                     <span class="item-info">Imagens Cadastradas</span>
                 </div>
             </div>
             <div class="col-md-3">
                 <div class="item-counter">
                     <span class="item-icon"><i class="fa fa-users"></i></span>
-                    <div data-refresh-interval="100" data-speed="10000" data-to="892" data-from="0" class="item-count">892</div>
+                    <div data-refresh-interval="100" data-speed="6000" data-to="{{$userCount}}" data-from="0" class="item-count">{{$userCount}}</div>
                     <span class="item-info">Usuários ativos</span>
                 </div>
             </div>

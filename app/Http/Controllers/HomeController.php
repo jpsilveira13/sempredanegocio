@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Validator;
 use Psy\Util\Json;
+use sempredanegocio\Models\AdvertImage;
+use sempredanegocio\Models\AdvertMessage;
 use sempredanegocio\Models\Cidade;
 use sempredanegocio\Http\Requests;
 use sempredanegocio\Http\Controllers\Controller;
@@ -15,8 +17,10 @@ use sempredanegocio\Models\AdvertCategory;
 use sempredanegocio\Models\Category;
 use sempredanegocio\Models\Complaint;
 use sempredanegocio\Models\Feature;
+use sempredanegocio\Models\MessageFriend;
 use sempredanegocio\Models\SubCategory;
 use Illuminate\Support\Facades\DB;
+use sempredanegocio\Models\User;
 
 class HomeController extends Controller
 {
@@ -25,10 +29,17 @@ class HomeController extends Controller
 
 
         $category = Category::get();
+        $advertCount = Advert::count();
+        $imageCount = AdvertImage::count();
+        $userCount = User::count();
+
 
         return view('site.pages.home',[
 
             'categories' => $category,
+            'advertCount' => $advertCount,
+            'imageCount' => $imageCount,
+            'userCount' => $userCount,
         ]);
 
     }
@@ -158,7 +169,7 @@ class HomeController extends Controller
 
     public function searchCidade($query){
         $result = null;
-        $result = Cidade::select('nome','uf')->where('nome','LIKE',$query.'%')->orderBy('nome','desc')->take(8)->distinct()->get();
+        $result = Cidade::select('nome','uf')->where('nome','LIKE',$query.'%')->orderBy('id','desc')->take(8)->distinct()->get();
         return \Response::json($result);
 
     }
@@ -214,13 +225,113 @@ class HomeController extends Controller
 
     }
 
+    public function formAmigo(){
+        $inputData = Input::get('formData');
+
+        parse_str($inputData, $formFields);
+        $userData = array(
+            'user_id'                   =>  $formFields['user_id'],
+            'url_site'                  =>  $formFields['url_site'],
+            'nome_amigo'                =>  $formFields['nome_amigo'],
+            'email_amigo'               =>  $formFields['email_amigo'],
+            'nome_anuncio'              =>  $formFields['nome_anuncio'],
+            'email_anuncio'             =>  $formFields['email_anuncio'],
+            'assunto_anuncio'           =>  $formFields['assunto_anuncio'],
+
+
+        );
+
+        $rules = array(
+            'nome_amigo'      =>  'required',
+            'email_amigo'     =>  'required',
+            'email_anuncio'    =>  'required',
+        );
+        $validator = Validator::make($userData,$rules);
+        if($validator->fails()){
+            return Response::json(array(
+                'fail' => true,
+                'errors' => $validator->getMessageBag()->toArray()
+            ));
+        }else {
+            \Mail::send('emails.contactAmigo',$userData,function($message) use ($userData){
+                $message->from('naoresponder@sempredanegocio.com.br', 'Sempre da Negócio');
+
+                $message->to($userData['email_amigo']);
+                $message->subject($userData['nome_anuncio']. ', quer compartilhar esse anúncio com você ');
+                $message->replyTo($userData['email_anuncio'], $userData['nome_anuncio']);
+
+            });
+
+            if(MessageFriend::create($userData)) {
+                //return success  message
+                return Response::json(array(
+                    'success' => true
+                ));
+
+
+            }
+
+        }
+
+    }
+    public function formContato(){
+        $inputData = Input::get('formData');
+
+        parse_str($inputData, $formFields);
+        $userData = array(
+            'url_site'                          =>  $formFields['url_site'],
+            'nome_usuario'                      =>  $formFields['nome_usuario'],
+            'email_usuario'                     =>  $formFields['email_usuario'],
+            'telefone_usuario'                  =>  $formFields['telefone_usuario'],
+            'nome'                              =>  $formFields['nome'],
+            'email'                             =>  $formFields['email'],
+            'codigo_area'                       =>  $formFields['codigo_area'],
+            'telefone'                          =>  $formFields['telefone'],
+            'mensagem'                          =>  $formFields['mensagem'],
+
+        );
+
+
+        $rules = array(
+            'email_usuario'              =>  'required',
+            'telefone_usuario'           =>  'required',
+            'mensagem'                   =>  'required',
+        );
+        $validator = Validator::make($userData,$rules);
+        if($validator->fails()){
+            return Response::json(array(
+                'fail' => true,
+                'errors' => $validator->getMessageBag()->toArray()
+            ));
+        }else {
+            \Mail::send('emails.contactAnunciante',$userData,function($message) use ($userData){
+                $message->from('naoresponder@sempredanegocio.com.br', 'Sempre da Negócio');
+
+                $message->to($userData['email_usuario']);
+                $message->subject($userData['nome']. ', enviou uma mensagem para você ');
+                $message->replyTo($userData['email_usuario'], $userData['nome']);
+
+            });
+            if(AdvertMessage::create($userData)) {
+                //return success  message
+                return Response::json(array(
+                    'success' => true
+                ));
+
+
+            }
+
+        }
+
+    }
+
     //search imoveis
 
     public function scopeImoveis(){
         $query = Advert::query();
 
-        $min_area = Input::has('min_area') ? Input::get('min_area'): null;
-        $max_area = Input::has('max_area') ? Input::get('max_area'): null;
+        $min_area = \Input::has('min_area') ? Input::get('min_area'): null;
+        $max_area = \Input::has('max_area') ? Input::get('max_area'): null;
         $max_price = str_replace(".","",str_replace(",","",\Input::get('max_price')));
         $min_price =  str_replace(".","",str_replace(",","",\Input::get('min_price')));
 
@@ -231,7 +342,8 @@ class HomeController extends Controller
 
         }
         if(\Input::get('cidade')){
-            $query->where('cidade',\Input::get('cidade'));
+
+            if($query->where('cidade',\Input::get('cidade')));
 
         }
 
@@ -262,8 +374,7 @@ class HomeController extends Controller
 
         }
 
-        return Response::json($query->where('status','>','0')->with('images')->paginate(18));
-
+        return Response::json($query->where('status','>','0')->orderBy(DB::raw('RAND()'))->with('images')->paginate(18));
 
     }
 

@@ -6,89 +6,14 @@
 
 
 @if(count($queryAnuncios) > 0)
-    <div id="menu-total" class="sidebar-left hide">
-        <div id="menu-teste" class="left">
-            <div class="col-md-2 col-sm-2">
-                <div class="area-pesquisa">
-                    <section class="clearfix sessao-area-filtro bg-branco">
-                        <h5 class="sessao-texto-pesquisa">Tipo de imóvel</h5>
-                        <select  name="categoria" class="search-results-select search-results-select-img">
-                            <options value="" selected>Seleciona uma opção</options>
-                            @foreach($subcategories as $subcategory)
 
-                                <option name="{{$subcategory->id}}">{{$subcategory->name}}</option>
-                            @endforeach
-                        </select>
-                    </section>
-                    <section class="clearfix sessao-area-filtro bg-branco ">
-                        <h5 class="sessao-texto-pesquisa">Preço</h5>
-                        <label class="sessao-area-filtro-label preco-corrente">
-                            Mínimo
-                            <input type="text" placeholder="R$" value="" name="min_price"  class="search-results-input" data-mask-currency="true">
-                        </label>
-                        <label class="sessao-area-filtro-label preco-corrente">
-                            Máximo
-                            <input type="text" placeholder="R$" value="" name="max_price" class="search-results-input" data-mask-currency="true">
-                        </label>
-                    </section>
-                    <section class="clearfix sessao-area-filtro bg-branco ">
-                        <h5 class="sessao-texto-pesquisa">Área</h5>
-                        <label class="sessao-area-filtro-label area-corrente">
-                            Mínimo
-                            <input type="text" placeholder="0" value="" name="min_area" class="search-results-input" data-mask-currency="true">
-                        </label>
-                        <label class="sessao-area-filtro-label area-corrente">
-                            Máximo
-                            <input type="text" placeholder="0" value="" name="max_area" class="search-results-input" data-mask-currency="true">
-                        </label>
-                    </section>
-                    <section class="clearfix sessao-area-filtro bg-branco ">
-                        <h5 class="sessao-texto-pesquisa hidden">Cômodos</h5>
-                        <label class="sessao-texto-pesquisa sessao-area-filtro-label-numeric fontsize11px">
-                            Quartos
-                            <select name="num_quartos" class="search-results-select numeric-select">
-                                <option selected="selected">-</option>
-                                <option value="1">1+</option>
-                                <option value="1">2+</option>
-                                <option value="1">3+</option>
-                                <option value="1">4+</option>
-
-                            </select>
-                        </label>
-                        <label class="sessao-texto-pesquisa sessao-area-filtro-label-numeric fontsize11px">
-                            Banheiros
-                            <select name="num_banheiros" class="search-results-select numeric-select">
-                                <option selected="selected">-</option>
-                                <option value="1">1+</option>
-                                <option value="1">2+</option>
-                                <option value="1">3+</option>
-                                <option value="1">4+</option>
-
-                            </select>
-                        </label>
-                        <label class="sessao-texto-pesquisa sessao-area-filtro-label-numeric fontsize11px" >
-                            Vagas
-                            <select id="num_vagas" name="num_vagas" class="search-results-select numeric-select">
-                                <option selected="selected">-</option>
-                                <option value="1">1+</option>
-                                <option value="1">2+</option>
-                                <option value="1">3+</option>
-                                <option value="1">4+</option>
-
-                            </select>
-                        </label>
-                    </section>
-                </div>
-            </div>
-        </div>
-    </div>
     <div class="clearfix"></div>
     <div class="row no-margin">
         <div class="container">
             <div class="col-md-12">
                 <div class="search-results">
                     <mark class="search-results-count">
-                        <strong class="search-results-header-counter">{{$queryCount}}</strong>
+                        <strong class="search-results-header-counter">{{number_format((float)$queryCount,0,".",".")}}</strong>
 
                     </mark>
                     <h1 class="search-title"> Anúncios Encontrados</h1>
@@ -126,7 +51,7 @@
                                 Valor
 
                             </option>
-                            <option  value="Area">
+                            <option  value="Area">]
                                 Área
 
                             </option>
@@ -135,16 +60,30 @@
                     <label class="control-label pull-right sort" for="sortby">Ordenar por</label>
                 </form>
             </div>
+            <div class="col-md-12 col-xs-12 col-sm-12 center-block">
+                <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                <!-- header responsivo -->
+                <ins class="adsbygoogle"
+                     style="display:block"
+                     data-ad-client="ca-pub-9276435422488602"
+                     data-ad-slot="5825433572"
+                     data-ad-format="auto"></ins>
+                <script>
+                    (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
+            </div>
+            <br />
             <div class="clearfix"></div>
             <div class="row">
                 <form action=""  id="formSearchImoveis" class="ajax">
+                    <input type="hidden" value="1" name="status" />
                     <div id="nav-lateral" class="col-md-2 col-sm-2 no-padding">
                         <button id="btn-close-nav" type="button" class="close">X</button>
                         <div class="area-pesquisa">
                             <section class="clearfix sessao-area-filtro bg-branco ">
                                 <h5 class="sessao-texto-pesquisa">Localização</h5>
                                 <div class="input-group">
-                                    <input name="cidade" id="location" value="{{\Input::get('cidade')}}"  autocomplete="off" type="text" class="form-control search-results-input escolhaAcomodacao pl3" placeholder="Incluir Cidade">
+                                    <input name="cidade" id="location" value="{{\Input::get('cidade')}}"  autocomplete="off" type="text" class="form-control search-results-input pl3" placeholder="Incluir Cidade">
                                     <ul id="listaCidades" class="lista-cidade-search"></ul>
                                 </div>
                             </section>
@@ -234,8 +173,24 @@
                         <div class="before"></div>
                         <div class="row" id="resultSearch">
                             <div id="products" class="list-group">
-
+                                <?php $contador = 0; ?>
                                 @foreach($queryAnuncios as $queryAnuncio)
+                                    <?php $contador+=1;?>
+                                    @if($contador > 12)
+                                        <?php $contador = 0;?>
+                                        <div class="item  col-xs-12 col-sm-12 col-lg-12 col-md-12 bloco-item">
+                                            <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                                            <!-- imoveis -->
+                                            <ins class="adsbygoogle"
+                                                 style="display:block"
+                                                 data-ad-client="ca-pub-9276435422488602"
+                                                 data-ad-slot="4429425578"
+                                                 data-ad-format="auto"></ins>
+                                            <script>
+                                                (adsbygoogle = window.adsbygoogle || []).push({});
+                                            </script>
+                                        </div>
+                                    @endif
                                     <div class="item  col-xs-12 col-sm-6 col-lg-4 col-md-4 bloco-item">
                                         <a class="item-total" href="{{url('/')}}/anuncio/{{$queryAnuncio->tipo_anuncio}}/{{$queryAnuncio->id}}/{{str_slug($queryAnuncio->url_anuncio)}}" >
                                             <div class="thumbnail">

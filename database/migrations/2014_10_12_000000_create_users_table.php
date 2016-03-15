@@ -19,7 +19,6 @@ class CreateUsersTable extends Migration
             $table->integer('status')->default(1);
             $table->string('avatar');
             $table->string('name');
-            $table->string('tipo');
             $table->string('email')->unique()->nullable();
             $table->string('password', 60)->nullable();
             $table->string('phone')->nullable();
@@ -27,6 +26,8 @@ class CreateUsersTable extends Migration
             $table->string('city');
             $table->string('state');
             $table->string('zipcode');
+            $table->integer('typeuser_id')->unsigned();
+            $table->foreign('typeuser_id')->references('id')->on('types_user');
             $table->rememberToken();
             $table->timestamps();
 

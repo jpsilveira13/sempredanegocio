@@ -279,7 +279,7 @@
                                     <input type="file" multiple id="photos"  name="anuncio_images[]" />
                                 </div>
                                 <br />
-                                <p class="help-block">Você pode fazer o upload de 4 fotos (de até 3Mb, em formatos de jpg ou png).</p>
+                                <p class="help-block">Você pode fazer o upload de 24 fotos (de até 3Mb, em formatos de jpg ou png).</p>
                             </div>
                             <ul id="photos_clearing" class="clearing-thumbs upload-imagem no-padding" data-clearing></ul>
                         </div>

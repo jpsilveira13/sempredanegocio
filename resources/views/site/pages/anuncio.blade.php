@@ -10,9 +10,14 @@
                 <div class="box-default clearfix imovel-area-detalhe">
                     <h1 class="pull-left">
                         <span class="subtitle">{{$advert->subcategory->name}} {{$advert->tipo_anuncio}}</span>
-                        {{$advert->rua}}
-                        <br />
-                        <span class="logradouro">{{$advert->bairro}}, {{$advert->cidade}} - {{$advert->estado}}</span>
+                        @if(count($advert->active > 0))
+                            {{$advert->rua}} - {{$advert->numero}}
+                            <br />
+                            <span class="logradouro">{{$advert->bairro}}, {{$advert->cidade}} - {{$advert->estado}}</span>
+                        @else
+                            <span class="logradouro">{{$advert->bairro}}, {{$advert->cidade}} - {{$advert->estado}}</span>
+
+                        @endif
                     </h1>
                     <div class="pull-right posvalue-imovel">
                         <span class="value-ficha">
@@ -29,9 +34,9 @@
                     <div class="pull-left">
                         <ul class="unstyled no-padding">
                             <li>@if($advert->numero_quarto == 0) -- @else{{$advert->numero_quarto}}@endif<span class="text-info">quarto</span></li>
-                            <li>@if($advert->numero_suite == 0) -- @else{{$advert->numero_suite}}@endif<span class="text-info">suíte</span></li>
+                            <li>@if($advert->numero_suite == 0) -- @else{{$advert->numero_suite}}@endif<span class="text-info">Banheiros</span></li>
                             <li>@if($advert->area_construida == 0) -- @else{{$advert->area_construida}}@endif<span class="text-info">Área Útil (m²)</span></li>
-                            <li>@if($advert->area_construida == 0) -- @else{{$advert->area_construida}}@endif<span class="text-info">Área Total (m²)</span></li>
+                            <li>@if($advert->numero_garagem == 0) -- @else{{$advert->numero_garagem}}@endif<span class="text-info">Número de Garagem</span></li>
                         </ul>
                     </div>
                     <div class="pull-right">
@@ -112,6 +117,7 @@
                     <h3>Características</h3>
 
                     <div id="caracteristicaOferta">
+
                         @if($advert->features()->count() > 0)
                             <p></p>
                             <p>
@@ -125,6 +131,10 @@
                                 @endif
 
                             </p>
+                    </div>
+                    <p></p>
+                    <div id="codigoAnuncio">
+                        <p><strong>Código do anúncio: </strong> {{$advert->id}}</p>
                     </div>
                 </div>
                 <div class="box-default clearfix">
@@ -163,27 +173,37 @@
                                 <p class="text-aoligar">Ao ligar, diga que você viu esse anúncio no Sempre da Negócio.</p>
                                 <span id="number_tel" class="number tc">@if(count($advert->user->phone) > 0){{$advert->user->phone}}@else -- @endif</span>
 
-                                <input type="hidden" id="hdnVerTelefoneAtivo" value="1">
+
                             </div>
                             <!-- mensagem -->
                             <div class="content-floaters">
                                 <div class="tab-mensagem active" id="email">
-                                    <form id="frmEnviarMensagem" class="form-mensagem clearfix">
-                                        <input id="txtNome" class="input input-block-level" type="text" placeholder="Nome" value="">
-                                        <input id="txtEmail" class="input input-block-level" type="email" placeholder="E-mail" value="">
-                                        <input id="txtDDD" class="input input-block-level span1" type="number" placeholder="DDD" maxlength="2"  value="">
-                                        <input id="txtTelefone" class="input input-block-level span2" type="tel" placeholder="Telefone" maxlength="9" value="">
-                                        <textarea id="txtMensagem" class="input-block-level" rows="5">
-Olá, Gostaria de ter mais informações sobre o imóvel Apartamento à venda, R$ {{$advert->preco}}, {{$advert->cidade}} - {{$advert->estado}}, que encontrei no Sempre da Negócio. Aguardo seu contato, obrigado.
+                                    <form id="emailAnuncio" action="" class="form-mensagem clearfix">
+                                        <input type="hidden" name="url_site"  value="{{Request::url()}}" />
+                                        <input type="hidden" name="nome_usuario" value="@if(count($advert->user->name) > 0){{$advert->user->name}}@else -- @endif" />
+                                        <input type="hidden" name="email_usuario"  value="@if(count($advert->user->email) > 0){{$advert->user->email}}@else -- @endif" />
+
+                                        <input type="hidden" name="telefone_usuario" value="@if(count($advert->user->phone) > 0){{$advert->user->phone}}@else -- @endif" />
+                                        <input id="txtNome" required name="nome" class="input input-block-level" type="text" placeholder="Nome" value="">
+                                        <input id="txtEmail" required name="email" class="input input-block-level" type="email" placeholder="E-mail" value="">
+                                        <input id="txtDDD" required name="codigo_area" class="input input-block-level span1" type="text" placeholder="DDD" maxlength="2"  value="">
+                                        <input id="txtTelefone" required name="telefone" class="input input-block-level span2" type="text" placeholder="Telefone" maxlength="9" value="">
+                                        <textarea name="mensagem" id="txtMensagem" class="input-block-level" rows="5">
+Olá, Gostaria de ter mais informações sobre o  imóvel {{$advert->subcategory->name}} à {{$advert->tipo_anuncio}}, R$ {{$advert->preco}}, em {{$advert->cidade}} - {{$advert->estado}}, que encontrei no Sempre da Negócio. Aguardo seu contato, obrigado.
 
                                         </textarea>
-                                        <div class="check-ofertas pull-left mt10">
-                                            <input class="pull-left" type="checkbox" id="chkNoticias" checked="checked">
+                                        <!--<div class="check-ofertas pull-left mt10">
                                             <label>Desejo receber notícias e ofertas do Sempre dá negócio e de seus parceiros</label>
-                                        </div>
+                                        </div> -->
+                                        <br />
                                         <input type="reset" class="btn-link" value="Limpar" id="btnLimpar">
-                                        <a href='#' id="lnkEnviarMensagem" class="pull-right btn btn-zap contact icone-e-mail" onclick="return enviarMensagem('/FichaCampanha/Enviar');">Enviar e-mail</a>
+                                        <button  type="submit" id="lnkEnviarMensagem" class="pull-right btn btn-zap contact icone-e-mail">Enviar e-mail</button>
                                     </form>
+                                    <div id="divSucessoAnuncio" class="tab-floater tab-pane">
+                                        <p class="text-success mt10">A mensagem foi enviada com sucesso!</p>
+                                        <p class="mt30">Em breve você receberá uma cópia dessa mensagem em seu endereço de e-mail.</p>
+                                        <p class="subline mt30">Não faça depósitos sem a certeza da existência e das condições do imóvel anunciado. Certifique-se da idoneidade do anunciante.</p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -215,7 +235,7 @@ Olá, Gostaria de ter mais informações sobre o imóvel Apartamento à venda, R
                     <!-- Atualizado há 16 dias -->
                     <div class="pull-left content-anunciante">
                         <a href="#" class="pull-left logo">
-                            <img src="" alt="{{$advert->user->name}}" width="88" height="52">
+                            <img src="{{$advert->user->avatar}}" alt="{{$advert->user->name}}" width="88" height="52">
                         </a>
                         <div class="pull-left anunciante">
                             <a href="#" class="fontsize13px">Outras ofertas de: {{$advert->user->name}}</a>
@@ -241,30 +261,45 @@ Olá, Gostaria de ter mais informações sobre o imóvel Apartamento à venda, R
                     <h4 class="modal-title" id="myModalLabel">Enviar esse anúncio a um amigo</h4>
                 </div>
                 <div class="modal-body">
-                    <center>
+                    <div class="hide-body">
+                        <center>
 
-                        <img class="img-responsive center-block borda-image" width="140" height="140" data-original="<?php if($advert->images()->count() > 0):
-                            echo asset('gallery/'.$advert->images()->first()->extension); else: echo asset('images/noimage2.jpg'); endif?>" />
-                        {{$advert->rua}}, {{$advert->bairro}}, {{$advert->cidade}} - {{$advert->estado}}
+                            <img class="img-responsive center-block borda-image" width="140" height="140" src="<?php if($advert->images()->count() > 0):
+                                echo asset('gallery/'.$advert->images()->first()->extension); else: echo asset('images/noimage2.jpg'); endif?>" />
+                            {{$advert->rua}}, {{$advert->bairro}}, {{$advert->cidade}} - {{$advert->estado}}
 
-                        <small>Sob consulta</small>
+                            <small>Sob consulta</small>
+                            <br />
+
+                            <span><strong>Características: </strong></span>
+                            @foreach($advert->features()->get() as $feature)
+                                <span class="label label-success">{{$feature->name}}</span>
+                            @endforeach
+                        </center>
                         <br />
+                    </div>
+                    <form id="emailAmigo" action="" >
+                        <input type="hidden" name="user_id" value="{{$advert->id}}" />
 
-                        <span><strong>Características: </strong></span>
-                        @foreach($advert->features()->get() as $feature)
-                            <span class="label label-success">{{$feature->name}}</span>
-                        @endforeach
-                    </center>
-                    <br />
-                    <form autocomplete="off">
-                        <input id="txtNomeAmigo" class="input input-block-level" type="text" placeholder="Nome do seu amigo">
-                        <input id="txtEmailAmigo" class="input input-block-level" type="email" placeholder="Email do seu amigo">
-                        <input id="txtNomeRemetente" class="input input-block-level" type="text" placeholder="Seu nome">
-                        <input id="txtEmailRemetente" class="input input-block-level" type="email" placeholder="Seu email">
-                        <textarea id="txtConteudo" class="input-block-level" rows="2" placeholder="Mensagem"></textarea>
+                        <input type="hidden" name="url_site" value="{{Request::url()}}" />
+                        <input id="txtNomeAmigo" required="required" name="nome_amigo"class="input input-block-level" type="text" placeholder="Nome do seu amigo">
+
+                        <input id="txtEmailAmigo" required="required" name="email_amigo"class="input input-block-level" type="email" placeholder="Email do seu amigo">
+                        <input id="txtNomeRemetente" required="required" name="nome_anuncio" class="input input-block-level" type="text" placeholder="Seu nome">
+                        <input id="txtEmailRemetente" required="required" name="email_anuncio" class="input input-block-level" type="email" placeholder="Seu email">
+                        <textarea id="txtConteudo" required="required" name="assunto_anuncio"class="input-block-level" rows="2" placeholder="Mensagem"></textarea>
                         <button class="btn-link" data-dismiss="modal">Cancelar</button>
-                        <button id="btnCompartilharOfertaEmail" type="button" class="btn btn-zap">Enviar</button>
+                        <button id="btnCompartilharOfertaEmail" type="submit" class="btn btn-zap">Enviar</button>
                     </form>
+                    <!-- Sucesso -->
+                    <div id="divSucessoAmigo" class="sucesso-modal tab-pane tab-absolute">
+                        <div class="text-center">
+                            <p>Anúncio enviado com sucesso!<br /><br /> Aproveite e veja outros anúncios</p>
+                            <div id="btnFecharDenuncie" data-dismiss="modal" class="center-button btn-fechar-denuncie">
+                                <a href="#" class="btn btn-zap">Fechar</a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="modal-footer text-center">
                     Ao enviar, você concorda com os <a href="#" target="_blank">Termos de Uso</a> e a <a href="" target="_blank">Política de Privacidade</a> do Sempre da negócio.
@@ -292,7 +327,7 @@ Olá, Gostaria de ter mais informações sobre o imóvel Apartamento à venda, R
                             <form class="denuncie-form" action="" id="denunciaForm">
                                 <input type="hidden" name="user_id" value="{{$advert->id}}" />
                                 <input type="hidden" name="url_site" value="{{Request::url()}}" />
-                                <select id="selTipoProblema" name="motivo" class="input-block-level"><option selected="selected" value="">Tipo de problema</option><option value="Imóvel já comercializado">Imóvel já comercializado</option><option value="Preço incorreto">Preço incorreto</option><option value="Sem retorno do anunciante">Sem retorno do anunciante</option><option value="Telefone não atende">Telefone não atende</option><option value="Foto incorreta">Foto incorreta</option><option value="Endereço/mapa incorreto">Endereço/mapa incorreto</option><option value="Não respondeu o e-mail em 48h">Não respondeu o e-mail em 48h</option><option value="Detalhe do empreendimento incorreto">Detalhe do empreendimento incorreto</option><option value="Imóvel em construção">Imóvel em construção</option><option value="Imóvel inexistente">Imóvel inexistente</option><option value="Oferta repetida">Oferta repetida</option><option value="ualidade do atendimento recebido">Qualidade do atendimento recebido</option><option value="Publicação sem autorização">Publicação sem autorização</option></select>
+                                <select id="selTipoProblema" name="motivo" class="input-block-level"><option selected="selected" value="">Tipo de problema</option><option value="Imóvel já comercializado">Imóvel já comercializado</option><option value="Preço incorreto">Preço incorreto</option><option value="Sem retorno do anunciante">Sem retorno do anunciante</option><option value="Telefone não atende">Telefone não atende</option><option value="Foto incorreta">Foto incorreta</option><option value="Endereço/mapa incorreto">Endereço/mapa incorreto</option><option value="Não respondeu o e-mail em 48h">Não respondeu o e-mail em 48h</option><option value="Detalhe do empreendimento incorreto">Detalhe do empreendimento incorreto</option><option value="Imóvel em construção">Imóvel em construção</option><option value="Imóvel inexistente">Imóvel inexistente</option><option value="Oferta repetida">Oferta repetida</option><option value="Qualidade do atendimento recebido">Qualidade do atendimento recebido</option><option value="Publicação sem autorização">Publicação sem autorização</option></select>
                                 <br />
                                 <p id="msgTipoProblema" class="text-error" style="display: none;">* Selecione o Tipo de problema</p>
 
@@ -313,12 +348,12 @@ Olá, Gostaria de ter mais informações sobre o imóvel Apartamento à venda, R
                         </div>
 
                         <!-- Tela Enviando -->
-                        <div id="divEnviandoDenuncie" class="tab-pane tab-absolute">
-                            <div class="text-center">
-                                ENVIANDO MENSAGEM...
-                                <div class="loader"></div>
-                            </div>
-                        </div>
+                        <!-- <div id="divEnviandoDenuncie" class="tab-pane tab-absolute">
+                             <div class="text-center">
+                                 ENVIANDO MENSAGEM...
+                                 <div class="loader"></div>
+                             </div>
+                         </div> -->
 
                         <!-- Sucesso -->
                         <div id="divSucessoDenuncie" class="sucesso-modal tab-pane tab-absolute">
@@ -331,7 +366,7 @@ Olá, Gostaria de ter mais informações sobre o imóvel Apartamento à venda, R
                         </div>
 
                         <!-- Erro -->
-                        <div id="divErroDenuncie" class="tab-pane tab-absolute">
+                        <!--<div id="divErroDenuncie" class="tab-pane tab-absolute">
                             <div class="need-info text-center">
                                 <span class="text text-error"><strong>Mensagem não enviada!</strong></span>
                                 <p>Infelizmente não conseguimos enviar sua mensagem.</p>
@@ -342,7 +377,7 @@ Olá, Gostaria de ter mais informações sobre o imóvel Apartamento à venda, R
                                     <a data-dismiss="modal" class="btn btn-zap btn-fechar-denuncie">Fechar</a>
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
 
                     </div>
                 </div>

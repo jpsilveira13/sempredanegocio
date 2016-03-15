@@ -103,6 +103,7 @@ function mvalor(v){
     return v;
 }
 
+
 function mvalor2(v){
     v=v.replace(/[^1234567890],./g,""); //somente numeros, ponto e virgula
     return v;
@@ -142,16 +143,35 @@ $(document).ready(function(){
         }
     });
 
-    $(document).ready(function(){
-        $('.dropdown-toggle').dropdown();
-    })
+    //js botao ir pro topo
+    $( window ).scroll(function() {
+        var topo = $('#toTop');
+        if($(window).scrollTop() > 700){
+            topo.removeClass('hide');
+
+        } else {
+
+            topo.addClass('hide');
+        }
+
+    });
+
+    $('#toTop').click(function(e){
+        e.preventDefault();
+        $('html, body').animate({scrollTop: 0}, 1000);
+    });
+
+
+    $('.dropdown-toggle').dropdown();
+
     /*$("#campotexto").keyup(search()); */
 
     //salvar denuncia
 
 
-    $( "#denunciaForm" ).submit(function( event ) {
+    $("#denunciaForm").submit(function( event ) {
         event.preventDefault();
+        var formDenuncia = $('#denunciaForm');
         var $form = $( this ),
             data = $form.serialize(),
             url = "/form-denuncia";
@@ -161,19 +181,70 @@ $(document).ready(function(){
         posting.done(function( data ) {
             if(data.fail) {
                 $.each(data.errors, function( index, value ) {
+                    $('.text-error').show('fast');
+                });
+                $('#successMessage').empty();
+            }
+            if(data.success) {
+
+                formDenuncia.empty();
+                $('.text').empty();
+                $('.modal-footer').hide();
+                $('.tab-content>.tab-pane').css('display','block');
+            } //success
+        }); //done
+    });
+
+    $( "#emailAmigo" ).submit(function( event ) {
+        var formAmigo = $('#emailAmigo');
+        event.preventDefault();
+        var $form = $( this ),
+            data = $form.serialize(),
+            url = "/form-amigo";
+
+        var posting = $.post( url, { formData: data } );
+
+        posting.done(function( data ) {
+            if(data.fail) {
+
+                $.each(data.errors, function( index, value ) {
+                    $('text-error').show('fast');
+                });
+                $('#successMessage').empty();
+            }
+            if(data.success) {
+                formAmigo.empty();
+                $('.hide-body').empty();
+                $('#divSucessoAmigo').css('display','block');
+            } //success
+        }); //done
+    });
+    $("#emailAnuncio").submit(function( event ) {
+        var formAnuncio = $('#emailAnuncio');
+        event.preventDefault();
+        var $form = $( this ),
+            data = $form.serialize(),
+            url = "/form-anuncio";
+
+        var posting = $.post( url, { formData: data } );
+
+        posting.done(function( data ) {
+            if(data.fail) {
+                console.log(data.fail);
+                console.log('errou');
+                $.each(data.errors, function( index, value ) {
                     $('text-error').show('fast');
                 });
                 $('#successMessage').empty();
             }
             if(data.success) {
 
-                $('#denunciaForm')[0].reset();
+                formAnuncio.empty();
 
-                $('#divSucessoDenuncie .sucesso-modal .tab-absolute').show('fast');
+                $('#divSucessoAnuncio').css('display','block');
             } //success
         }); //done
     });
-
     /* FUNÇÃO CONTADOR SITE */
 
     (function ($) {
@@ -306,24 +377,24 @@ $(document).ready(function(){
     //$('ul.pagination').hide();
 
     /*(function(){
-        var loading_options = {
-            finishedMsg: "<div class='end-msg'>Não há mais anúncios!</div>",
-            msgText: "<div class='carregamento-anuncio'>Carregando anúncios...</div>",
-            img: "http://www.infinite-scroll.com/loading.gif"
-        };
-        $('#products').infinitescroll({
-            loading : loading_options,
-            navSelector : "ul.pagination",
-            nextSelector : "ul.pagination li.active + li a",
-            itemSelector : "#products .item",
-        },function(arrayOfNewElems){
-//callback
-            $("img.lazy").lazyload({
-                effect: "fadeIn",
+     var loading_options = {
+     finishedMsg: "<div class='end-msg'>Não há mais anúncios!</div>",
+     msgText: "<div class='carregamento-anuncio'>Carregando anúncios...</div>",
+     img: "http://www.infinite-scroll.com/loading.gif"
+     };
+     $('#products').infinitescroll({
+     loading : loading_options,
+     navSelector : "ul.pagination",
+     nextSelector : "ul.pagination li.active + li a",
+     itemSelector : "#products .item",
+     },function(arrayOfNewElems){
+     //callback
+     $("img.lazy").lazyload({
+     effect: "fadeIn",
 
-            });
-        });
-    })(); */
+     });
+     });
+     })(); */
 
     $("img.lazy").lazyload({
         effect: "fadeIn",
@@ -626,7 +697,7 @@ $(document).ready(function(){
     });
 
     $(window).scroll(function(){
-        if ($(this).scrollTop() > 400){
+        if ($(this).scrollTop() > 300){
             $('.item-count').countTo({
                 formatter: function (value, options) {
                     return value.toFixed(options.decimals);
