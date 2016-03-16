@@ -112,6 +112,12 @@ Route::group(['prefix' => 'admin', 'middleware'=>'auth','where'=>['id'=>'[0-9]+'
         Route::get('/editar/{id}',['as'=>'admin.anuncios.edit', 'uses' => 'AdvertController@edit']);
 
     });
+    Route::group(['prefix' => 'mensagens'],function() {
+
+        Route::get('/',['as'=>'mensagens', 'uses' => 'MessageController@index']);
+
+
+    });
 
 
 });

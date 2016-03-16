@@ -14,6 +14,8 @@ class CreateAdvertsMessage extends Migration
     {
         Schema::create('adverts_messsage', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('id_user')->unsigned();
+            $table->foreign('id_user')->references('id')->on('adverts');
             $table->string('url_site');
             $table->string('nome_usuario');
             $table->string('email_usuario');

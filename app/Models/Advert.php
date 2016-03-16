@@ -52,7 +52,10 @@ class Advert extends Model
 
     }
 
+    public function advertMessage(){
+        return $this->belongsTo(AdvertMessage::class);
 
+    }
 
 
 

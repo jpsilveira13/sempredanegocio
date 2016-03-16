@@ -29,7 +29,7 @@ class AdvertSaveRequest extends Request
             'cidade' => 'required',
             'bairro' => 'required',
             'rua' => 'required',
-            'numero' => 'numeric',
+
             'numero_quarto' => 'numeric',
             'numero_garagem' => 'numeric',
             'numero_suite' => 'numeric',
@@ -52,7 +52,6 @@ class AdvertSaveRequest extends Request
     {
         return [
             'tipo_anuncio.required'         => 'Seleciona o campo Alugo ou Vendo',
-            'numero.numeric'                => 'O campo rua tem que ser números',
             'numero_quarto.numeric'         => 'O campo números de quartos tem que ser números',
             'numero_garagem.numeric'        => 'O campo números de garagem tem que ser números',
             'numero_suite.numeric'          => 'O campo número de banheiros tem que ser números',

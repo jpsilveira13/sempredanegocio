@@ -279,6 +279,7 @@ class HomeController extends Controller
 
         parse_str($inputData, $formFields);
         $userData = array(
+            'id_user'                           =>  $formFields['id_user'],
             'url_site'                          =>  $formFields['url_site'],
             'nome_usuario'                      =>  $formFields['nome_usuario'],
             'email_usuario'                     =>  $formFields['email_usuario'],
@@ -290,8 +291,6 @@ class HomeController extends Controller
             'mensagem'                          =>  $formFields['mensagem'],
 
         );
-
-
         $rules = array(
             'email_usuario'              =>  'required',
             'telefone_usuario'           =>  'required',
@@ -317,12 +316,8 @@ class HomeController extends Controller
                 return Response::json(array(
                     'success' => true
                 ));
-
-
             }
-
         }
-
     }
 
     //search imoveis

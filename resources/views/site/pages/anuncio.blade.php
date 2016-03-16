@@ -172,13 +172,12 @@
                             <div id="phone" class="tab-phone tab-pane hide active" style="display: block;">
                                 <p class="text-aoligar">Ao ligar, diga que você viu esse anúncio no Sempre da Negócio.</p>
                                 <span id="number_tel" class="number tc">@if(count($advert->user->phone) > 0){{$advert->user->phone}}@else -- @endif</span>
-
-
                             </div>
                             <!-- mensagem -->
                             <div class="content-floaters">
                                 <div class="tab-mensagem active" id="email">
                                     <form id="emailAnuncio" action="" class="form-mensagem clearfix">
+                                        <input type="hidden" name="id_user" value="{{$advert->user->id}}" />
                                         <input type="hidden" name="url_site"  value="{{Request::url()}}" />
                                         <input type="hidden" name="nome_usuario" value="@if(count($advert->user->name) > 0){{$advert->user->name}}@else -- @endif" />
                                         <input type="hidden" name="email_usuario"  value="@if(count($advert->user->email) > 0){{$advert->user->email}}@else -- @endif" />

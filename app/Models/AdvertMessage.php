@@ -9,6 +9,7 @@ class AdvertMessage extends Model
 
     protected $table = 'adverts_message';
     protected $fillable = [
+        'id_user',
         'url_site',
         'nome_usuario',
         'email_usuario',
@@ -21,4 +22,9 @@ class AdvertMessage extends Model
         'newsletter',
 
     ];
+
+    public function messageAdvert(){
+        return $this->hasMany(Advert::class);
+
+    }
 }

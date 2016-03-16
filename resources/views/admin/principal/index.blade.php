@@ -70,12 +70,12 @@
                             <i class="fa fa-comment-o fa-5x"></i>
                         </div>
                         <div class="col-xs-9 text-right">
-                            <div class="huge">12</div>
+                            <div class="huge">{{$messageCount}}</div>
                             <div>Mensagens</div>
                         </div>
                     </div>
                 </div>
-                <a href="#">
+                <a href="{{route('mensagens')}}">
                     <div class="panel-footer">
                         <span class="pull-left">Veja Detalhes</span>
                         <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
