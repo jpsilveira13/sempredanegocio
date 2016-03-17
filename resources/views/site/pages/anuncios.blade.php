@@ -73,7 +73,7 @@
         <div class="row">
             <form action=""  id="formSearchImoveis" class="ajax">
                 <div id="nav-lateral" class="col-md-2 col-sm-2 no-padding ">
-                    <button id="btn-close-nav" type="button" class="close">X</button>
+                    <button id="btn-close-nav" type="button" class="close"></button>
                     <div class="area-pesquisa">
                         <section class="clearfix sessao-area-filtro bg-branco ">
                             <h5 class="sessao-texto-pesquisa">Localização</h5>

@@ -92,30 +92,7 @@ function mascData(v){
     return v
 }
 
-function mascHora(v){
-    v=v.replace(/\D/g,"")                    //Remove tudo o que nï¿½o ï¿½ dï¿½gito
-    v=v.replace(/(\d{2})(\d)/,"$1:$2")       //Coloca uma barra entre o segundo e o terceiro dï¿½gitos
-    v=v.replace(/(\d{2})(\d)/,"$1:$2")       //Coloca uma barra entre o quarto  e o quinto dï¿½gitos
-                                             //de novo (para o segundo bloco de nï¿½meros)
-    return v
-}
 
-function mascSite(v){
-
-    //Esse sem comentarios para que vocï¿½ entenda sozinho ;-)
-    v=v.replace(/^http:\/\/?/,"")
-    dominio=v
-    caminho=""
-    if(v.indexOf("/")>-1)
-        dominio=v.split("/")[0]
-    caminho=v.replace(/[^\/]*/,"")
-    dominio=dominio.replace(/[^\w\.\+-:@]/g,"")
-    caminho=caminho.replace(/[^\w\d\+-@:\?&=%\(\)\.]/g,"")
-    caminho=caminho.replace(/([\?&])=/,"$1")
-    if(caminho!="")dominio=dominio.replace(/\.+$/,"")
-    v="http://"+dominio+caminho
-    return v
-}
 
 function mvalor(v){
     v=v.replace(/\D/g,"");//Remove tudo o que não é dígito
@@ -124,6 +101,13 @@ function mvalor(v){
 
     v=v.replace(/(\d)(\d{2})$/,"$1,$2");//coloca a virgula antes dos 2 últimos dígitos
     return v;
+}
+
+
+function mvalor2(v){
+    v=v.replace(/[^1234567890],./g,""); //somente numeros, ponto e virgula
+    return v;
+
 }
 
 function mascValorPonto(v){
@@ -149,9 +133,7 @@ function mascValorDoisDecimais(v){
 
 }
 
-function search(){
-    alert('teste');
-}
+
 
 //Começo jquery Site
 $(document).ready(function(){
@@ -161,15 +143,35 @@ $(document).ready(function(){
         }
     });
 
+    //js botao ir pro topo
+    $( window ).scroll(function() {
+        var topo = $('#toTop');
+        if($(window).scrollTop() > 700){
+            topo.removeClass('hide');
 
-    $("#num_vagas").change(function () {
-        search();
+        } else {
+
+            topo.addClass('hide');
+        }
+
     });
+
+    $('#toTop').click(function(e){
+        e.preventDefault();
+        $('html, body').animate({scrollTop: 0}, 1000);
+    });
+
+
+    $('.dropdown-toggle').dropdown();
+
+    /*$("#campotexto").keyup(search()); */
 
     //salvar denuncia
 
-    $( "#denunciaForm" ).submit(function( event ) {
+
+    $("#denunciaForm").submit(function( event ) {
         event.preventDefault();
+        var formDenuncia = $('#denunciaForm');
         var $form = $( this ),
             data = $form.serialize(),
             url = "/form-denuncia";
@@ -179,19 +181,70 @@ $(document).ready(function(){
         posting.done(function( data ) {
             if(data.fail) {
                 $.each(data.errors, function( index, value ) {
+                    $('.text-error').show('fast');
+                });
+                $('#successMessage').empty();
+            }
+            if(data.success) {
+
+                formDenuncia.empty();
+                $('.text').empty();
+                $('.modal-footer').hide();
+                $('.tab-content>.tab-pane').css('display','block');
+            } //success
+        }); //done
+    });
+
+    $( "#emailAmigo" ).submit(function( event ) {
+        var formAmigo = $('#emailAmigo');
+        event.preventDefault();
+        var $form = $( this ),
+            data = $form.serialize(),
+            url = "/form-amigo";
+
+        var posting = $.post( url, { formData: data } );
+
+        posting.done(function( data ) {
+            if(data.fail) {
+
+                $.each(data.errors, function( index, value ) {
+                    $('text-error').show('fast');
+                });
+                $('#successMessage').empty();
+            }
+            if(data.success) {
+                formAmigo.empty();
+                $('.hide-body').empty();
+                $('#divSucessoAmigo').css('display','block');
+            } //success
+        }); //done
+    });
+    $("#emailAnuncio").submit(function( event ) {
+        var formAnuncio = $('#emailAnuncio');
+        event.preventDefault();
+        var $form = $( this ),
+            data = $form.serialize(),
+            url = "/form-anuncio";
+
+        var posting = $.post( url, { formData: data } );
+
+        posting.done(function( data ) {
+            if(data.fail) {
+                console.log(data.fail);
+                console.log('errou');
+                $.each(data.errors, function( index, value ) {
                     $('text-error').show('fast');
                 });
                 $('#successMessage').empty();
             }
             if(data.success) {
 
-                $('#denunciaForm')[0].reset();
+                formAnuncio.empty();
 
-                $('#divSucessoDenuncie .sucesso-modal .tab-absolute').show('fast');
+                $('#divSucessoAnuncio').css('display','block');
             } //success
         }); //done
     });
-
     /* FUNÇÃO CONTADOR SITE */
 
     (function ($) {
@@ -274,121 +327,36 @@ $(document).ready(function(){
             return value.toFixed(settings.decimals);
         }
     }(jQuery));
-    $('.item-count').countTo({
-        formatter: function (value, options) {
-            return value.toFixed(options.decimals);
-        },
-        onUpdate: function (value) {
-            console.debug(this);
-        },
-        onComplete: function (value) {
-            console.debug(this);
-        }
-    });
+
     /* FIM CONTADOR */
-    (function($) {
-        "use strict"; // Start of use strict
 
-        // jQuery for page scrolling feature - requires jQuery Easing plugin
-        $('a.page-scroll').bind('click', function(event) {
-            var $anchor = $(this);
-            $('html, body').stop().animate({
-                scrollTop: ($($anchor.attr('href')).offset().top - 50)
-            }, 1250, 'easeInOutExpo');
-            event.preventDefault();
-        });
 
-        // Highlight the top nav as scrolling occurs
-        $('body').scrollspy({
-            target: '.navbar-fixed-top',
-            offset: 51
-        })
 
-        // Closes the Responsive Menu on Menu Item Click
-        $('.navbar-collapse ul li a').click(function() {
-            $('.navbar-toggle:visible').click();
-        });
 
-        // Fit Text Plugin for Main Header
-        $("h1").fitText(
-            1.2, {
-                minFontSize: '35px',
-                maxFontSize: '65px'
-            }
-        );
+    //$('ul.pagination').hide();
 
-        // Offset for Main Navigation
-        $('#mainNav').affix({
-            offset: {
-                top: 100
-            }
-        })
+    /*(function(){
+     var loading_options = {
+     finishedMsg: "<div class='end-msg'>Não há mais anúncios!</div>",
+     msgText: "<div class='carregamento-anuncio'>Carregando anúncios...</div>",
+     img: "http://www.infinite-scroll.com/loading.gif"
+     };
+     $('#products').infinitescroll({
+     loading : loading_options,
+     navSelector : "ul.pagination",
+     nextSelector : "ul.pagination li.active + li a",
+     itemSelector : "#products .item",
+     },function(arrayOfNewElems){
+     //callback
+     $("img.lazy").lazyload({
+     effect: "fadeIn",
 
-        // Initialize WOW.js Scrolling Animations
-        new WOW().init();
-
-    })(jQuery); // End of use strict
-
-    var cbpAnimatedHeader = (function() {
-
-        var docElem = document.documentElement,
-            header = document.querySelector( '.navbar-default' ),
-            didScroll = false,
-            changeHeaderOn = 300;
-
-        function init() {
-            window.addEventListener( 'scroll', function( event ) {
-                if( !didScroll ) {
-                    didScroll = true;
-                    setTimeout( scrollPage, 250 );
-                }
-            }, false );
-        }
-
-        function scrollPage() {
-            var sy = scrollY();
-            if ( sy >= changeHeaderOn ) {
-                classie.add( header, 'navbar-shrink' );
-            }
-            else {
-                classie.remove( header, 'navbar-shrink' );
-            }
-            didScroll = false;
-        }
-
-        function scrollY() {
-            return window.pageYOffset || docElem.scrollTop;
-        }
-
-        init();
-
-    })();
-
-    $('ul.pagination').hide();
-
-    (function(){
-        var loading_options = {
-            finishedMsg: "<div class='end-msg'>Não há mais anúncios!</div>",
-            msgText: "<div class='carregamento-anuncio'>Carregando anúncios...</div>",
-            img: "http://www.infinite-scroll.com/loading.gif"
-        };
-        $('#products').infinitescroll({
-            loading : loading_options,
-            navSelector : "ul.pagination",
-            nextSelector : "ul.pagination li.active + li a",
-            itemSelector : "#products .item",
-        },function(arrayOfNewElems){
-//callback
-            $("img.lazy").lazyload({
-                effect: "fadeIn"
-
-            });
-        });
-    })();
+     });
+     });
+     })(); */
 
     $("img.lazy").lazyload({
         effect: "fadeIn",
-
 
     });
 
@@ -443,9 +411,9 @@ $(document).ready(function(){
                         "</div>" +
                         "</li>";
                     var n = $( "#photos_clearing li" ).length;
-                    if(n > 4){
+                    if(n > 24){
                         alert('Número de upload no máximo 4');
-                        return;
+                        return false;
 
                     }else{
                         $('#photos_clearing').append(image_html);
@@ -459,6 +427,10 @@ $(document).ready(function(){
             }
         }
     };
+
+    $(".bt-rotate").click(function(){
+        alert('teste')
+    });
 
     $('#carrouselImovel').carousel({
         interval: 4000
@@ -585,6 +557,11 @@ $(document).ready(function(){
 
     });
 
+
+    var answer = true;
+    if((((3 * 90) === 270) || !(false && (!false)) || "bex".toUpperCase() === "BEX")){
+
+    }
 //procurar pelo cep
 
     $('#cep').blur(function(){
@@ -617,7 +594,6 @@ $(document).ready(function(){
         return false;
     });
 
-
 //buscar cidade
     $('#location').on('keyup',function(e){
         var minLetras = 4;
@@ -640,11 +616,8 @@ $(document).ready(function(){
 
             });
             if(listaCidade.is(":visible")){
-
                 $('body').on('click',function(){
-
                     listaCidade.fadeOut();
-
                 });
             }
         }else{
@@ -655,12 +628,45 @@ $(document).ready(function(){
     });
 //js area pesquisar
 
-    $("#btn-pesquisa").on('click',function(e){
-        e.preventDefault();
 
-        $("#menu-total").fadeIn("fast");
+    var btnPesquisar = $('#btn-pesquisa');
+    var menuLateral = $('#nav-lateral');
+    btnPesquisar.click(function(){
+
+        menuLateral.addClass('na-lef-pos');
+
+
     });
 
+    $('#btn-close-nav').on('click', function () {
+
+        menuLateral.removeClass('na-lef-pos');
+    });
+
+    //menu lateral fixo
+    $(function(){
+
+        var jElement = $('.area-pesquisa');
+
+        $(window).scroll(function(){
+            if ( $(this).scrollTop() > 300 ){
+                jElement.css({
+                    'position':'fixed',
+                    'top':'80px',
+                    'width':'195px',
+                    'z-index': '9999'
+                });
+            }else{
+                jElement.css({
+                    'position':'relative',
+                    'top':'auto'
+                });
+            }
+        });
+
+    });
+
+//lazyload
 
     $(window).scroll(function(){
         if ($(this).scrollTop() > 300) {
@@ -669,6 +675,24 @@ $(document).ready(function(){
         } else {
             $('#btAnuncie').fadeOut();
         }
+    });
+
+    $(window).scroll(function(){
+        if ($(this).scrollTop() > 300){
+            $('.item-count').countTo({
+                formatter: function (value, options) {
+                    return value.toFixed(options.decimals);
+                },
+                onUpdate: function (value) {
+                    console.debug(this);
+                },
+                onComplete: function (value) {
+                    console.debug(this);
+                }
+            });
+
+        }
+
     });
 //js modal evento
     $('#list').click(function(event){event.preventDefault();
@@ -728,16 +752,8 @@ $(document).ready(function(){
 
 //validação formulário anuncio
 
-    $('#sortable').sortable();
-    $('#sortable').disableSelection();
 
-//sortable events
-    $('#sortable').on('sortbeforestop',function(event){
-
-        reorderImages();
-
-    });
-
+    alert('teste');
 });
 
 

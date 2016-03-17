@@ -20,8 +20,4 @@ class Category extends Model
 
     }
 
-
-
-
-
 }

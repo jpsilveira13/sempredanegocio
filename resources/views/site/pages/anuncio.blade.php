@@ -3,7 +3,15 @@
 @section('content')
 
     <div class="clearfix" style="margin-bottom: 10px"></div>
+    @if(!auth()->guest())
+        @if(auth()->user()->id == $advert->user->id)
+            <section class="container col-md-12 col-lg-12 no-show ">
+                <a href="{{url("/admin/anuncios/editar")}}/{{$advert->id}}" style="margin-bottom: 10px" class="btn btn-zap">Editar Anúncio</a>
+            </section>
+        @endif
 
+    @endif
+    <p></p>
     <div class="container no-padding">
         <div class="col-md-12 col-lg-8 ">
             <div class="side-left">

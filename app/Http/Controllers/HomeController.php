@@ -61,12 +61,17 @@ class HomeController extends Controller
 
         $categoria_id = Category::select('id')->where('name_url', $name_url)->first();
 
+
         if(empty($categoria_id)){
             return view('error.error404');
 
         }else{
+
             $subcategories = SubCategory::where('category_id',$categoria_id->id)->get();
-            $adverts = Advert::join('subcategories', 'adverts.subcategories_id', '=', 'subcategories.id')->where('subcategories.category_id',$categoria_id->id)->where('status','=','1')->orderBy(DB::raw('RAND()'))->select('adverts.*')->paginate(18);
+
+            $adverts = Advert::join('subcategories', 'adverts.subcategories_id', '=', 'subcategories.id')->where('subcategories.category_id',$categoria_id->id)->where('status','=','1')->select('adverts.*')->take(18)->skip(18)->get();
+
+
             $advertsCount = Advert::join('subcategories', 'adverts.subcategories_id', '=', 'subcategories.id')->where('subcategories.category_id',$categoria_id->id)->select('adverts.*')->count();
 
             return view('site.pages.anuncios', [
@@ -375,20 +380,23 @@ class HomeController extends Controller
 
     //search anuncio
     public function searchAnuncio(){
+
+
         $categoria = Input::get('categoria');
         $subcategories = SubCategory::where('category_id',$categoria)->get();
         $transacao = Input::get('transacao');
         $cidade = Input::get('cidade');
 
+
         if($cidade != null ){
 
-            $queryAnuncios = Advert::join('subcategories', 'adverts.subcategories_id', '=', 'subcategories.id')->where('subcategories.category_id',$categoria)->where('cidade','=',$cidade)->where('tipo_anuncio','=',$transacao)->where('status','=','1')->orderBy(DB::raw('RAND()'))->select('adverts.*')->paginate(18);
+            $queryAnuncios = Advert::join('subcategories', 'adverts.subcategories_id', '=', 'subcategories.id')->where('subcategories.category_id',$categoria)->where('cidade','=',$cidade)->where('tipo_anuncio','=',$transacao)->where('status','=','1')->select('adverts.*')->take(18)->skip(18)->get();
 
             $queryCount = Advert::join('subcategories', 'adverts.subcategories_id', '=', 'subcategories.id')->where('subcategories.category_id',$categoria)->where('cidade','=',$cidade)->where('tipo_anuncio','=',$transacao)->where('status','=','1')->count();
 
             return view('resultado/anuncio', compact('queryAnuncios','anunciesubcats','queryCount','subcategories'));
         }else{
-            $queryAnuncios = Advert::join('subcategories', 'adverts.subcategories_id', '=', 'subcategories.id')->where('subcategories.category_id',$categoria)->where('tipo_anuncio','=',$transacao)->where('status','=','1')->orderBy(DB::raw('RAND()'))->select('adverts.*')->paginate(18);
+            $queryAnuncios = Advert::join('subcategories', 'adverts.subcategories_id', '=', 'subcategories.id')->where('subcategories.category_id',$categoria)->where('tipo_anuncio','=',$transacao)->where('status','=','1')->select('adverts.*')->take(18)->skip(18)->get();
 
             $queryCount = Advert::join('subcategories', 'adverts.subcategories_id', '=', 'subcategories.id')->where('subcategories.category_id',$categoria)->where('tipo_anuncio','=',$transacao)->count();
             return view('resultado/anuncio', compact('queryAnuncios','anunciesubcats','queryCount','subcategories'));
