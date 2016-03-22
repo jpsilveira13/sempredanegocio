@@ -37,10 +37,9 @@ class AdvertController extends Controller
 
     }
 
+
     /* salvar anúncio */
     public function store(Requests\AdvertSaveRequest $request, AdvertImage $advertImage, User $user){
-
-
 
         $data = $request->all();
         $data['user_id']    = Auth::user()->id;
@@ -62,9 +61,14 @@ class AdvertController extends Controller
         unset($data['anuncio_images']);
         unset($data['caracteristicas']);
         $anuncio = Advert::create($data);
+
+        $count = count($advertImage);
+        $count = round($count/100000);
+
         foreach($images as $image){
+
             $renamed = md5(date('Ymdhms').$image->getClientOriginalName()).'.'.$image->getClientOriginalExtension();
-            $path = public_path().'/gallery/'.$renamed;
+            $path = public_path().'/gallery/'.$count.'/'.$renamed;
             Image::make($image->getRealPath())->resize(678,407)->save($path);
             $advertImage::create(['advert_id' => $anuncio->id,'extension' => $renamed]);
         }

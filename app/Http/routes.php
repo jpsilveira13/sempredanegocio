@@ -25,6 +25,9 @@ Route::get('/', [
 
     'uses' => 'HomeController@index'
 ]);
+Route::get('pagamento',[
+    'uses' => 'HomeController@pagamento'
+]);
 
 
 /* anuncios routes */
@@ -87,29 +90,26 @@ Route::get('social/login/{provider}', 'Auth\AuthController@handleProviderCallbac
 
 Route::group(['prefix' => 'admin', 'middleware'=>'auth','where'=>['id'=>'[0-9]+']], function()
 {
-
     //ajax url
-
     Route::get('/altera-status/{query?}','HomeController@alterStatus');
 
     Route::group(['prefix' => 'home'],function(){
 
         Route::get('/',['as'=>'home', 'uses'=> 'AdminController@home']);
 
-
-
     });
 
     Route::group(['prefix' => 'usuarios'],function() {
 
         Route::get('/',['as'=>'usuarios', 'uses' => 'UserController@index']);
-        Route::get('/editar/{id}',['as'=>'admin.user.edit', 'uses' => 'UserController@edit']);
+        Route::get('/editar/{id}',['as'=>'admin.usuarios.edit', 'uses' => 'UserController@edit']);
+        Route::get('/update/{id}',['as'=>'usuarios.update', 'uses' => 'UserController@update']);
     });
 
     Route::group(['prefix' => 'anuncios'],function() {
 
         Route::get('/',['as'=>'anuncios', 'uses' => 'AdvertController@index']);
-        Route::get('/editar/{id}',['as'=>'admin.anuncios.edit', 'uses' => 'AdvertController@edit']);
+        Route::get('/editar/{id}',['as'=>'admin.anuncios.update', 'uses' => 'AdvertController@edit']);
 
     });
     Route::group(['prefix' => 'mensagens'],function() {

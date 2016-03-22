@@ -60,7 +60,7 @@
                     <label class="control-label pull-right sort" for="sortby">Ordenar por</label>
                 </form>
             </div>
-            <div class="col-md-12 col-xs-12 col-sm-12 center-block">
+            <div style="margin-bottom: 12px" class="col-md-12 col-xs-12 col-sm-12 center-block">
                 <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
                 <!-- header responsivo -->
                 <ins class="adsbygoogle"
@@ -168,6 +168,18 @@
                                 </label>
                             </section>
                         </div>
+                        <div class="propaganda">
+                            <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                            <!-- header responsivo imoveis -->
+                            <ins class="adsbygoogle"
+                                 style="display:block"
+                                 data-ad-client="ca-pub-9276435422488602"
+                                 data-ad-slot="7022965179"
+                                 data-ad-format="auto"></ins>
+                            <script>
+                                (adsbygoogle = window.adsbygoogle || []).push({});
+                            </script>
+                        </div>
                     </div>
                     <div class="col-md-10 col-sm-12">
                         <div class="before"></div>
@@ -178,7 +190,7 @@
                                     <?php $contador+=1;?>
                                     @if($contador > 12)
                                         <?php $contador = 0;?>
-                                        <div class="item  col-xs-12 col-sm-12 col-lg-12 col-md-12 bloco-item">
+                                        <div style="margin-bottom: 20px" class="item  col-xs-12 col-sm-12 col-lg-12 col-md-12 bloco-item">
                                             <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
                                             <!-- imoveis -->
                                             <ins class="adsbygoogle"

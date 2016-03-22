@@ -646,7 +646,7 @@ $(document).ready(function(){
     //menu lateral fixo
     $(function(){
 
-        var jElement = $('.area-pesquisa');
+        var jElement = $('.propaganda');
 
         $(window).scroll(function(){
             if ( $(this).scrollTop() > 300 ){
@@ -753,7 +753,7 @@ $(document).ready(function(){
 //validação formulário anuncio
 
 
-    alert('teste');
+
 });
 
 

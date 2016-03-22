@@ -646,10 +646,10 @@ $(document).ready(function(){
     //menu lateral fixo
     $(function(){
 
-        var jElement = $('.area-pesquisa');
+        var jElement = $('.propaganda');
 
         $(window).scroll(function(){
-            if ( $(this).scrollTop() > 300 ){
+            if ( $(this).scrollTop() > 1000 ){
                 jElement.css({
                     'position':'fixed',
                     'top':'80px',
@@ -753,7 +753,7 @@ $(document).ready(function(){
 //validação formulário anuncio
 
 
-alert('teste');
+
 });
 
 

@@ -39,7 +39,7 @@ class AuthController extends Controller
 
 
     public function getLogin() {
-        return redirect('/anuncie');
+        return redirect('/admin/home');
     }
 
     public function redirectToProvider($provider){

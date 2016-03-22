@@ -18,10 +18,11 @@
                 <div class="box-default clearfix imovel-area-detalhe">
                     <h1 class="pull-left">
                         <span class="subtitle">{{$advert->subcategory->name}} {{$advert->tipo_anuncio}}</span>
-                        @if(count($advert->active > 0))
-                            {{$advert->rua}} - {{$advert->numero}}
-                            <br />
-                            <span class="logradouro">{{$advert->bairro}}, {{$advert->cidade}} - {{$advert->estado}}</span>
+
+                        @if($advert->active == 0)
+                        {{$advert->rua}} - @if($advert->numero == 0)  @else{{$advert->numero}} @endif
+                        <br />
+                        <span class="logradouro">{{$advert->bairro}}, {{$advert->cidade}} - {{$advert->estado}}</span>
                         @else
                             <span class="logradouro">{{$advert->bairro}}, {{$advert->cidade}} - {{$advert->estado}}</span>
 
