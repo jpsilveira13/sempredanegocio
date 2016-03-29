@@ -3326,3 +3326,13 @@ input#images{display: none;}
     background-color: rgba(0, 0, 0, 0.6);
 
 }
+
+
+.header-logo-minisite{
+    position: relative;
+    background-image: url('/images/bg-imobiliaria.jpg');
+    background-size: 100% auto;
+    font-family: 'Open Sans','Droid Sans',Arial,sans-serif;
+    font-weight: 300;
+
+}

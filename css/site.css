@@ -1499,7 +1499,7 @@ footer{
     left: 14px;
     border-radius: 4px;
 }
-#listaCidades {
+#listaCidades, #listaBairros {
     border-radius: 4px;
     z-index: 1042;
     position: absolute;
@@ -1517,7 +1517,7 @@ footer{
     background-color: #fff;
 }
 
-#listaCidades li:nth-child(2n+0) {
+#listaCidades li:nth-child(2n+0), #listaBairros  li:nth-child(2n+0) {
     background-color: #e5e5e5;
 }
 
@@ -1529,7 +1529,7 @@ footer{
     cursor: pointer;
 }
 
-#listaCidades li a {
+#listaCidades li a, #listaBairros li a {
     text-decoration: none;
     display: block;
     padding: 2px 0.4em;
@@ -1550,7 +1550,7 @@ footer{
 
 }
 
-.lista-cidade-search{
+.lista-cidade-search,.lista-bairro-search{
     top: 79px!important;
     left: 10px!important;
     border-top-right-radius: 0px!important;
@@ -1559,7 +1559,7 @@ footer{
 }
 
 
-#listaCidades li a:hover{
+#listaCidades li a:hover, #listaBairros li a:hover{
     background-color: #d7d7d7;
     color: #007aa5!important
 
@@ -2551,7 +2551,8 @@ input.span1, textarea.span1 {
 
 
 .outras-informacoes .logo img {
-    width: 100%;
+    max-width: 194px;
+    max-height: 56px;
 }
 
 .mt40{
@@ -3748,5 +3749,410 @@ input#images{display: none;}
         background: #eb3812;
         border: 2px solid #eb3812;
     }
+
+}
+
+/* css hotsite */
+
+.header-logo-minisite{
+    position: relative;
+    background-image: url('/images/bg-imobiliaria.jpg');
+    background-size: 100% auto;
+    font-family: 'Open Sans','Droid Sans',Arial,sans-serif;
+    font-weight: 300;
+    padding-top: 410px;
+    top:-10px;
+
+}
+
+.minisite-area-logo{
+    position: absolute;
+    top: 25px;
+    left: 5%;
+    width: 500px;
+    height: 330px;
+}
+
+.area-logo-titulo{
+    width: 200px;
+    height: 50px;
+    position: absolute;
+    top: 150px;
+    left: 50px;
+    z-index: 10;
+    margin: 0;
+    text-align: center;
+}
+
+
+.area-logo-titulo:before{
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 0;
+    border: 180px solid transparent;
+    left: -80px;
+    top: -330px;
+    border-bottom-color: #fff;
+    z-index: -1;
+    pointer-events: none;
+    opacity: 0.8;
+
+}
+.area-logo-titulo:after{
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 0;
+    border: 180px solid transparent;
+    left: -80px;
+    top: 30px;
+    border-top-color: #fff;
+    z-index: -1;
+    opacity: 0.8;
+}
+
+.area-logo-titulo img{
+    max-width: 200px;
+    max-height: 80px;
+
+}
+
+.area-logo-titulo aside{
+    color: #fff;
+    position: absolute;
+    top: 122px;
+    right: 70px;
+    -webkit-transform: rotate(45deg);
+    -moz-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    -o-transform: rotate(45deg);
+    font-size: 13px;
+    text-align: right;
+    width: 250px;
+    font-weight: normal;
+
+}
+
+.minisite-diamente{
+    width: 105px;
+    height: 80px;
+    position: absolute;
+    z-index: 11;
+    margin: 0;
+    text-align: center;
+    color: #fff;
+    font-size: 18px;
+
+}
+
+.minisite-diamente:before{
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 0;
+    border: 90px solid transparent;
+    left: -38px;
+    top: -135px;
+    border-bottom-color: #034F85;
+    z-index: -1;
+    pointer-events: none;
+}
+
+.minisite-diamente:after{
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 0;
+    border: 90px solid transparent;
+    left: -38px;
+    top: 45px;
+    border-top-color: #034F85;
+    z-index: -1;
+}
+
+.minisite-diamante-upper{
+    top: 35px;
+    left: 290px;
+
+}
+
+.minisite-diamante-lower{
+    top: 235px;
+    left: 290px;
+
+}
+
+.minisite-diamente b{
+    display: block;
+    text-transform: uppercase;
+    font-size: 20px;
+
+}
+
+.minisite-diamente-count{
+    position: absolute;
+    top: 140px;
+    left: 77%;
+    width: 150px;
+    font-size: 18px;
+    color: #fff;
+
+}
+
+.pula-linha{
+    line-height: 29px;
+}
+
+
+.minisite-area-direita{
+    position: absolute;
+    top: 10px;
+    right: 5%;
+    width: 300px;
+    color: #fff;
+    font-size: 14px;
+
+}
+
+.minisite-area-direita-titulo{
+    font-weight: 500;
+    font-size: 16px;
+}
+
+.minisite-area-since{
+    padding-left: 40px;
+    position: relative;
+}
+
+dt.minisite-area-since:before{
+
+    background: url('/images/icn-calendar.png') no-repeat scroll 0 0 transparent;
+    content: '';
+    position: absolute;
+    top: 4px;
+    left: 0;
+    width: 28px;
+    height: 31px;
+}
+dd.minisite-area-since {
+    margin-bottom: 30px;
+}
+
+dt.minisite-area-atuacao{
+    border-bottom: solid 1px #fff;
+    font-size: 26px;
+    margin-bottom: 5px;
+    padding-bottom: 10px;
+}
+dd.minisite-area-atuacao{
+    font-size: 25px;
+    height: 35px;
+    padding-left: 30px;
+    position: relative;
+    width: 310px;
+
+}
+
+dd.minisite-area-atuacao:after{
+    content: 'Cidade';
+    text-align: center;
+    min-width: 80px;
+    -webkit-transform: rotate(-90deg);
+    -moz-transform: rotate(-90deg);
+    -ms-transform: rotate(-90deg);
+    -o-transform: rotate(-90deg);
+    position: absolute;
+    top: 27px;
+    left: -32px;
+    font-size: 11px;
+    background: rgba(255,255,255,0.4);
+    text-transform: uppercase;
+
+}
+
+span.minisite-area-atuacao-texto{
+    float: left;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 280px;
+}
+
+
+
+.minisite-area-atuacao-small{
+    font-size: 19px;
+    height: 28px;
+    padding-left: 30px;
+    position: relative;
+}
+
+.minisite-area-atuacao-small:nth-of-type(4) {
+    margin-top: 10px;
+}
+.minisite-area-atuacao-small:nth-of-type(4):after {
+    content: 'Bairros';
+    text-align: center;
+    width: 90px;
+    -webkit-transform: rotate(-90deg);
+    -moz-transform: rotate(-90deg);
+    -ms-transform: rotate(-90deg);
+    -o-transform: rotate(-90deg);
+    position: absolute;
+    top: 35px;
+    left: -37px;
+    font-size: 11px;
+    background: rgba(255,255,255,0.4);
+    text-transform: uppercase;
+}
+
+.minisite-header-footer{
+    background: rgba(51,51,51,0.65);
+    text-align: center;
+    padding-bottom: 20px;
+
+}
+
+.minisite-header-footer-info{
+    padding: 5px 0;
+    color: #fff;
+    font-size: 16px;
+    margin-bottom: 4px;
+}
+
+.minisite-header-footer-info dt{
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
+}
+
+.minisite-header-footer-info dd{
+    display: inline-block;
+    padding-left: 40px;
+    position: relative;
+    line-height: 2;
+}
+
+
+.agente-minisite-sprited:before{
+    background-image: url('/images/sprite-minisite.png');
+    background-repeat: no-repeat;
+    content: '';
+    width: 25px;
+    height: 24px;
+    position: absolute;
+    top: 4px;
+    left: 10px;
+    margin-right: 20px;
+}
+
+.agente-minisite-telefone:before{
+    background-position: 0 0;
+
+}
+
+.agente-minisite-email:before{
+    background-position: 0 -24px;
+}
+
+.agente-minisite-local:before {
+    background-position: 0 -72px;
+}
+
+/* minisite area destaque */
+
+.minisite-anuncio-destaque{
+    display: inline-block;
+    width: 24%;
+    height: 150px;
+    overflow: hidden;
+    position: relative;
+    z-index: 10;
+}
+
+.minisite-anuncio-destaque:hover .minisite-anuncio-destaque-descricao{
+    top: 0;
+    padding: 10px 20px;
+    background: rgba(0,0,0,0.6);
+}
+
+.minisite-anuncio-destaque img{
+    width: 100%;
+    height: 150px;
+}
+
+.minisite-anuncio-destaque-descricao{
+    position: absolute;
+    top: 90px;
+    left: 0;
+    right: 0;
+    height: 150px;
+    background: -moz-linear-gradient(top, rgba(0,0,0,0) 0, rgba(0,0,0,0.6) 20%, rgba(0,0,0,0.6) 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0, rgba(0,0,0,0)), color-stop(20%, rgba(0,0,0,0.6)), color-stop(100%, rgba(0,0,0,0.6)));
+    background: -webkit-linear-gradient(top, rgba(0,0,0,0) 0, rgba(0,0,0,0.6) 20%, rgba(0,0,0,0.6) 100%);
+    background: -o-linear-gradient(top, rgba(0,0,0,0) 0, rgba(0,0,0,0.6) 20%, rgba(0,0,0,0.6) 100%);
+    background: -ms-linear-gradient(top, rgba(0,0,0,0) 0, rgba(0,0,0,0.6) 20%, rgba(0,0,0,0.6) 100%);
+    background: linear-gradient(to bottom, rgba(0,0,0,0) 0, rgba(0,0,0,0.6) 20%, rgba(0,0,0,0.6) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#00000000', endColorstr='#99000000', GradientType=0);
+    color: #fff;
+    font-size: 16px;
+    text-align: left;
+    padding: 5px 20px;
+    transition: all 0.3s linear;
+}
+
+.minisite-anuncio-destaque-bairro{
+    font-size: 22px;
+    font-weight: bold;
+    margin: 0;
+    text-transform: uppercase;
+    height: 30px;
+    line-height: 30px;
+    overflow: hidden;
+
+}
+
+.minisite-anuncio-destaque-detalhes{
+    margin: 0;
+    height: 22px;
+    overflow: hidden;
+
+}
+
+.minisite-anuncio-destaque-localizacao{
+    border-top: solid 1px #fff;
+    padding-top: 7px;
+    display: block;
+    margin: 7px auto;
+    height: 27px;
+    overflow: hidden;
+}
+
+.minisite-anuncio-destaque-contato{
+    display: block;
+    margin: 0 auto;
+    width: 80%;
+    text-align: center;
+    font-size: 13px;
+}
+
+.contatoBtn{
+    color: #fff;
+    border: none;
+    background-color: #034F85;
+    box-shadow: 0 2px 0 #034F85;
+    padding-top: 8px;
+    padding-bottom: 8px;
+}
+
+.contatoBtn:hover{
+    background-color:#eb3812 ;
+    box-shadow: 0 2px 0 #eb3812;
 
 }

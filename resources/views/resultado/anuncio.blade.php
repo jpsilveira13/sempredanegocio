@@ -207,7 +207,19 @@
                                         <a class="item-total" href="{{url('/')}}/anuncio/{{$queryAnuncio->tipo_anuncio}}/{{$queryAnuncio->id}}/{{str_slug($queryAnuncio->url_anuncio)}}" >
                                             <div class="thumbnail">
                                                 @if(count($queryAnuncio->images))
-                                                    <img class="group list-group-image content-img-sugestao lazy transition-img" data-original="{{url('gallery/'.$queryAnuncio->images()->first()->extension)}}" width="220" height="229" alt="titulo imagem" />
+                                                    <?php
+                                                    $pos = strpos($queryAnuncio->images()->first()->extension, "imoveis/img");
+
+                                                    $url1 = "";
+                                                    if ($pos === false) {
+                                                    $url1 = 'gallery/'.$queryAnuncio->images()->first()->extension;
+                                                    } else {
+                                                    $url1 = "galeria/".$queryAnuncio->images()->first()->extension;
+                                                    }
+
+
+                                                    ?>
+                                                    <img class="group list-group-image content-img-sugestao lazy transition-img" data-original="{{url($url1)}}" width="220" height="229" alt="titulo imagem" />
                                                 @else
                                                     <img class="group list-group-image content-img-sugestao lazy transition-img" src="{{url('images/no-image.jpg')}}" alt="titulo imagem" />
                                                 @endif

@@ -599,8 +599,13 @@ $(document).ready(function(){
         var minLetras = 4;
         var textoPesquisa = $('#location').val();
         var listaCidade = $("#listaCidades");
+        if(textoPesquisa.length == 0){
+            $('#bairro').val('');
+            $('#bairro').attr('readonly', true);
+        }
         if(textoPesquisa.length >= minLetras ) {
             listaCidade.show('fast');
+
             $.get('/search-cidade/' + this.value, function (data) {
                 $('#listaCidades').html('');
                 $.each(data, function (index, cities) {
@@ -626,15 +631,45 @@ $(document).ready(function(){
         }
 
     });
+    $('#bairro').on('keyup',function(e){
+        var minLetras = 4;
+        var textoPesquisa = $('#bairro').val();
+        var listaBairro = $("#listaBairros");
+        if(textoPesquisa.length >= minLetras ) {
+            listaBairro.show('fast');
+            $.get('/search-bairro/' + this.value, function (data) {
+
+                $('#listaBairros').html('');
+                $.each(data, function (index, cities) {
+                    console.log(cities);
+                    $('#listaBairros').append('<li><a value="' + cities.bairro + '">' + cities.bairro + '</a></li>');
+                    $('#listaBairros li a').on('click',function(){
+                        var locationElem = $('#bairro');
+                        var valorCampo = $(this).attr('value');
+                        locationElem.val(valorCampo);
+                        locationElem.attr('value',valorCampo);
+                        locationElem.focus();
+                    });
+                });
+
+            });
+            if(listaBairro.is(":visible")){
+                $('body').on('click',function(){
+                    listaBairro.fadeOut();
+                });
+            }
+        }else{
+            listaBairro.hide();
+            listaBairro.html('');
+        }
+    });
 //js area pesquisar
 
 
     var btnPesquisar = $('#btn-pesquisa');
     var menuLateral = $('#nav-lateral');
     btnPesquisar.click(function(){
-
         menuLateral.addClass('na-lef-pos');
-
 
     });
 
@@ -665,7 +700,12 @@ $(document).ready(function(){
         });
 
     });
+//comando lightbox
 
+    lightbox.option({
+        'resizeDuration': 200,
+        'wrapAround': true
+    })
 //lazyload
 
     $(window).scroll(function(){
@@ -694,6 +734,8 @@ $(document).ready(function(){
         }
 
     });
+    //Jquery anuncio destaque
+
 //js modal evento
     $('#list').click(function(event){event.preventDefault();
         $('#products .item').addClass('list-group-item').removeClass('bloco-item');

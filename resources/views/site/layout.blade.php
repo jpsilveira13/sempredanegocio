@@ -20,6 +20,20 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     @endif
+    @if(isset($user))
+        <meta property="og:site_name" content="Sempre da Negócio">
+        <meta property="og:title" content="{{$user->name}}">
+        <meta property="og:type" content="website">
+        <meta property="og:url" content="{{url('/')}}/{{$user->id}}/{{$user->url_name}}">
+        <meta property="og:image:width" content="484">
+        <meta property="og:image:height" content="252">
+        <meta property="og:image" content="<?php if($user->avatar): echo asset('images/no-image.jpg');
+        else: echo asset($user->avatar); endif ?>">
+        <meta property="og:description" content="Acessem o meu hotsite e confiram os meus anúncios">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    @endif
+
     @if(isset($description))
         <meta name="description" content="{{$description}}">
     @endif
@@ -40,7 +54,9 @@
     <link rel="stylesheet" href="{{ asset('css/nouislider.min.css') }}">
     <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/jquery.bootstrapvalidator/0.5.2/css/bootstrapValidator.min.css"/>
     <link rel="stylesheet" href="{{ asset('css/sweetalert.css') }}"/>
-    <link rel="stylesheet" href="{{ asset('css/jquery-ui.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('css/lightbox.css') }}"/>
+   <!-- <link rel="stylesheet" href="{{ asset('css/jquery-ui.css') }}"/> -->
+    <link rel="stylesheet" href="{{ asset('css/site.css') }}">
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,800' rel='stylesheet' type='text/css'>
 </head>
 <body class="<?=Request::is('/') ? 'pt0' : '' ?>">
@@ -178,7 +194,6 @@
                     <div id="divLogin" class="login-box">
                         <p class="titulo">Já sou cadastrado</p>
                         <p id="mensagemPadrao" class="desc">Se você já é um usuário do Sempre da Negócio, pode fazer seu login abaixo.</p>
-                        <p id="mensagemEmailExistente" class="aviso" style="display: none;">O email informado já está cadastrado no Sempre da Negócio Imóveis. Faça seu login abaixo.</p>
                         <div class="rel">
                             <form class="form-horizontal mt43res" role="form" method="POST" action="{{ url('/auth/login') }}">
                                 {!! csrf_field() !!}
@@ -322,15 +337,16 @@
 <script src="{{asset('js/bootstrap.min.js')}}"></script>
 <script src="{{asset('js/nouislider.min.js')}}"></script>
 <script src="{{asset('js/sweetalert.min.js')}}"></script>
-<script src="{{asset('js/infinitescroll.js')}}"></script>
-<script src="{{asset('js/typeahead.min.js')}}"></script>
-<script src="{{asset('js/bloodhound.min.js')}}"></script>
+<!--<script src="{{asset('js/infinitescroll.js')}}"></script> -->
+<!--<script src="{{asset('js/typeahead.min.js')}}"></script> -->
+<!--<script src="{{asset('js/bloodhound.min.js')}}"></script> -->
 <script src="{{asset('js/jquery.easing.min.js')}}"></script>
 <script src="{{asset('js/jquery.fittext.js')}}"></script>
 <script src="{{asset('js/wow.min.js')}}"></script>
-<script src="/vendor/artesaos/cidades/js/scripts.js"></script>
+<!--<script src="/vendor/artesaos/cidades/js/scripts.js"></script> -->
 <script src="{{asset('js/validator.min.js')}}"></script>
 <script src="{{asset('js/lazyload.js')}}"></script>
+<script src="{{asset('js/lightbox.js')}}"></script>
 <script src="{{asset('js/site.js')}}"></script>
 @if(Request::is('/') || Request::is('anuncie') )
         <!--<script src="{{asset('js/menudinamico.js')}}"></script> -->
@@ -379,6 +395,20 @@
         }
     });
 </script>
+<script type="text/javascript">
+    / <![CDATA[ /
+    var google_conversion_id = 927904457;
+    var google_custom_params = window.google_tag_params;
+    var google_remarketing_only = true;
+    / ]]> /
+</script>
+<script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js">
+</script>
+<noscript>
+    <div style="display:inline;">
+        <img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/927904457/?value=0&amp;guid=ON&amp;script=0"/>
+    </div>
+</noscript>
 </body>
 </html>
 

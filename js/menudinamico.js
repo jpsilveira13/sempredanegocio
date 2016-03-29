@@ -8,15 +8,16 @@ function formatNumber (num) {
 function scrollPagina(page) {
     page = paginaAtual;
     if (continuaScroll) {
-        if(page){
-            var filters = $('#formSearchImoveis').serialize() + "&page=" + page;
-        }else{
+        if(page == 1){
             var filters = $('#formSearchImoveis').serialize();
 
+
+        }else{
+            var filters = $('#formSearchImoveis').serialize() + "&page=" + page;
+
         }
-
+        console.log(filters);
         continuaScroll = false;
-
         $.ajax ({
             url : "search-imoveis",
             type: 'GET',
@@ -36,6 +37,7 @@ function scrollPagina(page) {
             complete: function (data) {
 
                 var total = data.responseJSON.total;
+
                 if(total == 0){
                     $('.search-results-header-counter').html(total);
                     $(".before").empty();
@@ -46,6 +48,7 @@ function scrollPagina(page) {
                 }
             },
             success: function(data) {
+                console.log(data.data);
                 if (data.data.length != 0) {
                     $('#loading-page').css('display','block');
                     continuaScroll = true;
@@ -54,13 +57,14 @@ function scrollPagina(page) {
                     $('#resultSearch').fadeTo('slow', 1);
                     var html = '';
                     var totalAnuncio = formatNumber(data.total);
-
                     var data = data.data;
-
-
                     var len = data.length;
                     $('.search-results-header-counter').html(totalAnuncio);
+                    //Criador do contador para os anuncios
                     var cont = 0;
+                    var char = "imoveis/img";
+                    var url;
+
                     for (var i = 0; i < len; i++) {
                         cont++;
                         if(cont > 12 ){
@@ -68,9 +72,17 @@ function scrollPagina(page) {
                             html+='<div style="margin-bottom: 20px" class="item col-xs-12 col-sm-12 col-lg-12 col-md-12 bloco-item"><script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script><ins class="adsbygoogle"style="display:block" data-ad-client="ca-pub-9276435422488602" data-ad-slot="4429425578" data-ad-format="auto"></ins>  <script> (adsbygoogle = window.adsbygoogle || []).push({}) </script></div>';
                         }
                         html += '<div class="item col-xs-12 col-sm-6 col-lg-4 col-md-4 bloco-item"><a class="item-total" href="/anuncio/' + data[i].tipo_anuncio + '/' + data[i].id + '/' + data[i].url_anuncio + '"><div class="thumbnail">';
+
                         //Validação se existe imagem ou nao
                         if (data[i].images[0]) {
-                            html += '<img class="group list-group-image content-img-sugestao lazy transition-img" data-original="gallery/' + data[i].images[0].extension + '" width="220" height="229" alt="titulo imagem" />'
+
+                            if(data[i].images[0].extension.indexOf(char) > -1){
+                                url = "galeria/" + data[i].images[0].extension;
+                            }else{
+                                url = "gallery/" + data[i].images[0].extension;
+
+                            }
+                            html += '<img class="group list-group-image content-img-sugestao lazy transition-img" data-original="'+url+'" width="220" height="229" alt="titulo imagem" />'
 
                         } else {
                             html += '<img class="group list-group-image content-img-sugestao lazy transition-img" src="images/no-image.jpg" alt="titulo imagem" />';
@@ -91,13 +103,12 @@ function scrollPagina(page) {
                     $('#products').append(html);
 
                     $("img.lazy").lazyload({
-                        effect: "fadeIn",
+                        effect: "fadeIn"
 
                     });
                     paginaAtual++;
 
                 }else {
-
                     continuaScroll = false;
                     $('#loading-page').css('display','none');
                     $('#products').append('<div class="teste"> <p style="clear:both; text-align:center"><br /><br />FIM DE ANÚNCIOS ;/</p></div>');
@@ -134,7 +145,16 @@ jQuery(".escolhaAcomodacao").change(function () {
 
 $("#listaCidades li a").livequery(function(){
     $(this).click(function(){
+        $('#bairro').attr('readonly', false);
+        paginaAtual = 1;
+        continuaScroll = true;
+        scrollPagina();
+    });
 
+
+});
+$("#listaBairros li a").livequery(function(){
+    $(this).click(function(){
         paginaAtual = 1;
         continuaScroll = true;
         scrollPagina();

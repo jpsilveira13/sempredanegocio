@@ -56,9 +56,6 @@ Route::get('/ajax-subcat',[
     'uses' => 'HomeController@getCategories'
 ]);
 
-
-
-
 Route::get('/ajax-advcat',[
 
     'uses' => 'HomeController@getAdvSub'
@@ -66,6 +63,9 @@ Route::get('/ajax-advcat',[
 
 Route::get('search-cidade/{query?}',[
     'uses'=> 'HomeController@searchCidade'
+]);
+Route::get('search-bairro/{query?}',[
+    'uses'=> 'HomeController@searchBairro'
 ]);
 
 Route::get('search-imoveis',[
@@ -130,6 +130,10 @@ Route::get('anuncio/{tipo_anuncio}/{id}/{url_anuncio}',[
 
 ]);
 
+Route::get('{id}/{url_name}',[
+   'uses' => "HomeController@hotsite"
+
+]);
 //procura cep
 
 

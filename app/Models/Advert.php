@@ -28,7 +28,9 @@ class Advert extends Model
         'anuncio_descricao',
         'preco',
         'url_anuncio',
-        'active'
+        'active',
+        'adverts_count',
+        'destaque'
 
     ];
 
@@ -56,7 +58,5 @@ class Advert extends Model
         return $this->belongsTo(AdvertMessage::class);
 
     }
-
-
 
 }

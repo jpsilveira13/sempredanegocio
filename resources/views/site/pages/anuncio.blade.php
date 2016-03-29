@@ -20,9 +20,9 @@
                         <span class="subtitle">{{$advert->subcategory->name}} {{$advert->tipo_anuncio}}</span>
 
                         @if($advert->active == 0)
-                        {{$advert->rua}} - @if($advert->numero == 0)  @else{{$advert->numero}} @endif
-                        <br />
-                        <span class="logradouro">{{$advert->bairro}}, {{$advert->cidade}} - {{$advert->estado}}</span>
+                            {{$advert->rua}} - @if($advert->numero == 0)  @else{{$advert->numero}} @endif
+                            <br />
+                            <span class="logradouro">{{$advert->bairro}}, {{$advert->cidade}} - {{$advert->estado}}</span>
                         @else
                             <span class="logradouro">{{$advert->bairro}}, {{$advert->cidade}} - {{$advert->estado}}</span>
 
@@ -71,7 +71,21 @@
                                         <?php $j = 0 ?>
                                         @foreach($advert->images()->get() as $images)
                                             <div class="<?php if($j==0){echo 'active';}?> item srle" data-slide-number="<?=$j?>">
-                                                <img src="{{url('gallery/'.$images->extension)}}" class="img-responsive">
+                                                <?php
+                                                $pos = strpos($images->extension, "imoveis/img");
+
+                                                $url1 = "";
+                                                if ($pos === false) {
+                                                    $url1 = 'gallery/'.$images->extension;
+                                                } else {
+                                                    $url1 = "galeria/".$images->extension;
+                                                }
+
+
+                                                ?>
+                                                <a href="{{url($url1)}}" data-lightbox="roadtrip" data-title="Imagem do imóvel">
+                                                    <img src="{{url($url1)}}" class="img-responsive">
+                                                </a>
                                             </div>
                                             <?php $j++?>
                                         @endforeach
@@ -99,8 +113,19 @@
                                 <?php $i=0?>
                                 @foreach($advert->images()->get() as $images)
                                     <li>
-                                        <a id="carousel-selector-<?=$i?>" class="<?php if($i==0){echo 'selected';}?>">
-                                            <img src="{{url('gallery/'.$images->extension)}}" width="80" height="60" class="img-responsive">
+                                        <a  id="carousel-selector-<?=$i?>" class="<?php if($i==0){echo 'selected';}?>">
+                                            <?php
+                                            $pos = strpos($images->extension, "imoveis/img");
+
+                                            $url2 = "";
+                                            if ($pos === false) {
+                                                $url2 = 'gallery/'.$images->extension;
+                                            } else {
+                                                $url2 = "galeria/".$images->extension;
+                                            }
+
+                                            ?>
+                                            <img src="{{url($url2)}}" width="80" height="60" class="img-responsive">
                                         </a>
                                     </li>
                                     <?php $i++ ?>
@@ -246,7 +271,7 @@ Olá, Gostaria de ter mais informações sobre o  imóvel {{$advert->subcategory
                             <img src="{{$advert->user->avatar}}" alt="{{$advert->user->name}}" width="88" height="52">
                         </a>
                         <div class="pull-left anunciante">
-                            <a href="#" class="fontsize13px">Outras ofertas de: {{$advert->user->name}}</a>
+                            <a href="{{url('/')}}/{{$advert->user->id}}/{{$advert->user->url_name}}" class="fontsize13px">Outras ofertas de: {{$advert->user->name}}</a>
                         </div>
                     </div>
                 </aside>
@@ -273,7 +298,7 @@ Olá, Gostaria de ter mais informações sobre o  imóvel {{$advert->subcategory
                         <center>
 
                             <img class="img-responsive center-block borda-image" width="140" height="140" src="<?php if($advert->images()->count() > 0):
-                                echo asset('gallery/'.$advert->images()->first()->extension); else: echo asset('images/noimage2.jpg'); endif?>" />
+                                echo asset($url1); endif?>" />
                             {{$advert->rua}}, {{$advert->bairro}}, {{$advert->cidade}} - {{$advert->estado}}
 
                             <small>Sob consulta</small>

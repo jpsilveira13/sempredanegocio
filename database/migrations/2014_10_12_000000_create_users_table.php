@@ -26,6 +26,7 @@ class CreateUsersTable extends Migration
             $table->string('city');
             $table->string('state');
             $table->string('zipcode');
+            $table->integer('adverts_count');
             $table->integer('typeuser_id')->unsigned();
             $table->foreign('typeuser_id')->references('id')->on('types_user');
             $table->rememberToken();

@@ -20,11 +20,14 @@ class User extends Model implements AuthenticatableContract,
         return $this->hasMany(Advert::class);
 
     }
-
+    public function payments() {
+        return $this->hasMany(Payments::class)->Orderby('id','desc');
+    }
     public function getAuthIdentifier()
     {
         return $this->getKey();
     }
+
 
     /**
      * Get the password for the user.
@@ -58,7 +61,7 @@ class User extends Model implements AuthenticatableContract,
      *
      * @var array
      */
-    protected $fillable = ['typeuser_id','name','email', 'password','phone','avatar','adress','city','state'];
+    protected $fillable = ['typeuser_id','plan_id','name','email', 'password','phone','avatar','address','city','state','zipcode','url_name'];
 
     /**
      * The attributes excluded from the model's JSON form.

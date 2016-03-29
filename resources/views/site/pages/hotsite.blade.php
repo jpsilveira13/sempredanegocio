@@ -1,19 +1,115 @@
 @extends('site.layout')
 
 @section('content')
-</div><!-- fechamento da div row que esta dentro do layout -->
-</div><!-- fechamento da container  que esta dentro do layout -->
+</div>
+</div>
+<div class="col-md-12 col-lg-12 hidden-sm hidden-xs no-padding">
+    <div class="header-logo-minisite">
+        <div class="minisite-area-logo">
+            <h1 class="area-logo-titulo">
+                <img src="{{$user->avatar}}" title="{{$user->name}}" />
+                <aside>Registro CRECI: 152558 </aside>
+            </h1>
+            <p class="minisite-diamente minisite-diamante-upper pula-linha">
+                {{$advertVenda}}<br />Imóveis a <b> venda</b>
+            </p>
+            <p class="minisite-diamente minisite-diamante-lower pula-linha">
+                {{$advertAluga}}<br />Imóveis para <b> Aluguel</b>
+            </p>
+            <p class="minisite-diamente-count pula-linha">
+                {{$user->advertuser()->count()}}<br /> imóveis no portal
+            </p>
+        </div>
+        <div class="minisite-area-direita">
+            <h2 class="minisite-area-direita-titulo">
+                Outras Informações sobre<br />
+                {{$user->name}}:
+            </h2>
+            <dl>
+                <dt class="minisite-area-since">
+                    Anunciante desde
+                </dt>
+                <dd class="minisite-area-since">{{ date("m/Y", strtotime($user->created_at)) }}</dd>
+                <dt class="minisite-area-atuacao">Principal área de atuação:</dt>
+                <dd class="minisite-area-atuacao">
+                    <span class="minisite-area-atuacao-texto">
+                        {{$user->city}}
+                    </span>
+                </dd>
+                <!-- aqui irei rodar o laço para trazer os bairros -->
+                <dd class="minisite-area-atuacao-small">
+                     <span class="minisite-area-atuacao-texto">
 
+                    </span>
+                </dd>
+            </dl>
+        </div>
+        <div class="minisite-header-footer">
+            <dl class="minisite-header-footer-info">
+                <dt>Telefone:</dt>
+                <dd class="agente-minisite-sprited agente-minisite-telefone ">
+                    <span itemprop="telephone">{{$user->phone}}</span>
+                </dd>
+
+                <dt>Email:</dt>
+                <dd class="agente-minisite-sprited agente-minisite-email">
+                    <span itemprop="email"> {{$user->email}}</span>
+                </dd>
+                <dt>Endereço:</dt>
+                <dd itemprop="address" itemscope itemtype="http://schema.org/PostalAddress" class="agente-minisite-sprited agente-minisite-local">
+                    <span itemprop="streetAddress">{{$user->address}}</span>
+                </dd>
+            </dl>
+            <?php $i = 0?>
+            @foreach($user->advertuser()->get() as $advert)
+                <?php $i++ ?>
+                @if($i < 5)
+                    <a class="menu-show" href="{{url('/')}}/anuncio/{{$advert->tipo_anuncio}}/{{$advert->id}}/{{$advert->url_anuncio}}">
+                        <article class="minisite-anuncio-destaque">
+                            @if(count($advert->images))
+                                <?php
+                                $pos = strpos($advert->images()->first()->extension, "imoveis/img");
+
+                                $url1 = "";
+                                if ($pos === false) {
+                                    $url1 = 'gallery/'.$advert->images()->first()->extension;
+                                } else {
+                                    $url1 = "galeria/".$advert->images()->first()->extension;
+                                }
+
+                                ?>
+                                <img class="group list-group-image content-img-sugestao lazy transition-img" data-original="{{url($url1)}}" width="220" height="229" alt="" />
+                            @else
+                                <img class="group list-group-image content-img-sugestao lazy transition-img" src="{{url('images/no-image.jpg')}}" alt="titulo imagem" />
+                            @endif
+                            <div class="minisite-anuncio-destaque-descricao">
+                                <span class="minisite-anuncio-destaque-bairro">{{$advert->bairro}}</span>
+                                <p class="minisite-anuncio-destaque-detalhes">R$ {{number_format((float)$advert->preco,2,",",".")}} - {{$advert->area_construida}} m2 - {{$advert->numero_quarto}} quarto </p>
+                                <p class="minisite-anuncio-destaque-localizacao">
+                                    {{$advert->rua}} - @if($advert->numero){{$advert->numero}}@else @endif
+                                </p>
+                                <div>
+                                    <button class="minisite-anuncio-destaque-contato contatoBtn">Contato / Ver Detalhe</button>
+                                </div>
+                            </div>
+
+                        </article>
+                    </a>
+                @endif
+            @endforeach
+        </div>
+    </div>
+</div>
 <div class="clearfix"></div>
 <div class="row no-margin">
     <div class="container">
         <div class="col-md-12">
             <div class="search-results">
                 <mark class="search-results-count">
-                    <strong class="search-results-header-counter">{{number_format((float)$advertsCount,0,".",".")}}</strong>
+                    <strong class="search-results-header-counter">{{number_format((float)$user->advertuser()->count(),0,".",".")}}</strong>
 
                 </mark>
-                <h1 class="search-title"> Anúncios Encontrados</h1>
+                <h1 class="search-title"> Imovéis de {{$user->name}}</h1>
             </div>
         </div>
         <div class="col-md-12 hidden-lg hidden-md">
@@ -70,24 +166,22 @@
             </script>
         </div>
         <div class="clearfix"></div>
+
         <div class="row">
+
             <form action=""  id="formSearchImoveis" class="ajax">
+                <input type="hidden" name="id_user" value="{{$user->id}}" />
+
                 <div id="nav-lateral" class="col-md-2 col-sm-2 no-padding ">
                     <button id="btn-close-nav" type="button" class="close">X</button>
                     <div class="area-pesquisa">
-                        <section class="clearfix sessao-area-filtro bg-branco ">
+                        <!--<section class="clearfix sessao-area-filtro bg-branco ">
                             <h5 class="sessao-texto-pesquisa">Localização</h5>
 
-                            <input name="cidade" id="location" value="" autocomplete="off" type="text" class="form-control search-results-input  pl3" placeholder="Incluir Cidade">
+                           <input name="cidade" id="location" value="" autocomplete="off" type="text" class="form-control search-results-input  pl3" placeholder="Incluir Cidade">
                             <ul id="listaCidades" class="lista-cidade-search"></ul>
 
-                        </section>
-                        <section class="clearfix sessao-area-filtro bg-branco ">
-                            <h5 class="sessao-texto-pesquisa">Bairro</h5>
-
-                            <input readonly name="bairro" id="bairro" value="" autocomplete="off" type="text" class="form-control search-results-input  pl3" placeholder="Incluir Bairro">
-                            <ul id="listaBairros" class="lista-bairro-search"></ul>
-                        </section>
+                        </section> -->
                         <section class="clearfix sessao-area-filtro bg-branco">
                             <h5 class="sessao-texto-pesquisa">Tipo de imóvel</h5>
                             <select  name="subcategoria" class="search-results-select search-results-select-img escolhaAcomodacao">
@@ -163,26 +257,15 @@
                             </label>
                         </section>
                     </div>
-                    <div class="propaganda">
-                        <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-                        <!-- header responsivo imoveis -->
-                        <ins class="adsbygoogle"
-                             style="display:block"
-                             data-ad-client="ca-pub-9276435422488602"
-                             data-ad-slot="7022965179"
-                             data-ad-format="auto"></ins>
-                        <script>
-                            (adsbygoogle = window.adsbygoogle || []).push({});
-                        </script>
-                    </div>
                 </div>
+
                 <div class="col-md-10 col-sm-12">
                     <div class="before"></div>
                     <div class="row" id="resultSearch">
                         <div class="col-md-12">
                             <div id="products" class="list-group">
                                 <?php $contador = 0; ?>
-                                @foreach($adverts as $advert)
+                                @foreach($user->advertuser()->get() as $advert)
                                     <?php $contador+=1;?>
                                     @if($contador > 12)
                                         <?php $contador = 0;?>
@@ -271,5 +354,6 @@
         </div>
     </div>
 </div>
+
 
 @endsection
