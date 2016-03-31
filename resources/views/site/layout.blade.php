@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <title>{{ isset($title) ? $title : 'Sempre Da Negócio - Anúncios Classificados Grátis' }}</title>
 
@@ -14,8 +15,18 @@
         <meta property="og:url" content="{{url('/')}}/imovel/{{$advert->tipo_anuncio}}/{{$advert->id}}/{{$advert->url_anuncio}}">
         <meta property="og:image:width" content="484">
         <meta property="og:image:height" content="252">
+        <?php
+        $pos = strpos($advert->images()->first()->extension, "imoveis/img");
+        $url1 = "";
+        if ($pos === false) {
+            $url1 = 'gallery/'.$advert->images()->first()->extension;
+        } else {
+            $url1 = "galeria/".$advert->images()->first()->extension;
+        }
+
+        ?>
         <meta property="og:image" content="<?php if($advert->images()->count() < 1): echo asset('images/no-image.jpg');
-        else: echo asset('gallery/'.$advert->images()->first()->extension); endif ?>">
+        else: echo asset($url1); endif ?>">
         <meta property="og:description" content="{{str_limit($advert->anuncio_descricao, $limit = 100, $end =" ...")}}">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -55,7 +66,7 @@
     <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/jquery.bootstrapvalidator/0.5.2/css/bootstrapValidator.min.css"/>
     <link rel="stylesheet" href="{{ asset('css/sweetalert.css') }}"/>
     <link rel="stylesheet" href="{{ asset('css/lightbox.css') }}"/>
-   <!-- <link rel="stylesheet" href="{{ asset('css/jquery-ui.css') }}"/> -->
+    <!-- <link rel="stylesheet" href="{{ asset('css/jquery-ui.css') }}"/> -->
     <link rel="stylesheet" href="{{ asset('css/site.css') }}">
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,800' rel='stylesheet' type='text/css'>
 </head>
@@ -371,20 +382,22 @@
 </script>
 <script>
     $('#propriedade1').empty();
+    var imoveisResid = [10,20,60,70,80,107,108,112,113,105,107];
+    var imoveisTemp = [90,50,40];
     $('#divSubCategory').on('change', function (e) {
         var sub_id = e.target.value;
         $('#propriedade1').empty();
         //if verifica qual subcategoria foi escolhida
-        if(sub_id == 10 || sub_id == 20 || sub_id == 60 || sub_id == 70 || sub_id == 80) {
+        if(imoveisResid) {
             $('<div class="row"><div class="col-md-4 col-lg-4 col-sm-6 col-xs-12">' +
                     '<div class="form-group has-feedback"> ' +
                     '<label>Número de quartos *</label> ' +
                     '<select class="form-control" required data-error="Seleciona uma opção" required="required" name="numero_quarto"> ' +
                     '<option value="">Escolher</option><option value="0">Nenhum</option><option value="1">1</option><option value="2">2</option><option value="3">3</option> <option value="4">4</option> <option value="5">5 ou mais</option>' +
                     '</select><span class="form-control-feedback" aria-hidden="true"></span><div class="help-block with-errors"></div></div> </div><div class="col-md-4 col-lg-4 col-sm-6 col-xs-12"><div class="form-group has-feedback"><label>Vagas de garagem *</label> <select required data-error="Seleciona uma opção" required="required" class="form-control" name="numero_garagem"> <option value="">Escolher</option><option value="0">Nenhum</option><option value="1">1</option> <option value="2">2</option> <option value="3">3</option> <option value="4">4</option><option value="5">5 ou mais</option> </select> <span class="form-control-feedback" aria-hidden="true"></span> <div class="help-block with-errors"></div> </div> </div> <div class="col-md-4 col-lg-4 col-sm-6 col-xs-12"><div class="form-group has-feedback"> <label>Quantos Banheiros *</label> <select required data-error="Seleciona uma opção" class="form-control" name="numero_suite"> <option value="">Escolher</option><option value="0">Nenhum</option> <option value="1">1</option><option value="2">2</option> <option value="3">3</option> <option value="4">4</option> <option value="5">5 ou mais</option></select> <span class="form-control-feedback" aria-hidden="true"></span><div class="help-block with-errors"></div></div></div></div><div class="row"><div class="col-md-4 col-lg-4 col-sm-6 col-xs-12"> <div class="form-group has-feedback"> <label>Área Construída: *</label> <div class="input-group"> <input class="form-control" onkeypress="mascaraCampo(this, mascSoNumeros)" maxlength="7" required placeholder="Ex.: 150" type="text" data-error="Campo não pode ser vazio"  name="area_construida"><div class="input-group-addon">m²</div></div><span class="form-control-feedback" aria-hidden="true"></span><div class="help-block with-errors"></div></div></div><div class="col-md-4 col-lg-4 col-sm-6 col-xs-12"><div class="form-group has-feedback"><label>Condomínio: *</label><div class="input-group"><div class="input-group-addon">R$</div><input class="form-control" maxlength="10" onkeypress="mascaraCampo(this,mvalor)"  data-error="Campo não pode ser vazio" placeholder="Ex.: 150" type="text"  name="valor_condominio" id="valor_condominio"></div><span class="form-control-feedback" aria-hidden="true"></span><div class="help-block with-errors"></div></div></div><div class="col-md-4 col-lg-4 col-sm-6 col-xs-12"><div class="form-group has-feedback"><label>IPTU: *</label><div class="input-group"><div class="input-group-addon">R$</div><input  class="form-control" maxlength="7" onkeypress="mascaraCampo(this,mvalor)" data-error="Campo não pode ser vazio" placeholder="Ex.: 150" type="text"  name="valor_iptu" id="valor_iptu"></div><span class="form-control-feedback" aria-hidden="true"></span> <div class="help-block with-errors"></div></div></div></div>').appendTo('#propriedade1');
-        }else if(sub_id == 30 || sub_id == 40){
+        }else if(sub_id == 30){
             $('<div class="row"><div class="col-md-3 col-lg-3 col-sm-6 col-xs-12"><div class="form-group has-feedback"><label>Vagas de garagem *</label> <select required data-error="Seleciona uma opção" required="required" class="form-control" name="numero_garagem"> <option value="">Escolher</option><option value="0">Nenhum</option><option value="1">1</option> <option value="2">2</option> <option value="3">3</option> <option value="4">4</option><option value="5">5 ou mais</option> </select> <span class="form-control-feedback" aria-hidden="true"></span> <div class="help-block with-errors"></div> </div> </div><div class="col-md-3 col-lg-3 col-sm-6 col-xs-12"> <div class="form-group has-feedback"> <label>Área Construída: *</label> <div class="input-group"> <input class="form-control" onkeypress="mascaraCampo(this, mascSoNumeros)" maxlength="7" required placeholder="Ex.: 150" type="text" data-error="Campo não pode ser vazio"  name="area_construida"><div class="input-group-addon">m²</div></div><span class="form-control-feedback" aria-hidden="true"></span><div class="help-block with-errors"></div></div></div><div class="col-md-3 col-lg-3 col-sm-6 col-xs-12"><div class="form-group has-feedback"><label>Condomínio: *</label><div class="input-group"><div class="input-group-addon">R$</div><input class="form-control" maxlength="10" onkeypress="mascaraCampo(this,mvalor)"  data-error="Campo não pode ser vazio" placeholder="Ex.: 150" type="text"  name="valor_condominio" id="valor_condominio"></div><span class="form-control-feedback" aria-hidden="true"></span><div class="help-block with-errors"></div></div></div><div class="col-md-3 col-lg-3 col-sm-6 col-xs-12"><div class="form-group has-feedback"><label>IPTU: *</label><div class="input-group"><div class="input-group-addon">R$</div><input class="form-control" maxlength="7" onkeypress="mascaraCampo(this,mvalor)" data-error="Campo não pode ser vazio" placeholder="Ex.: 150" type="text" id="valor_iptu" name="valor_iptu"></div><span class="form-control-feedback" aria-hidden="true"></span> <div class="help-block with-errors"></div></div></div></div>').appendTo('#propriedade1');
-        }else if(sub_id == 90 || sub_id == 50){
+        }else if(imoveisTemp){
             $('<div class="row"><div class="col-md-4 col-lg-4 col-sm-6 col-xs-12">' +
                     '<div class="form-group has-feedback"> ' +
                     '<label>Número de quartos *</label> ' +
@@ -396,11 +409,11 @@
     });
 </script>
 <script type="text/javascript">
-    / <![CDATA[ /
+    /* <![CDATA[ */
     var google_conversion_id = 927904457;
     var google_custom_params = window.google_tag_params;
     var google_remarketing_only = true;
-    / ]]> /
+    /* ]]> */
 </script>
 <script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js">
 </script>
@@ -409,6 +422,7 @@
         <img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/927904457/?value=0&amp;guid=ON&amp;script=0"/>
     </div>
 </noscript>
+
 </body>
 </html>
 

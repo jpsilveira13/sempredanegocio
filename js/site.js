@@ -629,7 +629,6 @@ $(document).ready(function(){
             listaCidade.hide();
             listaCidade.html('');
         }
-
     });
     $('#bairro').on('keyup',function(e){
         var minLetras = 4;
@@ -637,8 +636,8 @@ $(document).ready(function(){
         var listaBairro = $("#listaBairros");
         if(textoPesquisa.length >= minLetras ) {
             listaBairro.show('fast');
-            $.get('/search-bairro/' + this.value, function (data) {
-
+            $.get('/search-bairro/' + this.value , function (data) {
+            console.log(data);
                 $('#listaBairros').html('');
                 $.each(data, function (index, cities) {
                     console.log(cities);

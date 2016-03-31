@@ -2,6 +2,7 @@
 var paginaAtual = 1;
 var temMaisUma = true;
 var continuaScroll = true;
+
 function formatNumber (num) {
     return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.")
 }
@@ -58,13 +59,13 @@ function scrollPagina(page) {
                     var html = '';
                     var totalAnuncio = formatNumber(data.total);
                     var data = data.data;
+                    var tipo_anuncio = data.tipo_anuncio;
                     var len = data.length;
                     $('.search-results-header-counter').html(totalAnuncio);
                     //Criador do contador para os anuncios
                     var cont = 0;
                     var char = "imoveis/img";
                     var url;
-
                     for (var i = 0; i < len; i++) {
                         cont++;
                         if(cont > 12 ){
@@ -107,7 +108,11 @@ function scrollPagina(page) {
 
                     });
                     paginaAtual++;
+                    //console.log(data[0].tipo_anuncio);
 
+                              //anuncio?transacao=venda&categoria=1&cidade=& status=1&cidade=&subcategoria=&tipo_anuncio=venda&min_price=&max_price=&min_area=&max_area=&num_quartos=0&num_banheiros=0&num_vagas=0&page=0
+                    //window.history.pushState('/anuncio?transacao='+ data[0].tipo_anuncio +'&categoria='+1+'&cidade='+data[0].cidade+'&'+ filters;
+                    window.history.pushState({}, null, '/anuncio?transacao='+ data[0].tipo_anuncio +'&categoria='+1+'&cidade='+data[0].cidade+'&'+ filters);
                 }else {
                     continuaScroll = false;
                     $('#loading-page').css('display','none');
@@ -120,7 +125,12 @@ function scrollPagina(page) {
     }
 }
 
+window.onload =  function carregarFuncao(){
 
+
+        scrollPagina(paginaAtual);
+
+};
 $(window).scroll(function() {
     if($(window).scrollTop() + $(window).height() == $(document).height()){
         if(temMaisUma){

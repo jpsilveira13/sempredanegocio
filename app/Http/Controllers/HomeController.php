@@ -197,8 +197,8 @@ class HomeController extends Controller
     }
     public function searchBairro($query){
         $result = null;
-        $cidade = Input::get('adv_id');
-        $result = Advert::select('bairro')->where('bairro','LIKE',$query.'%')->where('cidade',$cidade)->orderBy('id','desc')->take(8)->distinct()->get();
+        $cidade = Input::get('cidade');
+        $result = Advert::select('bairro')->where('bairro','LIKE',$query.'%')->orderBy('id','desc')->take(8)->distinct()->get();
         return \Response::json($result);
 
     }
@@ -352,12 +352,16 @@ class HomeController extends Controller
     //search imoveis
 
     public function scopeImoveis(){
-        $query = Advert::query();
+
+
+
         $id_user = \Input::has('id_user') ? Input::get('id_user'): null;
         $min_area = \Input::has('min_area') ? Input::get('min_area'): null;
         $max_area = \Input::has('max_area') ? Input::get('max_area'): null;
         $max_price = str_replace(".","",str_replace(",","",\Input::get('max_price')));
         $min_price =  str_replace(".","",str_replace(",","",\Input::get('min_price')));
+        $query = Advert::query();
+
 
         if($id_user){
             $query->where('user_id',$id_user);
@@ -406,7 +410,6 @@ class HomeController extends Controller
             $query->where('numero_garagem',\Input::get('num_vagas'));
 
         }
-
         return Response::json($query->where('status','>','0')->with('images')->paginate(18));
 
     }

@@ -8,7 +8,7 @@
         <div class="minisite-area-logo">
             <h1 class="area-logo-titulo">
                 <img src="{{$user->avatar}}" title="{{$user->name}}" />
-                <aside>Registro CRECI: 152558 </aside>
+                <aside>Registro CRECI: MGF-17423 </aside>
             </h1>
             <p class="minisite-diamente minisite-diamante-upper pula-linha">
                 {{$advertVenda}}<br />Imóveis a <b> venda</b>

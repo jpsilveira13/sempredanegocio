@@ -70,7 +70,7 @@
             </script>
         </div>
         <div class="clearfix"></div>
-        <div class="row">
+        <div class="row" onload="carregarFuncao();">
             <form action=""  id="formSearchImoveis" class="ajax">
                 <div id="nav-lateral" class="col-md-2 col-sm-2 no-padding ">
                     <button id="btn-close-nav" type="button" class="close">X</button>
@@ -86,7 +86,7 @@
                             <h5 class="sessao-texto-pesquisa">Bairro</h5>
 
                             <input readonly name="bairro" id="bairro" value="" autocomplete="off" type="text" class="form-control search-results-input  pl3" placeholder="Incluir Bairro">
-                            <ul id="listaBairros" class="lista-bairro-search"></ul>
+                            <ul id="listaBairros" class="lista-cidade-search"></ul>
                         </section>
                         <section class="clearfix sessao-area-filtro bg-branco">
                             <h5 class="sessao-texto-pesquisa">Tipo de imóvel</h5>
@@ -109,7 +109,7 @@
                             <h5 class="sessao-texto-pesquisa">Preço</h5>
                             <label class="sessao-area-filtro-label preco-corrente">
                                 Mínimo
-                                <input type="text" placeholder="0" name="min_price" id="min_price" onkeypress="mascaraCampo(this, mvalor2)"  class="search-results-input escolhaAcomodacao" data-mask-currency="true">
+                                <input type="text" placeholder="0" value="{{old('min_price')}}" name="min_price" id="min_price" onkeypress="mascaraCampo(this, mvalor2)"  class="search-results-input escolhaAcomodacao" data-mask-currency="true">
                             </label>
                             <label class="sessao-area-filtro-label preco-corrente">
                                 Máximo
