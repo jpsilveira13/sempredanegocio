@@ -3,63 +3,83 @@
 @section('content')
 
     <div class="clearfix" style="margin-bottom: 10px"></div>
+
     @if(!auth()->guest())
-        @if(auth()->user()->id == $advert->user->id)
+        @if(auth()->user()->id == $advertGeral->user->id)
             <section class="container col-md-12 col-lg-12 no-show ">
-                <a href="{{url("/admin/anuncios/editar")}}/{{$advert->id}}" style="margin-bottom: 10px" class="btn btn-zap">Editar Anúncio</a>
+                <a href="{{url("/admin/anuncios/editar")}}/{{$advertGeral->id}}" style="margin-bottom: 10px" class="btn btn-zap">Editar Anúncio</a>
             </section>
         @endif
 
     @endif
+
     <p></p>
     <div class="container no-padding">
         <div class="col-md-12 col-lg-8 ">
             <div class="side-left">
                 <div class="box-default clearfix imovel-area-detalhe">
                     <h1 class="pull-left">
-                        <span class="subtitle">{{$advert->subcategory->name}} {{$advert->tipo_anuncio}}</span>
+                        <span class="subtitle">{{$advertGeral->subcategory->name}} {{$advertGeral->tipo_anuncio}}</span>
 
-                        @if($advert->active == 0)
-                            {{$advert->rua}} - @if($advert->numero == 0)  @else{{$advert->numero}} @endif
+                        @if($advertGeral->active == 0)
+                            {{$advertGeral->rua}} - @if($advertGeral->numero == 0)  @else{{$advertGeral->numero}} @endif
                             <br />
-                            <span class="logradouro">{{$advert->bairro}}, {{$advert->cidade}} - {{$advert->estado}}</span>
+                            <span class="logradouro">{{$advertGeral->bairro}}, {{$advertGeral->cidade}} - {{$advertGeral->estado}}</span>
                         @else
-                            <span class="logradouro">{{$advert->bairro}}, {{$advert->cidade}} - {{$advert->estado}}</span>
+                            <span class="logradouro">{{$advertGeral->bairro}}, {{$advertGeral->cidade}} - {{$advertGeralGeral->estado}}</span>
 
                         @endif
+
                     </h1>
                     <div class="pull-right posvalue-imovel">
                         <span class="value-ficha">
-                                <span class="subtitle">@if($advert->tipo_anuncio == 'aluga')Valor de Locação @else Valor de Venda @endif</span>
-                            @if($advert->preco == 0)
+                                <span class="subtitle">@if($advertGeral->tipo_anuncio == 'aluga')Valor de Locação @else Valor de Venda @endif</span>
+                            @if($advertGeral->preco == 0)
                                 --
                             @else
-                                R$ {{number_format((float)$advert->preco,2,",",".")}}
+                                R$ {{number_format((float)$advertGeral->preco,2,",",".")}}
                             @endif
                         </span>
                     </div>
+
                 </div><!-- box informações endereço -->
                 <div class="box-default informacoes-imovel clearfix">
-                    <div class="pull-left">
-                        <ul class="unstyled no-padding">
-                            <li>@if($advert->numero_quarto == 0) -- @else{{$advert->numero_quarto}}@endif<span class="text-info">quarto</span></li>
-                            <li>@if($advert->numero_suite == 0) -- @else{{$advert->numero_suite}}@endif<span class="text-info">Banheiros</span></li>
-                            <li>@if($advert->area_construida == 0) -- @else{{$advert->area_construida}}@endif<span class="text-info">Área Útil (m²)</span></li>
-                            <li>@if($advert->numero_garagem == 0) -- @else{{$advert->numero_garagem}}@endif<span class="text-info">Número de Garagem</span></li>
-                        </ul>
-                    </div>
-                    <div class="pull-right">
-                        <ul class="unstyled no-padding">
-                            <li>
-                                @if($advert->valor_iptu == 0) -- @else{{number_format((float)$advert->valor_iptu,2,",",".")}}@endif
-                                <span class="text-info">IPTU</span>
-                            </li>
-                            <li>
-                                @if($advert->valor_condominio == 0) -- @else{{number_format((float)$advert->valor_condominio,2,",",".")}}@endif
-                                <span class="text-info">Condomínio</span>
-                            </li>
-                        </ul>
-                    </div>
+                    @if($advertGeral->advertImovel != null)
+                        <div class="pull-left">
+
+                            <ul class="unstyled no-padding">
+
+                                <li>@if($advertGeral->advertImovel->numero_quarto == 0) -- @else{{$advertGeral->advertImovel->numero_quarto}}@endif<span class="text-info">quarto</span></li>
+                                <li>@if($advertGeral->advertImovel->numero_suite == 0) -- @else{{$advertGeral->advertImovel->numero_banheiro}}@endif<span class="text-info">Banheiros</span></li>
+                                <li>@if($advertGeral->advertImovel->area_construida == 0) -- @else{{$advertGeral->advertImovel->area_construida}}@endif<span class="text-info">Área Útil (m²)</span></li>
+                                <li>@if($advertGeral->advertImovel->numero_garagem == 0) -- @else{{$advertGeral->advertImovel->numero_garagem}}@endif<span class="text-info">Número de Garagem</span></li>
+
+                            </ul>
+                        </div>
+                        <div class="pull-right">
+                            <ul class="unstyled no-padding">
+                                <li>
+                                    @if($advertGeral->advertImovel->valor_iptu == 0) -- @else{{number_format((float)$advertGeral->advertImovel->valor_iptu,2,",",".")}}@endif
+                                    <span class="text-info">IPTU</span>
+                                </li>
+                                <li>
+                                    @if($advertGeral->advertImovel->valor_condominio == 0) -- @else{{number_format((float)$advertGeral->advertImovel->valor_condominio,2,",",".")}}@endif
+                                    <span class="text-info">Condomínio</span>
+                                </li>
+                            </ul>
+                        </div>
+                    @endif
+                    @if($advertGeral->advertVeiculo != null)
+                        <div class="pull-left">
+                            <ul class="unstyled no-padding">
+                                <li>{{$advertGeral->advertVeiculo->ano}}<span class="text-info">Ano</span></li>
+                                <li>{{$advertGeral->advertVeiculo->km}}<span class="text-info">KM</span></li>
+                                <li>@if($advertGeral->advertVeiculo->combustivel == "Gasolina e álcool") Flex @else {{$advertGeral->advertVeiculo->combustivel}} @endif<span class="text-info">Combustível</span></li>
+                                <li>{{$advertGeral->advertVeiculo->cambio}}<span class="text-info">Câmbio</span></li>
+                            </ul>
+                        </div>
+                    @endif
+
                 </div><!-- box informações do imovel -->
                 <div class="box-default clearfix carrosel-fotos-imovel">
                     <div class="col-md-12" id="slider">
@@ -67,9 +87,9 @@
                             <div id="carrouselImovel" class="carousel slide">
                                 <!-- main slider carousel items -->
                                 <div class="carousel-inner">
-                                    @if($advert->images()->count() >0)
+                                    @if($advertGeral->images()->count() >0)
                                         <?php $j = 0 ?>
-                                        @foreach($advert->images()->get() as $images)
+                                        @foreach($advertGeral->images()->get() as $images)
                                             <div class="<?php if($j==0){echo 'active';}?> item srle" data-slide-number="<?=$j?>">
                                                 <?php
                                                 $pos = strpos($images->extension, "imoveis/img");
@@ -94,6 +114,7 @@
                                             <img src="{{url('images/noimage2.jpg')}}" class="img-responsive">
                                         </div>
                                     @endif
+
                                 </div>
                                 <!-- main slider carousel nav controls -->
                                 <a class="carousel-control left" href="#carrouselImovel" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a>
@@ -109,9 +130,9 @@
 
                         <!-- thumb navigation carousel items -->
                         <ul class="list-inline mt10">
-                            @if($advert->images()->count() >0)
+                            @if($advertGeral->images()->count() >0)
                                 <?php $i=0?>
-                                @foreach($advert->images()->get() as $images)
+                                @foreach($advertGeral->images()->get() as $images)
                                     <li>
                                         <a  id="carousel-selector-<?=$i?>" class="<?php if($i==0){echo 'selected';}?>">
                                             <?php
@@ -138,37 +159,34 @@
                                 </li>
                             @endif
                         </ul>
-
                     </div>
                 </div>
                 <div class="box-default clearfix box-descricao-caract">
                     <h3>Descrição</h3>
                     <div id="descricaoOferta">
                         <p>
-                            {{$advert->anuncio_descricao}}
+                            {{$advertGeral->anuncio_descricao}}
                         </p>
                     </div>
                     <h3>Características</h3>
-
                     <div id="caracteristicaOferta">
 
-                        @if($advert->features()->count() > 0)
+                        @if($advertGeral->features()->count() > 0)
                             <p></p>
                             <p>
                                 <strong>Características do Imóvel:</strong>
 
-                                @foreach($advert->features()->get() as $feature)
+                                @foreach($advertGeral->features()->get() as $feature)
                                     {{$feature->name}},
                                 @endforeach
                                 @else
                                     <strong>Não há característica cadastradas.</strong>
                                 @endif
-
                             </p>
                     </div>
                     <p></p>
                     <div id="codigoAnuncio">
-                        <p><strong>Código do anúncio: </strong> {{$advert->id}}</p>
+                        <p><strong>Código do anúncio: </strong> {{$advertGeral->id}}</p>
                     </div>
                 </div>
                 <div class="box-default clearfix">
@@ -205,25 +223,24 @@
 
                             <div id="phone" class="tab-phone tab-pane hide active" style="display: block;">
                                 <p class="text-aoligar">Ao ligar, diga que você viu esse anúncio no Sempre da Negócio.</p>
-                                <span id="number_tel" class="number tc">@if(count($advert->user->phone) > 0){{$advert->user->phone}}@else -- @endif</span>
+                                <span id="number_tel" class="number tc">@if(count($advertGeral->user->phone) > 0){{$advertGeral->user->phone}}@else -- @endif</span>
                             </div>
                             <!-- mensagem -->
                             <div class="content-floaters">
                                 <div class="tab-mensagem active" id="email">
                                     <form id="emailAnuncio" action="" class="form-mensagem clearfix">
-                                        <input type="hidden" name="id_user" value="{{$advert->user->id}}" />
+                                        <input type="hidden" name="id_user" value="{{$advertGeral->user->id}}" />
                                         <input type="hidden" name="url_site"  value="{{Request::url()}}" />
-                                        <input type="hidden" name="nome_usuario" value="@if(count($advert->user->name) > 0){{$advert->user->name}}@else -- @endif" />
-                                        <input type="hidden" name="email_usuario"  value="@if(count($advert->user->email) > 0){{$advert->user->email}}@else -- @endif" />
+                                        <input type="hidden" name="nome_usuario" value="@if(count($advertGeral->user->name) > 0){{$advertGeral->user->name}}@else -- @endif" />
+                                        <input type="hidden" name="email_usuario"  value="@if(count($advertGeral->user->email) > 0){{$advertGeral->user->email}}@else -- @endif" />
 
-                                        <input type="hidden" name="telefone_usuario" value="@if(count($advert->user->phone) > 0){{$advert->user->phone}}@else -- @endif" />
+                                        <input type="hidden" name="telefone_usuario" value="@if(count($advertGeral->user->phone) > 0){{$advertGeral->user->phone}}@else -- @endif" />
                                         <input id="txtNome" required name="nome" class="input input-block-level" type="text" placeholder="Nome" value="">
                                         <input id="txtEmail" required name="email" class="input input-block-level" type="email" placeholder="E-mail" value="">
                                         <input id="txtDDD" required name="codigo_area" class="input input-block-level span1" type="text" placeholder="DDD" maxlength="2"  value="">
                                         <input id="txtTelefone" required name="telefone" class="input input-block-level span2" type="text" placeholder="Telefone" maxlength="9" value="">
                                         <textarea name="mensagem" id="txtMensagem" class="input-block-level" rows="5">
-Olá, Gostaria de ter mais informações sobre o  imóvel {{$advert->subcategory->name}} à {{$advert->tipo_anuncio}}, R$ {{$advert->preco}}, em {{$advert->cidade}} - {{$advert->estado}}, que encontrei no Sempre da Negócio. Aguardo seu contato, obrigado.
-
+Olá, Gostaria de ter mais informações sobre o  anúncio {{$advertGeral->subcategory->name}} à {{$advertGeral->tipo_anuncio}}, R$ {{$advertGeral->preco}}, em {{$advertGeral->cidade}} - {{$advertGeral->estado}}, que encontrei no Sempre da Negócio. Aguardo seu contato, obrigado.
                                         </textarea>
                                         <!--<div class="check-ofertas pull-left mt10">
                                             <label>Desejo receber notícias e ofertas do Sempre dá negócio e de seus parceiros</label>
@@ -253,6 +270,7 @@ Olá, Gostaria de ter mais informações sobre o  imóvel {{$advert->subcategory
 
                         @endif
                     </div>
+
                     <div class="clearfix"></div>
                 </div><!-- fim contratar anunciante -->
 
@@ -268,13 +286,14 @@ Olá, Gostaria de ter mais informações sobre o  imóvel {{$advert->subcategory
                     <!-- Atualizado há 16 dias -->
                     <div class="pull-left content-anunciante">
                         <a href="#" class="pull-left logo">
-                            <img src="{{$advert->user->avatar}}" alt="{{$advert->user->name}}" width="88" height="52">
+                            <img src="{{$advertGeral->user->avatar}}" alt="{{$advertGeral->user->name}}" width="88" height="52">
                         </a>
                         <div class="pull-left anunciante">
-                            <a href="{{url('/')}}/{{$advert->user->id}}/{{$advert->user->url_name}}" class="fontsize13px">Outras ofertas de: {{$advert->user->name}}</a>
+                            <a href="{{url('/')}}/{{$advertGeral->user->id}}/{{$advertGeral->user->url_name}}" class="fontsize13px">Outras ofertas de: {{$advertGeral->user->name}}</a>
                         </div>
                     </div>
                 </aside>
+
             </div>
         </div>
     </div>
@@ -297,22 +316,22 @@ Olá, Gostaria de ter mais informações sobre o  imóvel {{$advert->subcategory
                     <div class="hide-body">
                         <center>
 
-                            <img class="img-responsive center-block borda-image" width="140" height="140" src="<?php if($advert->images()->count() > 0):
+                            <img class="img-responsive center-block borda-image" width="140" height="140" src="<?php if($advertGeral->images()->count() > 0):
                                 echo asset($url1); endif?>" />
-                            {{$advert->rua}}, {{$advert->bairro}}, {{$advert->cidade}} - {{$advert->estado}}
+                            {{$advertGeral->rua}}, {{$advertGeral->bairro}}, {{$advertGeral->cidade}} - {{$advertGeral->estado}}
 
                             <small>Sob consulta</small>
                             <br />
 
                             <span><strong>Características: </strong></span>
-                            @foreach($advert->features()->get() as $feature)
+                            @foreach($advertGeral->features()->get() as $feature)
                                 <span class="label label-success">{{$feature->name}}</span>
                             @endforeach
                         </center>
                         <br />
                     </div>
                     <form id="emailAmigo" action="" >
-                        <input type="hidden" name="user_id" value="{{$advert->id}}" />
+                        <input type="hidden" name="user_id" value="{{$advertGeral->id}}" />
 
                         <input type="hidden" name="url_site" value="{{Request::url()}}" />
                         <input id="txtNomeAmigo" required="required" name="nome_amigo"class="input input-block-level" type="text" placeholder="Nome do seu amigo">
@@ -354,13 +373,20 @@ Olá, Gostaria de ter mais informações sobre o  imóvel {{$advert->subcategory
                         <div class="tab-pane active">
                             <div class="text">
                                 <p>Descreva qual foi o problema encontrado na oferta:</p>
-                                <p>{{$advert->subcategory->name}}, @if($advert->numero_quarto > 0) {{$advert->numero_quarto}} quartos @endif, {{$advert->tipo_anuncio}}, {{$advert->rua}}<br><span class="logradouro">{{$advert->cidade}}, {{$advert->estado}}</span></p>
-                            </div>
 
+
+                                @if($advertGeral->advertImovel != null)
+                                    <p>{{$advertGeral->subcategory->name}}, @if($advertGeral->advertImovel->numero_quarto > 0) {{$advertGeral->advertImovel->numero_quarto}} quartos @endif, {{$advertGeral->tipo_anuncio}}, {{$advertGeral->rua}}<br><span class="logradouro">{{$advertGeral->cidade}}, {{$advertGeral->estado}}</span></p>
+
+                                @endif
+                                @if($advertGeral->advertVeiculo != null)
+                                    entrou aqui
+                                @endif
+                            </div>
                             <form class="denuncie-form" action="" id="denunciaForm">
-                                <input type="hidden" name="user_id" value="{{$advert->id}}" />
+                                <input type="hidden" name="user_id" value="{{$advertGeral->id}}" />
                                 <input type="hidden" name="url_site" value="{{Request::url()}}" />
-                                <select id="selTipoProblema" name="motivo" class="input-block-level"><option selected="selected" value="">Tipo de problema</option><option value="Imóvel já comercializado">Imóvel já comercializado</option><option value="Preço incorreto">Preço incorreto</option><option value="Sem retorno do anunciante">Sem retorno do anunciante</option><option value="Telefone não atende">Telefone não atende</option><option value="Foto incorreta">Foto incorreta</option><option value="Endereço/mapa incorreto">Endereço/mapa incorreto</option><option value="Não respondeu o e-mail em 48h">Não respondeu o e-mail em 48h</option><option value="Detalhe do empreendimento incorreto">Detalhe do empreendimento incorreto</option><option value="Imóvel em construção">Imóvel em construção</option><option value="Imóvel inexistente">Imóvel inexistente</option><option value="Oferta repetida">Oferta repetida</option><option value="Qualidade do atendimento recebido">Qualidade do atendimento recebido</option><option value="Publicação sem autorização">Publicação sem autorização</option></select>
+                                <select id="selTipoProblema" name="motivo" class="input-block-level"><option selected="selected" value="">Tipo de problema</option><option value="Anúncio já comercializado">Anúncio já comercializado</option><option value="Preço incorreto">Preço incorreto</option><option value="Sem retorno do anunciante">Sem retorno do anunciante</option><option value="Telefone não atende">Telefone não atende</option><option value="Foto incorreta">Foto incorreta</option><option value="Endereço/mapa incorreto">Endereço/mapa incorreto</option><option value="Não respondeu o e-mail em 48h">Não respondeu o e-mail em 48h</option><option value="Detalhe do anúncio incorreto">Detalhe do empreendimento incorreto</option>><option value="Anúncio inexistente">Imóvel inexistente</option><option value="Oferta repetida">Oferta repetida</option><option value="Qualidade do atendimento recebido">Qualidade do atendimento recebido</option><option value="Publicação sem autorização">Publicação sem autorização</option></select>
                                 <br />
                                 <p id="msgTipoProblema" class="text-error" style="display: none;">* Selecione o Tipo de problema</p>
 
@@ -379,16 +405,6 @@ Olá, Gostaria de ter mais informações sobre o  imóvel {{$advert->subcategory
                                 </div>
                             </form>
                         </div>
-
-                        <!-- Tela Enviando -->
-                        <!-- <div id="divEnviandoDenuncie" class="tab-pane tab-absolute">
-                             <div class="text-center">
-                                 ENVIANDO MENSAGEM...
-                                 <div class="loader"></div>
-                             </div>
-                         </div> -->
-
-                        <!-- Sucesso -->
                         <div id="divSucessoDenuncie" class="sucesso-modal tab-pane tab-absolute">
                             <div class="text-center">
                                 <p>Denúncia enviada com sucesso.<br> Vamos analisar a informação que você nos encaminhou.</p>
@@ -397,21 +413,6 @@ Olá, Gostaria de ter mais informações sobre o  imóvel {{$advert->subcategory
                                 </div>
                             </div>
                         </div>
-
-                        <!-- Erro -->
-                        <!--<div id="divErroDenuncie" class="tab-pane tab-absolute">
-                            <div class="need-info text-center">
-                                <span class="text text-error"><strong>Mensagem não enviada!</strong></span>
-                                <p>Infelizmente não conseguimos enviar sua mensagem.</p>
-                                <p>O que você deseja fazer?</p>
-
-                                <div class="center-button">
-                                    <a id="btnTentarNovamenteDenuncie" class="btn btn-zap">Tentar novamente</a>
-                                    <a data-dismiss="modal" class="btn btn-zap btn-fechar-denuncie">Fechar</a>
-                                </div>
-                            </div>
-                        </div> -->
-
                     </div>
                 </div>
                 <div class="clearfix"></div>

@@ -42,7 +42,12 @@ Route::group(['middleware'=>'auth'], function() {
     ]);
 
 });
+//Route::get('anuncie', 'HomeController@anuncie');
+//Route::post('anuncie','AdvertController@store');
+/*Route::get('anuncie',[
 
+    'uses' => 'HomeController@anuncieCategoria'
+]); */
 
 
 /* rotas ajax */
@@ -59,6 +64,18 @@ Route::get('/ajax-subcat',[
 Route::get('/ajax-advcat',[
 
     'uses' => 'HomeController@getAdvSub'
+]);
+
+Route::get('/get-marcatotal',[
+    'uses'=> 'HomeController@getMarcaTotal'
+]);
+
+Route::get('/get-marca',[
+    'uses'=> 'HomeController@getMarca'
+]);
+
+Route::get('/get-modelo',[
+    'uses'=> 'HomeController@getModelo'
 ]);
 
 Route::get('search-cidade/{query?}',[

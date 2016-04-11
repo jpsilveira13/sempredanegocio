@@ -11,6 +11,7 @@
     @if(isset($advert))
         <meta property="og:site_name" content="Sempre da Negócio">
         <meta property="og:title" content="{{$advert->anuncio_titulo}}">
+        <meta name="description" content="{{$advert->anuncio_descricao}}" />
         <meta property="og:type" content="website">
         <meta property="og:url" content="{{url('/')}}/imovel/{{$advert->tipo_anuncio}}/{{$advert->id}}/{{$advert->url_anuncio}}">
         <meta property="og:image:width" content="484">
@@ -384,10 +385,12 @@
     $('#propriedade1').empty();
     var imoveisResid = [10,20,60,70,80,107,108,112,113,105,107];
     var imoveisTemp = [90,50,40];
+    var veiculos = [1,2,3];
     $('#divSubCategory').on('change', function (e) {
         var sub_id = e.target.value;
         $('#propriedade1').empty();
         //if verifica qual subcategoria foi escolhida
+
         if(imoveisResid) {
             $('<div class="row"><div class="col-md-4 col-lg-4 col-sm-6 col-xs-12">' +
                     '<div class="form-group has-feedback"> ' +
@@ -404,6 +407,9 @@
                     '<select class="form-control" required data-error="Seleciona uma opção" required="required" name="numero_quarto"> ' +
                     '<option value="">Escolher</option><option value="0">Nenhum</option><option value="1">1</option><option value="2">2</option><option value="3">3</option> <option value="4">4</option> <option value="5">5 ou mais</option>' +
                     '</select><span class="form-control-feedback" aria-hidden="true"></span><div class="help-block with-errors"></div></div> </div><div class="col-md-4 col-lg-4 col-sm-6 col-xs-12"><div class="form-group has-feedback"><label>Vagas de garagem *</label> <select required data-error="Seleciona uma opção" required="required" class="form-control" name="numero_garagem"> <option value="">Escolher</option><option value="0">Nenhum</option><option value="1">1</option> <option value="2">2</option> <option value="3">3</option> <option value="4">4</option><option value="5">5 ou mais</option> </select> <span class="form-control-feedback" aria-hidden="true"></span> <div class="help-block with-errors"></div> </div> </div> <div class="col-md-4 col-lg-4 col-sm-6 col-xs-12"><div class="form-group has-feedback"> <label>Banheiros *</label> <select required data-error="Seleciona uma opção" class="form-control" name="numero_suite"> <option value="">Escolher</option><option value="0">Nenhum</option> <option value="1">1</option><option value="2">2</option> <option value="3">3</option> <option value="4">4</option> <option value="5">5 ou mais</option></select> <span class="form-control-feedback" aria-hidden="true"></span><div class="help-block with-errors"></div></div></div></div><div class="row"><div class="col-md-4 col-lg-4 col-sm-6 col-xs-12"> <div class="form-group has-feedback"> <label>Acomodações: *</label> <div class="input-group"> <input class="form-control" onkeypress="mascaraCampo(this, mascSoNumeros)" maxlength="2" required placeholder="Ex.: 99" type="text" data-error="Campo não pode ser vazio"  name="acomodacoes"></div><span class="form-control-feedback" aria-hidden="true"></span><div class="help-block with-errors"></div></div></div><div class="col-md-3 col-lg-3 col-sm-6 col-xs-12"> <div class="form-group has-feedback"> <label>Área Construída: *</label> <div class="input-group"> <input class="form-control" onkeypress="mascaraCampo(this, mascSoNumeros)" maxlength="7" required placeholder="Ex.: 150" type="text" data-error="Campo não pode ser vazio"  name="area_construida"><div class="input-group-addon">m²</div></div><span class="form-control-feedback" aria-hidden="true"></span><div class="help-block with-errors"></div></div></div></div>').appendTo('#propriedade1');
+
+        }else{
+            $('<div class="row"><div class="col-md-12 col-lg-12 col-sm-12 col-xs-12"><h2>Por favor selecione uma das subcategorias</h2></div></div>').appendTo('#propriedade1');
 
         }
     });

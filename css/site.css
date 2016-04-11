@@ -1067,11 +1067,8 @@ body{
     color: #0A5489;
     -webkit-transition: all 0.5s;
     transition: all 0.5s;
-    font-weight: 600;
+    font-weight: 700;
 }
-
-
-
 
 
 .bottom-suggest .text-diaria {
@@ -2165,6 +2162,7 @@ ul.unstyled {
 .informacoes-imovel li {
     float: left;
     margin-right: 20px;
+    font-size: 18px;
 }
 
 
@@ -4156,3 +4154,62 @@ span.minisite-area-atuacao-texto{
     box-shadow: 0 2px 0 #eb3812;
 
 }
+
+/* css anuncios carros */
+
+.features{
+    font-size: 16px;
+    font-weight: 700;
+    color: #034F85;
+
+}
+
+.features div {
+    display: table;
+}
+.features div span {
+    display: table-cell;
+    min-width: 150px;
+    height: 25px;
+    vertical-align: middle;
+}
+
+.features div span i {
+    margin-right: 10px;
+}
+
+.spr-resultado-busca{
+
+    display: inline-block;
+    text-indent: -2000em;
+    background-image: url('/images/sprites_total.png');
+}
+
+.spr-resultado-busca.ico-combustivel {
+    background-position: -135px -343px;
+    width: 16px;
+    height: 17px;
+}
+
+.spr-resultado-busca.ico-year {
+    background-position: -72px -315px;
+    width: 17px;
+    height: 18px;
+}
+.spr-resultado-busca.ico-km{
+    background-position: -104px -314px;
+    width: 17px;
+    height: 18px;
+
+}
+.spr-resultado-busca.ico-shift{
+    background-position: -164px -315px;
+    width: 17px;
+    height: 18px;
+
+}
+
+/* fim css carro */
+
+/* comeco alteracao anuncie carro */
+

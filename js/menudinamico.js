@@ -44,12 +44,10 @@ function scrollPagina(page) {
                     $(".before").empty();
                     $('#resultSearch').fadeTo('slow', 1);
                     $('.before').show().append('<h1 class="text-error-search">Nenhum resultado foi encontrado!</h1><img class="img-responsive" src="../images/404erro.png" />');
-
-
                 }
             },
             success: function(data) {
-                console.log(data.data);
+
                 if (data.data.length != 0) {
                     $('#loading-page').css('display','block');
                     continuaScroll = true;
@@ -59,6 +57,7 @@ function scrollPagina(page) {
                     var html = '';
                     var totalAnuncio = formatNumber(data.total);
                     var data = data.data;
+                    console.log(data);
                     var tipo_anuncio = data.tipo_anuncio;
                     var len = data.length;
                     $('.search-results-header-counter').html(totalAnuncio);
@@ -88,7 +87,8 @@ function scrollPagina(page) {
                         } else {
                             html += '<img class="group list-group-image content-img-sugestao lazy transition-img" src="images/no-image.jpg" alt="titulo imagem" />';
                         }
-                        html += ' <div class="caption infos-suggest"> <h4 class="group inner list-group-item-heading text-bairro">' + data[i].cidade + '<br />' + data[i].estado + '</h4><p class="group inner list-group-item-text"><ul class="list-infos unstyled clearfix no-padding" id="tooltip-config"><li class="icone-quartos zaptip" data-original-title="Quantidade de quartos" data-toggle="tooltip">' + data[i].numero_quarto + '</li><li class="icone-suites zaptip" data-original-title="Quantidade de suítes" data-toggle="tooltip">' + data[i].numero_suite + '</li><li class="icone-vagas zaptip" data-original-title="Quantidade de vagas" data-toggle="tooltip">' + data[i].numero_garagem + '</li></ul>';
+
+                        html += ' <div class="caption infos-suggest"> <h4 class="group inner list-group-item-heading text-bairro">' + data[i].cidade + '<br />' + data[i].estado + '</h4><p class="group inner list-group-item-text"><ul class="list-infos unstyled clearfix no-padding" id="tooltip-config"><li class="icone-quartos zaptip" data-original-title="Quantidade de quartos" data-toggle="tooltip">' + data[i].numero_quarto + '</li><li class="icone-suites zaptip" data-original-title="Quantidade de suítes" data-toggle="tooltip">' + data[i].numero_banheiro + '</li><li class="icone-vagas zaptip" data-original-title="Quantidade de vagas" data-toggle="tooltip">' + data[i].numero_garagem + '</li><li class="icone-hospedes zaptip" data-original-title="Acomodações" data-toggle="tooltip">'+data[i].acomodacoes+'</li></ul>';
                         html += '<div class="col-xs-12 col-md-12 list-item-nav2"><p class="lead description-anuncio">' + data[i].anuncio_descricao + '</p></div><div class="row list-group-hidden"> <div class="col-xs-12 col-md-12"><p class="lead description-anuncio">' + data[i].anuncio_descricao + '</p></div></div>';
                         html += '<div class="row mb4"><div class="col-xs-8 col-md-8 "><div class="bottom-suggest"> <span class="val-imovel">R$ ' + mvalor(data[i].preco) + ' </span>';
                         //Validar se o anúncio é venda ou compra
@@ -108,11 +108,8 @@ function scrollPagina(page) {
 
                     });
                     paginaAtual++;
-                    //console.log(data[0].tipo_anuncio);
 
-                              //anuncio?transacao=venda&categoria=1&cidade=& status=1&cidade=&subcategoria=&tipo_anuncio=venda&min_price=&max_price=&min_area=&max_area=&num_quartos=0&num_banheiros=0&num_vagas=0&page=0
-                    //window.history.pushState('/anuncio?transacao='+ data[0].tipo_anuncio +'&categoria='+1+'&cidade='+data[0].cidade+'&'+ filters;
-                    window.history.pushState({}, null, '/anuncio?transacao='+ data[0].tipo_anuncio +'&categoria='+1+'&cidade='+data[0].cidade+'&'+ filters);
+                    window.history.pushState({}, null, '/anuncio?transacao='+ data[0].tipo_anuncio +'&categoria='+data.categoria+'&cidade=&'+ filters);
                 }else {
                     continuaScroll = false;
                     $('#loading-page').css('display','none');
@@ -125,12 +122,6 @@ function scrollPagina(page) {
     }
 }
 
-window.onload =  function carregarFuncao(){
-
-
-        scrollPagina(paginaAtual);
-
-};
 $(window).scroll(function() {
     if($(window).scrollTop() + $(window).height() == $(document).height()){
         if(temMaisUma){

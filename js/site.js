@@ -143,6 +143,9 @@ $(document).ready(function(){
         }
     });
 
+    //js alterar campo form
+
+
     //js botao ir pro topo
     $( window ).scroll(function() {
         var topo = $('#toTop');
@@ -515,11 +518,13 @@ $(document).ready(function(){
     $('#category_id').on('change',function(e){
 
         var cat_id = e.target.value;
+        $('#propriedade1').empty();
 
         $('#divSubCategory').show('fast');
         $('#divAdvertSubcategory').hide('fast');
         $.get('/ajax-subcat?cat_id=' + cat_id, function(data){
             $('#subcategory').empty();
+            $('#subcategory').append('<option value="" >Seleciona uma opção...</option>');
             $.each(data, function(index, subcatObj){
 
                 $('#subcategory').append('<option value="'+subcatObj.id+'" id="'+subcatObj.id+'" >'+subcatObj.name+'</option>');
@@ -529,39 +534,104 @@ $(document).ready(function(){
         });
 
     });
-
     $('#subcategory').on('change',function(e){
+
         var adv_id = e.target.value;
 
-        $('#divAdvertSubcategory').hide('fast');
-        $.get('/ajax-advcat?adv_id=' + adv_id, function(data){
-            $('#advertcategory').empty();
-            if(data.advert.length != 0){
-                for(var i = 0, len = data.advert.length; i < len; i++) {
+        if(adv_id < 5){
+            console.log(adv_id);
+            $('#veiculos').empty();
 
-                    $('#advertcategory').append('<option value="' + data.advert[i].id + '" id="' + data.advert[i].id + '" >' + data.advert[i].name + '</option>');
+            $('#divAdvertSubcategory').hide('fast');
+            $.ajax({
+                type: "GET",
+                url: "get-marcatotal",
+                data: "marca",
+                async: false,
+                cache: false,
+
+                beforeSend: function(){
+
+                    $("#veiculos").append('<option value="" selected="selected">Selecione uma opção...</option>');
+
+
+                },
+                success: function(data){
+                    if (data.length > 0) {
+                        console.log(data);
+
+                        for (i = 0; i < data.length; i++) {
+                            ;
+                            $("#veiculos").append('<option value=' + data[i].codigo_marca + '>' + data[i].marca + '</option>');
+                        }
+                    }else{
+
+                        $("#veiculos").append("<option value=''>Nada foi encontrado</option>");
+                    }
+
+                },
+                error: function(){
+
                 }
-                $('#divAdvertSubcategory').show('fast');
-            }
+            });
+        }else{
+            $('#divAdvertSubcategory').hide('fast');
+            $.get('/ajax-advcat?adv_id=' + adv_id, function(data){
+                $('#advertcategory').empty();
+                $('#veiculos').empty();
+                if(data.advert.length != 0){
+                    for(var i = 0, len = data.advert.length; i < len; i++) {
 
-            var caractList = $('#listCaract');
-            var html = '<div class="btn-group" data-toggle="buttons">';
-            for(var j = 0, lenj = data.features.length;j<lenj;j++){
+                        $('#advertcategory').append('<option value="' + data.advert[i].id + '" id="' + data.advert[i].id + '" >' + data.advert[i].name + '</option>');
+                    }
+                    $('#divAdvertSubcategory').show('fast');
+                }
 
-                html+= '<label class="btn btn-default btcaract mt10" style="width: 204px;margin-left: 47px;"><input type="checkbox" aria-required="false" class="material_checkbox" name="caracteristicas[]" value="'+data.features[j].id+'">'+data.features[j].name+'</label>'
-            }
-            html+='</div>';
-            caractList.html(html);
+                var caractList = $('#listCaract');
+                var html = '<div class="btn-group" data-toggle="buttons">';
+                for(var j = 0, lenj = data.features.length;j<lenj;j++){
+
+                    html+= '<label class="btn btn-default btcaract mt10" style="width: 204px;margin-left: 47px;"><input type="checkbox" aria-required="false" class="material_checkbox" name="caracteristicas[]" value="'+data.features[j].id+'">'+data.features[j].name+'</label>'
+                }
+                html+='</div>';
+                caractList.html(html);
+
+            });
+        }
+    });
+
+    $('#veiculos').on('change',function(e){
+        var marca_id = e.target.value;
+        $('#modelo').empty();
+        $('#tipo').hide('fast');
+        $.get('/get-marca?marca_id=' + marca_id, function(data){
+            //$('#subcategory').empty();
+
+            $.each(data, function(index, modelObj){
+                $('#modelo').append('<option value="'+modelObj.codigo_modelo+'" >'+modelObj.modelo+'</option>');
+
+            });
 
         });
+    });
+    $('#modelo').on('change',function(e){
+        var modelo_id = e.target.value;
+        console.log(modelo_id);
+        $('#tipo').empty();
+        $.get('/get-modelo?modelo_id=' + modelo_id, function(data){
+            $.each(data, function(index, anoObj){
 
+                $('#tipo').append('<option value="'+anoObj.ano+'" >'+anoObj.ano+'</option>');
+
+            });
+            $('#tipo').show('fast');
+
+
+        });
     });
 
 
-    var answer = true;
-    if((((3 * 90) === 270) || !(false && (!false)) || "bex".toUpperCase() === "BEX")){
 
-    }
 //procurar pelo cep
 
     $('#cep').blur(function(){
@@ -637,7 +707,7 @@ $(document).ready(function(){
         if(textoPesquisa.length >= minLetras ) {
             listaBairro.show('fast');
             $.get('/search-bairro/' + this.value , function (data) {
-            console.log(data);
+                console.log(data);
                 $('#listaBairros').html('');
                 $.each(data, function (index, cities) {
                     console.log(cities);

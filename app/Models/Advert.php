@@ -4,6 +4,7 @@ namespace sempredanegocio\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
+
 class Advert extends Model
 {
     protected $table = "adverts";
@@ -12,28 +13,34 @@ class Advert extends Model
         'user_id',
         'subcategories_id',
         'tipo_anuncio',
+        'origem',
+        'origem_identificacao',
+        'status',
         'estado',
         'status',
         'cidade',
         'bairro',
         'rua',
         'numero',
-        'numero_quarto',
-        'numero_garagem',
-        'numero_suite',
-        'area_construida',
-        'valor_condominio',
-        'valor_iptu',
         'anuncio_titulo',
         'anuncio_descricao',
         'preco',
         'url_anuncio',
         'active',
         'adverts_count',
-        'destaque'
+        'destaque',
+        'confirm',
 
     ];
 
+    public function advertImovel(){
+        return $this->hasOne(AdvertImovel::class);
+    }
+
+   public function advertVeiculo(){
+       return $this->hasOne(AdvertVeiculo::class);
+
+   }
     public function images(){
 
         return $this->hasMany('sempredanegocio\Models\AdvertImage');

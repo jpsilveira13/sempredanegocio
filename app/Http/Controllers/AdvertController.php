@@ -19,6 +19,8 @@ class AdvertController extends Controller
 {
 
     private $advertModel;
+    private $advertCarro;
+    private $advertImovel;
 
     public function  __construct(Advert $advertModel){
         $this->advertModel = $advertModel;
@@ -37,11 +39,11 @@ class AdvertController extends Controller
 
     }
 
-
     /* salvar anúncio */
     public function store(Requests\AdvertSaveRequest $request, AdvertImage $advertImage, User $user){
 
         $data = $request->all();
+
         $data['user_id']    = Auth::user()->id;
         $user               = User::find($data['user_id']);
         $user->name         = $request->get('nome-usuario');
@@ -52,23 +54,20 @@ class AdvertController extends Controller
         $data['url_anuncio'] = str_slug($data['anuncio_titulo']);
 
         $data['valor_condominio'] = str_replace(",",".",str_replace(".","",$data['valor_condominio']));
-        //dd($data['valor_condominio']);
+
         $data['valor_iptu'] = str_replace(",",".",str_replace(".","",$data['valor_iptu']));
         $data['preco'] = str_replace(",",".",str_replace(".","",$data['preco']));
-        //dd($data['preco']);
+
         $features = $request->get('caracteristicas');
         $images = $request->file('anuncio_images');
         unset($data['anuncio_images']);
         unset($data['caracteristicas']);
         $anuncio = Advert::create($data);
 
-        $count = count($advertImage);
-        $count = round($count/100000);
-
         foreach($images as $image){
 
             $renamed = md5(date('Ymdhms').$image->getClientOriginalName()).'.'.$image->getClientOriginalExtension();
-            $path = public_path().'/gallery/'.$count.'/'.$renamed;
+            $path = public_path().'/gallery/'.$renamed;
             Image::make($image->getRealPath())->resize(678,407)->save($path);
             $advertImage::create(['advert_id' => $anuncio->id,'extension' => $renamed]);
         }
