@@ -1,10 +1,11 @@
-<?php namespace Laravel\Socialite\Two;
+<?php
 
-use Symfony\Component\HttpFoundation\RedirectResponse;
+namespace Laravel\Socialite\Two;
+
+use GuzzleHttp\ClientInterface;
 
 class GoogleProvider extends AbstractProvider implements ProviderInterface
 {
-
     /**
      * The separating character for the requested scopes.
      *
@@ -18,9 +19,9 @@ class GoogleProvider extends AbstractProvider implements ProviderInterface
      * @var array
      */
     protected $scopes = [
-        'https://www.googleapis.com/auth/plus.me',
-        'https://www.googleapis.com/auth/plus.login',
-        'https://www.googleapis.com/auth/plus.profile.emails.read',
+        'openid',
+        'profile',
+        'email',
     ];
 
     /**
@@ -47,8 +48,10 @@ class GoogleProvider extends AbstractProvider implements ProviderInterface
      */
     public function getAccessToken($code)
     {
+        $postKey = (version_compare(ClientInterface::VERSION, '6') === 1) ? 'form_params' : 'body';
+
         $response = $this->getHttpClient()->post($this->getTokenUrl(), [
-            'body' => $this->getTokenFields($code),
+            $postKey => $this->getTokenFields($code),
         ]);
 
         return $this->parseAccessToken($response->getBody());
@@ -78,7 +81,7 @@ class GoogleProvider extends AbstractProvider implements ProviderInterface
             ],
             'headers' => [
                 'Accept' => 'application/json',
-                'Authorization' => 'Bearer ' . $token,
+                'Authorization' => 'Bearer '.$token,
             ],
         ]);
 

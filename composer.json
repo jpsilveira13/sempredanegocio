@@ -10,10 +10,11 @@
     "laravel/framework": "5.1.*",
     "artesaos/cidadesbr": "^1.0",
     "laravel/socialite": "2.*",
-    "guzzlehttp/guzzle": "~4.0",
+    "guzzlehttp/guzzle": "~6.0@dev",
     "illuminate/html": "5.*",
     "bestmomo/scafold": "dev-master",
-    "intervention/image": "dev-master"
+    "intervention/image": "dev-master",
+    "league/flysystem-aws-s3-v2": "^1.0"
   },
   "require-dev": {
     "fzaninotto/faker": "~1.4",

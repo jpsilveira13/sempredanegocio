@@ -1,20 +1,16 @@
-<?php namespace Laravel\Socialite;
+<?php
+
+namespace Laravel\Socialite;
 
 use InvalidArgumentException;
 use Illuminate\Support\Manager;
-use Laravel\Socialite\Two\GithubProvider;
-use Laravel\Socialite\Two\GoogleProvider;
 use Laravel\Socialite\One\TwitterProvider;
-use Laravel\Socialite\Two\FacebookProvider;
 use Laravel\Socialite\One\BitbucketProvider;
 use League\OAuth1\Client\Server\Twitter as TwitterServer;
 use League\OAuth1\Client\Server\Bitbucket as BitbucketServer;
-use Laravel\Socialite\One\AbstractProvider as AbstractOneProvider;
-use Laravel\Socialite\Two\AbstractProvider as AbstractTwoProvider;
 
 class SocialiteManager extends Manager implements Contracts\Factory
 {
-
     /**
      * Get a driver instance.
      *
@@ -69,6 +65,20 @@ class SocialiteManager extends Manager implements Contracts\Factory
     }
 
     /**
+     * Create an instance of the specified driver.
+     *
+     * @return \Laravel\Socialite\Two\AbstractProvider
+     */
+    protected function createLinkedinDriver()
+    {
+        $config = $this->app['config']['services.linkedin'];
+
+        return $this->buildProvider(
+          'Laravel\Socialite\Two\LinkedInProvider', $config
+        );
+    }
+
+    /**
      * Build an OAuth 2 provider instance.
      *
      * @param  string  $provider
@@ -112,18 +122,18 @@ class SocialiteManager extends Manager implements Contracts\Factory
     }
 
     /**
-     * Format the Twitter server configuration.
+     * Format the server configuration.
      *
      * @param  array  $config
      * @return array
      */
     public function formatConfig(array $config)
     {
-        return [
+        return array_merge([
             'identifier' => $config['client_id'],
             'secret' => $config['client_secret'],
             'callback_uri' => $config['redirect'],
-        ];
+        ], $config);
     }
 
     /**
@@ -135,6 +145,6 @@ class SocialiteManager extends Manager implements Contracts\Factory
      */
     public function getDefaultDriver()
     {
-        throw new InvalidArgumentException("No Socialite driver was specified.");
+        throw new InvalidArgumentException('No Socialite driver was specified.');
     }
 }
