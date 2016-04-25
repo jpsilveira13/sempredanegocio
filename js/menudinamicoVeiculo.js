@@ -9,17 +9,17 @@ function scrollPagina(page) {
     page = paginaAtual;
     if (continuaScroll) {
         if(page == 1){
-            var filters = $('#formSearchImoveis').serialize();
+            var filters = $('#formSearchVeiculos').serialize();
 
 
         }else{
-            var filters = $('#formSearchImoveis').serialize() + "&page=" + page;
+            var filters = $('#formSearchVeiculos').serialize() + "&page=" + page;
 
         }
         console.log(filters);
         continuaScroll = false;
         $.ajax ({
-            url : "search-imoveis",
+            url : "search-veiculos",
             type: 'GET',
             cache: false,
             data: filters,
@@ -72,7 +72,7 @@ function scrollPagina(page) {
                             cont = 0;
                             html+='<div style="margin-bottom: 20px" class="item col-xs-12 col-sm-12 col-lg-12 col-md-12 bloco-item"><script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script><ins class="adsbygoogle"style="display:block" data-ad-client="ca-pub-9276435422488602" data-ad-slot="4429425578" data-ad-format="auto"></ins>  <script> (adsbygoogle = window.adsbygoogle || []).push({}) </script></div>';
                         }
-                        html += '<div class="item col-xs-12 col-sm-6 col-lg-4 col-md-4 bloco-item"><a class="item-total" href="/anuncio/' + data[i].tipo_anuncio + '/' + data[i].id + '/' + data[i].url_anuncio + '"><div class="thumbnail">';
+                        html += '<div class="item col-xs-12 col-sm-6 col-lg-4 col-md-4 bloco-item"><a class="item-total" href="/anuncio/' + data[i].tipo_anuncio + '/' + data[i].id + '/' + data[i].url_anuncio + '"><div class="thumbnail heigth417">';
 
                         //Validação se existe imagem ou nao
                         if (data[i].images[0]) {
@@ -83,12 +83,12 @@ function scrollPagina(page) {
                                 url = data[i].images[0].extension;
 
                             }
-                            html += '<img class="group list-group-image content-img-sugestao lazy transition-img" data-original="'+url+'" width="220" height="229" alt="titulo imagem" />'
+                            html += '<img class="group list-group-image content-img-sugestao lazy transition-img" data-original="'+url+'" width="220" height="229" alt="'+data[i].anuncio_descricao+'" />'
 
                         } else {
                             html += '<img class="group list-group-image content-img-sugestao lazy transition-img" src="images/no-image.jpg" alt="titulo imagem" />';
                         }
-                        html += ' <div class="caption infos-suggest"> <h4 class="group inner list-group-item-heading text-bairro">' + data[i].cidade + '<br />' + data[i].estado + '</h4><p class="group inner list-group-item-text"><ul class="list-infos unstyled clearfix no-padding" id="tooltip-config"><li class="icone-quartos zaptip" data-original-title="Quantidade de quartos" data-toggle="tooltip"> ' + data[i].advert_imovel.numero_quarto + '</li><li class="icone-suites zaptip" data-original-title="Quantidade de Banheiros" data-toggle="tooltip"> ' + data[i].advert_imovel.numero_banheiro + '</li><li class="icone-vagas zaptip" data-original-title="Quantidade de vagas" data-toggle="tooltip"> ' + data[i].advert_imovel.numero_garagem + '</li></ul>';
+                        html += ' <div class="caption infos-suggest"> <h4 class="group inner list-group-item-heading text-bairro">' + data[i].advert_veiculo.marca + '<br />' + data[i].advert_veiculo.modelo + '</h4><p class="group inner list-group-item-text"><div class="features"><div><span><i class="spr-resultado-busca ico-year"></i>'+data[i].advert_veiculo.ano+'</span><span><i class="spr-resultado-busca ico-combustivel"></i>'+data[i].advert_veiculo.combustivel+'</span></div><div><span><i class="spr-resultado-busca ico-km"></i>'+data[i].advert_veiculo.km+'</span><span><i class="spr-resultado-busca ico-shift"></i>'+data[i].advert_veiculo.cambio+'</span></div></div> </p>';
                         html += '<div class="col-xs-12 col-md-12 list-item-nav2"><p class="lead description-anuncio">' + data[i].anuncio_descricao + '</p></div><div class="row list-group-hidden"> <div class="col-xs-12 col-md-12"><p class="lead description-anuncio">' + data[i].anuncio_descricao + '</p></div></div>';
                         html += '<div class="row mb4"><div class="col-xs-8 col-md-8 "><div class="bottom-suggest"> <span class="val-imovel">R$ ' + mvalor(data[i].preco) + ' </span>';
                         //Validar se o anúncio é venda ou compra

@@ -17,7 +17,9 @@ class AdvertVeiculo extends Model
         'cambio',
         'combustivel',
         'placa',
-        'opcionais'
+        'opcionais',
+        'marca',
+        'modelo'
 
     ];
 

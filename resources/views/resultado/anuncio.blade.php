@@ -85,8 +85,14 @@
                                 <h5 class="sessao-texto-pesquisa">Localização</h5>
                                 <div class="input-group">
                                     <input name="cidade" id="location" value="{{\Input::get('cidade')}}"  autocomplete="off" type="text" class="form-control search-results-input pl3" placeholder="Incluir Cidade">
-                                    <ul id="listaCidades" class="lista-cidade-search"></ul>
+                                    <ul id="listaCidades" class="arrumaAnuncio lista-cidade-search"></ul>
                                 </div>
+                            </section>
+                            <section class="clearfix sessao-area-filtro bg-branco ">
+                                <h5 class="sessao-texto-pesquisa">Bairro</h5>
+
+                                <input readonly name="bairro" id="bairro" value="" autocomplete="off" type="text" class="form-control search-results-input  pl3" placeholder="Incluir Bairro">
+                                <ul id="listaBairros" class="lista-cidade-search"></ul>
                             </section>
                             <section class="clearfix sessao-area-filtro bg-branco">
                                 <h5 class="sessao-texto-pesquisa">Tipo de imóvel</h5>
@@ -186,7 +192,9 @@
                         <div class="before"></div>
                         <div class="row" id="resultSearch">
                             <div id="products" class="list-group">
+
                                 <?php $contador = 0; ?>
+
                                 @foreach($queryAnuncios as $queryAnuncio)
                                     <?php $contador+=1;?>
                                     @if($contador > 12)
@@ -207,32 +215,36 @@
                                     <div class="item  col-xs-12 col-sm-6 col-lg-4 col-md-4 bloco-item">
                                         <a class="item-total" href="{{url('/')}}/anuncio/{{$queryAnuncio->tipo_anuncio}}/{{$queryAnuncio->id}}/{{str_slug($queryAnuncio->url_anuncio)}}" >
                                             <div class="thumbnail">
+
                                                 @if(count($queryAnuncio->images))
                                                     <?php
-                                                    $pos = strpos($queryAnuncio->images()->first()->extension, "imoveis/img");
+                                                    $pos = strpos($queryAnuncio->images()->first()->extension, "amazonaws.com");
 
                                                     $url1 = "";
                                                     if ($pos === false) {
-                                                    $url1 = 'gallery/'.$queryAnuncio->images()->first()->extension;
-                                                    } else {
+
                                                     $url1 = "galeria/".$queryAnuncio->images()->first()->extension;
-                                                    }
-
-
                                                     ?>
                                                     <img class="group list-group-image content-img-sugestao lazy transition-img" data-original="{{url($url1)}}" width="220" height="229" alt="titulo imagem" />
+                                                    <?php }else{
+                                                    $url1 = $queryAnuncio->images()->first()->extension;
+                                                    ?>
+                                                    <img class="group list-group-image content-img-sugestao lazy transition-img" data-original="{{$url1}}" width="220" height="229" alt="titulo imagem" />
+                                                    <?php }?>
+
                                                 @else
                                                     <img class="group list-group-image content-img-sugestao lazy transition-img" src="{{url('images/no-image.jpg')}}" alt="titulo imagem" />
                                                 @endif
+
                                                 <div class="caption infos-suggest">
                                                     <h4 class="group inner list-group-item-heading text-bairro">{{$queryAnuncio->cidade}}<br />
                                                         {{$queryAnuncio->estado}}
                                                     </h4>
                                                     <p class="group inner list-group-item-text">
                                                     <ul class="list-infos unstyled clearfix no-padding" id="tooltip-config">
-                                                        <li class="icone-quartos zaptip" data-original-title="Quantidade de quartos" data-toggle="tooltip">{{$queryAnuncio->numero_quarto}}</li>
-                                                        <li class="icone-suites zaptip" data-original-title="Quantidade de suítes" data-toggle="tooltip">{{$queryAnuncio->numero_suite}}</li>
-                                                        <li class="icone-vagas zaptip" data-original-title="Quantidade de vagas" data-toggle="tooltip">{{$queryAnuncio->numero_garagem}}</li>
+                                                        <li class="icone-quartos zaptip" data-original-title="Quantidade de quartos" data-toggle="tooltip"> {{$queryAnuncio->advertImovel->numero_quarto}}</li>
+                                                        <li class="icone-suites zaptip" data-original-title="Quantidade de suítes" data-toggle="tooltip"> {{$queryAnuncio->advertImovel->numero_banheiro}}</li>
+                                                        <li class="icone-vagas zaptip" data-original-title="Quantidade de vagas" data-toggle="tooltip"> {{$queryAnuncio->advertImovel->numero_garagem}}</li>
                                                     </ul>
                                                     <!-- essa div só ficara visivel quando for lista -->
                                                     <div class="col-xs-12 col-md-12 list-item-nav2">

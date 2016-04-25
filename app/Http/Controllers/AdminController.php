@@ -15,6 +15,7 @@ use sempredanegocio\Models\User;
 class AdminController extends Controller
 {
 
+
     public function home(User $user)
     {
         $user = Auth::user();
@@ -34,5 +35,10 @@ class AdminController extends Controller
         }
     }
 
+    public function mostrarMensagem(User $user){
+        $id_user =  Auth::user()->id;
+        $messageQuery = AdvertMessage::where('id_user',$id_user)->take(6)->get();
+        return view('admin.principal.index',compact('messageQuery'));
 
+    }
 }

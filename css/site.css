@@ -179,6 +179,10 @@ section{
 
 }
 
+
+.heigth417{
+    min-height: 417px!important;
+}
 .mt43res{
     margin-top: 43px;
 }
@@ -1555,6 +1559,11 @@ footer{
 
 }
 
+.arrumaAnuncio{
+    top: 33px!important;
+    left: 0px!important;
+
+}
 
 #listaCidades li a:hover, #listaBairros li a:hover{
     background-color: #d7d7d7;
@@ -2538,7 +2547,7 @@ input.span1, textarea.span1 {
     max-height: 52px;
     margin-right: 15px;
     max-width: 88px;
-    border: solid 4px #eee;
+
 }
 
 .outras-informacoes .anunciante {
@@ -2905,6 +2914,8 @@ input#images{display: none;}
 /********************************/
 #nav-lateral{
     position: relative;
+
+
 }
 
 @media only screen and (max-width:1000px){

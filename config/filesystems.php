@@ -64,10 +64,10 @@ return [
 
         's3' => [
             'driver' => 's3',
-            'key'    => 'your-key',
-            'secret' => 'your-secret',
-            'region' => 'your-region',
-            'bucket' => 'your-bucket',
+            'key'    => 'AKIAIWEZ77ZAIDWHZQPA',
+            'secret' => 'U3JMPlFdHKFddnFOARRGTtANbxLAzIS2W0BRSGaK',
+            'region' => 'sa-east-1',
+            'bucket' => 'imoveis-sempredanegocio',
         ],
 
         'rackspace' => [

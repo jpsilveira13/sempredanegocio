@@ -84,7 +84,7 @@
                             @endif
                             <div class="minisite-anuncio-destaque-descricao">
                                 <span class="minisite-anuncio-destaque-bairro">{{$advert->bairro}}</span>
-                                <p class="minisite-anuncio-destaque-detalhes">R$ {{number_format((float)$advert->preco,2,",",".")}} - {{$advert->area_construida}} m2 - {{$advert->numero_quarto}} quarto </p>
+                                <p class="minisite-anuncio-destaque-detalhes">R$ {{number_format((float)$advert->preco,2,",",".")}} - {{$advert->advertImovel->area_construida}} m2 - {{$advert->advertImovel->numero_quarto}} quarto </p>
                                 <p class="minisite-anuncio-destaque-localizacao">
                                     {{$advert->rua}} - @if($advert->numero){{$advert->numero}}@else @endif
                                 </p>
@@ -305,10 +305,9 @@
                                                     </h4>
                                                     <p class="group inner list-group-item-text">
                                                     <ul class="list-infos unstyled clearfix no-padding" id="tooltip-config">
-                                                        <li class="icone-quartos zaptip" data-original-title="Quantidade de quartos" data-toggle="tooltip">{{$advert->numero_quarto}}</li>
-                                                        <li class="icone-suites zaptip" data-original-title="Quantidade de suítes" data-toggle="tooltip">{{$advert->numero_suite}}</li>
-                                                        <li class="icone-vagas zaptip" data-original-title="Quantidade de vagas" data-toggle="tooltip">{{$advert->numero_garagem}}</li>
-                                                        <li class="icone-hospedes zaptip" data-original-title="Quantidade de pessoas" data-toggle="tooltip">12</li>
+                                                        <li class="icone-quartos zaptip" data-original-title="Quantidade de quartos" data-toggle="tooltip">{{$advert->advertImovel->numero_quarto}}</li>
+                                                        <li class="icone-suites zaptip" data-original-title="Quantidade de suítes" data-toggle="tooltip">{{$advert->advertImovel->numero_banheiro}}</li>
+                                                        <li class="icone-vagas zaptip" data-original-title="Quantidade de vagas" data-toggle="tooltip">{{$advert->advertImovel->numero_garagem}}</li>
 
                                                     </ul>
                                                     <!-- essa div só ficara visivel quando for lista -->

@@ -128,31 +128,27 @@
                             <hr />
                         </div>
                     </div>
-                    <div id="propriedade1">
+                    <div class="hide" id="divVeiculo">
                         <div class="row">
                             <div class="col-md-4 col-lg-4 col-sm-6 col-xs-12">
-                                <div class="form-group has-feedback">
-                                    <label for="Subcategoria">Seleciona a marca</label>
-                                    <select class="form-control" id="veiculos" name="marca_id">
-                                        <options value="">Escolha uma</options>
-                                    </select>
+                                <div class="form-group has-feedback"> <label for="Subcategoria">Seleciona a marca</label>
+                                    <select class="form-control" id="veiculos" name="marca_id"></select>
                                 </div>
                             </div>
-                            <label for="modelo">Modelo: <select name="modelo_id" class="input-medium" id="modelo"></select></label>
-                            <label for="tipo">Ano: <select name="tipo" class="input-medium" id="tipo"></select></label>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-4 col-lg-4 col-sm-6 col-xs-12">
-                            <div class="form-group has-feedback">
-                                <label for="Subcategoria">Seleciona a marca</label>
-                                <select class="form-control" id="veiculos" name="marca_id">
-                                    <options value="">Escolha uma</options>
-                                </select>
+                            <div class="col-md-4 col-lg-4 col-sm-6 col-xs-12">
+                                <div class="form-group has-feedback"> <label for="Subcategoria">Selecione o modelo</label>
+                                    <select name="modelo_id" class="form-control" id="modelo"></select>
+                                </div>
+                            </div>
+                            <div id="divAno" class="col-md-4 col-lg-4 col-sm-6 col-xs-12">
+                                <div class="form-group has-feedback"> <label for="Subcategoria">Ano</label>
+                                    <select name="tipo" class="form-control" id="tipo"></select>
+                                </div>
                             </div>
                         </div>
-                        <label for="modelo">Modelo: <select name="modelo_id" class="input-medium" id="modelo"></select></label>
-                        <label for="tipo">Ano: <select name="tipo" class="input-medium" id="tipo"></select></label>
+                    </div>
+                    <div id="propriedade1">
+
                     </div>
                     <br />
                     <div class="row">
@@ -232,6 +228,47 @@
                             <div class="col-md-12 col-lg-12">
                                 <h2><i class="fa fa-user"></i> Sua conta</h2>
                                 <hr />
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-6">
+                            <div class="row">
+
+                                <div class="col-md-6 col-lg-6 col-sm-6 col-xs-12">
+                                    <div class="form-group has-feedback">
+                                        <label>Nome: *</label>
+                                        <input type="text" name='nome-usuario' value="{{Auth::user()->name}}" data-minlength="6" required data-error="Número de caracteres tem que ser maior que 6" class="form-control" />
+                                        <span class=" form-control-feedback" aria-hidden="true"></span>
+                                        <div class="help-block with-errors"></div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-lg-6 col-sm-6 col-xs-12">
+                                    <div class="form-group has-feedback">
+                                        <label>Telefone: *</label>
+                                        <input type="tel" name='telefone-usuario' maxlength="15" onkeypress="mascaraCampo(this, mtel)" required  data-error="Campo não pode ser vazio" maxlength="15" value="{{Auth::user()->phone}}"  class="form-control" />
+                                        <span class="form-control-feedback" aria-hidden="true"></span>
+                                        <div class="help-block with-errors"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
+                                    <div class="form-group has-feedback">
+                                        <label  for="inputEmail">Email: *</label>
+                                        @if(Auth::user()->email)
+                                            <input type="email" id="inputEmail" value='{{Auth::user()->email}}' name='email' required  data-error="Campo não pode ser vazio" readonly class="form-control" />
+                                        @else
+                                            <input type="email" id="inputEmail" value='' name='email' required  data-error="Campo não pode ser vazio" class="form-control" />
+                                        @endif
+                                        <span class="form-control-feedback" aria-hidden="true"></span>
+                                        <div class="help-block with-errors"></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div>
+                                <label>
+                                    <input type="checkbox" > Quero receber novidades do sempre da negócio
+                                </label>
                             </div>
                         </div>
 

@@ -64,18 +64,18 @@
                             <img class="mb10 transition-img" src="{{url('images/img-imoveis.png')}}" alt="Imóveis" title="Área Imóveis" width="167" height="130" />
                             <figcaption>
                                 <p class="hero-description">Imóveis</p>
-                                <p class="hero-description fontsize13px">Encontre mais de <strong>{{number_format((float)$advertCount,0,".",".")}}</strong> imóveis de sua região em um único lugar. </p>
+                                <p class="hero-description fontsize13px">Encontre mais de <strong>{{number_format((float)$advertCountImoveis,0,".",".")}}</strong> imóveis de sua região em um único lugar. Aproveita! </p>
                             </figcaption>
                         </figure>
                     </a>
                 </div>
                 <div class="col-md-3 col-sm-6 selecao-categoria">
-                    <a href="#">
+                    <a href="{{asset('/veiculos')}}">
                         <figure class="">
                             <img class="mb10 transition-img height148" src="{{url('images/img-veiculos.png')}}" alt="Veículos" title="Área Veículos" width="167" height="130" />
                             <figcaption>
                                 <p class="hero-description"> Veículos </p>
-                                <p class="hero-description fontsize13px">Em Breve </p>
+                                <p class="hero-description fontsize13px">Encontre o veículo do seu sonho, buscamos anúncios em mais de 30 sites de classificados pelo Brasil</p>
                             </figcaption>
                         </figure>
                     </a>
@@ -86,7 +86,7 @@
                             <img class="mb10 transition-img height148" src="{{url('images/img-eletronicos.png')}}" alt="Eletrônicos" title="Área Eletrônicos" width="167" height="130" />
                             <figcaption>
                                 <p class="hero-description">Eletrônicos</p>
-                                <p class="hero-description fontsize13px">Em Breve </p>
+                                <p class="hero-description fontsize13px">Nós pesquisamos para você os melhores preços para economizar tempo e dinheiro.</p>
                             </figcaption>
                         </figure>
                     </a>
@@ -97,7 +97,7 @@
                             <img class="mb10 transition-img height148" src="{{url('images/img-equipamentos.png')}}" alt="Equipamentos" title="Área Equipamentos" width="167" height="130" />
                             <figcaption>
                                 <p class="hero-description">Equipamentos </p>
-                                <p class="hero-description fontsize13px">Em Breve</p>
+                                <p class="hero-description fontsize13px">Somos o único portal com área exclusiva para locação e venda de máquinas e equipamentos.</p>
                             </figcaption>
                         </figure>
                     </a>
@@ -153,7 +153,7 @@
             <div class="col-md-3">
                 <div class="item-counter">
                     <span class="item-icon"><i class="fa fa-database"></i></span>
-                    <div data-refresh-interval="100" data-speed="6000" data-to="{{$advertCount}}" data-from="0" class="item-count">{{$advertCount}}</div>
+                    <div data-refresh-interval="100" data-speed="6000" data-to="{{$advertCountTotal}}" data-from="0" class="item-count">{{$advertCountTotal}}</div>
                     <span class="item-info">Anúncios Cadastrados</span>
                 </div>
             </div>

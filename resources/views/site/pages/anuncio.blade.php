@@ -20,13 +20,12 @@
                 <div class="box-default clearfix imovel-area-detalhe">
                     <h1 class="pull-left">
                         <span class="subtitle">{{$advertGeral->subcategory->name}} {{$advertGeral->tipo_anuncio}}</span>
-
                         @if($advertGeral->active == 0)
                             {{$advertGeral->rua}} - @if($advertGeral->numero == 0)  @else{{$advertGeral->numero}} @endif
                             <br />
                             <span class="logradouro">{{$advertGeral->bairro}}, {{$advertGeral->cidade}} - {{$advertGeral->estado}}</span>
                         @else
-                            <span class="logradouro">{{$advertGeral->bairro}}, {{$advertGeral->cidade}} - {{$advertGeralGeral->estado}}</span>
+                            <span class="logradouro">{{$advertGeral->bairro}}, {{$advertGeral->cidade}} - {{$advertGeral->estado}}</span>
 
                         @endif
 
@@ -50,7 +49,7 @@
                             <ul class="unstyled no-padding">
 
                                 <li>@if($advertGeral->advertImovel->numero_quarto == 0) -- @else{{$advertGeral->advertImovel->numero_quarto}}@endif<span class="text-info">quarto</span></li>
-                                <li>@if($advertGeral->advertImovel->numero_suite == 0) -- @else{{$advertGeral->advertImovel->numero_banheiro}}@endif<span class="text-info">Banheiros</span></li>
+                                <li>@if($advertGeral->advertImovel->numero_banheiro == 0) -- @else{{$advertGeral->advertImovel->numero_banheiro}}@endif<span class="text-info">Banheiros</span></li>
                                 <li>@if($advertGeral->advertImovel->area_construida == 0) -- @else{{$advertGeral->advertImovel->area_construida}}@endif<span class="text-info">Área Útil (m²)</span></li>
                                 <li>@if($advertGeral->advertImovel->numero_garagem == 0) -- @else{{$advertGeral->advertImovel->numero_garagem}}@endif<span class="text-info">Número de Garagem</span></li>
 
@@ -92,20 +91,23 @@
                                         @foreach($advertGeral->images()->get() as $images)
                                             <div class="<?php if($j==0){echo 'active';}?> item srle" data-slide-number="<?=$j?>">
                                                 <?php
-                                                $pos = strpos($images->extension, "imoveis/img");
-
+                                                $pos = strpos($images->extension, "amazonaws.com");
                                                 $url1 = "";
                                                 if ($pos === false) {
-                                                    $url1 = 'gallery/'.$images->extension;
-                                                } else {
-                                                    $url1 = "galeria/".$images->extension;
-                                                }
-
+                                                $url1 = "galeria/".$images->extension;
 
                                                 ?>
                                                 <a href="{{url($url1)}}" data-lightbox="roadtrip" data-title="Imagem do imóvel">
                                                     <img src="{{url($url1)}}" class="img-responsive">
                                                 </a>
+                                                <?php
+                                                }else{
+                                                $url1 = $images->extension;
+                                                ?>
+                                                <a href="{{$url1}}" data-lightbox="roadtrip" data-title="Imagem do imóvel">
+                                                    <img src="{{$url1}}" class="img-responsive">
+                                                </a>
+                                                <?php } ?>
                                             </div>
                                             <?php $j++?>
                                         @endforeach
@@ -136,17 +138,20 @@
                                     <li>
                                         <a  id="carousel-selector-<?=$i?>" class="<?php if($i==0){echo 'selected';}?>">
                                             <?php
-                                            $pos = strpos($images->extension, "imoveis/img");
-
-                                            $url2 = "";
+                                            $pos = strpos($images->extension, "amazonaws.com");
+                                            $url1 = "";
                                             if ($pos === false) {
-                                                $url2 = 'gallery/'.$images->extension;
-                                            } else {
-                                                $url2 = "galeria/".$images->extension;
-                                            }
+                                            $url1 = "galeria/".$images->extension;
 
                                             ?>
-                                            <img src="{{url($url2)}}" width="80" height="60" class="img-responsive">
+                                            <img src="{{url($url1)}}" width="80" height="60" class="img-responsive">
+
+                                            <?php
+                                            }else{
+                                            $url1 = $images->extension;
+                                            ?>
+                                            <img src="{{$url1}}" width="80" height="60" class="img-responsive">
+                                            <?php }?>
                                         </a>
                                     </li>
                                     <?php $i++ ?>
@@ -275,10 +280,26 @@ Olá, Gostaria de ter mais informações sobre o  anúncio {{$advertGeral->subca
                 </div><!-- fim contratar anunciante -->
 
                 <aside class="box-default clearfix outras-informacoes">
-                    <span class="title">Mapa do Imóvel</span>
-                    <div class="anuncio-area-mapa larMapa center-block">
-                        <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d60081.57254231143!2d-47.93496225!3d-19.750978449999998!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1spt-BR!2sbr!4v1447264947839" width="100%" height="100%" frameborder="0" style="border:0" allowfullscreen=""></iframe>
-                    </div>
+                    @if($advertGeral->advertVeiculo != null)
+                        <span class="title">Simuladores</span>
+                        <div class="col-lg-12" style="margin-bottom:15px"><a href=" https://www2.bancobrasil.com.br/aapf/login.jsp?url=emprestimo/simulacao/8B6-00.jsp" target="_blank" alt="" title=""><img border="0" width="190" height="56" src="{{url('images/banco-brasil.jpg')}}" alt="" title="" class="center-block"></a></div>
+                        <div class="col-lg-12" style="margin-bottom:15px"><a href="https://wwws8.hsbc.com.br/HPB-SIMULACAOAUF-PWS/servlets/SimulacaoPwsServlet?ServletState=1" target="_blank" alt="" title=""><img border="0" width="190" height="53" src="{{url('images/hsbc.jpg')}}" alt="" title="" class="center-block"></a></div>
+
+                        @endif
+
+                                <!--<span class="title">Mapa do Imóvel</span>https://www2.bancobrasil.com.br/aapf/login.jsp
+                        <div class="anuncio-area-mapa larMapa center-block">
+                            <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d60081.57254231143!2d-47.93496225!3d-19.750978449999998!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1spt-BR!2sbr!4v1447264947839" width="100%" height="100%" frameborder="0" style="border:0" allowfullscreen=""></iframe>
+                        </div> -->
+
+                        @if($advertGeral->advertImovel != null)
+                            <span class="title">Simuladores</span>
+                            <div class="col-lg-12" style="margin-bottom:15px"><a href="http://www.santander.com.br/portal/wps/script/templates/GCMRequest.do?page=6287" target="_blank" alt="" title=""><img border="0" width="190" height="53" src="{{url('images/caixa.jpg')}}" alt="" title="" class="center-block" /></a></div>
+                            <div class="col-lg-12" style="margin-bottom:15px"><a href="https://wwws3.hsbc.com.br/HPB-CHM-SIMULADOR/servlets/HPBCreditoImobiliarioServlet" target="_blank" alt="" title=""><img border="0" width="190" height="53" src="{{url('images/santander.jpg')}}" alt="" title="" class="center-block" /></a></div>
+                            <div class="col-lg-12" style="margin-bottom:15px"><a href="https://wwws3.hsbc.com.br/HPB-CHM-SIMULADOR/servlets/HPBCreditoImobiliarioServlet" target="_blank" alt="" title=""><img border="0" width="190" height="53" src="{{url('images/hsbc.jpg')}}" alt="" title="" class="center-block"></a></div>
+                            <div class="col-lg-12" style="margin-bottom:15px"><a href="http://www.bb.com.br/portalbb/page44,116,19519,1,0,1,1.bb?codigoNoticia=377&amp;codigoMenu=172&amp;codigoRet" target="_blank" alt="" title=""><img border="0" width="190" height="56" src="{{url('images/banco-brasil.jpg')}}" alt="" title="" class="center-block"></a></div>
+
+                        @endif
                 </aside>
                 <aside class="box-default clearfix outras-informacoes">
                     <span class="title">Outras informações</span>
@@ -286,7 +307,11 @@ Olá, Gostaria de ter mais informações sobre o  anúncio {{$advertGeral->subca
                     <!-- Atualizado há 16 dias -->
                     <div class="pull-left content-anunciante">
                         <a href="#" class="pull-left logo">
-                            <img src="{{$advertGeral->user->avatar}}" alt="{{$advertGeral->user->name}}" width="88" height="52">
+                            @if(count($advertGeral->user->avatar ) > 0)
+                                <img src="{{$advertGeral->user->avatar}}" alt="{{$advertGeral->user->name}}" width="88" height="52">
+                            @else
+                                <img src="{{asset('images/icon-user.png')}}" alt="{{$advertGeral->user->name}}" width="88" height="52">
+                            @endif
                         </a>
                         <div class="pull-left anunciante">
                             <a href="{{url('/')}}/{{$advertGeral->user->id}}/{{$advertGeral->user->url_name}}" class="fontsize13px">Outras ofertas de: {{$advertGeral->user->name}}</a>

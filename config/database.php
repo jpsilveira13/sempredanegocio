@@ -55,9 +55,9 @@ return [
         'mysql' => [
             'driver'    => 'mysql',
             'host'      => env('DB_HOST', 'localhost'),
-            'database'  => env('DB_DATABASE', 'semprene_teste'),
-            'username'  => env('DB_USERNAME', 'semprene_teste'),
-            'password'  => env('DB_PASSWORD', 'inovar200*'),
+            'database'  => env('DB_DATABASE', 'semprene_sempreNovo'),
+            'username'  => env('DB_USERNAME', 'semprene_novo'),
+            'password'  => env('DB_PASSWORD', 'Uberaba3075*'),
             'charset'   => 'utf8',
             'collation' => 'utf8_unicode_ci',
             'prefix'    => '',

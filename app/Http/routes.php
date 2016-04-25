@@ -30,10 +30,10 @@ Route::get('pagamento',[
 ]);
 
 
-/* anuncios routes */
+        /* anuncios routes */
 
 
-Route::group(['middleware'=>'auth'], function() {
+/*Route::group(['middleware'=>'auth'], function() {
     Route::get('anuncie', 'HomeController@anuncie');
     Route::post('anuncie','AdvertController@store');
     Route::get('anuncie',[
@@ -41,13 +41,13 @@ Route::group(['middleware'=>'auth'], function() {
         'uses' => 'HomeController@anuncieCategoria'
     ]);
 
-});
-//Route::get('anuncie', 'HomeController@anuncie');
-//Route::post('anuncie','AdvertController@store');
-/*Route::get('anuncie',[
+}); */
+Route::get('anuncie', 'HomeController@anuncie');
+Route::post('anuncie','AdvertController@store');
+Route::get('anuncie',[
 
     'uses' => 'HomeController@anuncieCategoria'
-]); */
+]);
 
 
 /* rotas ajax */
@@ -90,6 +90,11 @@ Route::get('search-imoveis',[
 
 ]);
 
+Route::get('search-veiculos',[
+    'uses' => 'HomeController@scopeVeiculos'
+
+]);
+
 Route::get('/consultar_cep','HomeController@searchCep');
 
 Route::get('anuncio','HomeController@searchAnuncio');
@@ -108,7 +113,6 @@ Route::get('social/login/{provider}', 'Auth\AuthController@handleProviderCallbac
 Route::group(['prefix' => 'admin', 'middleware'=>'auth','where'=>['id'=>'[0-9]+']], function()
 {
     //ajax url
-    Route::get('/altera-status/{query?}','HomeController@alterStatus');
 
     Route::group(['prefix' => 'home'],function(){
 
@@ -127,6 +131,7 @@ Route::group(['prefix' => 'admin', 'middleware'=>'auth','where'=>['id'=>'[0-9]+'
 
         Route::get('/',['as'=>'anuncios', 'uses' => 'AdvertController@index']);
         Route::get('/editar/{id}',['as'=>'admin.anuncios.update', 'uses' => 'AdvertController@edit']);
+        Route::get('{id}/edit',['as'=>'admin.anuncios.edit','uses'=>'AdvertController@edit']);
 
     });
     Route::group(['prefix' => 'mensagens'],function() {

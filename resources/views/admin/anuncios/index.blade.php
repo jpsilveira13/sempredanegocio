@@ -40,7 +40,21 @@
                 <td class="vertical-middle">{{$advert->id}}</td>
                 <td>
                     @if(count($advert->images))
-                        <img width="80" height="80" src="{{url('gallery/'.$advert->images()->first()->extension)}}"/>
+                        <?php
+                        $pos = strpos($advert->images()->first()->extension, "amazonaws.com");
+
+                        $url1 = "";
+                        if ($pos === false) {
+
+                        $url1 = "galeria/".$advert->images()->first()->extension;
+                        ?>
+                        <img class="group list-group-image content-img-sugestao lazy transition-img" src="{{url($url1)}}" width="80" height="80" alt="titulo imagem" />
+                        <?php }else{
+                        $url1 = $advert->images()->first()->extension;
+                        ?>
+                        <img class="group list-group-image content-img-sugestao lazy transition-img" src="{{$url1}}" width="80" height="80" alt="titulo imagem" />
+                        <?php }?>
+
                     @else
                         <img src="{{url('images/no-img.jpg')}}" alt="" width="80" height="80" />
                     @endif

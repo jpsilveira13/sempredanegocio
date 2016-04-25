@@ -519,7 +519,8 @@ $(document).ready(function(){
 
         var cat_id = e.target.value;
         $('#propriedade1').empty();
-
+        $('#listCaract').empty();
+        $('#divVeiculo').removeClass('show').addClass('hide');
         $('#divSubCategory').show('fast');
         $('#divAdvertSubcategory').hide('fast');
         $.get('/ajax-subcat?cat_id=' + cat_id, function(data){
@@ -541,6 +542,7 @@ $(document).ready(function(){
         if(adv_id < 5){
             console.log(adv_id);
             $('#veiculos').empty();
+            $('#divVeiculo').addClass('show');
 
             $('#divAdvertSubcategory').hide('fast');
             $.ajax({
@@ -558,10 +560,10 @@ $(document).ready(function(){
                 },
                 success: function(data){
                     if (data.length > 0) {
-                        console.log(data);
+
 
                         for (i = 0; i < data.length; i++) {
-                            ;
+
                             $("#veiculos").append('<option value=' + data[i].codigo_marca + '>' + data[i].marca + '</option>');
                         }
                     }else{
@@ -577,21 +579,13 @@ $(document).ready(function(){
         }else{
             $('#divAdvertSubcategory').hide('fast');
             $.get('/ajax-advcat?adv_id=' + adv_id, function(data){
-                $('#advertcategory').empty();
-                $('#veiculos').empty();
-                if(data.advert.length != 0){
-                    for(var i = 0, len = data.advert.length; i < len; i++) {
 
-                        $('#advertcategory').append('<option value="' + data.advert[i].id + '" id="' + data.advert[i].id + '" >' + data.advert[i].name + '</option>');
-                    }
-                    $('#divAdvertSubcategory').show('fast');
-                }
 
                 var caractList = $('#listCaract');
                 var html = '<div class="btn-group" data-toggle="buttons">';
-                for(var j = 0, lenj = data.features.length;j<lenj;j++){
+                for(var j = 0, lenj = data.length;j<lenj;j++){
 
-                    html+= '<label class="btn btn-default btcaract mt10" style="width: 204px;margin-left: 47px;"><input type="checkbox" aria-required="false" class="material_checkbox" name="caracteristicas[]" value="'+data.features[j].id+'">'+data.features[j].name+'</label>'
+                    html+= '<label class="btn btn-default btcaract mt10" style="width: 204px;margin-left: 47px;"><input type="checkbox" aria-required="false" class="material_checkbox" name="caracteristicas[]" value="'+data[j].id+'">'+data[j].name+'</label>'
                 }
                 html+='</div>';
                 caractList.html(html);
@@ -601,9 +595,10 @@ $(document).ready(function(){
     });
 
     $('#veiculos').on('change',function(e){
-        var marca_id = e.target.value;
+        var marca_id = $(this).find('option:selected').attr('id');
         $('#modelo').empty();
         $('#tipo').hide('fast');
+
         $.get('/get-marca?marca_id=' + marca_id, function(data){
             //$('#subcategory').empty();
 
@@ -629,8 +624,6 @@ $(document).ready(function(){
 
         });
     });
-
-
 
 //procurar pelo cep
 
@@ -861,9 +854,48 @@ $(document).ready(function(){
 
     });
 
-//validação formulário anuncio
+//anuncie html
 
+    $('#propriedade1').empty();
 
+    $("#subcategory").livequery(function(){
+        var imoveisResid = [10,20,60,70,80,107,108,112,113,105,107];
+        var imoveisTemp = [90,50,40];
+        var veiculos = [1,2,3];
+        var  teste = imoveisResid.indexOf(50);
+        var teste2 = imoveisTemp.indexOf(50);
+        console.log(teste);
+        console.log(teste2);
+
+        $(this).on('change', function (e) {
+            var sub_id = e.target.value;
+            $('#propriedade1').empty();
+
+            //if verifica qual subcategoria foi escolhida
+
+            if(sub_id == 10 || sub_id == 20 || sub_id == 60 || sub_id == 70 || sub_id == 80 || sub_id == 107 || sub_id == 108 || sub_id == 112 || sub_id == 113 || sub_id == 105 || sub_id == 107) {
+                console.log('entrou primeiro if');
+                $('<div class="row"><div class="col-md-4 col-lg-4 col-sm-6 col-xs-12">' +
+                    '<div class="form-group has-feedback"> ' +
+                    '<label>Número de quartos *</label> ' +
+                    '<select class="form-control" required data-error="Seleciona uma opção" required="required" name="numero_quarto"> ' +
+                    '<option value="">Escolher</option><option value="0">Nenhum</option><option value="1">1</option><option value="2">2</option><option value="3">3</option> <option value="4">4</option> <option value="5">5 ou mais</option>' +
+                    '</select><span class="form-control-feedback" aria-hidden="true"></span><div class="help-block with-errors"></div></div> </div><div class="col-md-4 col-lg-4 col-sm-6 col-xs-12"><div class="form-group has-feedback"><label>Vagas de garagem *</label> <select required data-error="Seleciona uma opção" required="required" class="form-control" name="numero_garagem"> <option value="">Escolher</option><option value="0">Nenhum</option><option value="1">1</option> <option value="2">2</option> <option value="3">3</option> <option value="4">4</option><option value="5">5 ou mais</option> </select> <span class="form-control-feedback" aria-hidden="true"></span> <div class="help-block with-errors"></div> </div> </div> <div class="col-md-4 col-lg-4 col-sm-6 col-xs-12"><div class="form-group has-feedback"> <label>Quantos Banheiros *</label> <select required data-error="Seleciona uma opção" class="form-control" name="numero_banheiro"> <option value="">Escolher</option><option value="0">Nenhum</option> <option value="1">1</option><option value="2">2</option> <option value="3">3</option> <option value="4">4</option> <option value="5">5 ou mais</option></select> <span class="form-control-feedback" aria-hidden="true"></span><div class="help-block with-errors"></div></div></div></div><div class="row"><div class="col-md-4 col-lg-4 col-sm-6 col-xs-12"> <div class="form-group has-feedback"> <label>Área Construída: *</label> <div class="input-group"> <input class="form-control" onkeypress="mascaraCampo(this, mascSoNumeros)" maxlength="7" required placeholder="Ex.: 150" type="text" data-error="Campo não pode ser vazio"  name="area_construida"><div class="input-group-addon">m²</div></div><span class="form-control-feedback" aria-hidden="true"></span><div class="help-block with-errors"></div></div></div><div class="col-md-4 col-lg-4 col-sm-6 col-xs-12"><div class="form-group has-feedback"><label>Condomínio: *</label><div class="input-group"><div class="input-group-addon">R$</div><input class="form-control" maxlength="10" onkeypress="mascaraCampo(this,mvalor)"  data-error="Campo não pode ser vazio" placeholder="Ex.: 150" type="text"  name="valor_condominio" id="valor_condominio"></div><span class="form-control-feedback" aria-hidden="true"></span><div class="help-block with-errors"></div></div></div><div class="col-md-4 col-lg-4 col-sm-6 col-xs-12"><div class="form-group has-feedback"><label>IPTU: *</label><div class="input-group"><div class="input-group-addon">R$</div><input  class="form-control" maxlength="7" onkeypress="mascaraCampo(this,mvalor)" data-error="Campo não pode ser vazio" placeholder="Ex.: 150" type="text"  name="valor_iptu" id="valor_iptu"></div><span class="form-control-feedback" aria-hidden="true"></span> <div class="help-block with-errors"></div></div></div></div>').appendTo('#propriedade1');
+            }else if(sub_id == 30){
+                $('<div class="row"><div class="col-md-3 col-lg-3 col-sm-6 col-xs-12"><div class="form-group has-feedback"><label>Vagas de garagem *</label> <select required data-error="Seleciona uma opção" required="required" class="form-control" name="numero_garagem"> <option value="">Escolher</option><option value="0">Nenhum</option><option value="1">1</option> <option value="2">2</option> <option value="3">3</option> <option value="4">4</option><option value="5">5 ou mais</option> </select> <span class="form-control-feedback" aria-hidden="true"></span> <div class="help-block with-errors"></div> </div> </div><div class="col-md-3 col-lg-3 col-sm-6 col-xs-12"> <div class="form-group has-feedback"> <label>Área Construída: *</label> <div class="input-group"> <input class="form-control" onkeypress="mascaraCampo(this, mascSoNumeros)" maxlength="7" required placeholder="Ex.: 150" type="text" data-error="Campo não pode ser vazio"  name="area_construida"><div class="input-group-addon">m²</div></div><span class="form-control-feedback" aria-hidden="true"></span><div class="help-block with-errors"></div></div></div><div class="col-md-3 col-lg-3 col-sm-6 col-xs-12"><div class="form-group has-feedback"><label>Condomínio: *</label><div class="input-group"><div class="input-group-addon">R$</div><input class="form-control" maxlength="10" onkeypress="mascaraCampo(this,mvalor)"  data-error="Campo não pode ser vazio" placeholder="Ex.: 150" type="text"  name="valor_condominio" id="valor_condominio"></div><span class="form-control-feedback" aria-hidden="true"></span><div class="help-block with-errors"></div></div></div><div class="col-md-3 col-lg-3 col-sm-6 col-xs-12"><div class="form-group has-feedback"><label>IPTU: *</label><div class="input-group"><div class="input-group-addon">R$</div><input class="form-control" maxlength="7" onkeypress="mascaraCampo(this,mvalor)" data-error="Campo não pode ser vazio" placeholder="Ex.: 150" type="text" id="valor_iptu" name="valor_iptu"></div><span class="form-control-feedback" aria-hidden="true"></span> <div class="help-block with-errors"></div></div></div></div>').appendTo('#propriedade1');
+            }else if(sub_id == 90 || sub_id == 50 || sub_id == 40){
+                console.log('entrou segundo if');
+
+                $('<div class="row"><div class="col-md-4 col-lg-4 col-sm-6 col-xs-12">' +
+                    '<div class="form-group has-feedback"> ' +
+                    '<label>Número de quartos *</label> ' +
+                    '<select class="form-control" required data-error="Seleciona uma opção" required="required" name="numero_quarto"> ' +
+                    '<option value="">Escolher</option><option value="0">Nenhum</option><option value="1">1</option><option value="2">2</option><option value="3">3</option> <option value="4">4</option> <option value="5">5 ou mais</option>' +
+                    '</select><span class="form-control-feedback" aria-hidden="true"></span><div class="help-block with-errors"></div></div> </div><div class="col-md-4 col-lg-4 col-sm-6 col-xs-12"><div class="form-group has-feedback"><label>Vagas de garagem *</label> <select required data-error="Seleciona uma opção" required="required" class="form-control" name="numero_garagem"> <option value="">Escolher</option><option value="0">Nenhum</option><option value="1">1</option> <option value="2">2</option> <option value="3">3</option> <option value="4">4</option><option value="5">5 ou mais</option> </select> <span class="form-control-feedback" aria-hidden="true"></span> <div class="help-block with-errors"></div> </div> </div> <div class="col-md-4 col-lg-4 col-sm-6 col-xs-12"><div class="form-group has-feedback"> <label>Banheiros *</label> <select required data-error="Seleciona uma opção" class="form-control" name="numero_banheiro"> <option value="">Escolher</option><option value="0">Nenhum</option> <option value="1">1</option><option value="2">2</option> <option value="3">3</option> <option value="4">4</option> <option value="5">5 ou mais</option></select> <span class="form-control-feedback" aria-hidden="true"></span><div class="help-block with-errors"></div></div></div></div><div class="row"><div class="col-md-4 col-lg-4 col-sm-6 col-xs-12"> <div class="form-group has-feedback"> <label>Acomodações: *</label> <div class="input-group"> <input class="form-control" onkeypress="mascaraCampo(this, mascSoNumeros)" maxlength="2" required placeholder="Ex.: 99" type="text" data-error="Campo não pode ser vazio"  name="acomodacoes"></div><span class="form-control-feedback" aria-hidden="true"></span><div class="help-block with-errors"></div></div></div><div class="col-md-3 col-lg-3 col-sm-6 col-xs-12"> <div class="form-group has-feedback"> <label>Área Construída: *</label> <div class="input-group"> <input class="form-control" onkeypress="mascaraCampo(this, mascSoNumeros)" maxlength="7" required placeholder="Ex.: 150" type="text" data-error="Campo não pode ser vazio"  name="area_construida"><div class="input-group-addon">m²</div></div><span class="form-control-feedback" aria-hidden="true"></span><div class="help-block with-errors"></div></div></div></div>').appendTo('#propriedade1');
+
+            }
+        });
+    });
 
 });
 

@@ -5,7 +5,10 @@ namespace sempredanegocio\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
+use sempredanegocio\Models\AdvertImovel;
+use sempredanegocio\Models\AdvertVeiculo;
 use sempredanegocio\Models\User;
 use sempredanegocio\Http\Requests;
 use sempredanegocio\Http\Controllers\Controller;
@@ -19,18 +22,20 @@ class AdvertController extends Controller
 {
 
     private $advertModel;
-    private $advertCarro;
+    private $advertVeiculo;
     private $advertImovel;
 
-    public function  __construct(Advert $advertModel){
+    public function  __construct(Advert $advertModel,AdvertImovel $advertImovel, AdvertVeiculo $advertVeiculo){
         $this->advertModel = $advertModel;
+        $this->advertImovel = $advertImovel;
+        $this->advertVeiculo = $advertVeiculo;
     }
 
     public function index(){
         $user = Auth::user();
         if($user->tipo != 'admin'){
 
-            $adverts = Advert::where('user_id',$user->id)->paginate(30);
+            $adverts = Advert::where('user_id',$user->id)->orderBy('id','desc')->paginate(30);
             return view('admin.anuncios.index',compact('adverts'));
         }else{
             $adverts = $this->advertModel->paginate(30);
@@ -40,9 +45,10 @@ class AdvertController extends Controller
     }
 
     /* salvar anúncio */
-    public function store(Requests\AdvertSaveRequest $request, AdvertImage $advertImage, User $user){
+    public function store(Requests\AdvertSaveRequest $request, AdvertImage $advertImage, User $user, AdvertImovel $advertImovel){
 
         $data = $request->all();
+        //aqui eu atualizo as informações do usuário
 
         $data['user_id']    = Auth::user()->id;
         $user               = User::find($data['user_id']);
@@ -52,27 +58,44 @@ class AdvertController extends Controller
         $user->update();
 
         $data['url_anuncio'] = str_slug($data['anuncio_titulo']);
-
-        $data['valor_condominio'] = str_replace(",",".",str_replace(".","",$data['valor_condominio']));
-
-        $data['valor_iptu'] = str_replace(",",".",str_replace(".","",$data['valor_iptu']));
-        $data['preco'] = str_replace(",",".",str_replace(".","",$data['preco']));
-
         $features = $request->get('caracteristicas');
         $images = $request->file('anuncio_images');
         unset($data['anuncio_images']);
         unset($data['caracteristicas']);
         $anuncio = Advert::create($data);
-
+        $diskCloud = Storage::disk('s3');
         foreach($images as $image){
 
             $renamed = md5(date('Ymdhms').$image->getClientOriginalName()).'.'.$image->getClientOriginalExtension();
-            $path = public_path().'/gallery/'.$renamed;
-            Image::make($image->getRealPath())->resize(678,407)->save($path);
+            //$path = public_path().'/galeria/imoveis/site'.$renamed;
+            $diskCloud->put($renamed,Image::make($image->getRealPath())->resize(678,407));
+            //Image::make($image->getRealPath())->resize(678,407)->save($path);
             $advertImage::create(['advert_id' => $anuncio->id,'extension' => $renamed]);
         }
 
         $anuncio->features()->sync($features);
+
+        if($data['category_id'] == 1){
+
+
+            $numero_quarto = $data['numero_quarto'];
+            $numero_garagem = $data['numero_garagem'];
+            $numero_banheiro = $data['numero_banheiro'];
+            $area_construida = $data['area_construida'];
+            $valor_condomio = str_replace(",",".",str_replace(".","",$data['valor_condominio']));
+            $valor_iptu  = str_replace(",",".",str_replace(".","",$data['valor_iptu']));
+            $valor_preco  = str_replace(",",".",str_replace(".","",$data['preco']));
+            if(empty($data['acomodacoes'])){
+                $acomodacoes = 0;
+
+            }
+
+            $advertImovel::create(['numero_quarto'=>$numero_quarto,'numero_garagem' => $numero_garagem,'numero_banheiro' => $numero_banheiro,'area_construida' => $area_construida,'valor_condominio' => $valor_condomio,'valor_preco' => $valor_preco,'valor_iptu' => $valor_iptu,'acomodacoes' => $acomodacoes,'advert_id' => $anuncio->id,'category_id' => $data['category_id']]);
+
+
+        }
+
+
         if($anuncio){
 
             $dataSend = [

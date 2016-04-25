@@ -27,14 +27,14 @@ class Advert extends Model
         'preco',
         'url_anuncio',
         'active',
-        'adverts_count',
+        'advert_count',
         'destaque',
         'confirm',
 
     ];
 
     public function advertImovel(){
-        return $this->hasOne(AdvertImovel::class);
+        return $this->hasOne(AdvertImovel::class,'advert_id','id');
     }
 
    public function advertVeiculo(){
@@ -43,7 +43,7 @@ class Advert extends Model
    }
     public function images(){
 
-        return $this->hasMany('sempredanegocio\Models\AdvertImage');
+        return $this->hasMany(AdvertImage::class,'advert_id','id');
     }
 
     public function subcategory(){
@@ -65,5 +65,8 @@ class Advert extends Model
         return $this->belongsTo(AdvertMessage::class);
 
     }
+    public function cidades(){
+        return $this->hasMany(Advert::class);
 
+    }
 }

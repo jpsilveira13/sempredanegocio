@@ -36,7 +36,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="{{url('/')}}"><img class="img-responsive tam-logo-adm" src="{{url('images/logo312x33.png')}}" alt="Sempre da Negócio" title="Sempre da Negócio "/> </a>
+            <a class="navbar-brand" alt="Voltar ao site" href="{{url('/')}}"><img class="img-responsive tam-logo-adm" src="{{url('images/logo312x33.png')}}" alt="Sempre da Negócio" title="Sempre da Negócio "/> </a>
         </div>
         <!-- Top Menu Items -->
         <ul class="nav navbar-right top-nav">
@@ -154,49 +154,33 @@
         <div class="collapse navbar-collapse navbar-ex1-collapse">
             <ul class="nav navbar-nav side-nav">
                 <li class="active">
-                    <a href="index.html"><i class="fa fa-fw fa-dashboard"></i> Painel Administrativo</a>
+                    <a href="{{url('/admin/home')}}"><i class="fa fa-fw fa-dashboard"></i> Painel Principal</a>
                 </li>
-                <li>
-                    @if(auth()->user()->tipo == 'admin')
-                        <a href="{{route('usuarios')}}"><i class="fa fa-fw fa-user"></i> Gerenciar Usuários</a>
-                    @else
-                        <a href="{{route('admin.user.edit',['id'=>auth()->user()->id])}}"><i class="fa fa-fw fa-user"></i> Meus Dados</a>
-                    @endif
 
-                </li>
-                <li>
-                    <a href="tables.html"><i class="fa fa-fw fa-comments"></i> Mensagens</a>
-                </li>
                 <li>
                     @if(auth()->user()->tipo == 'admin')
                         <a href="{{route('anuncios')}}"><i class="fa fa-tag"></i> Gerenciar Anúncios</a>
                     @else
                         <a href="{{route('anuncios')}}"><i class="fa fa-tag"></i> Meus Anúncios</a>
                     @endif
+
+
                 </li>
                 <li>
-                    <a href="bootstrap-elements.html"><i class="fa fa-fw fa-desktop"></i> Bootstrap Elements</a>
+                    <a href="{{route('mensagens')}}"><i class="fa fa-fw fa-comments"></i> Mensagens</a>
                 </li>
-                <li>
-                    <a href="bootstrap-grid.html"><i class="fa fa-fw fa-wrench"></i> Bootstrap Grid</a>
-                </li>
-                <li>
-                    <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-arrows-v"></i> Dropdown <i class="fa fa-fw fa-caret-down"></i></a>
-                    <ul id="demo" class="collapse">
-                        <li>
-                            <a href="#">Dropdown Item</a>
-                        </li>
-                        <li>
-                            <a href="#">Dropdown Item</a>
-                        </li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="blank-page.html"><i class="fa fa-fw fa-file"></i> Blank Page</a>
-                </li>
-                <li>
-                    <a href="index-rtl.html"><i class="fa fa-fw fa-dashboard"></i> RTL Dashboard</a>
-                </li>
+                <!--
+                 <li>
+                     <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-arrows-v"></i> Dropdown <i class="fa fa-fw fa-caret-down"></i></a>
+                     <ul id="demo" class="collapse">
+                         <li>
+                             <a href="#">Dropdown Item</a>
+                         </li>
+                         <li>
+                             <a href="#">Dropdown Item</a>
+                         </li>
+                     </ul>
+                 </li>-->
             </ul>
         </div>
         <!-- /.navbar-collapse -->
