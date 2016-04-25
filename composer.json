@@ -14,7 +14,8 @@
     "illuminate/html": "5.*",
     "bestmomo/scafold": "dev-master",
     "intervention/image": "dev-master",
-    "league/flysystem-aws-s3-v2": "^1.0"
+    "league/flysystem-aws-s3-v3": "^1.0"
+
   },
   "require-dev": {
     "fzaninotto/faker": "~1.4",

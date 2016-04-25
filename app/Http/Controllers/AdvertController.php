@@ -16,7 +16,7 @@ use sempredanegocio\Models\Advert;
 use sempredanegocio\Models\AdvertImage;
 use sempredanegocio\Models\Feature;
 use Intervention\Image\Facades\Image;
-use Illuminate\Contracts\Filesystem\Filesystem;
+use League\Flysystem\AwsS3v2\AwsS3Adapter;
 
 class AdvertController extends Controller
 {
@@ -63,13 +63,13 @@ class AdvertController extends Controller
         unset($data['anuncio_images']);
         unset($data['caracteristicas']);
         $anuncio = Advert::create($data);
-
+        $diskCloud = Storage::disk('s3');
         foreach($images as $image){
 
             $renamed = md5(date('Ymdhms').$image->getClientOriginalName()).'.'.$image->getClientOriginalExtension();
             //$path = public_path().'/galeria/imoveis/site'.$renamed;
-            $img = $advertImage::create(['advert_id' => $anuncio->id,'extension' => $renamed]);
-            Storage::disk('s3')->put($renamed,Image::make($image->getRealPath())->resize(678,407));
+            $advertImage::create(['advert_id' => $anuncio->id,'extension' => $renamed]);
+            $diskCloud->put($renamed,Image::make($image->getRealPath())->resize(678,407));
             //Image::make($image->getRealPath())->resize(678,407)->save($path);
 
         }
