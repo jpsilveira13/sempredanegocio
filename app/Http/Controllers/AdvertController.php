@@ -2,10 +2,13 @@
 
 namespace sempredanegocio\Http\Controllers;
 
+
+
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-use Illuminate\Support\Facades\Storage;
+
 use Illuminate\Support\Facades\Validator;
 use sempredanegocio\Models\AdvertImovel;
 use sempredanegocio\Models\AdvertVeiculo;
@@ -16,7 +19,8 @@ use sempredanegocio\Models\Advert;
 use sempredanegocio\Models\AdvertImage;
 use sempredanegocio\Models\Feature;
 use Intervention\Image\Facades\Image;
-use League\Flysystem\AwsS3v2\AwsS3Adapter;
+use Illuminate\Support\Facades\File;
+
 
 class AdvertController extends Controller
 {
@@ -45,7 +49,7 @@ class AdvertController extends Controller
     }
 
     /* salvar anúncio */
-    public function store(Requests\AdvertSaveRequest $request, AdvertImage $advertImage, User $user, AdvertImovel $advertImovel){
+    public function store(\Illuminate\Contracts\Filesystem\Factory $fs, Requests\AdvertSaveRequest $request, AdvertImage $advertImage, User $user, AdvertImovel $advertImovel){
 
         $data = $request->all();
         //aqui eu atualizo as informações do usuário
@@ -63,15 +67,18 @@ class AdvertController extends Controller
         unset($data['anuncio_images']);
         unset($data['caracteristicas']);
         $anuncio = Advert::create($data);
-        $diskCloud = Storage::disk('s3');
+        $diskCloud = $fs->disk('s3');
+
         foreach($images as $image){
 
-            $renamed = md5(date('Ymdhms').$image->getClientOriginalName()).'.'.$image->getClientOriginalExtension();
-            //$path = public_path().'/galeria/imoveis/site'.$renamed;
-            $advertImage::create(['advert_id' => $anuncio->id,'extension' => $renamed]);
-            $diskCloud->put($renamed,Image::make($image->getRealPath())->resize(678,407));
-            //Image::make($image->getRealPath())->resize(678,407)->save($path);
 
+            $renamed = md5(date('Ymdhms').$image->getClientOriginalName()).'.'.$image->getClientOriginalExtension();
+            $advertImage::create(['advert_id' => $anuncio->id,'extension' => $renamed]);
+            $diskCloud->disk('s3')->put($renamed, file_get_contents($image));
+            //$path = public_path().'/galeria/imoveis/site'.$renamed;
+
+           // $url = Image::make($image->getRealPath())->resize(678,407);
+            //Image::make($image->getRealPath())->resize(678,407)->save($path);
         }
 
         $anuncio->features()->sync($features);

@@ -13,8 +13,7 @@
     "guzzlehttp/guzzle": "~6.0@dev",
     "illuminate/html": "5.*",
     "bestmomo/scafold": "dev-master",
-    "intervention/image": "dev-master",
-    "league/flysystem-aws-s3-v3": "^1.0"
+    "intervention/image": "dev-master"
 
   },
   "require-dev": {

@@ -150,7 +150,6 @@ return [
         sempredanegocio\Providers\EventServiceProvider::class,
         sempredanegocio\Providers\RouteServiceProvider::class,
 
-
     ],
 
     /*
@@ -202,7 +201,7 @@ return [
         'Socialite' => Laravel\Socialite\Facades\Socialite::class,
         'Form'      => Illuminate\Html\FormFacade::class,
         'HTML'      => Illuminate\Html\HtmlFacade::class,
-        'Image'     => Intervention\Image\Facades\Image::class
+        'Image'     => Intervention\Image\Facades\Image::class,
 
 
     ],

@@ -67,7 +67,7 @@ return [
             'key'    => 'AKIAIWEZ77ZAIDWHZQPA',
             'secret' => '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',
             'region' => 'sa-east-1',
-            'bucket' => 'imoveis-sempredanegocio',
+            'bucket' => 'site-sempredanegocio',
         ],
 
         'rackspace' => [
