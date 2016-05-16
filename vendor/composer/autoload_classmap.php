@@ -2018,7 +2018,6 @@ return array(
     'League\\Flysystem\\Adapter\\Polyfill\\StreamedTrait' => $vendorDir . '/league/flysystem/src/Adapter/Polyfill/StreamedTrait.php',
     'League\\Flysystem\\Adapter\\Polyfill\\StreamedWritingTrait' => $vendorDir . '/league/flysystem/src/Adapter/Polyfill/StreamedWritingTrait.php',
     'League\\Flysystem\\Adapter\\SynologyFtp' => $vendorDir . '/league/flysystem/src/Adapter/SynologyFtp.php',
-    'League\\Flysystem\\AwsS3v3\\AwsS3Adapter' => $vendorDir . '/league/flysystem-aws-s3-v3/src/AwsS3Adapter.php',
     'League\\Flysystem\\Config' => $vendorDir . '/league/flysystem/src/Config.php',
     'League\\Flysystem\\ConfigAwareTrait' => $vendorDir . '/league/flysystem/src/ConfigAwareTrait.php',
     'League\\Flysystem\\Directory' => $vendorDir . '/league/flysystem/src/Directory.php',

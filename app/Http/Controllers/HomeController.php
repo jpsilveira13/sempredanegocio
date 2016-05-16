@@ -298,6 +298,7 @@ class HomeController extends Controller
         }
 
     }
+
     public function formAmigo(){
         $inputData = Input::get('formData');
 
@@ -373,7 +374,7 @@ class HomeController extends Controller
         );
 
         $validator = Validator::make($userData,$rules);
-       /* if($validator->fails()){
+        if($validator->fails()){
             return Response::json(array(
                 'fail' => true,
                 'errors' => $validator->getMessageBag()->toArray()
@@ -388,7 +389,7 @@ class HomeController extends Controller
 
             });
 
-        }*/
+        }
         if(AdvertMessage::create($userData)) {
 
             //return success  message
@@ -597,6 +598,14 @@ class HomeController extends Controller
 
     }
 
+    public function contadorFinanciamento(){
+        $id =  Input::get('id');
+        $telCount = Advert::find($id);
+        $telCount->fin_count = $telCount->fin_count+1;
+        $telCount->save();
+
+
+    }
 
     public function tipoPlano($id){
         $idPlano = Plans::find(\Input::get('id'));

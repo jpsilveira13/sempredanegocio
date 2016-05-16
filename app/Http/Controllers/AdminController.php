@@ -24,14 +24,12 @@ class AdminController extends Controller
             $queryCountTotal = Advert::all()->count();
             $countTickert = Complaint::all()->count();
 
-
             return view('admin.principal.index',compact('queryCountTotal','countTickert'));
         }else{
             $id_user =  Auth::user()->id;
             $messageCount = AdvertMessage::where('id_user',$id_user)->count();
             $queryCountUser = Advert::where('user_id','=',$id_user )->count();
             return view('admin.principal.index',compact('queryCountUser','messageCount'));
-
         }
     }
 
@@ -39,6 +37,12 @@ class AdminController extends Controller
         $id_user =  Auth::user()->id;
         $messageQuery = AdvertMessage::where('id_user',$id_user)->take(6)->get();
         return view('admin.principal.index',compact('messageQuery'));
+    }
 
+    public function dadosPainelAdm()
+    {
+        $qntVerAnuncios = Advert::sum('advert_count');
+
+        return view('admin.principal.adm',compact('qntVerAnuncios'));
     }
 }

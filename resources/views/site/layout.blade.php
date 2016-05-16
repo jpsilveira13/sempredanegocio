@@ -395,6 +395,12 @@
 <script src="{{asset('js/lazyload.js')}}"></script>
 <script src="{{asset('js/lightbox.min.js')}}"></script>
 <script src="{{asset('js/site.js')}}"></script>
+@if(Request::is('pagamento'))
+
+<script type="text/javascript" src="https://stc.sandbox.pagseguro.uol.com.br/pagseguro/api/v2/checkout/pagseguro.lightbox.js"></script>
+<!--Para integração em ambiente de produção use este link-->
+<!--<script type="text/javascript" src="https://stc.pagseguro.uol.com.br/pagseguro/api/v2/checkout/pagseguro.lightbox.js"></script>-->
+@endif
 
 @if(Request::is('veiculos') || \Input::get('categoria') == 2)
     <script src="{{asset('js/menudinamicoVeiculo.js')}}"></script>

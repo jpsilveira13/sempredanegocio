@@ -66,6 +66,8 @@ Route::get('anuncie',[
 
 Route::post('/get-contadortel','HomeController@contadorTelefone');
 
+Route::post('/get-contadorFinanciamento','HomeController@contadorFinanciamento');
+
 Route::post('/form-denuncia', 'HomeController@denuncia');
 Route::post('/form-amigo', 'HomeController@formAmigo');
 Route::post('/form-message', 'HomeController@formContato');
@@ -157,7 +159,13 @@ Route::group(['prefix' => 'admin', 'middleware'=>'auth','where'=>['id'=>'[0-9]+'
 
 
     });
+    
+    Route::group(['prefix' => 'adm'],function() {
 
+        Route::get('/',['as'=>'adm', 'uses' => 'AdminController@dadosPainelAdm']);
+
+
+    });
 
 });
 

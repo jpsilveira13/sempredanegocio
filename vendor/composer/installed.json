@@ -3986,6 +3986,55 @@
         ]
     },
     {
+        "name": "league/flysystem-aws-s3-v3",
+        "version": "dev-master",
+        "version_normalized": "9999999-dev",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/thephpleague/flysystem-aws-s3-v3.git",
+            "reference": "996491670d5ea9da8c0181b2324c0a7a7ae961fe"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/thephpleague/flysystem-aws-s3-v3/zipball/996491670d5ea9da8c0181b2324c0a7a7ae961fe",
+            "reference": "996491670d5ea9da8c0181b2324c0a7a7ae961fe",
+            "shasum": ""
+        },
+        "require": {
+            "aws/aws-sdk-php": "^3.0.0",
+            "league/flysystem": "~1.0",
+            "php": ">=5.5.0"
+        },
+        "require-dev": {
+            "henrikbjorn/phpspec-code-coverage": "~1.0.1",
+            "phpspec/phpspec": "^2.0.0"
+        },
+        "time": "2016-04-19 20:27:15",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "1.0-dev"
+            }
+        },
+        "installation-source": "source",
+        "autoload": {
+            "psr-4": {
+                "League\\Flysystem\\AwsS3v3\\": "src/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Frank de Jonge",
+                "email": "info@frenky.net"
+            }
+        ],
+        "description": "Flysystem adapter for the AWS S3 SDK v3.x"
+    },
+    {
         "name": "aws/aws-sdk-php",
         "version": "3.18.1",
         "version_normalized": "3.18.1.0",
@@ -4035,7 +4084,7 @@
                 "dev-master": "3.0-dev"
             }
         },
-        "installation-source": "source",
+        "installation-source": "dist",
         "autoload": {
             "psr-4": {
                 "Aws\\": "src/"
@@ -4124,54 +4173,5 @@
             "s3",
             "sdk"
         ]
-    },
-    {
-        "name": "league/flysystem-aws-s3-v3",
-        "version": "dev-master",
-        "version_normalized": "9999999-dev",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/thephpleague/flysystem-aws-s3-v3.git",
-            "reference": "996491670d5ea9da8c0181b2324c0a7a7ae961fe"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/thephpleague/flysystem-aws-s3-v3/zipball/996491670d5ea9da8c0181b2324c0a7a7ae961fe",
-            "reference": "996491670d5ea9da8c0181b2324c0a7a7ae961fe",
-            "shasum": ""
-        },
-        "require": {
-            "aws/aws-sdk-php": "^3.0.0",
-            "league/flysystem": "~1.0",
-            "php": ">=5.5.0"
-        },
-        "require-dev": {
-            "henrikbjorn/phpspec-code-coverage": "~1.0.1",
-            "phpspec/phpspec": "^2.0.0"
-        },
-        "time": "2016-04-19 20:27:15",
-        "type": "library",
-        "extra": {
-            "branch-alias": {
-                "dev-master": "1.0-dev"
-            }
-        },
-        "installation-source": "source",
-        "autoload": {
-            "psr-4": {
-                "League\\Flysystem\\AwsS3v3\\": "src/"
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "Frank de Jonge",
-                "email": "info@frenky.net"
-            }
-        ],
-        "description": "Flysystem adapter for the AWS S3 SDK v3.x"
     }
 ]
