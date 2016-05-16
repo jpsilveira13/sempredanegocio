@@ -15,12 +15,12 @@ return [
     */
 
     'mailgun' => [
-        'domain' => env('MAILGUN_DOMAIN'),
-        'secret' => env('MAILGUN_SECRET'),
+        'domain' => 'sempredanegocio.com.br',
+        'secret' => 'key-c2f4a4c65e0347eac60e3c66fd7020c3',
     ],
 
     'mandrill' => [
-        'secret' => 'fb9UGVb8JMgqjKhZT1yrww',
+        'secret' => '',
     ],
 
     'ses' => [

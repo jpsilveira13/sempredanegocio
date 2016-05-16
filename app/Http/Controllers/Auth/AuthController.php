@@ -58,6 +58,8 @@ class AuthController extends Controller
             $user->avatar = $socUser->getAvatar();
             $user->name = $socUser->getName();
             $user->email = $socUser->getEmail();
+            $user->plans_id = 1;
+            $user->typeuser_id = 2;
             $user->password = bcrypt(str_random(10));
             $user->save();
             \Event::fire(new UsuarioInserido($user));
@@ -91,14 +93,17 @@ class AuthController extends Controller
      */
     protected function create(array $data)
     {
-            $user = User::create([
+
+        $userUrl = str_slug($data['name']);
+        $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
-            'password' => bcrypt($data['password']),
+            'url_name' => $userUrl,
 
+            'password' => bcrypt($data['password']),
         ]);
 
-        \Event::fire(new UsuarioInserido($user));
+        /*\Event::fire(new UsuarioInserido($user)); */
 
         return $user;
 

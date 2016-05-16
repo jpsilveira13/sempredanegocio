@@ -20,7 +20,7 @@
                 Filtros
             </button>
         </div>
-        <div class="col-md-6 hidden-sm hidden-xs">
+      <!--  <div class="col-md-6 hidden-sm hidden-xs">
             <div class="well well-sm">
                 <strong>Exibir como </strong>
                 <div class="btn-group">
@@ -29,9 +29,9 @@
                                 class="glyphicon glyphicon-th"></span>Grade</a>
                 </div>
             </div>
-        </div>
+        </div> -->
 
-        <div class="col-md-6 pull-right hidden-sm hidden-xs">
+        <!--<div class="col-md-6 pull-right hidden-sm hidden-xs">
             <form action="{{URL::current()}}" class="pull-right">
                 <div class="select2-container pull-right " style="margin-top:9px">
                     <select class="select2-choice" id="sortby">
@@ -55,7 +55,7 @@
                 </div>
                 <label class="control-label pull-right sort" for="sortby">Ordenar por</label>
             </form>
-        </div>
+        </div> -->
         <div style="margin-bottom: 12px" class="col-md-12 col-xs-12 col-sm-12 center-block">
             <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
             <!-- header responsivo imoveis -->
@@ -135,57 +135,12 @@
                                 <input onkeypress="mascaraCampo(this, mvalor2)" type="text" name="max_price" placeholder="0"  class="search-results-input escolhaAcomodacao" data-mask-currency="true">
                             </label>
                         </section>
-                        <!--<section class="clearfix sessao-area-filtro bg-branco ">
-                            <h5 class="sessao-texto-pesquisa">Área</h5>
-                            <label class="sessao-area-filtro-label area-corrente">
-                                Mínimo
-                                <input type="text" onkeypress="mascaraCampo(this, mvalor2)" name="min_area" placeholder="0" value="" class="search-results-input escolhaAcomodacao" data-mask-currency="true">
-                            </label>
-                            <label class="sessao-area-filtro-label area-corrente">
-                                Máximo
-                                <input type="text" name="max_area" onkeypress="mascaraCampo(this, mvalor2)" placeholder="0" value="" class="search-results-input escolhaAcomodacao" data-mask-currency="true">
-                            </label>
-                        </section> -->
-                        <!--<section class="clearfix sessao-area-filtro bg-branco ">
-                            <h5 class="sessao-texto-pesquisa hidden">Cômodos</h5>
-                            <label class="sessao-texto-pesquisa sessao-area-filtro-label-numeric fontsize11px">
-                                Quartos
-                                <select  name="num_quartos" id="numQuartos" class="search-results-select numeric-select escolhaAcomodacao">
-                                    <option selected="selected" value="0">-</option>
-                                    <option value="1">1+</option>
-                                    <option value="2">2+</option>
-                                    <option value="3">3+</option>
-                                    <option value="4">4+</option>
 
-                                </select>
-                            </label>
-                            <label class="sessao-texto-pesquisa sessao-area-filtro-label-numeric fontsize11px">
-                                Banheiros
-                                <select name="num_banheiros" id="numBanheiros" class="search-results-select numeric-select escolhaAcomodacao">
-                                    <option selected="selected" value="0">-</option>
-                                    <option value="1">1+</option>
-                                    <option value="2">2+</option>
-                                    <option value="3">3+</option>
-                                    <option value="4">4+</option>
-
-                                </select>
-                            </label>
-                            <label class="sessao-texto-pesquisa sessao-area-filtro-label-numeric fontsize11px" >
-                                Vagas
-                                <select id="numVagas" name="num_vagas" class="search-results-select numeric-select escolhaAcomodacao">
-                                    <option selected="selected" value="0">-</option>
-                                    <option value="1">1+</option>
-                                    <option value="2">2+</option>
-                                    <option value="3">3+</option>
-                                    <option value="4">4+</option>
-                                </select>
-                            </label>
-                        </section>-->
                     </div>
             </form>
-            <div class="propaganda">
+            <!--<div class="propaganda">
                 <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-                <!-- header responsivo imoveis -->
+
                 <ins class="adsbygoogle"
                      style="display:block"
                      data-ad-client="ca-pub-9276435422488602"
@@ -194,7 +149,7 @@
                 <script>
                     (adsbygoogle = window.adsbygoogle || []).push({});
                 </script>
-            </div>
+            </div> -->
         </div>
         <div class="col-md-10 col-sm-12">
             <div class="before"></div>
@@ -293,7 +248,7 @@
                         @endforeach
                     </div>
                     <div class='text-center'>
-                        <div id="loading-page"><img alt="Loading..." src="http://www.infinite-scroll.com/loading.gif"><div><div class="carregamento-anuncio">Carregando anúncios...</div></div></div>
+                        <div id="loading-page"><img alt="Loading..." src="{{url('images/preloaderVei.gif')}}"><div><div class="carregamento-anuncio"></div></div></div>
                     </div>
                 </div>
             </div>

@@ -15,7 +15,7 @@ return [
     |
     */
 
-    'driver' => 'mandrill',
+    'driver' => 'mailgun',
 
     /*
     |--------------------------------------------------------------------------
@@ -28,7 +28,7 @@ return [
     |
     */
 
-    'host' =>  'smtp.mandrillapp.com',
+    'host' =>  'smtp.mailgun.org',
 
     /*
     |--------------------------------------------------------------------------
@@ -80,7 +80,7 @@ return [
     |
     */
 
-    'username' => 'desenvolvimento@sempredanegocio.com.br',
+    'username' => 'postmaster@sempredanegocio.com.br',
 
     /*
     |--------------------------------------------------------------------------
@@ -93,7 +93,7 @@ return [
     |
     */
 
-    'password' => 'fb9UGVb8JMgqjKhZT1yrww',
+    'password' => '864b074a6c3b8d68697547a803ae4cc3',
 
     /*
     |--------------------------------------------------------------------------

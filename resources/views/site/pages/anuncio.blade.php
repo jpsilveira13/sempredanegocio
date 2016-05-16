@@ -9,27 +9,55 @@
             <section class="container col-md-12 col-lg-12 no-show ">
                 <a href="{{url("/admin/anuncios/editar")}}/{{$advertGeral->id}}" style="margin-bottom: 10px" class="btn btn-zap">Editar Anúncio</a>
             </section>
+            <br />
         @endif
 
     @endif
 
+    @if($advertGeral->advertImovel != null)
+
+        <section class="container col-md-6 col-lg-6 no-show ">
+            <a href="{{url("imoveis")}}" style="margin-bottom: 10px" class="btn btn-zap">Ver todos os Anúncios</a>
+        </section>
+    @endif
+    @if($advertGeral->advertVeiculo != null)
+        <section class="container col-md-6 col-lg-6 no-show ">
+            <a href="{{url("veiculos")}}" style="margin-bottom: 10px" class="btn btn-zap">Ver todos os Anúncios</a>
+        </section>
+    @endif
     <p></p>
     <div class="container no-padding">
         <div class="col-md-12 col-lg-8 ">
             <div class="side-left">
                 <div class="box-default clearfix imovel-area-detalhe">
-                    <h1 class="pull-left">
-                        <span class="subtitle">{{$advertGeral->subcategory->name}} {{$advertGeral->tipo_anuncio}}</span>
-                        @if($advertGeral->active == 0)
-                            {{$advertGeral->rua}} - @if($advertGeral->numero == 0)  @else{{$advertGeral->numero}} @endif
+                    @if($advertGeral->advertImovel != null)
+                        <h1 class="pull-left">
+                            <span class="subtitle">{{$advertGeral->subcategory->name}} {{$advertGeral->tipo_anuncio}}</span>
+                            @if($advertGeral->active == 0)
+                                {{$advertGeral->rua}} - @if($advertGeral->numero == 0)  @else{{$advertGeral->numero}} @endif
+                                <br />
+                                <span class="logradouro">{{$advertGeral->bairro}}, {{$advertGeral->cidade}} - {{$advertGeral->estado}}</span>
+                            @else
+                                <span class="logradouro">{{$advertGeral->bairro}}, {{$advertGeral->cidade}} - {{$advertGeral->estado}}</span>
+
+                            @endif
+
+                        </h1>
+                    @endif
+                    @if($advertGeral->advertVeiculo != null)
+
+                        <h1 class="pull-left">
+                            <span class="subtitle">{{$advertGeral->subcategory->name}} {{$advertGeral->tipo_anuncio}}</span>
+
+                            <span class="logradouro" style="line-height: 24px"><b>{{$advertGeral->advertVeiculo->marca}}</b><br />{{$advertGeral->advertVeiculo->modelo}}</span>
                             <br />
-                            <span class="logradouro">{{$advertGeral->bairro}}, {{$advertGeral->cidade}} - {{$advertGeral->estado}}</span>
-                        @else
+
+
                             <span class="logradouro">{{$advertGeral->bairro}}, {{$advertGeral->cidade}} - {{$advertGeral->estado}}</span>
 
-                        @endif
 
-                    </h1>
+                        </h1>
+                    @endif
                     <div class="pull-right posvalue-imovel">
                         <span class="value-ficha">
                                 <span class="subtitle">@if($advertGeral->tipo_anuncio == 'aluga')Valor de Locação @else Valor de Venda @endif</span>
@@ -187,6 +215,11 @@
                                 @else
                                     <strong>Não há característica cadastradas.</strong>
                                 @endif
+
+                                @if(!empty($advertGeral->advertVeiculo->opcionais))
+                                    <strong>Opcionais do carro: </strong>
+                                    {{$advertGeral->advertVeiculo->opcionais}}
+                                @endif
                             </p>
                     </div>
                     <p></p>
@@ -220,7 +253,7 @@
                         <div class="modal-body no-padding" id="modalBodyContate">
                             <ul class="unstyled clearfix list-buttons mb10 no-padding">
                                 <li id="liTelefone" class="pull-left">
-                                    <a href="#phone" class="icone-telefone btn-zap btn" data-toggle="tab"> Ver telefone</a>
+                                    <a id="{{$advertGeral->id}}" href="#phone" class="icone-telefone btn-zap btn" data-toggle="tab"> Ver telefone</a>
                                 </li>
                             </ul>
                             <!-- telefone contato -->

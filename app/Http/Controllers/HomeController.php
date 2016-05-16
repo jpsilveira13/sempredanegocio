@@ -3,6 +3,7 @@
 namespace sempredanegocio\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Validator;
@@ -20,8 +21,10 @@ use sempredanegocio\Models\Category;
 use sempredanegocio\Models\Complaint;
 use sempredanegocio\Models\Feature;
 use sempredanegocio\Models\MessageFriend;
+use sempredanegocio\Models\Plans;
 use sempredanegocio\Models\SubCategory;
 use Illuminate\Support\Facades\DB;
+use sempredanegocio\Models\TypeUser;
 use sempredanegocio\Models\User;
 use sempredanegocio\Models\VeiculoAno;
 use sempredanegocio\Models\VeiculoMarca;
@@ -53,7 +56,7 @@ class HomeController extends Controller
     public function sendEmailTest()
     {
 
-        \Mail::send('emails.teste', ['msg' => 'hello'], function ($message) {
+        \Mai::send('emails.teste', ['msg' => 'hello'], function ($message) {
             $message->from('suporte@sempredanegocio.com.br', 'João Paulo');
 
             $message->to('samotinho@gmail.com', 'Pedro 2')->subject('My Test Email!');
@@ -73,7 +76,7 @@ class HomeController extends Controller
         }else{
             $subcategories = SubCategory::where('category_id',$categoria_id->id)->get();
             if($categoria_id->id == 1){
-                $adverts = Advert::join('subcategories', 'adverts.subcategories_id', '=', 'subcategories.id')->join('advert_imovel','adverts.id','=','advert_imovel.advert_id')->where('subcategories.category_id',$categoria_id->id)->where('status','=','1')->select('adverts.*')->limit(18)->get();
+                $adverts = Advert::join('subcategories', 'adverts.subcategories_id', '=', 'subcategories.id')->join('advert_imovel','adverts.id','=','advert_imovel.advert_id')->where('subcategories.category_id',$categoria_id->id)->where('status','=','1')->select('adverts.*')->limit(18)->skip(18)->get();
 
                 $advertsCount = Advert::join('subcategories', 'adverts.subcategories_id', '=', 'subcategories.id')->join('advert_imovel','adverts.id','=','advert_imovel.advert_id')->where('subcategories.category_id',$categoria_id->id)->select('adverts.*')->count();
 
@@ -91,7 +94,7 @@ class HomeController extends Controller
 
                 $marcas = VeiculoMarca::get();
                 $modelos = VeiculoModelo::get();
-                $advertVeiculos = Advert::join('subcategories', 'adverts.subcategories_id', '=', 'subcategories.id')->join('advert_carro','adverts.id','=','advert_carro.advert_id')->where('subcategories.category_id',$categoria_id->id)->where('status','=','1')->select('adverts.*')->limit(18)->get();
+                $advertVeiculos = Advert::join('subcategories', 'adverts.subcategories_id', '=', 'subcategories.id')->join('advert_carro','adverts.id','=','advert_carro.advert_id')->where('subcategories.category_id',$categoria_id->id)->where('status','=','1')->select('adverts.*')->orderBy(DB::raw('RAND()'))->limit(18)->get();
                 $advertsCount = Advert::join('subcategories', 'adverts.subcategories_id', '=', 'subcategories.id')->join('advert_carro','adverts.id','=','advert_carro.advert_id')->where('subcategories.category_id',$categoria_id->id)->select('adverts.*')->count();
                 return view('site.pages._veiculo', [
                     'title' => 'Sempredanegocio.com.br | Não perca tempo! Anuncie',
@@ -123,14 +126,17 @@ class HomeController extends Controller
         $anuncieCats = Category::get();
         $anuncieSubCat = SubCategory::get();
         $anuncieCaract = Feature::get();
+        $typeusers = TypeUser::get();
         return view('site.pages.anuncie',[
             'anunciecats' => $anuncieCats,
             'anunciesubcats' => $anuncieSubCat,
-            'anunciecaracts' => $anuncieCaract
+            'anunciecaracts' => $anuncieCaract,
+            'typeusers' => $typeusers
 
         ]);
 
     }
+
     //hotsite
     public function hotsite($id,$url_name){
         $user = User::find($id);
@@ -158,6 +164,10 @@ class HomeController extends Controller
     }
     public function anuncioInterno($tipo_anuncio, $id, $url_anuncio){
         $advertGeral = Advert::where('id',$id)->with('advertImovel','advertVeiculo')->first();
+
+        $advertCount = Advert::find($id);
+        $advertCount->advert_count = $advertCount->advert_count+1;
+        $advertCount->save();
 
         if(empty($advertGeral)){
             return view('error.error404');
@@ -248,9 +258,7 @@ class HomeController extends Controller
 
         $result = null;
         $cidade = Input::get('cidade');
-        $result = Advert::where('bairro','LIKE',$query.'%')->whereHas('cidades', function ($query) use ($cidade) {
-            $query->where('cidade', 'like', $cidade.'%');
-        })->orderBy('id','desc')->take(8)->distinct()->get();
+        $result = Advert::where('bairro','LIKE',$query.'%')->orderBy('id','desc')->take(8)->distinct()->get();
 
         return \Response::json($result);
 
@@ -290,7 +298,6 @@ class HomeController extends Controller
         }
 
     }
-
     public function formAmigo(){
         $inputData = Input::get('formData');
 
@@ -312,6 +319,14 @@ class HomeController extends Controller
             'email_amigo'     =>  'required',
             'email_anuncio'    =>  'required',
         );
+        if(MessageFriend::create($userData)) {
+            //return success  message
+            return Response::json(array(
+                'success' => true
+            ));
+
+
+        }
         $validator = Validator::make($userData,$rules);
         if($validator->fails()){
             return Response::json(array(
@@ -328,20 +343,14 @@ class HomeController extends Controller
 
             });
 
-            if(MessageFriend::create($userData)) {
-                //return success  message
-                return Response::json(array(
-                    'success' => true
-                ));
 
-
-            }
 
         }
 
     }
     public function formContato(){
         $inputData = Input::get('formData');
+
 
         parse_str($inputData, $formFields);
         $userData = array(
@@ -362,8 +371,9 @@ class HomeController extends Controller
             'telefone_usuario'           =>  'required',
             'mensagem'                   =>  'required',
         );
+
         $validator = Validator::make($userData,$rules);
-        if($validator->fails()){
+       /* if($validator->fails()){
             return Response::json(array(
                 'fail' => true,
                 'errors' => $validator->getMessageBag()->toArray()
@@ -377,12 +387,14 @@ class HomeController extends Controller
                 $message->replyTo($userData['email_usuario'], $userData['nome']);
 
             });
-            if(AdvertMessage::create($userData)) {
-                //return success  message
-                return Response::json(array(
-                    'success' => true
-                ));
-            }
+
+        }*/
+        if(AdvertMessage::create($userData)) {
+
+            //return success  message
+            return Response::json(array(
+                'success' => true
+            ));
         }
     }
 
@@ -443,7 +455,7 @@ class HomeController extends Controller
             $query->where('numero_garagem', \Input::get('num_vagas'));
 
         }
-        return Response::json($query->where('status', '>', '0')->with('images','advertImovel')->paginate(18));
+        return Response::json($query->where('status', '>', '0')->with('images','advertImovel')->skip(18)->paginate(18));
 
     }
 
@@ -511,12 +523,12 @@ class HomeController extends Controller
             if($cidade != null){
                 $queryAnuncios = Advert::join('subcategories', 'adverts.subcategories_id', '=', 'subcategories.id')->join('advert_imovel','adverts.id','=','advert_imovel.advert_id')->where('subcategories.category_id',$categoria)->where('cidade','=',$cidade)->where('tipo_anuncio','=',$transacao)->where('status','=','1')->select('adverts.*');
                 $queryCount = $queryAnuncios->count();
-                $queryAnuncios = $queryAnuncios->orderBy(DB::raw('RAND()'))->limit(18)->get();
+                $queryAnuncios = $queryAnuncios->take(18)->get();
                 return view('resultado/anuncio',compact('queryAnuncios','subcategories','queryCount'));
             }else{
                 $queryAnuncios = Advert::join('subcategories', 'adverts.subcategories_id', '=', 'subcategories.id')->join('advert_imovel','adverts.id','=','advert_imovel.advert_id')->where('subcategories.category_id',$categoria)->where('tipo_anuncio','=',$transacao)->where('status','=','1')->select('adverts.*');
                 $queryCount = $queryAnuncios->count();
-                $queryAnuncios = $queryAnuncios->limit(18)->get();
+                $queryAnuncios = $queryAnuncios->take(18)->get();
                 return view('resultado/anuncio',compact('queryAnuncios','subcategories','queryCount'));
 
             }
@@ -536,40 +548,8 @@ class HomeController extends Controller
                 return view('resultado/resultVeiculo', compact('queryAnuncios', 'subcategories', 'queryCount','pegaMarcas'));
             }
         }
-
-        /*if($categoria == 1){
-            $query = Advert::join('advert_imovel','adverts.id','=','advert_imovel.advert_id');
-
-            if(!empty($cidade)){
-                $query->where('cidade','=',$cidade);
-
-            }
-            if(!empty($transacao)){
-
-                $query->where('tipo_anuncio','=',$transacao);
-            }
-            $query->where('status','>',0);
-            $queryCount = $query->count();
-            $queryAnuncios = $query->limit(18)->with('images')->get();
-            return view('resultado/anuncio',compact('queryAnuncios','subcategories','queryCount'));
-        } */
-        if ($cidade != null) {
-
-            /* $queryAnuncios = Advert::join('subcategories', 'adverts.subcategories_id', '=', 'subcategories.id')->where('subcategories.category_id',$categoria)->where('tipo_anuncio','=',$transacao)->where('status','=','1')->where('cidade','=',$cidade)->select('adverts.*')->limit(18)->get();
-
-             $queryCount = Advert::join('subcategories', 'adverts.subcategories_id', '=', 'subcategories.id')->where('subcategories.category_id',$categoria)->where('cidade','=',$cidade)->where('tipo_anuncio','=',$transacao)->where('status','=','1')->count();
-
-             return view('resultado/anuncio', compact('queryAnuncios','anunciesubcats','queryCount','subcategories'));
-         }else{
-             $queryAnuncios = Advert::join('subcategories', 'adverts.subcategories_id', '=', 'subcategories.id')->where('subcategories.category_id',$categoria)->where('tipo_anuncio','=',$transacao)->where('status','=','1')->select('adverts.*')->limit(18)->get();
-
-             $queryCount = Advert::join('subcategories', 'adverts.subcategories_id', '=', 'subcategories.id')->where('subcategories.category_id',$categoria)->where('tipo_anuncio','=',$transacao)->count();
-             return view('resultado/anuncio', compact('queryAnuncios','anunciesubcats','queryCount','subcategories'));
-
-         }
- */
-        }
     }
+
 
     public function alterStatus($query){
 
@@ -582,11 +562,53 @@ class HomeController extends Controller
     //tela pagamento
 
     public function pagamento(){
+        $bronze = Plans::where('id','=', 1)->first();
+        $prata = Plans::where('id',2)->first();
+        $ouro = Plans::where('id',3)->first();
+        $diamante = Plans::where('id',4)->first();
+        //Planos para corretores e imobiliarias
+        $economic = Plans::where('id','=',5)->first();
+        $standard = Plans::where('id',6)->first();
+        $turbo = Plans::where('id',7)->first();
+        $turboAnual = Plans::where('id',8)->first();
+
         return view('site.pages.pagamento', [
             'title' => 'Sempredanegocio.com.br | Não perca tempo! Anuncie.',
             'description' => 'Os melhores anúncios no melhor site.',
+            'bronze' => $bronze,
+            'prata' => $prata,
+            'ouro' => $ouro,
+            'diamante' => $diamante,
+            'economic' => $economic,
+            'standard' => $standard,
+            'turbo' => $turbo,
+            'turboAnual' => $turboAnual,
 
         ]);
+
+    }
+
+    public function contadorTelefone(){
+        $id =  Input::get('id');
+        $telCount = Advert::find($id);
+        $telCount->tel_count = $telCount->tel_count+1;
+        $telCount->save();
+
+
+    }
+
+
+    public function tipoPlano($id){
+        $idPlano = Plans::find(\Input::get('id'));
+        dd($idPlano);
+
+    }
+
+    public function formPagamento(){
+        $id_plan = Input::get('id');
+        $usuario =  Auth::user();
+        $usuario->plans_id = $id_plan;
+        $usuario->save();
 
     }
 }

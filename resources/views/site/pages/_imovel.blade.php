@@ -14,7 +14,7 @@
                 Filtros
             </button>
         </div>
-        <div class="col-md-6 hidden-sm hidden-xs">
+       <!-- <div class="col-md-6 hidden-sm hidden-xs">
             <div class="well well-sm">
                 <strong>Exibir como </strong>
                 <div class="btn-group">
@@ -23,9 +23,9 @@
                                 class="glyphicon glyphicon-th"></span>Grade</a>
                 </div>
             </div>
-        </div>
+        </div> -->
 
-        <div class="col-md-6 pull-right hidden-sm hidden-xs">
+        <!--<div class="col-md-6 pull-right hidden-sm hidden-xs">
             <form action="{{URL::current()}}" class="pull-right">
                 <div class="select2-container pull-right " style="margin-top:9px">
                     <select class="select2-choice" id="sortby">
@@ -49,10 +49,10 @@
                 </div>
                 <label class="control-label pull-right sort" for="sortby">Ordenar por</label>
             </form>
-        </div>
+        </div> -->
         <div style="margin-bottom: 12px" class="col-md-12 col-xs-12 col-sm-12 center-block">
             <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-            <!-- header responsivo imoveis -->
+
             <ins class="adsbygoogle"
                  style="display:block"
                  data-ad-client="ca-pub-9276435422488602"
@@ -158,9 +158,9 @@
                             </label>
                         </section>
                     </div>
-                    <div class="propaganda">
+                    <!--<div class="propaganda">
                         <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-                        <!-- header responsivo imoveis -->
+
                         <ins class="adsbygoogle"
                              style="display:block"
                              data-ad-client="ca-pub-9276435422488602"
@@ -169,7 +169,7 @@
                         <script>
                             (adsbygoogle = window.adsbygoogle || []).push({});
                         </script>
-                    </div>
+                    </div> -->
                 </div>
                 <div class="col-md-10 col-sm-12">
                     <div class="before"></div>
@@ -197,19 +197,29 @@
                                         </div>
                                     @endif
                                     <div class="item  col-xs-12 col-sm-6 col-lg-4 col-md-4 bloco-item">
+                                        @if(!empty(auth()->user()->id))
+                                            @if(count(auth()->user()) > 0 && auth()->user()->id == $advert->advertImovel->user_id )
+                                                <span class="contador-visita"><i class="fa fa-eye" aria-hidden="true"></i> {{$advert->advert_count}}</span>
+                                            @endif
+                                        @endif
                                         <a class="item-total" href="{{url('/')}}/anuncio/{{$advert->tipo_anuncio}}/{{$advert->id}}/{{str_slug($advert->url_anuncio)}}" >
                                             <div class="thumbnail">
                                                 @if(count($advert->images))
                                                     <?php
-                                                    $pos = strpos($advert->images()->first()->extension, "imoveis/img");
+                                                    $pos = strpos($advert->images()->first()->extension, "amazonaws.com");
+
                                                     $url1 = "";
                                                     if ($pos === false) {
-                                                        $url1 = 'gallery/'.$advert->images()->first()->extension;
-                                                    } else {
-                                                        $url1 = "galeria/".$advert->images()->first()->extension;
-                                                    }
+
+                                                    $url1 = "galeria/".$advert->images()->first()->extension;
                                                     ?>
-                                                    <img class="group list-group-image content-img-sugestao lazy transition-img" data-original="{{url($url1)}}" width="220" height="229" alt="titulo imagem" />
+                                                    <img class="group list-group-image content-img-sugestao lazy transition-img" data-original="{{url($url1)}}" width="220 height="229" alt="titulo imagem" />
+                                                    <?php }else{
+                                                    $url1 = $advert->images()->first()->extension;
+                                                    ?>
+                                                    <img class="group list-group-image content-img-sugestao lazy transition-img" data-original="{{$url1}}" width="220" height="229" alt="titulo imagem" />
+                                                    <?php }?>
+
                                                 @else
                                                     <img class="group list-group-image content-img-sugestao lazy transition-img" src="{{url('images/no-image.jpg')}}" alt="titulo imagem" />
                                                 @endif
@@ -222,7 +232,7 @@
                                                         <li class="icone-quartos zaptip" data-original-title="Quantidade de quartos" data-toggle="tooltip"> {{$advert->advertImovel->numero_quarto}}</li>
                                                         <li class="icone-suites zaptip" data-original-title="Quantidade de suítes" data-toggle="tooltip"> {{$advert->advertImovel->numero_banheiro}}</li>
                                                         <li class="icone-vagas zaptip" data-original-title="Quantidade de vagas" data-toggle="tooltip"> {{$advert->advertImovel->numero_garagem}}</li>
-                                                        <li class="icone-hospedes zaptip" data-original-title="Acomodações" data-toggle="tooltip"> {{$advert->advertImovel->acomodacoes}}</li>
+
 
                                                     </ul>
                                                     <!-- essa div só ficara visivel quando for lista -->
@@ -259,7 +269,7 @@
                                 @endforeach
                             </div>
                             <div class='text-center'>
-                                <div id="loading-page"><img alt="Loading..." src="http://www.infinite-scroll.com/loading.gif"><div><div class="carregamento-anuncio">Carregando anúncios...</div></div></div>
+                                <div id="loading-page"><img alt="Loading..." src="{{url('images/ajaxLoading.gif')}}"><div><div class="carregamento-anuncio"></div></div></div>
                             </div>
                         </div>
                     </div>

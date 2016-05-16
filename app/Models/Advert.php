@@ -28,6 +28,7 @@ class Advert extends Model
         'url_anuncio',
         'active',
         'advert_count',
+        'tel_count',
         'destaque',
         'confirm',
 

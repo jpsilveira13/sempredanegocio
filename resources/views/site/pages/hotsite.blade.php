@@ -3,6 +3,7 @@
 @section('content')
 </div>
 </div>
+
 <div class="col-md-12 col-lg-12 hidden-sm hidden-xs no-padding">
     <div class="header-logo-minisite">
         <div class="minisite-area-logo">
@@ -60,6 +61,7 @@
                     <span itemprop="streetAddress">{{$user->address}}</span>
                 </dd>
             </dl>
+
             <?php $i = 0?>
             @foreach($user->advertuser()->get() as $advert)
                 <?php $i++ ?>
@@ -68,17 +70,20 @@
                         <article class="minisite-anuncio-destaque">
                             @if(count($advert->images))
                                 <?php
-                                $pos = strpos($advert->images()->first()->extension, "imoveis/img");
+                                $pos = strpos($advert->images()->first()->extension, "amazonaws.com");
 
                                 $url1 = "";
                                 if ($pos === false) {
-                                    $url1 = 'gallery/'.$advert->images()->first()->extension;
-                                } else {
-                                    $url1 = "galeria/".$advert->images()->first()->extension;
-                                }
 
+                                $url1 = "galeria/".$advert->images()->first()->extension;
                                 ?>
-                                <img class="group list-group-image content-img-sugestao lazy transition-img" data-original="{{url($url1)}}" width="220" height="229" alt="" />
+                                <img class="group list-group-image content-img-sugestao lazy transition-img" data-original="{{url($url1)}}" width="220" height="229" alt="titulo imagem" />
+                                <?php }else{
+                                $url1 = $advert->images()->first()->extension;
+                                ?>
+                                <img class="group list-group-image content-img-sugestao lazy transition-img" data-original="{{$url1}}" width="220" height="229" alt="titulo imagem" />
+                                <?php }?>
+
                             @else
                                 <img class="group list-group-image content-img-sugestao lazy transition-img" src="{{url('images/no-image.jpg')}}" alt="titulo imagem" />
                             @endif
@@ -97,6 +102,7 @@
                     </a>
                 @endif
             @endforeach
+
         </div>
     </div>
 </div>
@@ -109,9 +115,11 @@
                     <strong class="search-results-header-counter">{{number_format((float)$user->advertuser()->count(),0,".",".")}}</strong>
 
                 </mark>
+
                 <h1 class="search-title"> Imovéis de {{$user->name}}</h1>
             </div>
         </div>
+
         <div class="col-md-12 hidden-lg hidden-md">
             <button id="btn-pesquisa" class="center-block btn-search">
                 Filtros
@@ -168,7 +176,6 @@
         <div class="clearfix"></div>
 
         <div class="row">
-
             <form action=""  id="formSearchImoveis" class="ajax">
                 <input type="hidden" name="id_user" value="{{$user->id}}" />
 
@@ -282,26 +289,40 @@
                                             </script>
                                         </div>
                                     @endif
+
                                     <div class="item  col-xs-12 col-sm-6 col-lg-4 col-md-4 bloco-item">
+                                        @if(!empty(auth()->user()->id))
+
+                                            @if(count(auth()->user()->id) > 0 && auth()->user()->id == $advert->user_id )
+                                                <span class="contador-visita"><i class="fa fa-eye" aria-hidden="true"></i> {{$advert->advert_count}}</span>
+                                            @endif
+                                        @endif
                                         <a class="item-total" href="{{url('/')}}/anuncio/{{$advert->tipo_anuncio}}/{{$advert->id}}/{{str_slug($advert->url_anuncio)}}" >
                                             <div class="thumbnail">
                                                 @if(count($advert->images))
                                                     <?php
-                                                    $pos = strpos($advert->images()->first()->extension, "imoveis/img");
+                                                    $pos = strpos($advert->images()->first()->extension, "amazonaws.com");
+
+
                                                     $url1 = "";
                                                     if ($pos === false) {
-                                                        $url1 = 'gallery/'.$advert->images()->first()->extension;
-                                                    } else {
-                                                        $url1 = "galeria/".$advert->images()->first()->extension;
-                                                    }
+
+                                                    $url1 = "galeria/".$advert->images()->first()->extension;
                                                     ?>
                                                     <img class="group list-group-image content-img-sugestao lazy transition-img" data-original="{{url($url1)}}" width="220" height="229" alt="titulo imagem" />
+                                                    <?php }else{
+                                                    $url1 = $advert->images()->first()->extension;
+
+                                                    ?>
+                                                    <img class="group list-group-image content-img-sugestao lazy transition-img" data-original="{{$url1}}" width="220" height="229" alt="titulo imagem" />
+                                                    <?php }?>
+
                                                 @else
                                                     <img class="group list-group-image content-img-sugestao lazy transition-img" src="{{url('images/no-image.jpg')}}" alt="titulo imagem" />
                                                 @endif
                                                 <div class="caption infos-suggest">
                                                     <h4 class="group inner list-group-item-heading text-bairro">{{$advert->cidade}}<br />
-                                                        {{$advert->estado}}
+
                                                     </h4>
                                                     <p class="group inner list-group-item-text">
                                                     <ul class="list-infos unstyled clearfix no-padding" id="tooltip-config">
@@ -342,6 +363,7 @@
                                         </a>
                                     </div>
                                 @endforeach
+
                             </div>
                             <div class='text-center'>
                                 <div id="loading-page"><img alt="Loading..." src="http://www.infinite-scroll.com/loading.gif"><div><div class="carregamento-anuncio">Carregando anúncios...</div></div></div>

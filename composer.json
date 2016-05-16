@@ -13,7 +13,10 @@
     "guzzlehttp/guzzle": "~6.0@dev",
     "illuminate/html": "5.*",
     "bestmomo/scafold": "dev-master",
-    "intervention/image": "dev-master"
+    "intervention/image": "dev-master",
+    "aws/aws-sdk-php-laravel": "~3.0",
+    "league/flysystem-aws-s3-v3": "^1.0"
+
 
   },
   "require-dev": {

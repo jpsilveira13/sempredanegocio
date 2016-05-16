@@ -222,7 +222,7 @@
                             @endif
                             <div class="item  col-xs-12 col-sm-6 col-lg-4 col-md-4 bloco-item">
                                 <a class="item-total" href="{{url('/')}}/anuncio/{{$queryAnuncio->tipo_anuncio}}/{{$queryAnuncio->id}}/{{str_slug($queryAnuncio->url_anuncio)}}" >
-                                    <div class="thumbnail">
+                                    <div class="thumbnail heigth417">
 
                                         @if(count($queryAnuncio->images))
                                             <?php
@@ -294,7 +294,7 @@
 
                     </div>
                     <div class='text-center'>
-                        <div id="loading-page"><img alt="Loading..." src="http://www.infinite-scroll.com/loading.gif"><div><div class="carregamento-anuncio">Carregando anúncios...</div></div></div><br /><br />
+                        <div id="loading-page"><img alt="Loading..." src="{{url('images/preloaderVei.gif')}}"><div><div class="carregamento-anuncio"></div></div></div>
                     </div>
                     @else
                         Nao achou nenhum resultado ;/

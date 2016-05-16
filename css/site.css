@@ -1431,7 +1431,15 @@ footer{
 
 
 
+.contador-visita{
+    position: absolute;
+    right: 29px;
+    top: 208px;
+    color: #B82536;
+    z-index: 300;
+    font-size: 1.2em;
 
+}
 
 .area-pesquisa .search-results-select-img{
 
@@ -3667,7 +3675,6 @@ input#images{display: none;}
     color: #3e4f6a;
     font-weight: 700;
     letter-spacing: 3px;
-    line-height: 2.8em;
     border: 2px solid #3e4f6a;
     display: inline-block;
     width: 80%;
@@ -4219,6 +4226,13 @@ span.minisite-area-atuacao-texto{
     height: 18px;
 
 }
+
+.swal2-confirm a{
+    color: #fff!important;
+
+}
+
+
 
 /* fim css carro */
 

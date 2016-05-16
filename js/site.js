@@ -143,10 +143,55 @@ $(document).ready(function(){
         }
     });
 
-    //js alterar campo form
+    //incrementação ao clicar na div
+
+    $('.icone-telefone').click(function () {
+        var id = $(this).attr('id');
+        $.ajax({
+            type: "POST",
+            url: "/get-contadortel",
+            dataType: 'html',
+            data: ({id:id})
+        });
+    });
+
+    $('.btnPagamento').click(function () {
+        var id = $(this).attr('id');
+        console.log(id);
+        $.ajax({
+            type: "POST",
+            url: "/form-pagamento",
+            dataType: 'html',
+            data: ({id:id}),
+            beforeSend: function () {
+
+            },
+            success: function () {
+                swal({
+                    title: 'Parabéns seu perfil foi atualizado com sucesso!',
+                    type: 'success',
+                    showCloseButton: true,
+                    showCancelButton: true,
+                    confirmButtonText:
+                        '<a href="http://www.sempredanegocio.com.br/admin/home">Painel Administrativo</a>',
+                    cancelButtonText:
+                        '<a href="http://www.sempredanegocio.com.br">Ir para Home</a>',
+                })
+
+            },
+            error: function(id){
+                console.log("Algo deu erro!!");
+            }
 
 
-    //js botao ir pro topo
+        });
+
+    });
+
+//js alterar campo form
+
+
+//js botao ir pro topo
     $( window ).scroll(function() {
         var topo = $('#toTop');
         if($(window).scrollTop() > 700){
@@ -169,7 +214,7 @@ $(document).ready(function(){
 
     /*$("#campotexto").keyup(search()); */
 
-    //salvar denuncia
+//salvar denuncia
 
 
     $("#denunciaForm").submit(function( event ) {
@@ -227,21 +272,22 @@ $(document).ready(function(){
         event.preventDefault();
         var $form = $( this ),
             data = $form.serialize(),
-            url = "/form-anuncio";
-
+            url = "/form-message";
+        console.log(url);
         var posting = $.post( url, { formData: data } );
 
         posting.done(function( data ) {
+
             if(data.fail) {
-                console.log(data.fail);
-                console.log('errou');
+                console.log('Nao');
+
                 $.each(data.errors, function( index, value ) {
                     $('text-error').show('fast');
                 });
                 $('#successMessage').empty();
             }
             if(data.success) {
-
+                console.log("Sim ;D");
                 formAnuncio.empty();
 
                 $('#divSucessoAnuncio').css('display','block');
@@ -336,7 +382,7 @@ $(document).ready(function(){
 
 
 
-    //$('ul.pagination').hide();
+//$('ul.pagination').hide();
 
     /*(function(){
      var loading_options = {
@@ -363,7 +409,7 @@ $(document).ready(function(){
 
     });
 
-    //JS carregar fotos ;D
+//JS carregar fotos ;D
     var multiPhotoDisplay;
 
     $('#photos').on('change', function(e) {
@@ -386,7 +432,7 @@ $(document).ready(function(){
         }
     };
 
-    //js fotos múltiplas anuncie
+//js fotos múltiplas anuncie
 
     multiPhotoDisplay = function(input) {
 
@@ -439,7 +485,7 @@ $(document).ready(function(){
         interval: 4000
     });
 
-    // handles the carousel thumbnails
+// handles the carousel thumbnails
     $('[id^=carousel-selector-]').click( function(){
         var id_selector = $(this).attr("id");
         var id = id_selector.substr(id_selector.length -1);
@@ -459,7 +505,7 @@ $(document).ready(function(){
 
 
 
-    //js slider imovel
+//js slider imovel
     (function(window, $, undefined) {
 
         var conf = {
@@ -539,8 +585,8 @@ $(document).ready(function(){
 
         var adv_id = e.target.value;
 
-        if(adv_id < 5){
-            console.log(adv_id);
+        if(adv_id < 5) {
+
             $('#veiculos').empty();
             $('#divVeiculo').addClass('show');
 
@@ -549,49 +595,47 @@ $(document).ready(function(){
                 type: "GET",
                 url: "get-marcatotal",
                 data: "marca",
-                async: false,
-                cache: false,
 
-                beforeSend: function(){
+                beforeSend: function () {
 
                     $("#veiculos").append('<option value="" selected="selected">Selecione uma opção...</option>');
 
 
                 },
-                success: function(data){
+                success: function (data) {
                     if (data.length > 0) {
 
 
                         for (i = 0; i < data.length; i++) {
 
-                            $("#veiculos").append('<option value=' + data[i].codigo_marca + '>' + data[i].marca + '</option>');
+                            $("#veiculos").append('<option id='+data[i].codigo_marca+' value=' + data[i].marca + '>' + data[i].marca + '</option>');
                         }
-                    }else{
+                    } else {
 
                         $("#veiculos").append("<option value=''>Nada foi encontrado</option>");
                     }
 
                 },
-                error: function(){
+                error: function () {
 
                 }
-            });
-        }else{
-            $('#divAdvertSubcategory').hide('fast');
-            $.get('/ajax-advcat?adv_id=' + adv_id, function(data){
-
-
-                var caractList = $('#listCaract');
-                var html = '<div class="btn-group" data-toggle="buttons">';
-                for(var j = 0, lenj = data.length;j<lenj;j++){
-
-                    html+= '<label class="btn btn-default btcaract mt10" style="width: 204px;margin-left: 47px;"><input type="checkbox" aria-required="false" class="material_checkbox" name="caracteristicas[]" value="'+data[j].id+'">'+data[j].name+'</label>'
-                }
-                html+='</div>';
-                caractList.html(html);
-
             });
         }
+        $('#divAdvertSubcategory').hide('fast');
+        $.get('/ajax-advcat?adv_id=' + adv_id, function(data){
+
+
+            var caractList = $('#listCaract');
+            var html = '<div class="btn-group" data-toggle="buttons">';
+            for(var j = 0, lenj = data.length;j<lenj;j++){
+
+                html+= '<label class="btn btn-default btcaract mt10" style="width: 204px;margin-left: 47px;"><input type="checkbox" aria-required="false" class="material_checkbox" name="caracteristicas[]" value="'+data[j].id+'">'+data[j].name+'</label>'
+            }
+            html+='</div>';
+            caractList.html(html);
+
+        });
+
     });
 
     $('#veiculos').on('change',function(e){
@@ -603,14 +647,14 @@ $(document).ready(function(){
             //$('#subcategory').empty();
 
             $.each(data, function(index, modelObj){
-                $('#modelo').append('<option value="'+modelObj.codigo_modelo+'" >'+modelObj.modelo+'</option>');
+                $('#modelo').append('<option id="'+modelObj.codigo_modelo+'" value="'+modelObj.modelo+'" >'+modelObj.modelo+'</option>');
 
             });
 
         });
     });
     $('#modelo').on('change',function(e){
-        var modelo_id = e.target.value;
+        var modelo_id = $(this).find('option:selected').attr('id');
         console.log(modelo_id);
         $('#tipo').empty();
         $.get('/get-modelo?modelo_id=' + modelo_id, function(data){
@@ -635,6 +679,7 @@ $(document).ready(function(){
             data: 'cep=' + $('#cep').val(), /* dado que será enviado via POST */
             dataType: 'json', /* Tipo de transmissão */
             success: function(data){
+                console.log(data.sucesso);
                 if(data.sucesso == 1){
                     $('#rua').val(data.rua);
                     $('#bairro').val(data.bairro);
@@ -645,9 +690,9 @@ $(document).ready(function(){
                 }
                 if(data.sucesso == 2){
 
-                    $('#rua').val('').removeAttr('disabled').focus();
+                    $('#rua').val('').removeAttr('readonly').focus();
 
-                    $('#bairro').val('').removeAttr('disabled');
+                    $('#bairro').val('').removeAttr('readonly');
                     $('#cidade').val(data.cidade);
                     $('#estado').val(data.estado);
                     $('.localizacao').removeClass('hide').addClass('shows');
@@ -740,7 +785,7 @@ $(document).ready(function(){
         menuLateral.removeClass('na-lef-pos');
     });
 
-    //menu lateral fixo
+//menu lateral fixo
     $(function(){
 
         var jElement = $('.propaganda');
@@ -771,15 +816,6 @@ $(document).ready(function(){
 //lazyload
 
     $(window).scroll(function(){
-        if ($(this).scrollTop() > 300) {
-            $('#btAnuncie').fadeIn();
-
-        } else {
-            $('#btAnuncie').fadeOut();
-        }
-    });
-
-    $(window).scroll(function(){
         if ($(this).scrollTop() > 300){
             $('.item-count').countTo({
                 formatter: function (value, options) {
@@ -796,7 +832,7 @@ $(document).ready(function(){
         }
 
     });
-    //Jquery anuncio destaque
+//Jquery anuncio destaque
 
 //js modal evento
     $('#list').click(function(event){event.preventDefault();
@@ -859,13 +895,6 @@ $(document).ready(function(){
     $('#propriedade1').empty();
 
     $("#subcategory").livequery(function(){
-        var imoveisResid = [10,20,60,70,80,107,108,112,113,105,107];
-        var imoveisTemp = [90,50,40];
-        var veiculos = [1,2,3];
-        var  teste = imoveisResid.indexOf(50);
-        var teste2 = imoveisTemp.indexOf(50);
-        console.log(teste);
-        console.log(teste2);
 
         $(this).on('change', function (e) {
             var sub_id = e.target.value;
@@ -874,7 +903,7 @@ $(document).ready(function(){
             //if verifica qual subcategoria foi escolhida
 
             if(sub_id == 10 || sub_id == 20 || sub_id == 60 || sub_id == 70 || sub_id == 80 || sub_id == 107 || sub_id == 108 || sub_id == 112 || sub_id == 113 || sub_id == 105 || sub_id == 107) {
-                console.log('entrou primeiro if');
+
                 $('<div class="row"><div class="col-md-4 col-lg-4 col-sm-6 col-xs-12">' +
                     '<div class="form-group has-feedback"> ' +
                     '<label>Número de quartos *</label> ' +
@@ -892,6 +921,50 @@ $(document).ready(function(){
                     '<select class="form-control" required data-error="Seleciona uma opção" required="required" name="numero_quarto"> ' +
                     '<option value="">Escolher</option><option value="0">Nenhum</option><option value="1">1</option><option value="2">2</option><option value="3">3</option> <option value="4">4</option> <option value="5">5 ou mais</option>' +
                     '</select><span class="form-control-feedback" aria-hidden="true"></span><div class="help-block with-errors"></div></div> </div><div class="col-md-4 col-lg-4 col-sm-6 col-xs-12"><div class="form-group has-feedback"><label>Vagas de garagem *</label> <select required data-error="Seleciona uma opção" required="required" class="form-control" name="numero_garagem"> <option value="">Escolher</option><option value="0">Nenhum</option><option value="1">1</option> <option value="2">2</option> <option value="3">3</option> <option value="4">4</option><option value="5">5 ou mais</option> </select> <span class="form-control-feedback" aria-hidden="true"></span> <div class="help-block with-errors"></div> </div> </div> <div class="col-md-4 col-lg-4 col-sm-6 col-xs-12"><div class="form-group has-feedback"> <label>Banheiros *</label> <select required data-error="Seleciona uma opção" class="form-control" name="numero_banheiro"> <option value="">Escolher</option><option value="0">Nenhum</option> <option value="1">1</option><option value="2">2</option> <option value="3">3</option> <option value="4">4</option> <option value="5">5 ou mais</option></select> <span class="form-control-feedback" aria-hidden="true"></span><div class="help-block with-errors"></div></div></div></div><div class="row"><div class="col-md-4 col-lg-4 col-sm-6 col-xs-12"> <div class="form-group has-feedback"> <label>Acomodações: *</label> <div class="input-group"> <input class="form-control" onkeypress="mascaraCampo(this, mascSoNumeros)" maxlength="2" required placeholder="Ex.: 99" type="text" data-error="Campo não pode ser vazio"  name="acomodacoes"></div><span class="form-control-feedback" aria-hidden="true"></span><div class="help-block with-errors"></div></div></div><div class="col-md-3 col-lg-3 col-sm-6 col-xs-12"> <div class="form-group has-feedback"> <label>Área Construída: *</label> <div class="input-group"> <input class="form-control" onkeypress="mascaraCampo(this, mascSoNumeros)" maxlength="7" required placeholder="Ex.: 150" type="text" data-error="Campo não pode ser vazio"  name="area_construida"><div class="input-group-addon">m²</div></div><span class="form-control-feedback" aria-hidden="true"></span><div class="help-block with-errors"></div></div></div></div>').appendTo('#propriedade1');
+
+            }else if(sub_id == 1 || sub_id == 2 || sub_id == 3){
+
+                $('<div class="row">' +
+                    '<div class="col-md-4 col-lg-4 col-sm-6 col-xs-12">' +
+                    '<div class="form-group has-feedback"> ' +
+                    '<label>Cor: *</label> ' +
+                    '<select class="form-control" required data-error="Seleciona uma opção" required="required" name="cor"> ' +
+                    '<option value="">Escolher</option>' +
+                    '<option value="indefinida">Indefinida</option>' +
+                    '<option value="Amarelo">Amarelo</option>' +
+                    '<option value="Azul">Azul</option>' +
+                    '<option value="Bege">Bege</option> ' +
+                    '<option value="Branco">Branco</option>' +
+                    ' <option value="Bronze">Bronze</option>' +
+                    '<option value="Cinza">Cinza</option><option value="Dourado">Dourado</option><option value="Laranja">Laranja</option><option value="Marrom">Marrom</option><option value="Prata">Prata</option><option value="Preto">Preto</option><option value="Rosa">Rosa</option><option value="Roxo">Roxo</option><option value="Verde">Verde</option><option value="Vermelho">Vermelho</option><option value="Vinho">Vinho</option>' +
+                    '</select></div></div>' +
+                    '<div class="col-md-4 col-lg-4 col-sm-6 col-xs-12"> ' +
+                    '<div class="form-group has-feedback"> ' +
+                    '<label>Placa: *</label> ' +
+                    ' <input class="form-control" maxlength="1" required placeholder="Apenas o último dígito" type="text" data-error="Campo não pode ser vazio"  name="placa">' +
+                    '<span class="form-control-feedback" aria-hidden="true"></span>' +
+                    '<div class="help-block with-errors"></div>' +
+                    '</div>' +
+                    '</div>' +
+                    '<div class="col-md-4 col-lg-4 col-sm-6 col-xs-12"> <div class="form-group has-feedback"> <label>Quilometragem: *</label> <div class="input-group"> <input class="form-control" onkeypress="mascaraCampo(this, mascSoNumeros)" maxlength="7" required placeholder="Ex.: 150" type="text" data-error="Campo não pode ser vazio"  name="km"><div class="input-group-addon">KM</div></div><span class="form-control-feedback" aria-hidden="true"></span><div class="help-block with-errors"></div></div></div></div>' +
+                    '<div class="row">' +
+                    '<div class="col-md-4 col-lg-4 col-sm-6 col-xs-12">' +
+                    '<div class="form-group has-feedback">' +
+                    '<label>Tipo de Combustível: *</label>' +
+                    '<select class="form-control" required data-error="Seleciona uma opção" required="required" name="combustivel">' +
+                    '<option value="">Escolher</option><option value="Gasolina">Gasolina</option><option value="Álcool">Álcool</option><option value="Diesel">Diesel</option><option value="Gás Natural">Gás Natural</option><option value="Flex">Flex</option><option value="Gasolina e Gás Natural">Gasolina e Gás Natural</option><option value="Álcool e Gás Natural">Álcool e Gás Natural</option><option value="Álcool e Gás Natural">Gasolina, Álcool e Gás Natural</option><option value="Gasolina, Álcool, Gás Natural e Benzina">Gasolina, Álcool, Gás Natural e Benzina</option><option value="Gasolina e Elétrico">Gasolina e Elétricol</option></select>' +
+                    '</div>' +
+                    '</div>' +
+                    '<div class="col-md-4 col-lg-4 col-sm-6 col-xs-12">' +
+                    '<div class="form-group has-feedback">' +
+                    '<label>Portas: *</label> ' +
+                    '<select class="form-control" required data-error="Seleciona uma opção" required="required" name="portas">' +
+                    '<option value="">Escolher</option><option value="0">0</option><option value="2">2</option><option value="3">3</option><option value="4">4</option></select></div></div>' +
+                    '<div class="col-md-4 col-lg-4 col-sm-6 col-xs-12">' +
+                    '<div class="form-group has-feedback">' +
+                    '<label>Câmbio: *</label> ' +
+                    '<select class="form-control" required data-error="Seleciona uma opção" required="required" name="cambio">' +
+                    '<option value="">Escolher</option><option value="Automático">Automático</option><option value="Manual">Manual</option></select></div></div></div></div></div>').appendTo('#propriedade1');
 
             }
         });

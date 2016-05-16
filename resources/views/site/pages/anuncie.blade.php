@@ -230,10 +230,10 @@
                                 <hr />
                             </div>
                         </div>
-                        <div class="col-md-6 col-lg-6">
+                        <div class="col-md-12 col-lg-12">
                             <div class="row">
 
-                                <div class="col-md-6 col-lg-6 col-sm-6 col-xs-12">
+                                <div class="col-md-4 col-lg-4 col-sm-6 col-xs-12">
                                     <div class="form-group has-feedback">
                                         <label>Nome: *</label>
                                         <input type="text" name='nome-usuario' value="{{Auth::user()->name}}" data-minlength="6" required data-error="Número de caracteres tem que ser maior que 6" class="form-control" />
@@ -241,12 +241,31 @@
                                         <div class="help-block with-errors"></div>
                                     </div>
                                 </div>
-                                <div class="col-md-6 col-lg-6 col-sm-6 col-xs-12">
+                                <div class="col-md-4 col-lg-4 col-sm-6 col-xs-12">
                                     <div class="form-group has-feedback">
                                         <label>Telefone: *</label>
                                         <input type="tel" name='telefone-usuario' maxlength="15" onkeypress="mascaraCampo(this, mtel)" required  data-error="Campo não pode ser vazio" maxlength="15" value="{{Auth::user()->phone}}"  class="form-control" />
                                         <span class="form-control-feedback" aria-hidden="true"></span>
                                         <div class="help-block with-errors"></div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-lg-4 col-sm-6 col-xs-12">
+                                    <div class="form-group has-feedback">
+                                        @if(empty(auth()->user()->typeuser_id))
+                                            <label>Selecione seu perfil </label>
+                                            <select class="form-control" name="typeuser_id">
+                                                <option>Selecione seu tipo de usuário</option>
+                                                @foreach($typeusers as $typeuser)
+                                                    @if($typeuser->id == 1)
+
+                                                    @else
+                                                        <option value="{{$typeuser->id}}">{{$typeuser->position}}</option>
+                                                    @endif
+                                                @endforeach
+                                            </select>
+                                            <span class="form-control-feedback" aria-hidden="true"></span>
+                                            <div class="help-block with-errors"></div>
+                                        @endif
                                     </div>
                                 </div>
                             </div>
@@ -273,6 +292,7 @@
                         </div>
 
                     </div>
+
                     <div class="row">
                         <div class="col-md-12 col-lg-12">
                             <div class="alert alert-success">

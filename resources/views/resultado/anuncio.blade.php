@@ -213,6 +213,11 @@
                                         </div>
                                     @endif
                                     <div class="item  col-xs-12 col-sm-6 col-lg-4 col-md-4 bloco-item">
+                                        @if(!empty(auth()->user()->id))
+                                            @if(count(auth()->user()) > 0 && auth()->user()->id == $queryAnuncio->user_id )
+                                                <span class="contador-visita"><i class="fa fa-eye" aria-hidden="true"></i> {{$queryAnuncio->advert_count}}</span>
+                                            @endif
+                                        @endif
                                         <a class="item-total" href="{{url('/')}}/anuncio/{{$queryAnuncio->tipo_anuncio}}/{{$queryAnuncio->id}}/{{str_slug($queryAnuncio->url_anuncio)}}" >
                                             <div class="thumbnail">
 
@@ -281,7 +286,7 @@
 
                             </div>
                             <div class='text-center'>
-                                <div id="loading-page"><img alt="Loading..." src="http://www.infinite-scroll.com/loading.gif"><div><div class="carregamento-anuncio">Carregando anúncios...</div></div></div><br /><br />
+                                <div id="loading-page"><img alt="Loading..." src="{{url('images/ajaxLoading.gif')}}"><div><div class="carregamento-anuncio"></div></div></div>
                             </div>
                             @else
                                 Nao achou nenhum resultado ;/

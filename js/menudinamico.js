@@ -30,7 +30,7 @@ function scrollPagina(page) {
                     $('#products').empty();
                     $("html, body").animate({scrollTop: 0}, "slow");
                     $('.before').show().append('<img class="img-responsive" src="../images/loadingSearch.gif" />');
-
+                    $('#loading-page').css('display','none');
                 }
 
             },
@@ -129,10 +129,12 @@ $(window).scroll(function() {
             paginaAtual = 0;
             temMaisUma = false;
             scrollPagina(paginaAtual);
+            $('#loading-page').css('display','block');
         }
 
         if(paginaAtual == 0){
             temMaisuma = false;
+            $('#loading-page').css('display','block');
             paginaAtual++;
         }
         scrollPagina(paginaAtual);

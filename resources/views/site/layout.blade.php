@@ -2,74 +2,93 @@
 <html lang="pt-br">
 
 <head>
-    <title>{{ isset($title) ? $title : 'Sempre Da Negócio - Anúncios Classificados Grátis' }}</title>
-
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="language" content="pt-br"/>
-    @if(isset($advert))
-        <meta property="og:site_name" content="Sempre da Negócio">
-        <meta property="og:title" content="{{$advert->anuncio_titulo}}">
-        <meta name="description" content="{{$advert->anuncio_descricao}}" />
-        <meta property="og:type" content="website">
-        <meta property="og:url" content="{{url('/')}}/imovel/{{$advert->tipo_anuncio}}/{{$advert->id}}/{{$advert->url_anuncio}}">
-        <meta property="og:image:width" content="484">
-        <meta property="og:image:height" content="252">
-        <?php
-        $pos = strpos($advert->images()->first()->extension, "imoveis/img");
-        $url1 = "";
-        if ($pos === false) {
-            $url1 = 'gallery/'.$advert->images()->first()->extension;
-        } else {
-            $url1 = "galeria/".$advert->images()->first()->extension;
-        }
-
-        ?>
-        <meta property="og:image" content="<?php if($advert->images()->count() < 1): echo asset('images/no-image.jpg');
-        else: echo asset($url1); endif ?>">
-        <meta property="og:description" content="{{str_limit($advert->anuncio_descricao, $limit = 100, $end =" ...")}}">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    @endif
-    @if(isset($user))
-        <meta property="og:site_name" content="Sempre da Negócio">
-        <meta property="og:title" content="{{$user->name}}">
-        <meta property="og:type" content="website">
-        <meta property="og:url" content="{{url('/')}}/{{$user->id}}/{{$user->url_name}}">
-        <meta property="og:image:width" content="484">
-        <meta property="og:image:height" content="252">
-        <meta property="og:image" content="<?php if($user->avatar): echo asset('images/no-image.jpg');
-        else: echo asset($user->avatar); endif ?>">
-        <meta property="og:description" content="Acessem o meu hotsite e confiram os meus anúncios">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    @endif
-
-    @if(isset($description))
-        <meta name="description" content="{{$description}}">
-    @endif
-
-    <meta name="keywords" content="Classificados, Anúncios grátis, à venda, usados, Imóveis, Carros, Motos, sempredanegocio.com.br, Sempre da Negócio, sempre da negocio, apartamentos, alugar, comprar, aluguel casa, aluguel casa temporada  " />
-    <meta name="robots" content="ALL" />
-    <meta name="copyright" content="© 2016 Sempre da Negócio" />
-
-    <link rel="icon" href="{{ asset('images/favicon.ico') }}" type="image/x-icon">
-    <meta name="csrf-token" content="{{ csrf_token() }}" />
-    <meta name="google-site-verification" content="wma-4TJAj_E1sgTjCKRH5unqj224KpxXv131FaQ4xjY" />
-
     <!-- CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous">
     <link rel="stylesheet" href="{{ asset('css/site.css') }}">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
     <link href='//cdn.jsdelivr.net/devicons/1.8.0/css/devicons.min.css' rel='stylesheet'>
-    <link rel="stylesheet" href="{{ asset('css/nouislider.min.css') }}">
     <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/jquery.bootstrapvalidator/0.5.2/css/bootstrapValidator.min.css"/>
-    <link rel="stylesheet" href="{{ asset('css/sweetalert.css') }}"/>
-    <link rel="stylesheet" href="{{ asset('css/lightbox.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('css/sweetalert2.min.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('css/lightbox.min.css') }}"/>
     <!-- <link rel="stylesheet" href="{{ asset('css/jquery-ui.css') }}"/> -->
-    <link rel="stylesheet" href="{{ asset('css/site.css') }}">
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,800' rel='stylesheet' type='text/css'>
+    <title>{{ isset($title) ? $title : 'Sempre Da Negócio - Anúncios Classificados Grátis' }}</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="language" content="pt-br"/>
+    <meta name="keywords" content="Classificados, Anúncios grátis, à venda, usados, Imóveis, Carros, Motos, sempredanegocio.com.br, Sempre da Negócio, sempre da negocio, apartamentos, alugar, comprar, aluguel casa, aluguel casa temporada  " />
+    <meta name="robots" content="ALL" />
+    <meta name="copyright" content="© 2016 Sempre da Negócio" />
+
+
+    @if(isset($advertGeral))
+
+        <meta property="og:site_name" content="Sempre da Negócio">
+        <meta property="og:title" content="{{$advertGeral->anuncio_titulo}}">
+        <meta name="description" content="{{$advertGeral->anuncio_descricao}}" />
+        <meta property="og:type" content="website">
+        <meta property="og:url" content="{{url('/')}}/imovel/{{$advertGeral->tipo_anuncio}}/{{$advertGeral->id}}/{{$advertGeral->url_anuncio}}">
+        <meta property="og:image:width" content="484">
+        <meta property="og:image:height" content="252">
+        <?php
+        $pos = strpos($advertGeral->images()->first()->extension, "amazonaws.com");
+        $url1 = "";
+        if ($pos === false) {
+            $url1 = "galeria/".$advertGeral->images()->first()->extension;
+        } else {
+            $url1 = $advertGeral->images()->first()->extension;
+        }
+
+        ?>
+        <meta property="og:image" content="<?php if($advertGeral->images()->count() < 1): echo asset('images/no-image.jpg');
+        else: echo asset($url1); endif ?>">
+        <meta property="og:description" content="{{str_limit($advertGeral->anuncio_descricao, $limit = 100, $end =" ...")}}">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    @elseif(isset($user))
+
+        <meta property="og:site_name" content="Sempre da Negócio">
+        <meta property="og:title" content="{{$user->name}}">
+        <meta property="og:type" content="website">
+        <meta property="og:url" content="{{url('/')}}/{{$user->id}}/{{$user->url_name}}">
+        <?php
+        $pos = strpos($advert->images()->first()->extension, "amazonaws.com");
+
+        $url1 = "";
+        if ($pos === false) {
+
+            $url1 = "galeria/".$advert->images()->first()->extension;
+        }else{
+
+            $url1 = $advert->images()->first()->extension;
+        }
+        ?>
+        <meta property="og:image" content="{{url($url1)}}">
+        <meta property="og:image:width" content="484">
+        <meta property="og:image:height" content="252">
+        <meta property="og:description" content="Acessem o meu hotsite e confiram os meus anúncios publicados.">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    @else
+
+        <meta property="og:site_name" content="Sempre da Negócio">
+        <meta property="og:title" content="Sempre Da Negócio">
+        <meta name="description" content="O maior portal de anúncios do Brasil" />
+        <meta property="og:type" content="website">
+        <meta property="og:url" content="{{url('/')}}">
+        <meta property="og:image:width" content="484">
+        <meta property="og:image:height" content="252">
+        <meta property="og:image" content="<?php echo asset('images/logo312x33.png')?>">
+    @endif
+
+    <link rel="icon" href="{{ asset('images/favicon.ico') }}" type="image/x-icon">
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
+    <meta name="google-site-verification" content="wma-4TJAj_E1sgTjCKRH5unqj224KpxXv131FaQ4xjY" />
+    @if(isset($description))
+        <meta name="description" content="{{$description}}">
+    @endif
+
     <script>
         (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
                     (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -87,7 +106,6 @@
         var google_remarketing_only = true;
         /* ]]> */
     </script>
-    <script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js"></script>
 </head>
 <body class="<?=Request::is('/') ? 'pt0' : '' ?>">
 <script type="text/javascript">
@@ -124,12 +142,12 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="navbar-collapse collapse" id="bs-example-navbar-collapse-1" aria-expanded="false" style="height: 1px;">
             <ul class="nav navbar-nav navbar-right">
-
                 @if(auth()->guest())
                     @if(!Request::is('auth/login'))
                         <li class="new-ads"><a href="#loginModal" id="modalLogin" rel="Anuncie" data-toggle="modal" data-target="#loginModal" class="btn btn-ads btn-azul"><span class="glyphicon glyphicon-file"></span> Anuncie</a></li>
                         <li><a href="#loginModal" id="modalLogin" class="" data-toggle="modal" data-target="#loginModal"><span class="glyphicon glyphicon-user"></span> Iniciar Sessão</a></li>
                         <li><a href="#loginModal" id="modalLogin" class="" data-toggle="modal" data-target="#loginModal"><span class="glyphicon glyphicon-heart"></span> Favoritos</a></li>
+
                     @endif
                 @else
                     <li class="new-ads"><a href="{{url('anuncie')}}" id="modalLogin" class="btn btn-ads btn-azul"><span class="glyphicon glyphicon-file"></span> Anuncie</a></li>
@@ -172,7 +190,7 @@
         <div class="container">
             <div class="col-md-12 bb-white">
                 <div class="text-center footer-texto">
-                    <p>Telefone para contato: <strong>(34) 99938-8993</strong> / Email: marketing@sempredanegocio.com.br </p>
+                    <p><strong>Email: marketing@sempredanegocio.com.br</strong> / </p>
                 </div>
             </div>
         </div>
@@ -365,8 +383,7 @@
 <script src="{{asset('js/jquery-2.1.4.min.js')}}"></script>
 <script src="{{asset('js/livequery.min.js')}}"></script>
 <script src="{{asset('js/bootstrap.min.js')}}"></script>
-<script src="{{asset('js/nouislider.min.js')}}"></script>
-<script src="{{asset('js/sweetalert.min.js')}}"></script>
+<script src="{{asset('js/sweetalert2.min.js')}}"></script>
 <!--<script src="{{asset('js/infinitescroll.js')}}"></script> -->
 <!--<script src="{{asset('js/typeahead.min.js')}}"></script> -->
 <!--<script src="{{asset('js/bloodhound.min.js')}}"></script> -->
@@ -376,15 +393,15 @@
 <!--<script src="/vendor/artesaos/cidades/js/scripts.js"></script> -->
 <script src="{{asset('js/validator.min.js')}}"></script>
 <script src="{{asset('js/lazyload.js')}}"></script>
-<script src="{{asset('js/lightbox.js')}}"></script>
+<script src="{{asset('js/lightbox.min.js')}}"></script>
 <script src="{{asset('js/site.js')}}"></script>
 
 @if(Request::is('veiculos') || \Input::get('categoria') == 2)
     <script src="{{asset('js/menudinamicoVeiculo.js')}}"></script>
 
-@endif
-@if(Request::is('/') || Request::is('anuncie') || Request::is('veiculos'))
-        <!--<script src="{{asset('js/menudinamico.js')}}"></script> -->
+    @endif
+    @if(Request::is('/') || Request::is('anuncie') || Request::is('veiculos'))
+            <!--<script src="{{asset('js/menudinamico.js')}}"></script> -->
 @elseif( \Input::get('categoria') == 1 || Request::is('imoveis') )
     <script src="{{asset('js/menudinamico.js')}}"></script>
 

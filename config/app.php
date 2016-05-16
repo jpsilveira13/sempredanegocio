@@ -149,6 +149,7 @@ return [
         sempredanegocio\Providers\AuthServiceProvider::class,
         sempredanegocio\Providers\EventServiceProvider::class,
         sempredanegocio\Providers\RouteServiceProvider::class,
+        Aws\Laravel\AwsServiceProvider::class,
 
     ],
 
@@ -202,6 +203,7 @@ return [
         'Form'      => Illuminate\Html\FormFacade::class,
         'HTML'      => Illuminate\Html\HtmlFacade::class,
         'Image'     => Intervention\Image\Facades\Image::class,
+        'AWS' => Aws\Laravel\AwsFacade::class,
 
 
     ],

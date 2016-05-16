@@ -25,15 +25,15 @@ Route::get('/', [
 
     'uses' => 'HomeController@index'
 ]);
-Route::get('pagamento',[
-    'uses' => 'HomeController@pagamento'
-]);
+
+
+
 
 
         /* anuncios routes */
 
 
-/*Route::group(['middleware'=>'auth'], function() {
+Route::group(['middleware'=>'auth'], function() {
     Route::get('anuncie', 'HomeController@anuncie');
     Route::post('anuncie','AdvertController@store');
     Route::get('anuncie',[
@@ -41,25 +41,42 @@ Route::get('pagamento',[
         'uses' => 'HomeController@anuncieCategoria'
     ]);
 
-}); */
+    Route::get('pagamento',[
+        'uses' => 'HomeController@pagamento'
+    ]);
+
+    Route::get('plano/{id?}',[
+        'uses' => 'HomeController@tipoPlano'
+    ]);
+
+
+
+});
+
+/*
 Route::get('anuncie', 'HomeController@anuncie');
 Route::post('anuncie','AdvertController@store');
 Route::get('anuncie',[
 
     'uses' => 'HomeController@anuncieCategoria'
 ]);
-
+*/
 
 /* rotas ajax */
 
+Route::post('/get-contadortel','HomeController@contadorTelefone');
+
 Route::post('/form-denuncia', 'HomeController@denuncia');
 Route::post('/form-amigo', 'HomeController@formAmigo');
-Route::post('/form-anuncio', 'HomeController@formContato');
+Route::post('/form-message', 'HomeController@formContato');
+Route::post('/form-pagamento','HomeController@formPagamento');
+
 
 Route::get('/ajax-subcat',[
 
     'uses' => 'HomeController@getCategories'
 ]);
+
 
 Route::get('/ajax-advcat',[
 
