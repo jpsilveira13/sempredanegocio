@@ -16,7 +16,7 @@ trait RegistersUsers
      */
     public function getRegister()
     {
-        return view('auth.register');
+        return view('anuncie');
     }
 
     /**
@@ -37,6 +37,6 @@ trait RegistersUsers
 
         Auth::login($this->create($request->all()));
 
-        return redirect($this->redirectPath());
+        return redirect('anuncie');
     }
 }

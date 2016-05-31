@@ -222,6 +222,13 @@
                                 @endif
                             </p>
                     </div>
+                    @if(!auth()->guest())
+                        @if(auth()->user()->id == $advertGeral->user->id)
+                            <div id="codigoAnuncio">
+                                <p><strong>Número de visitas do anúncio: </strong> {{$advertGeral->advert_count}}</p>
+                            </div>
+                        @endif
+                    @endif
                     <p></p>
                     <div id="codigoAnuncio">
                         <p><strong>Código do anúncio: </strong> {{$advertGeral->id}}</p>
@@ -311,7 +318,19 @@ Olá, Gostaria de ter mais informações sobre o  anúncio {{$advertGeral->subca
 
                     <div class="clearfix"></div>
                 </div><!-- fim contratar anunciante -->
-
+                <!-- área anúncio site -->
+                <aside class="box-default clearfix outras-informacoes height240px">
+                    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                    <!-- bloco anuncio -->
+                    <ins class="adsbygoogle"
+                         style="display:block"
+                         data-ad-client="ca-pub-9276435422488602"
+                         data-ad-slot="9599056770"
+                         data-ad-format="auto"></ins>
+                    <script>
+                        (adsbygoogle = window.adsbygoogle || []).push({});
+                    </script>
+                </aside>
                 <aside class="box-default clearfix outras-informacoes">
                     @if($advertGeral->advertVeiculo != null)
                         <span class="title">Simuladores</span>
@@ -327,7 +346,7 @@ Olá, Gostaria de ter mais informações sobre o  anúncio {{$advertGeral->subca
 
                         @if($advertGeral->advertImovel != null)
                             <span class="title">Simuladores</span>
-                            <div class="col-lg-12" style="margin-bottom:15px"><a href="http://www.santander.com.br/portal/wps/script/templates/GCMRequest.do?page=6287" target="_blank" alt="" title=""><img border="0" width="190" height="53" src="{{url('images/caixa.jpg')}}" alt="" title="" class="center-block" /></a></div>
+                            <div class="col-lg-12" style="margin-bottom:15px"><a href="http://www8.caixa.gov.br/siopiinternet/simulaOperacaoInternet.do?method=inicializarCasoUso" target="_blank" alt="" title=""><img border="0" width="190" height="53" src="{{url('images/caixa.jpg')}}" alt="" title="" class="center-block" /></a></div>
                             <div class="col-lg-12" style="margin-bottom:15px"><a href="https://wwws3.hsbc.com.br/HPB-CHM-SIMULADOR/servlets/HPBCreditoImobiliarioServlet" target="_blank" alt="" title=""><img border="0" width="190" height="53" src="{{url('images/santander.jpg')}}" alt="" title="" class="center-block" /></a></div>
                             <div class="col-lg-12" style="margin-bottom:15px"><a href="https://wwws3.hsbc.com.br/HPB-CHM-SIMULADOR/servlets/HPBCreditoImobiliarioServlet" target="_blank" alt="" title=""><img border="0" width="190" height="53" src="{{url('images/hsbc.jpg')}}" alt="" title="" class="center-block"></a></div>
                             <div class="col-lg-12" style="margin-bottom:15px"><a href="http://www.bb.com.br/portalbb/page44,116,19519,1,0,1,1.bb?codigoNoticia=377&amp;codigoMenu=172&amp;codigoRet" target="_blank" alt="" title=""><img border="0" width="190" height="56" src="{{url('images/banco-brasil.jpg')}}" alt="" title="" class="center-block"></a></div>

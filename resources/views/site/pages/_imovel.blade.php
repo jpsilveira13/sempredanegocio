@@ -157,6 +157,13 @@
                                 </select>
                             </label>
                         </section>
+                        <section class="clearfix sessao-area-filtro bg-branco">
+                            <h5 class="hidden">Controle exibição</h5>
+                            <label class="search-results-filter-section__label">
+                                <input type="checkbox" checked="" value="yes" name="imagens" class="search-results-filter__checkbox">
+                                Somente com imagens
+                            </label>
+                        </section>
                     </div>
                     <!--<div class="propaganda">
                         <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>

@@ -144,9 +144,9 @@
             <ul class="nav navbar-nav navbar-right">
                 @if(auth()->guest())
                     @if(!Request::is('auth/login'))
-                        <li class="new-ads"><a href="#loginModal" id="modalLogin" rel="Anuncie" data-toggle="modal" data-target="#loginModal" class="btn btn-ads btn-azul"><span class="glyphicon glyphicon-file"></span> Anuncie</a></li>
-                        <li><a href="#loginModal" id="modalLogin" class="" data-toggle="modal" data-target="#loginModal"><span class="glyphicon glyphicon-user"></span> Iniciar Sessão</a></li>
-                        <li><a href="#loginModal" id="modalLogin" class="" data-toggle="modal" data-target="#loginModal"><span class="glyphicon glyphicon-heart"></span> Favoritos</a></li>
+                        <li class="new-ads"><a href="{{url('login')}}" id="modalLogin" rel="Anuncie" data-toggle="modal" class="btn btn-ads btn-azul"><span class="glyphicon glyphicon-file"></span> Anuncie</a></li>
+                        <li><a href="{{url('login')}}" class="" ><span class="glyphicon glyphicon-user"></span> Iniciar Sessão</a></li>
+                        <li><a href="#"><span class="glyphicon glyphicon-heart"></span> Favoritos</a></li>
 
                     @endif
                 @else
@@ -185,6 +185,104 @@
     </div>
 </section>
 <div class="clearfix"></div>
+<!--
+<footer class="footer-site">
+    <div class="site-footer__menu footer-menu clear-fix">
+        <div class="site-content-wrapper">
+            <div class="footer-menu__column">
+                <dl>
+                    <dt class="footer-menu__title">Encontre Anúncios</dt>
+                    <dd class="footer-menu__item">
+                        <a href="{{url('imoveis')}}" itemprop="url" title="Imóveis">Imóveis</a>
+                    </dd>
+                    <dd class="footer-menu__item">
+                        <a href="{{url('veiculos')}}" itemprop="url" title="Veículos">Veículos</a>
+                    </dd>
+                </dl>
+            </div>
+            <div class="footer-menu__column">
+                <dl>
+                    <dt class="footer-menu__title">Institucional</dt>
+                    <dd class="footer-menu__item">
+                        <a href="#" itemprop="url" title="Sobre nós">Sobre nós</a>
+                    </dd>
+                    <dd class="footer-menu__item">
+                        <a href="#" itemprop="url" title="Quer trabalhar conosco">Quer trabalhar conosco</a>
+                    </dd>
+                    <dd class="footer-menu__item">
+                        <a href="#" itemprop="url" title="Parceiros">Parceiros</a>
+                    </dd>
+                    <dd class="footer-menu__item">
+                        <a href="#" itemprop="url" title="Mapa do Site">Mapa do site</a>
+                    </dd>
+                </dl>
+            </div>
+
+            <div class="footer-menu__column">
+                <dl>
+                    <dt class="footer-menu__title">Mais Produtos</dt>
+                    <dd class="footer-menu__item">
+                        <a href="#" itemprop="url" title="Sobre nós">Sobre nós</a>
+                    </dd>
+                    <dd class="footer-menu__item">
+                        <a href="#" itemprop="url" title="Quer trabalhar conosco">Quer trabalhar conosco</a>
+                    </dd>
+                    <dd class="footer-menu__item">
+                        <a href="#" itemprop="url" title="Parceiros">Parceiros</a>
+                    </dd>
+                    <dd class="footer-menu__item">
+                        <a href="#" itemprop="url" title="Mapa do Site">Mapa do site</a>
+                    </dd>
+                </dl>
+            </div>
+            <div class="footer-menu__column">
+                <dl class="site-footer__anunciante">
+                    <dt class="footer-menu__title">Anunciante</dt>
+                    <dd class="footer-menu__item">
+                        <a href="{{url('anuncie')}}" itemprop="url" title="Anuncie">Anunciar</a>
+                    </dd>
+                </dl>
+                <dl class="site-footer__social nav-icon">
+                    <dt class="nav-icon__title">Social</dt>
+                    <dd class="nav-icon__item -icon -facebook icon-facebook-f">
+                        <a href="https://www.facebook.com/sempredanegocio" target="_blank" itemprop="url" title="facebook">facebook</a>
+                    </dd>
+                    <dd class="nav-icon__item -icon -twitter icon-twitter-bird"><a href="#"  itemprop="url" title="twitter"><i class="fa fa-facebook" aria-hidden="true"></i>
+                        </a>
+                    </dd>
+                    <dd class="nav-icon__item -icon -youtube icon-youtube"><a href="#" itemprop="url" title="youtube">youtube</a></dd>
+                    <dd class="nav-icon__item -icon -instagram icon-instagram"><a href="#" itemprop="url" title="instagram">instagram</a></dd>
+                </dl>
+                <dl class="site-footer__mobile nav-icon">
+                    <dt class="nav-icon__title">Mobile</dt>
+                    <dd class="nav-icon__item -playstore">
+                        <a href="#" itemprop="url" title="play store">play store</a>
+                    </dd>
+                    <dd class="nav-icon__item -icon -applestore icon-apple" data-icon="c"><a href="#" class="site-footer__icon site-footer__icon--as" itemprop="url" title="apple store">apple store</a>
+                    </dd>
+                </dl>
+            </div>
+        </div>
+    </div>
+    <div class="site-footer__about about-us clearfix" style="clear: both;">
+        <div class="site-content-wrapper">
+            <p class="about-us__description">
+                Copyright © 2016, Sempre da Negócio. Todos os direitos reservados.
+            </p>
+            <div class="about-us__navigation terms-policy">
+                <ul>
+                    <li class="terms-policy__item">
+                        <a href="/legal/termos/" itemprop="url" title="Termos de Uso">Termos de Uso</a></li>
+                    <li class="terms-policy__item">
+                        <a href="/legal/privacidade/" itemprop="url" title="Política de Privacidade">Política de Privacidade</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+</footer>
+-->
 <footer>
     <div class="row">
         <div class="container">
@@ -212,6 +310,7 @@
         </div>
     </div>
 </footer>
+
 <!--<a href="{{url('anuncie')}}" title="Anuncie" class="btn btn-anuncio <?=Request::is('anuncie') ? 'hide' : '' ?>" id="btAnuncie">Anuncie Agora</a> -->
 <a href="#" title="Ir para o topo" class="hide" id="toTop">Topo</a>
 <!-- modal area site -->
@@ -331,7 +430,7 @@
                                 <input type="password" id="txtEmailUsuarioCadastro"  name="password_confirmation" class="input input-block-level span3" placeholder="Confirma a senha" autocapitalize="off">
 
                             </div>
-                            <button href="javascript:void(0);" type="submit" id="btnCadastrar" class="btn btn-zap pull-right mb8res" onclick="IrParaCadastroCompleto();">Cadastrar</button>
+                            <button href="javascript:void(0);" type="submit" id="btnCadastrar" class="btn btn-zap pull-right mb8res">Cadastrar</button>
 
                     </div>
                     </form>
@@ -395,12 +494,10 @@
 <script src="{{asset('js/lazyload.js')}}"></script>
 <script src="{{asset('js/lightbox.min.js')}}"></script>
 <script src="{{asset('js/site.js')}}"></script>
-@if(Request::is('pagamento'))
 
-<script type="text/javascript" src="https://stc.sandbox.pagseguro.uol.com.br/pagseguro/api/v2/checkout/pagseguro.lightbox.js"></script>
-<!--Para integração em ambiente de produção use este link-->
-<!--<script type="text/javascript" src="https://stc.pagseguro.uol.com.br/pagseguro/api/v2/checkout/pagseguro.lightbox.js"></script>-->
-@endif
+<!--<script type="text/javascript" src="https://stc.sandbox.pagseguro.uol.com.br/pagseguro/api/v2/checkout/pagseguro.lightbox.js"></script> -->
+<script type="text/javascript" src="https://stc.pagseguro.uol.com.br/pagseguro/api/v2/checkout/pagseguro.lightbox.js"></script>
+
 
 @if(Request::is('veiculos') || \Input::get('categoria') == 2)
     <script src="{{asset('js/menudinamicoVeiculo.js')}}"></script>
@@ -412,7 +509,7 @@
     <script src="{{asset('js/menudinamico.js')}}"></script>
 
 @endif
-@if (session('status'))
+@if (session('status') && !Request::is('password/email'))
     <script>
         swal("Parabéns!", "Seu anúncio foi criado com sucesso!", "success")
     </script>

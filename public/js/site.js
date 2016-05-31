@@ -133,8 +133,6 @@ function mascValorDoisDecimais(v){
 
 }
 
-
-
 //Começo jquery Site
 $(document).ready(function(){
     $.ajaxSetup({
@@ -143,7 +141,16 @@ $(document).ready(function(){
         }
     });
 
+    $('#confirmaPagamento').livequery(function () {
+        $('#confirmaPagamento').ready(function () {
+            var code = $('#pagamentoCampo').val();
+            PagSeguroLightbox(code);
+        });
+    });
+
+
     //incrementação ao clicar na div
+
 
     $('.icone-telefone').click(function () {
         var id = $(this).attr('id');
@@ -166,9 +173,9 @@ $(document).ready(function(){
         });
     });
 
+
     $('.btnPagamento').click(function () {
         var id = $(this).attr('id');
-        console.log(id);
         $.ajax({
             type: "POST",
             url: "/form-pagamento",
@@ -194,13 +201,117 @@ $(document).ready(function(){
                 console.log("Algo deu erro!!");
             }
 
-
         });
 
     });
 
+    //js login form
 //js alterar campo form
+    var LoginModalController = {
+        tabsElementName: ".logmod__tabs li",
+        tabElementName: ".logmod__tab",
+        inputElementsName: ".logmod__form .input",
+        hidePasswordName: ".hide-password",
 
+        inputElements: null,
+        tabsElement: null,
+        tabElement: null,
+        hidePassword: null,
+
+        activeTab: null,
+        tabSelection: 0, // 0 - first, 1 - second
+
+        findElements: function() {
+            var base = this;
+
+            base.tabsElement = $(base.tabsElementName);
+            base.tabElement = $(base.tabElementName);
+            base.inputElements = $(base.inputElementsName);
+            base.hidePassword = $(base.hidePasswordName);
+
+            return base;
+        },
+
+        setState: function(state) {
+            var base = this,
+                elem = null;
+
+            if (!state) {
+                state = 0;
+            }
+
+            if (base.tabsElement) {
+                elem = $(base.tabsElement[state]);
+                elem.addClass("current");
+                $("." + elem.attr("data-tabtar")).addClass("show");
+            }
+
+            return base;
+        },
+
+        getActiveTab: function() {
+            var base = this;
+
+            base.tabsElement.each(function(i, el) {
+                if ($(el).hasClass("current")) {
+                    base.activeTab = $(el);
+                }
+            });
+
+            return base;
+        },
+
+        addClickEvents: function() {
+            var base = this;
+
+            base.hidePassword.on("click", function(e) {
+                var $this = $(this),
+                    $pwInput = $this.prev("input");
+
+                if ($pwInput.attr("type") == "password") {
+                    $pwInput.attr("type", "text");
+                    $this.text("Hide");
+                } else {
+                    $pwInput.attr("type", "password");
+                    $this.text("Show");
+                }
+            });
+
+            base.tabsElement.on("click", function(e) {
+                var targetTab = $(this).attr("data-tabtar");
+
+                e.preventDefault();
+                base.activeTab.removeClass("current");
+                base.activeTab = $(this);
+                base.activeTab.addClass("current");
+
+                base.tabElement.each(function(i, el) {
+                    el = $(el);
+                    el.removeClass("show");
+                    if (el.hasClass(targetTab)) {
+                        el.addClass("show");
+                    }
+                });
+            });
+
+            base.inputElements.find("label").on("click", function(e) {
+                var $this = $(this),
+                    $input = $this.next("input");
+
+                $input.focus();
+            });
+
+            return base;
+        },
+
+        initialize: function() {
+            var base = this;
+
+            base.findElements().setState().getActiveTab().addClickEvents();
+        }
+    };
+
+    LoginModalController.initialize();
 
 //js botao ir pro topo
     $( window ).scroll(function() {
@@ -284,21 +395,17 @@ $(document).ready(function(){
         var $form = $( this ),
             data = $form.serialize(),
             url = "/form-message";
-        console.log(url);
+
         var posting = $.post( url, { formData: data } );
-
         posting.done(function( data ) {
-
             if(data.fail) {
-                console.log('Nao');
-
                 $.each(data.errors, function( index, value ) {
                     $('text-error').show('fast');
                 });
                 $('#successMessage').empty();
             }
             if(data.success) {
-                console.log("Sim ;D");
+
                 formAnuncio.empty();
 
                 $('#divSucessoAnuncio').css('display','block');
@@ -666,7 +773,7 @@ $(document).ready(function(){
     });
     $('#modelo').on('change',function(e){
         var modelo_id = $(this).find('option:selected').attr('id');
-        console.log(modelo_id);
+
         $('#tipo').empty();
         $.get('/get-modelo?modelo_id=' + modelo_id, function(data){
             $.each(data, function(index, anoObj){
@@ -690,7 +797,7 @@ $(document).ready(function(){
             data: 'cep=' + $('#cep').val(), /* dado que será enviado via POST */
             dataType: 'json', /* Tipo de transmissão */
             success: function(data){
-                console.log(data.sucesso);
+
                 if(data.sucesso == 1){
                     $('#rua').val(data.rua);
                     $('#bairro').val(data.bairro);
@@ -756,10 +863,10 @@ $(document).ready(function(){
         if(textoPesquisa.length >= minLetras ) {
             listaBairro.show('fast');
             $.get('/search-bairro/' + this.value , function (data) {
-                console.log(data);
+
                 $('#listaBairros').html('');
                 $.each(data, function (index, cities) {
-                    console.log(cities);
+
                     $('#listaBairros').append('<li><a value="' + cities.bairro + '">' + cities.bairro + '</a></li>');
                     $('#listaBairros li a').on('click',function(){
                         var locationElem = $('#bairro');
@@ -924,7 +1031,7 @@ $(document).ready(function(){
             }else if(sub_id == 30){
                 $('<div class="row"><div class="col-md-3 col-lg-3 col-sm-6 col-xs-12"><div class="form-group has-feedback"><label>Vagas de garagem *</label> <select required data-error="Seleciona uma opção" required="required" class="form-control" name="numero_garagem"> <option value="">Escolher</option><option value="0">Nenhum</option><option value="1">1</option> <option value="2">2</option> <option value="3">3</option> <option value="4">4</option><option value="5">5 ou mais</option> </select> <span class="form-control-feedback" aria-hidden="true"></span> <div class="help-block with-errors"></div> </div> </div><div class="col-md-3 col-lg-3 col-sm-6 col-xs-12"> <div class="form-group has-feedback"> <label>Área Construída: *</label> <div class="input-group"> <input class="form-control" onkeypress="mascaraCampo(this, mascSoNumeros)" maxlength="7" required placeholder="Ex.: 150" type="text" data-error="Campo não pode ser vazio"  name="area_construida"><div class="input-group-addon">m²</div></div><span class="form-control-feedback" aria-hidden="true"></span><div class="help-block with-errors"></div></div></div><div class="col-md-3 col-lg-3 col-sm-6 col-xs-12"><div class="form-group has-feedback"><label>Condomínio: *</label><div class="input-group"><div class="input-group-addon">R$</div><input class="form-control" maxlength="10" onkeypress="mascaraCampo(this,mvalor)"  data-error="Campo não pode ser vazio" placeholder="Ex.: 150" type="text"  name="valor_condominio" id="valor_condominio"></div><span class="form-control-feedback" aria-hidden="true"></span><div class="help-block with-errors"></div></div></div><div class="col-md-3 col-lg-3 col-sm-6 col-xs-12"><div class="form-group has-feedback"><label>IPTU: *</label><div class="input-group"><div class="input-group-addon">R$</div><input class="form-control" maxlength="7" onkeypress="mascaraCampo(this,mvalor)" data-error="Campo não pode ser vazio" placeholder="Ex.: 150" type="text" id="valor_iptu" name="valor_iptu"></div><span class="form-control-feedback" aria-hidden="true"></span> <div class="help-block with-errors"></div></div></div></div>').appendTo('#propriedade1');
             }else if(sub_id == 90 || sub_id == 50 || sub_id == 40){
-                console.log('entrou segundo if');
+
 
                 $('<div class="row"><div class="col-md-4 col-lg-4 col-sm-6 col-xs-12">' +
                     '<div class="form-group has-feedback"> ' +

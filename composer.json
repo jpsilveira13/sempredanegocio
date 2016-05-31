@@ -14,7 +14,7 @@
     "illuminate/html": "5.*",
     "bestmomo/scafold": "dev-master",
     "intervention/image": "dev-master",
-    "pagseguro/php": "@stable"
+    "pagseguro/php": "^2.7"
   },
   "require-dev": {
     "fzaninotto/faker": "~1.4",

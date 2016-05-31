@@ -15,8 +15,8 @@ return [
     */
 
     'mailgun' => [
-        'domain' => 'sempredanegocio.com.br',
-        'secret' => 'key-c2f4a4c65e0347eac60e3c66fd7020c3',
+        'domain' => 'sempredanegocio.com',
+        'secret' => 'key-be5e439b268e3fa3e9fd89d23e531ce7',
     ],
 
     'mandrill' => [

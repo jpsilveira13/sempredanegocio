@@ -4,6 +4,9 @@
 
     <div class="row">
         <div class="col-md-12 col-lg-12">
+            @if(empty(auth()->user()->typeuser_id))
+                @include('site.pages._etapa')
+            @endif
             <div class="area-anuncio-total">
                 <h1 class="anuncio-titulo"><strong>Postar o seu anúncio é GRÁTIS, rápido e fácil!</strong></h1>
                 <p class="anuncio-texto-header">O seu anúncio pode ser visto todos os dias por milhares de pessoas.</p>

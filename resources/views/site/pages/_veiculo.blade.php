@@ -20,16 +20,16 @@
                 Filtros
             </button>
         </div>
-      <!--  <div class="col-md-6 hidden-sm hidden-xs">
-            <div class="well well-sm">
-                <strong>Exibir como </strong>
-                <div class="btn-group">
-                    <a href="#" id="list" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-th-list">
-                 </span>Lista</a> <a href="#" id="grid" class="btn btn-default btn-sm"><span
-                                class="glyphicon glyphicon-th"></span>Grade</a>
-                </div>
-            </div>
-        </div> -->
+        <!--  <div class="col-md-6 hidden-sm hidden-xs">
+              <div class="well well-sm">
+                  <strong>Exibir como </strong>
+                  <div class="btn-group">
+                      <a href="#" id="list" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-th-list">
+                   </span>Lista</a> <a href="#" id="grid" class="btn btn-default btn-sm"><span
+                                  class="glyphicon glyphicon-th"></span>Grade</a>
+                  </div>
+              </div>
+          </div> -->
 
         <!--<div class="col-md-6 pull-right hidden-sm hidden-xs">
             <form action="{{URL::current()}}" class="pull-right">
@@ -83,12 +83,6 @@
                             <ul id="listaCidades" class="lista-cidade-search"></ul>
 
                         </section>
-                        <section class="clearfix sessao-area-filtro bg-branco ">
-                            <h5 class="sessao-texto-pesquisa">Bairro</h5>
-
-                            <input readonly name="bairro" id="bairro" value="" autocomplete="off" type="text" class="form-control search-results-input  pl3" placeholder="Incluir Bairro">
-                            <ul id="listaBairros" class="lista-cidade-search"></ul>
-                        </section>
                         <section class="clearfix sessao-area-filtro bg-branco">
                             <h5 class="sessao-texto-pesquisa">Tipo de Veículos</h5>
                             <select  name="subcategoria" class="search-results-select search-results-select-img escolhaAcomodacao">
@@ -103,18 +97,13 @@
                             <select  id="veiculos" name="marca_id" class="search-results-select search-results-select-img escolhaAcomodacao">
                                 <option value="">Seleciona uma opção</option>
                                 @foreach($marcas as $marca)
-                                    <option value="{{$marca->marca}}" id="{{$marca->marca}}">{{$marca->marca}}</option>
+                                    <option value="{{$marca->marca}}" id="{{$marca->codigo_marca}}">{{$marca->marca}}</option>
                                 @endforeach
                             </select>
                         </section>
                         <section class="clearfix sessao-area-filtro bg-branco">
                             <h5 class="sessao-texto-pesquisa">Seleciona o Modelo</h5>
-                            <select id="modelo" name="modelo_id" class="search-results-select search-results-select-img escolhaAcomodacao">
-                                <option value="">Seleciona uma opção</option>
-                                @foreach($modelos as $modelo)
-                                    <option value="{{$modelo->modelo}}" id="{{$modelo->modelo}}">{{$modelo->modelo}}</option>
-                                @endforeach
-                            </select>
+                            <select id="modelo" name="modelo_id" class="search-results-select search-results-select-img escolhaAcomodacao"></select>
                         </section>
                         <section class="clearfix sessao-area-filtro bg-branco ">
                             <h5 class="sessao-texto-pesquisa">Modalidade</h5>
@@ -135,7 +124,6 @@
                                 <input onkeypress="mascaraCampo(this, mvalor2)" type="text" name="max_price" placeholder="0"  class="search-results-input escolhaAcomodacao" data-mask-currency="true">
                             </label>
                         </section>
-
                     </div>
             </form>
             <!--<div class="propaganda">

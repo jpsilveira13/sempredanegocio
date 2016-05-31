@@ -11,6 +11,8 @@ use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 use Laravel\Socialite\Facades\Socialite;
 use Illuminate\Support\Facades\Auth;
+use sempredanegocio\Http\Requests;
+use Illuminate\Http\Request;
 
 class AuthController extends Controller
 {
@@ -32,14 +34,19 @@ class AuthController extends Controller
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(Request $request)
     {
         $this->middleware('guest', ['except' => 'getLogout']);
+        if ($request->is('anuncie')) {
+           redirect('anuncie');
+        } else {
+            redirect('admin/home');
+        }
     }
 
 
     public function getLogin() {
-        return redirect('/admin/home');
+        return redirect('/anuncie');
     }
 
     public function redirectToProvider($provider){
@@ -62,10 +69,11 @@ class AuthController extends Controller
             $user->typeuser_id = 2;
             $user->password = bcrypt(str_random(10));
             $user->save();
-            \Event::fire(new UsuarioInserido($user));
+            return redirect('/anuncie');
+          \Event::fire(new UsuarioInserido($user));
         }
         auth()->login($user);
-        return redirect('/anuncie');
+        return redirect('/admin/home');
     }
 
 
@@ -103,7 +111,7 @@ class AuthController extends Controller
             'password' => bcrypt($data['password']),
         ]);
 
-        /*\Event::fire(new UsuarioInserido($user)); */
+        \Event::fire(new UsuarioInserido($user));
 
         return $user;
 

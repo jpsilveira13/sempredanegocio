@@ -16,6 +16,15 @@ Route::get('/', function(){
     return view('layout');
 });
 
+// Rotas para solicitar trocar de senha...
+Route::get('password/email', 'Auth\PasswordController@getEmail');
+Route::post('password/email', 'Auth\PasswordController@postEmail');
+
+// Rotas para trocar a senha...
+Route::get('password/reset/{token}', 'Auth\PasswordController@getReset');
+Route::post('password/reset', 'Auth\PasswordController@postReset');
+
+
 Route::get('/email',[
    'uses' => 'HomeController@sendEmailTest'
 
@@ -26,14 +35,17 @@ Route::get('/', [
     'uses' => 'HomeController@index'
 ]);
 
+//url pagamento
+
+/*Route::post('/payment', 'PaymentController@pay');*/
 
 
 
 
         /* anuncios routes */
-
-
 Route::group(['middleware'=>'auth'], function() {
+
+
     Route::get('anuncie', 'HomeController@anuncie');
     Route::post('anuncie','AdvertController@store');
     Route::get('anuncie',[
@@ -48,9 +60,8 @@ Route::group(['middleware'=>'auth'], function() {
     Route::get('plano/{id?}',[
         'uses' => 'HomeController@tipoPlano'
     ]);
-
-
-
+    Route::post('/payment/{id}', ['as' => 'adquirir' , 'uses' => 'PaymentController@pay']);
+    Route::get('/payment/{id}', ['as' => 'adquirir' , 'uses' => 'PaymentController@pay']);
 });
 
 /*
@@ -72,6 +83,8 @@ Route::post('/form-denuncia', 'HomeController@denuncia');
 Route::post('/form-amigo', 'HomeController@formAmigo');
 Route::post('/form-message', 'HomeController@formContato');
 Route::post('/form-pagamento','HomeController@formPagamento');
+
+Route::get('login','HomeController@loginTela');
 
 
 Route::get('/ajax-subcat',[

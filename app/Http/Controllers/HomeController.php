@@ -2,28 +2,23 @@
 
 namespace sempredanegocio\Http\Controllers;
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Validator;
-use Psy\Util\Json;
+use sempredanegocio\Http\Requests;
+use sempredanegocio\Models\Advert;
 use sempredanegocio\Models\AdvertImage;
 use sempredanegocio\Models\AdvertImovel;
 use sempredanegocio\Models\AdvertMessage;
-use sempredanegocio\Models\AdvertVeiculo;
-use sempredanegocio\Models\Cidade;
-use sempredanegocio\Http\Requests;
-use sempredanegocio\Http\Controllers\Controller;
-use sempredanegocio\Models\Advert;
-use sempredanegocio\Models\AdvertCategory;
 use sempredanegocio\Models\Category;
+use sempredanegocio\Models\Cidade;
 use sempredanegocio\Models\Complaint;
 use sempredanegocio\Models\Feature;
 use sempredanegocio\Models\MessageFriend;
 use sempredanegocio\Models\Plans;
 use sempredanegocio\Models\SubCategory;
-use Illuminate\Support\Facades\DB;
 use sempredanegocio\Models\TypeUser;
 use sempredanegocio\Models\User;
 use sempredanegocio\Models\VeiculoAno;
@@ -56,7 +51,7 @@ class HomeController extends Controller
     public function sendEmailTest()
     {
 
-        \Mai::send('emails.teste', ['msg' => 'hello'], function ($message) {
+        \Mail::send('emails.teste', ['msg' => 'hello'], function ($message) {
             $message->from('suporte@sempredanegocio.com.br', 'João Paulo');
 
             $message->to('samotinho@gmail.com', 'Pedro 2')->subject('My Test Email!');
@@ -111,6 +106,7 @@ class HomeController extends Controller
     }
 
     public  function anuncie(){
+
         //$products = Product::orderBy(DB::raw('RAND()'))->get();
 
 
@@ -142,6 +138,7 @@ class HomeController extends Controller
         $user = User::find($id);
         $subcategories = SubCategory::get();
 
+        $marcas = VeiculoMarca::get();
 
         $advertAluga = Advert::where('user_id',$user->id)->where('tipo_anuncio','=','aluga')->count();
         $advertVenda = Advert::where('user_id',$user->id)->where('tipo_anuncio','=','venda')->count();
@@ -155,7 +152,8 @@ class HomeController extends Controller
                 'user' => $user,
                 'advertAluga' => $advertAluga,
                 'advertVenda' => $advertVenda,
-                'subcategories' => $subcategories
+                'subcategories' => $subcategories,
+                'marcas' => $marcas,
 
             ]);
 
@@ -434,6 +432,7 @@ class HomeController extends Controller
 
         }
 
+
         if ($min_price && $max_price) {
             $query->where('preco', '>=', $min_price)->where('preco', '<=', $max_price);
 
@@ -452,11 +451,18 @@ class HomeController extends Controller
             $query->where('numero_banheiro', \Input::get('num_banheiros'));
 
         }
+
         if (\Input::get('num_vagas')) {
             $query->where('numero_garagem', \Input::get('num_vagas'));
 
         }
-        return Response::json($query->where('status', '>', '0')->with('images','advertImovel')->skip(18)->paginate(18));
+
+        if(\Input::get('imagens') === 'yes') {
+
+        }
+
+            return Response::json($query->where('status', '>', '0')->orderBy('destaque','desc')->with('images','advertImovel')->paginate(18));
+
 
     }
 
@@ -620,4 +626,17 @@ class HomeController extends Controller
         $usuario->save();
 
     }
+
+    public function loginTela(){
+        if(Auth::user()){
+
+            return redirect('/');
+        }else{
+            return view('site.pages.login', [
+                'title' => 'Sempredanegocio.com.br | Não perca tempo! Anuncie.',
+                'description' => 'Os melhores anúncios no melhor site.',
+            ]);
+        }
+    }
+
 }

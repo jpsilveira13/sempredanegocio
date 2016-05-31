@@ -87,16 +87,26 @@ class AdvertController extends Controller
         if($data['category_id'] == 1){
 
 
+
             $numero_quarto = $data['numero_quarto'];
             $numero_garagem = $data['numero_garagem'];
             $numero_banheiro = $data['numero_banheiro'];
             $area_construida = $data['area_construida'];
-            $valor_condominio = str_replace(",",".",str_replace(".","",$data['valor_condominio']));
-            $valor_iptu  = str_replace(",",".",str_replace(".","",$data['valor_iptu']));
-
-
+            if(empty($data['valor_condominio'])){
+                $valor_condominio = 0;
+            }else{
+                $valor_condominio = str_replace(",",".",str_replace(".","",$data['valor_condominio']));
+            }
+            if(empty($data['valor_iptu'])){
+                $valor_iptu = 0;
+            }else{
+                $valor_iptu  = str_replace(",",".",str_replace(".","",$data['valor_iptu']));
+            }
             if(empty($data['acomodacoes'])){
                 $acomodacoes = 0;
+
+            }else{
+                $acomodacoes = $data['acomodacoes'];
 
             }
             if(empty($numero_quarto)){
@@ -123,7 +133,7 @@ class AdvertController extends Controller
 
             $advertVeiculo::create(['ano'=>$tipo,'km' => $km,'cor' => $cor,'portas' => $portas,'cambio' => $cambio, 'combustivel' => $combustivel,'placa' => $placa,'opcionais'=> $opcionais,'marca' => $marca,'modelo' => $modelo, 'advert_id' => $anuncio->id,'category_id' => $data['category_id']]);
         }
-       /*if($anuncio){
+       if($anuncio){
 
             $dataSend = [
                 'id'    => $anuncio->id,
@@ -139,7 +149,7 @@ class AdvertController extends Controller
                 $message->to($dataSend['email']);
 
             });
-        } */
+        }
         if(auth()->user()->plans_id != null ){
 
             return redirect('/')->with('status', 'Parabéns!! Seu anúncio foi publicado!');

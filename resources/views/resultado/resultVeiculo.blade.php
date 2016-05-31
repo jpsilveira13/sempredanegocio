@@ -88,12 +88,6 @@
                                 <ul id="listaCidades" class="lista-cidade-search"></ul>
 
                             </section>
-                            <section class="clearfix sessao-area-filtro bg-branco ">
-                                <h5 class="sessao-texto-pesquisa">Bairro</h5>
-
-                                <input readonly name="bairro" id="bairro" value="" autocomplete="off" type="text" class="form-control search-results-input  pl3" placeholder="Incluir Bairro">
-                                <ul id="listaBairros" class="lista-cidade-search"></ul>
-                            </section>
                             <section class="clearfix sessao-area-filtro bg-branco">
                                 <h5 class="sessao-texto-pesquisa">Tipo de Veículos</h5>
                                 <select  name="subcategoria" class="search-results-select search-results-select-img escolhaAcomodacao">
