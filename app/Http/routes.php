@@ -16,6 +16,13 @@ Route::get('/', function(){
     return view('layout');
 });
 
+//rotas parceria, contato
+
+Route::get('parcerias','HomeController@parceriaTela');
+Route::get('contato','HomeController@contato');
+Route::post('enviar/contato',['as'=> 'contato.form','uses' => 'HomeController@contatoEnvio']);
+
+
 // Rotas para solicitar trocar de senha...
 Route::get('password/email', 'Auth\PasswordController@getEmail');
 Route::post('password/email', 'Auth\PasswordController@postEmail');
@@ -38,8 +45,6 @@ Route::get('/', [
 //url pagamento
 
 /*Route::post('/payment', 'PaymentController@pay');*/
-
-
 
 
         /* anuncios routes */
@@ -177,6 +182,15 @@ Route::group(['prefix' => 'admin', 'middleware'=>'auth','where'=>['id'=>'[0-9]+'
 
         Route::get('/',['as'=>'adm', 'uses' => 'AdminController@dadosPainelAdm']);
 
+
+    });
+
+    Route::group(['prefix' => 'leads'],function() {
+
+        Route::get('/',['as'=>'leads', 'uses' => 'AdminController@mostrarLeads']);
+        Route::get('{id}/edit',['as'=>'admin.leads.edit','uses'=>'AdminController@edit']);
+        Route::get('/novo',['as'=>'admin.leads.novo','uses'=>'AdminController@novo']);
+        Route::post('/salvarlead',['as'=>'admin.leads.salvarlead','uses'=>'AdminController@store']);
 
     });
 

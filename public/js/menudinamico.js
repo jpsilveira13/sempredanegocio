@@ -93,7 +93,7 @@ function scrollPagina(page) {
                         if (data[i].tipo_anuncio == 'aluga') {
                             html += '<span class="text-diaria"> / mês</span>';
                         } else {
-                            html += '<span class="text-diaria"></span>';
+                            html += '<span class="text-diaria">/ venda</span>';
                         }
                         html += '</div></div><div class="col-xs-4 col-md-4 fr"><div class="acoes-minifichas-sugestoes"> <span class="addicon btnFavorito4090308 icone-favoritada pull-right fvestilo"data-toggle="tooltip" data-placement="top" data-original-title="Adicionar à minha lista"></span></div></div></div></div></div></a></div>';
 

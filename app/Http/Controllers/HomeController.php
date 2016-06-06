@@ -15,6 +15,7 @@ use sempredanegocio\Models\AdvertMessage;
 use sempredanegocio\Models\Category;
 use sempredanegocio\Models\Cidade;
 use sempredanegocio\Models\Complaint;
+use sempredanegocio\Models\Contact;
 use sempredanegocio\Models\Feature;
 use sempredanegocio\Models\MessageFriend;
 use sempredanegocio\Models\Plans;
@@ -370,6 +371,13 @@ class HomeController extends Controller
             'telefone_usuario'           =>  'required',
             'mensagem'                   =>  'required',
         );
+        if(AdvertMessage::create($userData)) {
+
+            //return success  message
+            return Response::json(array(
+                'success' => true
+            ));
+        }
 
         $validator = Validator::make($userData,$rules);
         if($validator->fails()){
@@ -388,14 +396,42 @@ class HomeController extends Controller
             });
 
         }
-        if(AdvertMessage::create($userData)) {
 
-            //return success  message
-            return Response::json(array(
-                'success' => true
-            ));
-        }
     }
+
+    public function parceriaTela(){
+
+        return view('site.pages.parceiro', [
+            'title' => 'Sempredanegocio.com.br | Não perca tempo! Anuncie.',
+            'description' => 'Seja um de nossos parceiros!',
+        ]);
+    }
+
+    public function contato(){
+
+        return view('site.pages.contato', [
+            'title' => 'Sempredanegocio.com.br | Não perca tempo! Anuncie.',
+            'description' => 'Alguma dúvida? Entra em contato conosco!',
+        ]);
+    }
+
+    public function contatoEnvio(Requests\ContatoSaveRequest $requests){
+
+        $data = $requests->all();
+        if(Contact::create($data)) {
+            \Mail::send('emails.contactForm',$data,function($message) use ($data){
+                $message->from('comercial@sempredanegocio.com.br', 'Sempre da Negócio');
+
+                $message->to('comercial@sempredanegocio.com.br');
+                $message->subject($data['name']. ', entrou em contato com você ');
+
+            });
+        }
+
+        return redirect('/')->with('contato', 'Enviado com sucesso!! Em breve entraremos em contato!');
+
+    }
+
 
     //search imoveis
 
@@ -461,7 +497,7 @@ class HomeController extends Controller
 
         }
 
-            return Response::json($query->where('status', '>', '0')->orderBy('destaque','desc')->with('images','advertImovel')->paginate(18));
+        return Response::json($query->where('status', '>', '0')->orderBy('destaque','desc')->with('images','advertImovel')->paginate(18));
 
 
     }

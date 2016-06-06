@@ -321,12 +321,11 @@ Olá, Gostaria de ter mais informações sobre o  anúncio {{$advertGeral->subca
                 <!-- área anúncio site -->
                 <aside class="box-default clearfix outras-informacoes height240px">
                     <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-                    <!-- bloco anuncio -->
+                    <!-- bloco anuncio 3 -->
                     <ins class="adsbygoogle"
-                         style="display:block"
+                         style="display:inline-block;width:320px;height:200px"
                          data-ad-client="ca-pub-9276435422488602"
-                         data-ad-slot="9599056770"
-                         data-ad-format="auto"></ins>
+                         data-ad-slot="7485561574"></ins>
                     <script>
                         (adsbygoogle = window.adsbygoogle || []).push({});
                     </script>

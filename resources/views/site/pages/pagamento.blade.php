@@ -47,7 +47,7 @@
                                 <li class="price"><p class="bestPlanPrice">R${{$standard->value}}</p></li>
                                 <li>
                                     <ul class="options">
-                                        <li>Fotos ilimitada</li>
+                                        <li>Fotos ilimitadas</li>
                                         <li> <span>Até</span> 12 <span>vezes mais visualização por anúncio</span></li>
                                         <li><span>Máximo </span> 40 <span>anúncios</span></li>
                                         <li>40 <span>SMS de alerta</span></li>

@@ -185,7 +185,6 @@
     </div>
 </section>
 <div class="clearfix"></div>
-<!--
 <footer class="footer-site">
     <div class="site-footer__menu footer-menu clear-fix">
         <div class="site-content-wrapper">
@@ -213,7 +212,7 @@
                         <a href="#" itemprop="url" title="Parceiros">Parceiros</a>
                     </dd>
                     <dd class="footer-menu__item">
-                        <a href="#" itemprop="url" title="Mapa do Site">Mapa do site</a>
+                        <a href="{{url('contato')}}" itemprop="url" title="Contato">Contato</a>
                     </dd>
                 </dl>
             </div>
@@ -222,16 +221,16 @@
                 <dl>
                     <dt class="footer-menu__title">Mais Produtos</dt>
                     <dd class="footer-menu__item">
-                        <a href="#" itemprop="url" title="Sobre nós">Sobre nós</a>
+                        <a href="#" itemprop="url" title="Planos">Planos</a>
                     </dd>
                     <dd class="footer-menu__item">
-                        <a href="#" itemprop="url" title="Quer trabalhar conosco">Quer trabalhar conosco</a>
+                        <a href="#" itemprop="url" title="Corretores">Corretores</a>
                     </dd>
                     <dd class="footer-menu__item">
-                        <a href="#" itemprop="url" title="Parceiros">Parceiros</a>
+                        <a href="#" itemprop="url" title="Garageiros">Garageiros</a>
                     </dd>
                     <dd class="footer-menu__item">
-                        <a href="#" itemprop="url" title="Mapa do Site">Mapa do site</a>
+                        <a href="#" itemprop="url" title="Imobiliárias">Imobiliárias</a>
                     </dd>
                 </dl>
             </div>
@@ -239,18 +238,22 @@
                 <dl class="site-footer__anunciante">
                     <dt class="footer-menu__title">Anunciante</dt>
                     <dd class="footer-menu__item">
-                        <a href="{{url('anuncie')}}" itemprop="url" title="Anuncie">Anunciar</a>
+                        @if(empty(Auth()->user()->id))
+                            <a href="{{url('login')}}" itemprop="url" title="Anuncie">Anunciar</a>
+                        @else
+                            <a href="{{url('anuncie')}}" itemprop="url" title="Anuncie">Anunciar</a>
+                        @endif
                     </dd>
                 </dl>
                 <dl class="site-footer__social nav-icon">
                     <dt class="nav-icon__title">Social</dt>
                     <dd class="nav-icon__item -icon -facebook icon-facebook-f">
-                        <a href="https://www.facebook.com/sempredanegocio" target="_blank" itemprop="url" title="facebook">facebook</a>
+                        <a href="https://www.facebook.com/Sempre-da-Neg%C3%B3cio-1698054733743389/" target="_blank" itemprop="url" title="facebook"><i class="fa fa-facebook"></i></a>
                     </dd>
-                    <dd class="nav-icon__item -icon -twitter icon-twitter-bird"><a href="#"  itemprop="url" title="twitter"><i class="fa fa-facebook" aria-hidden="true"></i>
+                    <dd class="nav-icon__item -icon -twitter icon-twitter-bird"><a href="#"  itemprop="url" title="twitter"><i class="fa fa-twitter" aria-hidden="true"></i>
                         </a>
                     </dd>
-                    <dd class="nav-icon__item -icon -youtube icon-youtube"><a href="#" itemprop="url" title="youtube">youtube</a></dd>
+                    <dd class="nav-icon__item -icon -youtube icon-youtube"><a href="#" itemprop="url" title="youtube"><i class="fa fa-youtube" aria-hidden="true"></i></a></dd>
                     <dd class="nav-icon__item -icon -instagram icon-instagram"><a href="#" itemprop="url" title="instagram">instagram</a></dd>
                 </dl>
                 <dl class="site-footer__mobile nav-icon">
@@ -267,14 +270,14 @@
     <div class="site-footer__about about-us clearfix" style="clear: both;">
         <div class="site-content-wrapper">
             <p class="about-us__description">
-                Copyright © 2016, Sempre da Negócio. Todos os direitos reservados.
+                © 2016, Sempre da Negócio. Todos os direitos reservados.
             </p>
             <div class="about-us__navigation terms-policy">
                 <ul>
                     <li class="terms-policy__item">
-                        <a href="/legal/termos/" itemprop="url" title="Termos de Uso">Termos de Uso</a></li>
+                        <a href="{{url('termos/termos-de-uso-v-1.pdf')}}" target="_blank" itemprop="url" title="Termos de Uso">Termos de Uso</a></li>
                     <li class="terms-policy__item">
-                        <a href="/legal/privacidade/" itemprop="url" title="Política de Privacidade">Política de Privacidade</a>
+                        <a href="{{url('termos/politica-privacidade-v-1.pdf')}}" target="_blank" itemprop="url" title="Política de Privacidade">Política de Privacidade</a>
                     </li>
                 </ul>
             </div>
@@ -282,8 +285,8 @@
     </div>
 
 </footer>
--->
-<footer>
+
+<!--<footer>
     <div class="row">
         <div class="container">
             <div class="col-md-12 bb-white">
@@ -309,7 +312,7 @@
             </div>
         </div>
     </div>
-</footer>
+</footer> -->
 
 <!--<a href="{{url('anuncie')}}" title="Anuncie" class="btn btn-anuncio <?=Request::is('anuncie') ? 'hide' : '' ?>" id="btAnuncie">Anuncie Agora</a> -->
 <a href="#" title="Ir para o topo" class="hide" id="toTop">Topo</a>
@@ -512,6 +515,11 @@
 @if (session('status') && !Request::is('password/email'))
     <script>
         swal("Parabéns!", "Seu anúncio foi criado com sucesso!", "success")
+    </script>
+@endif
+@if (session('contato') && !Request::is('password/email'))
+    <script>
+        swal("Parabéns!", "Enviado com sucesso!! Em breve entraremos em contato.", "success")
     </script>
 @endif
 
