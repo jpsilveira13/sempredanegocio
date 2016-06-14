@@ -509,11 +509,9 @@
     @if(Request::is('/') || Request::is('anuncie') || Request::is('veiculos'))
             <!--<script src="{{asset('js/menudinamico.js')}}"></script> -->
 @elseif( \Input::get('categoria') == 1 || Request::is('imoveis') )
-
+    <script src="{{asset('js/menudinamico.js')}}"></script>
 
 @endif
-
-<script src="{{asset('js/menudinamico.js')}}"></script>
 
 @if (session('status') && !Request::is('password/email'))
     <script>

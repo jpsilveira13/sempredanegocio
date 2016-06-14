@@ -435,6 +435,17 @@ class HomeController extends Controller
 
     //search imoveis
 
+    public function noImage(){
+        $anuncio = Advert::find(1997047);
+
+        $semImagem = $anuncio->images()->count();
+        if($semImagem > 0){
+            echo "Possui fotos";
+        }else{
+            echo "nao tem";
+        }
+    }
+
     public function scopeImoveis(){
 
         $id_user = \Input::has('id_user') ? Input::get('id_user'): null;
@@ -467,8 +478,6 @@ class HomeController extends Controller
             $query->where('tipo_anuncio', \Input::get('tipo_anuncio'));
 
         }
-
-
         if ($min_price && $max_price) {
             $query->where('preco', '>=', $min_price)->where('preco', '<=', $max_price);
 

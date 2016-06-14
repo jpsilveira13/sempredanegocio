@@ -136,6 +136,8 @@ Route::get('search-veiculos',[
 
 ]);
 
+
+Route::get('sem-imagem', 'HomeController@noImage');
 Route::get('/consultar_cep','HomeController@searchCep');
 
 Route::get('anuncio','HomeController@searchAnuncio');
