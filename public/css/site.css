@@ -5459,3 +5459,26 @@ span.minisite-area-atuacao-texto{
     margin-top: 150px;
     margin-bottom: 150px;
 }
+/* tela tipo de planos */
+
+#tipo-plano label{
+    font-size: 1.4em;
+    margin-bottom: 18px;
+    margin-top: 73px;
+    FONT-WEIGHT: 600;
+
+}
+
+#tipo-plano select{
+    height: 57px;
+    font-size: 20px;
+}
+
+#tipo-plano span{
+    font-weight: bold;
+}
+
+.plano-tudo{
+    padding-bottom: 150px;
+
+}

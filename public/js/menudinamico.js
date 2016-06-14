@@ -62,7 +62,7 @@ function scrollPagina(page) {
                     $('.search-results-header-counter').html(totalAnuncio);
                     //Criador do contador para os anuncios
                     var cont = 0;
-                    var char = "imoveis/img";
+                    var char = "imoveis/site";
                     var url;
                     for (var i = 0; i < len; i++) {
                         cont++;
@@ -77,6 +77,7 @@ function scrollPagina(page) {
 
                             if(data[i].images[0].extension.indexOf(char) > -1){
                                 url = "galeria/" + data[i].images[0].extension;
+
                             }else{
                                 url = data[i].images[0].extension;
 

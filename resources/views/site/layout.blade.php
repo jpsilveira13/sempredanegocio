@@ -221,7 +221,7 @@
                 <dl>
                     <dt class="footer-menu__title">Mais Produtos</dt>
                     <dd class="footer-menu__item">
-                        <a href="#" itemprop="url" title="Planos">Planos</a>
+                        <a href="{{url('planos')}}" itemprop="url" title="Planos">Planos</a>
                     </dd>
                     <dd class="footer-menu__item">
                         <a href="#" itemprop="url" title="Corretores">Corretores</a>
@@ -509,9 +509,12 @@
     @if(Request::is('/') || Request::is('anuncie') || Request::is('veiculos'))
             <!--<script src="{{asset('js/menudinamico.js')}}"></script> -->
 @elseif( \Input::get('categoria') == 1 || Request::is('imoveis') )
-    <script src="{{asset('js/menudinamico.js')}}"></script>
+
 
 @endif
+
+<script src="{{asset('js/menudinamico.js')}}"></script>
+
 @if (session('status') && !Request::is('password/email'))
     <script>
         swal("Parabéns!", "Seu anúncio foi criado com sucesso!", "success")

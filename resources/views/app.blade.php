@@ -158,7 +158,7 @@
                 </li>
 
                 <li>
-                    @if(auth()->user()->tipo == 'admin')
+                    @if(auth()->user()->typeuser_id == '1')
                         <a href="{{route('anuncios')}}"><i class="fa fa-tag"></i> Gerenciar Anúncios</a>
                     @else
                         <a href="{{route('anuncios')}}"><i class="fa fa-tag"></i> Meus Anúncios</a>
@@ -168,6 +168,12 @@
                 </li>
                 <li>
                     <a href="{{route('mensagens')}}"><i class="fa fa-fw fa-comments"></i> Mensagens</a>
+                </li>
+                <li>
+                    @if(auth()->user()->typeuser_id == '1')
+                        <a href="{{route('adm')}}"><i class="fa fa-tag"></i> Painel ADM</a>
+                        <a href="{{route('leads')}}"><i class="fa fa-tag"></i> Leads</a>
+                    @endif
                 </li>
                 <!--
                  <li>

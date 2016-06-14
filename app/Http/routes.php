@@ -69,6 +69,8 @@ Route::group(['middleware'=>'auth'], function() {
     Route::get('/payment/{id}', ['as' => 'adquirir' , 'uses' => 'PaymentController@pay']);
 });
 
+Route::get('planos', 'HomeController@telaPlano' );
+
 /*
 Route::get('anuncie', 'HomeController@anuncie');
 Route::post('anuncie','AdvertController@store');
@@ -110,6 +112,8 @@ Route::get('/get-marcatotal',[
 Route::get('/get-marca',[
     'uses'=> 'HomeController@getMarca'
 ]);
+
+Route::get('/get-veiculos', 'AdminController@getVeiculo');
 
 Route::get('/get-modelo',[
     'uses'=> 'HomeController@getModelo'
@@ -183,6 +187,10 @@ Route::group(['prefix' => 'admin', 'middleware'=>'auth','where'=>['id'=>'[0-9]+'
         Route::get('/',['as'=>'adm', 'uses' => 'AdminController@dadosPainelAdm']);
 
 
+        Route::get('/anuncios',['as'=>'adm.anuncios', 'uses' => 'AdminController@anunciosSemImg']);
+        Route::get('/xml',['as'=>'adm.xml', 'uses' => 'AdminController@lerXML']);
+
+
     });
 
     Route::group(['prefix' => 'leads'],function() {
@@ -191,12 +199,17 @@ Route::group(['prefix' => 'admin', 'middleware'=>'auth','where'=>['id'=>'[0-9]+'
         Route::get('{id}/edit',['as'=>'admin.leads.edit','uses'=>'AdminController@edit']);
         Route::get('/novo',['as'=>'admin.leads.novo','uses'=>'AdminController@novo']);
         Route::post('/salvarlead',['as'=>'admin.leads.salvarlead','uses'=>'AdminController@store']);
+        Route::post('/editarlead',['as'=>'admin.leads.editarlead','uses'=>'AdminController@editLead']);
+        Route::post('/salvarleadhistorico',['as'=>'admin.leads.salvarleadhistorico','uses'=>'AdminController@addHistoricoLead']);
+        Route::get('{id}/{idLead}/inativarleadhistorico',['as'=>'admin.leads.inativarhistorico','uses'=>'AdminController@inativarHistoricoLead']);
 
     });
 
 });
 
 Route::get('/{url_name}', 'HomeController@tipocategoria');
+Route::get('/{url_name}/teste', 'HomeController@tipocategoriaTeste');
+
 
 Route::get('anuncio/{tipo_anuncio}/{id}/{url_anuncio}',[
     'uses' => "HomeController@anuncioInterno"

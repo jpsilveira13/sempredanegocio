@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use sempredanegocio\Models\AdvertImovel;
 use sempredanegocio\Models\AdvertVeiculo;
+use sempredanegocio\Models\SubCategory;
 use sempredanegocio\Models\User;
 use sempredanegocio\Http\Requests;
 use sempredanegocio\Http\Controllers\Controller;
@@ -24,11 +25,13 @@ class AdvertController extends Controller
     private $advertModel;
     private $advertVeiculo;
     private $advertImovel;
+    private $subcategories;
 
-    public function  __construct(Advert $advertModel,AdvertImovel $advertImovel, AdvertVeiculo $advertVeiculo){
+    public function  __construct(Advert $advertModel,AdvertImovel $advertImovel, AdvertVeiculo $advertVeiculo, SubCategory $subcategories){
         $this->advertModel = $advertModel;
         $this->advertImovel = $advertImovel;
         $this->advertVeiculo = $advertVeiculo;
+        $this->subcategories = $subcategories;
     }
 
     public function index(){
@@ -82,16 +85,33 @@ class AdvertController extends Controller
         }
 
         if(!empty($features)){
-             $anuncio->features()->sync($features);
+            $anuncio->features()->sync($features);
         }
         if($data['category_id'] == 1){
 
 
 
-            $numero_quarto = $data['numero_quarto'];
-            $numero_garagem = $data['numero_garagem'];
-            $numero_banheiro = $data['numero_banheiro'];
-            $area_construida = $data['area_construida'];
+            if(empty($data['numero_quarto'])){
+                $numero_quarto = 0;
+            }else{
+                $numero_quarto = $data['numero_quarto'];
+            }
+            if(empty($data['numero_garagem'])){
+                $numero_garagem = 0;
+            }else{
+                $numero_garagem = $data['numero_garagem'];
+            }
+            if(empty($data['numero_banheiro'])){
+                $numero_banheiro = 0;
+            }else{
+                $numero_banheiro = $data['numero_banheiro'];
+            }
+            if(empty($data['area_construida'])){
+                $area_construida = 0;
+            }else{
+                $area_construida = $data['area_construida'];
+            }
+
             if(empty($data['valor_condominio'])){
                 $valor_condominio = 0;
             }else{
@@ -107,10 +127,6 @@ class AdvertController extends Controller
 
             }else{
                 $acomodacoes = $data['acomodacoes'];
-
-            }
-            if(empty($numero_quarto)){
-                $numero_quarto = 0;
 
             }
 
@@ -133,7 +149,7 @@ class AdvertController extends Controller
 
             $advertVeiculo::create(['ano'=>$tipo,'km' => $km,'cor' => $cor,'portas' => $portas,'cambio' => $cambio, 'combustivel' => $combustivel,'placa' => $placa,'opcionais'=> $opcionais,'marca' => $marca,'modelo' => $modelo, 'advert_id' => $anuncio->id,'category_id' => $data['category_id']]);
         }
-       if($anuncio){
+        if($anuncio){
 
             $dataSend = [
                 'id'    => $anuncio->id,
@@ -161,8 +177,11 @@ class AdvertController extends Controller
 
     }
 
-    public function edit(){
-        return view('admin.anuncios.edit');
+    public function edit($id){
+
+        $advert = $this->advertModel->find($id);
+        $subcategories = $this->subcategories->where('category_id',1)->get();
+        return view('admin.anuncios.edit',compact('advert','subcategories'));
 
     }
 

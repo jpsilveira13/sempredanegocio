@@ -90,7 +90,7 @@ class HomeController extends Controller
 
                 $marcas = VeiculoMarca::get();
                 $modelos = VeiculoModelo::get();
-                $advertVeiculos = Advert::join('subcategories', 'adverts.subcategories_id', '=', 'subcategories.id')->join('advert_carro','adverts.id','=','advert_carro.advert_id')->where('subcategories.category_id',$categoria_id->id)->where('status','=','1')->select('adverts.*')->orderBy(DB::raw('RAND()'))->limit(18)->get();
+                $advertVeiculos = Advert::join('subcategories', 'adverts.subcategories_id', '=', 'subcategories.id')->join('advert_carro','adverts.id','=','advert_carro.advert_id')->where('subcategories.category_id',$categoria_id->id)->where('status','=','1')->select('adverts.*')->limit(18)->get();
                 $advertsCount = Advert::join('subcategories', 'adverts.subcategories_id', '=', 'subcategories.id')->join('advert_carro','adverts.id','=','advert_carro.advert_id')->where('subcategories.category_id',$categoria_id->id)->select('adverts.*')->count();
                 return view('site.pages._veiculo', [
                     'title' => 'Sempredanegocio.com.br | Não perca tempo! Anuncie',
@@ -105,7 +105,7 @@ class HomeController extends Controller
             }
         }
     }
-
+    
     public  function anuncie(){
 
         //$products = Product::orderBy(DB::raw('RAND()'))->get();
@@ -614,10 +614,35 @@ class HomeController extends Controller
         $standard = Plans::where('id',6)->first();
         $turbo = Plans::where('id',7)->first();
         $turboAnual = Plans::where('id',8)->first();
-
         return view('site.pages.pagamento', [
             'title' => 'Sempredanegocio.com.br | Não perca tempo! Anuncie.',
             'description' => 'Os melhores anúncios no melhor site.',
+            'bronze' => $bronze,
+            'prata' => $prata,
+            'ouro' => $ouro,
+            'diamante' => $diamante,
+            'economic' => $economic,
+            'standard' => $standard,
+            'turbo' => $turbo,
+            'turboAnual' => $turboAnual,
+
+        ]);
+
+    }
+
+    public function telaPlano(){
+        $bronze = Plans::where('id','=', 1)->first();
+        $prata = Plans::where('id',2)->first();
+        $ouro = Plans::where('id',3)->first();
+        $diamante = Plans::where('id',4)->first();
+        //Planos para corretores e imobiliarias
+        $economic = Plans::where('id','=',5)->first();
+        $standard = Plans::where('id',6)->first();
+        $turbo = Plans::where('id',7)->first();
+        $turboAnual = Plans::where('id',8)->first();
+        return view('site.pages.planos', [
+            'title' => 'Sempredanegocio.com.br | Não perca tempo! Anuncie.',
+            'description' => 'Adapta-se ao melhor plano para você!',
             'bronze' => $bronze,
             'prata' => $prata,
             'ouro' => $ouro,

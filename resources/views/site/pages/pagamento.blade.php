@@ -3,6 +3,8 @@
 @section('content')
     @include('site.pages._etapa')
 
+
+
     <form id="formPagamento" action="">
 
         @if(!empty(auth()->user()->typeuser_id >= 3 && auth()->user()->typeuser_id <= 4))

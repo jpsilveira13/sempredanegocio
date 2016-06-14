@@ -4,7 +4,6 @@
 </div><!-- fechamento da div row que esta dentro do layout -->
 </div><!-- fechamento da container  que esta dentro do layout -->
 
-
 @if(count($queryAnuncios) > 0)
 
     <div class="clearfix"></div>
@@ -192,6 +191,7 @@
                                                     if ($pos === false) {
 
                                                     $url1 = "galeria/".$queryAnuncio->images()->first()->extension;
+
                                                     ?>
                                                     <img class="group list-group-image content-img-sugestao lazy transition-img" data-original="{{url($url1)}}" width="220" height="229" alt="titulo imagem" />
                                                     <?php }else{

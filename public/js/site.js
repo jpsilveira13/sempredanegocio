@@ -141,6 +141,37 @@ $(document).ready(function(){
         }
     });
 
+    //tela de plano
+
+    $('#escolhaPlanos').on('change',function(e){
+        var tipo =  $(this).val();
+
+        var valorSpan = $(this).find('option:selected').attr('class');
+
+        if(valorSpan == ''){
+            $('#escolheu-plano').html('Nenhum');
+            $('.usuario-plano').addClass('hide').removeClass('show');
+            $('.plano-master').addClass('hide').removeClass('show');
+
+        }
+
+        if(tipo == 'planoMaster'){
+            $('.usuario-plano').addClass('hide').removeClass('show');
+            $('.plano-master').removeClass('hide').addClass('show');
+            $('#escolheu-plano').html(valorSpan);
+            
+
+        }else if(tipo == 'outros'){
+            $('.plano-master').addClass('hide').removeClass('show');
+            $('.usuario-plano').removeClass('hide').addClass('show');
+            $('#escolheu-plano').html(valorSpan);
+            
+        }
+
+       // var marca_id = $(this).find('option:selected').attr('id');
+        //e.target.value
+        
+    });
     $('#confirmaPagamento').livequery(function () {
         $('#confirmaPagamento').ready(function () {
             var code = $('#pagamentoCampo').val();
@@ -595,10 +626,6 @@ $(document).ready(function(){
         }
     };
 
-    $(".bt-rotate").click(function(){
-        alert('teste')
-    });
-
     $('#carrouselImovel').carousel({
         interval: 4000
     });
@@ -758,6 +785,7 @@ $(document).ready(function(){
 
     $('#veiculos').on('change',function(e){
         var marca_id = $(this).find('option:selected').attr('id');
+
         $('#modelo').empty();
         $('#tipo').hide('fast');
 
