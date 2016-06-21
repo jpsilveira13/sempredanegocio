@@ -159,23 +159,29 @@ $(document).ready(function(){
             $('.usuario-plano').addClass('hide').removeClass('show');
             $('.plano-master').removeClass('hide').addClass('show');
             $('#escolheu-plano').html(valorSpan);
-            
+
 
         }else if(tipo == 'outros'){
             $('.plano-master').addClass('hide').removeClass('show');
             $('.usuario-plano').removeClass('hide').addClass('show');
             $('#escolheu-plano').html(valorSpan);
-            
+
         }
 
-       // var marca_id = $(this).find('option:selected').attr('id');
+        // var marca_id = $(this).find('option:selected').attr('id');
         //e.target.value
-        
+
     });
     $('#confirmaPagamento').livequery(function () {
         $('#confirmaPagamento').ready(function () {
             var code = $('#pagamentoCampo').val();
             PagSeguroLightbox(code);
+        });
+    });
+
+    $('#recarregaPagina').livequery(function(){
+        $('#recarregaPagina').ready(function(){
+            scrollPagina();
         });
     });
 
@@ -931,52 +937,24 @@ $(document).ready(function(){
         menuLateral.removeClass('na-lef-pos');
     });
 
-//menu lateral fixo
-    $(function(){
 
-        var jElement = $('.propaganda');
-
-        $(window).scroll(function(){
-            if ( $(this).scrollTop() > 1000 ){
-                jElement.css({
-                    'position':'fixed',
-                    'top':'80px',
-                    'width':'195px',
-                    'z-index': '9999'
-                });
-            }else{
-                jElement.css({
-                    'position':'relative',
-                    'top':'auto'
-                });
-            }
-        });
-
-    });
 //comando lightbox
 
     lightbox.option({
         'resizeDuration': 200,
         'wrapAround': true
-    })
-//lazyload
+    });
 
-    $(window).scroll(function(){
-        if ($(this).scrollTop() > 300){
-            $('.item-count').countTo({
-                formatter: function (value, options) {
-                    return value.toFixed(options.decimals);
-                },
-                onUpdate: function (value) {
-                    console.debug(this);
-                },
-                onComplete: function (value) {
-                    console.debug(this);
-                }
-            });
-
+    $('.item-count').countTo({
+        formatter: function (value, options) {
+            return value.toFixed(options.decimals);
+        },
+        onUpdate: function (value) {
+            console.debug(this);
+        },
+        onComplete: function (value) {
+            console.debug(this);
         }
-
     });
 //Jquery anuncio destaque
 

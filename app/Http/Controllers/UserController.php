@@ -22,12 +22,12 @@ class UserController extends Controller
 
     public function index(){
 
-        $user = Auth::user()->tipo;
-        if($user != 'admin'){
+        $user = Auth::user()->typeuser_id;
+        if($user != 1){
 
             return redirect()->route('home');
         }else{
-            $users = $this->userModel->orderBy('tipo','asc')->paginate(30);
+            $users = $this->userModel->paginate(30);
             return view('admin.user.index',compact('users'));
         }
     }

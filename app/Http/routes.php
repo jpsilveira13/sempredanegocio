@@ -157,12 +157,12 @@ Route::group(['prefix' => 'admin', 'middleware'=>'auth','where'=>['id'=>'[0-9]+'
 {
     //ajax url
 
+
     Route::group(['prefix' => 'home'],function(){
 
         Route::get('/',['as'=>'home', 'uses'=> 'AdminController@home']);
 
     });
-
     Route::group(['prefix' => 'usuarios'],function() {
 
         Route::get('/',['as'=>'usuarios', 'uses' => 'UserController@index']);
@@ -170,27 +170,32 @@ Route::group(['prefix' => 'admin', 'middleware'=>'auth','where'=>['id'=>'[0-9]+'
         Route::get('/update/{id}',['as'=>'usuarios.update', 'uses' => 'UserController@update']);
     });
 
+    Route::group(['prefix' => 'perfil'],function(){
+       Route::get('/',['as'=> 'perfil','uses' => 'PerfilController@index']);
+    });
+
     Route::group(['prefix' => 'anuncios'],function() {
 
         Route::get('/',['as'=>'anuncios', 'uses' => 'AdvertController@index']);
         Route::get('/editar/{id}',['as'=>'admin.anuncios.update', 'uses' => 'AdvertController@edit']);
         Route::get('{id}/edit',['as'=>'admin.anuncios.edit','uses'=>'AdvertController@edit']);
-
+        Route::get('destroy/{id}',['as'=> 'anuncios.destroy','uses' => 'AdvertController@destroy'  ]);
     });
+
     Route::group(['prefix' => 'mensagens'],function() {
 
         Route::get('/',['as'=>'mensagens', 'uses' => 'MessageController@index']);
-
-
+        Route::get('message/view/{id}',['as'=>'message.view','uses'=> 'MessageController@view' ]);
+        Route::get('message/destroy/{id}',['as'=>'message.destroy', 'uses' => 'MessageController@destroy']);
     });
-    
+
     Route::group(['prefix' => 'adm'],function() {
 
         Route::get('/',['as'=>'adm', 'uses' => 'AdminController@dadosPainelAdm']);
 
-
         Route::get('/anuncios',['as'=>'adm.anuncios', 'uses' => 'AdminController@anunciosSemImg']);
         Route::get('/xml',['as'=>'adm.xml', 'uses' => 'AdminController@lerXML']);
+        Route::get('/deluser',['as'=>'adm.deluser', 'uses' => 'AdminController@usuariosSemAnuncio']);
 
 
     });

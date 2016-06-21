@@ -29,7 +29,9 @@ function scrollPagina(page) {
                     $('#resultSearch').fadeTo('slow',0.5);
                     $('#products').empty();
                     $("html, body").animate({scrollTop: 0}, "slow");
+                    $('#loading-page').css('display','block');
                     $('.before').show().append('<img class="img-responsive" src="../images/loadingSearch.gif" />');
+
                     $('#loading-page').css('display','none');
                 }
 
@@ -43,8 +45,6 @@ function scrollPagina(page) {
                     $(".before").empty();
                     $('#resultSearch').fadeTo('slow', 1);
                     $('.before').show().append('<h1 class="text-error-search">Nenhum resultado foi encontrado!</h1><img class="img-responsive" src="../images/404erro.png" />');
-
-
                 }
             },
             success: function(data) {

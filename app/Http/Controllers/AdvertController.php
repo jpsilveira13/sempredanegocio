@@ -16,7 +16,7 @@ use sempredanegocio\Models\AdvertImage;
 use sempredanegocio\Models\Feature;
 use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\File;
-use Illuminate\Contracts\Filesystem\Factory as Storage;
+use Illuminate\Support\Facades\Storage;
 
 
 class AdvertController extends Controller
@@ -88,9 +88,6 @@ class AdvertController extends Controller
             $anuncio->features()->sync($features);
         }
         if($data['category_id'] == 1){
-
-
-
             if(empty($data['numero_quarto'])){
                 $numero_quarto = 0;
             }else{
@@ -185,5 +182,32 @@ class AdvertController extends Controller
 
     }
 
+    public function destroy($id){
 
+        $tipoUsuario = Auth::user()->typeuser_id;
+
+        if ($tipoUsuario == 1) {
+            $advert = $this->advertModel->find($id);
+
+            if ($advert) {
+                if ($advert->images) {
+                    foreach ($advert->images as $image) {
+
+                        if (file_exists(public_path() . '/galeria/' . $image->extension)) {
+
+                            File::delete(public_path() . '/galeria/' . $image->extension);
+                        }
+
+                        $image->delete();
+                    }
+                }
+                $advert->delete();
+                return redirect()->route('home');
+            }
+            return redirect()->route('home');
+        } else {
+            return view('error.error404');
+
+        }
+    }
 }

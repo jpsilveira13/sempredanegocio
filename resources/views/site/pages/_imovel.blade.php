@@ -276,7 +276,8 @@
                                 @endforeach
                             </div>
                             <div class='text-center'>
-                                <div id="loading-page"><img alt="Loading..." src="{{url('images/ajaxLoading.gif')}}"><div><div class="carregamento-anuncio"></div></div></div>
+                                <div id="page-selection"></div>
+                                <div id="loading-page" ><img alt="Loading..." src="{{url('images/ajaxLoading.gif')}}"><div><div class="carregamento-anuncio"></div></div></div>
                             </div>
                         </div>
                     </div>

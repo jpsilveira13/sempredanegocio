@@ -205,9 +205,9 @@
                     <dd class="footer-menu__item">
                         <a href="#" itemprop="url" title="Sobre nós">Sobre nós</a>
                     </dd>
-                    <dd class="footer-menu__item">
+                    <!--<dd class="footer-menu__item">
                         <a href="#" itemprop="url" title="Quer trabalhar conosco">Quer trabalhar conosco</a>
-                    </dd>
+                    </dd> -->
                     <dd class="footer-menu__item">
                         <a href="#" itemprop="url" title="Parceiros">Parceiros</a>
                     </dd>
@@ -510,7 +510,6 @@
             <!--<script src="{{asset('js/menudinamico.js')}}"></script> -->
 @elseif( \Input::get('categoria') == 1 || Request::is('imoveis') )
     <script src="{{asset('js/menudinamico.js')}}"></script>
-
 @endif
 
 @if (session('status') && !Request::is('password/email'))

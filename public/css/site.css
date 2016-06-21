@@ -2931,14 +2931,16 @@ input.span1, textarea.span1 {
 .outras-informacoes .content-anunciante .logo {
     max-height: 52px;
     margin-right: 15px;
-    max-width: 88px;
 
 }
 
 .outras-informacoes .anunciante {
-    margin-top: -3px;
-    width: 131px;
+
     font-family: 'Roboto Condensed';
+    margin-left: auto;
+    margin-right: auto;
+    background: #034F85;
+    width: 100%;
 }
 
 

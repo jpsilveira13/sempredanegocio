@@ -20,11 +20,15 @@ class AdvertMessage extends Model
         'telefone',
         'mensagem',
         'newsletter',
-
+        'visto'
     ];
 
     public function messageAdvert(){
         return $this->hasMany(Advert::class);
 
+    }
+
+    public function messageUser(){
+        return $this->belongsTo(User::class,'id','id_user');
     }
 }

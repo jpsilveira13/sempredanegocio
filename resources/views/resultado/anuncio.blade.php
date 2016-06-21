@@ -6,7 +6,7 @@
 
 @if(count($queryAnuncios) > 0)
 
-    <div class="clearfix"></div>
+    <div id="recarregaPagina" class="clearfix"></div>
     <div class="row no-margin">
         <div class="container">
             <div class="col-md-12">
@@ -65,12 +65,12 @@
                             <section class="clearfix sessao-area-filtro bg-branco ">
                                 <h5 class="sessao-texto-pesquisa">Bairro</h5>
 
-                                <input readonly name="bairro" id="bairro" value="" autocomplete="off" type="text" class="form-control search-results-input  pl3" placeholder="Incluir Bairro">
+                                <input readonly name="bairro" id="bairro" value="{{\Input::get('bairro')}}" autocomplete="off" type="text" class="form-control search-results-input  pl3" placeholder="Incluir Bairro">
                                 <ul id="listaBairros" class="lista-cidade-search"></ul>
                             </section>
                             <section class="clearfix sessao-area-filtro bg-branco">
                                 <h5 class="sessao-texto-pesquisa">Tipo de imóvel</h5>
-                                <select  name="subcategoria" class="search-results-select search-results-select-img escolhaAcomodacao">
+                                <select   value="<?=(Session::get('subcategoria'))?> "name="subcategoria" class="search-results-select search-results-select-img escolhaAcomodacao">
                                     <option value="">Seleciona uma opção</option>
                                     @foreach($subcategories as $subcategory)
                                         <option value="{{$subcategory->id}}" id="{{$subcategory->id}}">{{$subcategory->name}}</option>
@@ -79,7 +79,7 @@
                             </section>
                             <section class="clearfix sessao-area-filtro bg-branco ">
                                 <h5 class="sessao-texto-pesquisa">Modalidade</h5>
-                                <select  name="tipo_anuncio" class="search-results-select search-results-select-img escolhaAcomodacao">
+                                <select  value="<?=(Session::get('tipo_anuncio'))?>" name="tipo_anuncio" class="search-results-select search-results-select-img escolhaAcomodacao">
                                     <option value="">Seleciona uma opção</option>
                                     @if(\Input::get('transacao') == 'venda')
                                         <option value="venda" selected>Comprar</option>
@@ -95,29 +95,29 @@
                                 <h5 class="sessao-texto-pesquisa">Preço</h5>
                                 <label class="sessao-area-filtro-label preco-corrente">
                                     Mínimo
-                                    <input type="text" placeholder="R$" name="min_price" id="min_price" onkeypress="mascaraCampo(this, mvalor2)"  class="search-results-input escolhaAcomodacao" data-mask-currency="true">
+                                    <input type="text" value="<?=(Session::get('min_price'))?>" placeholder="R$" name="min_price" id="min_price" onkeypress="mascaraCampo(this, mvalor2)"  class="search-results-input escolhaAcomodacao" data-mask-currency="true">
                                 </label>
                                 <label class="sessao-area-filtro-label preco-corrente">
                                     Máximo
-                                    <input onkeypress="mascaraCampo(this, mvalor2)" type="text" name="max_price" placeholder="R$"  class="search-results-input escolhaAcomodacao" data-mask-currency="true">
+                                    <input onkeypress="mascaraCampo(this, mvalor2)" type="text" name="max_price" placeholder="R$" value="<?=(Session::get('max_price'))?>"  class="search-results-input escolhaAcomodacao" data-mask-currency="true">
                                 </label>
                             </section>
                             <section class="clearfix sessao-area-filtro bg-branco ">
                                 <h5 class="sessao-texto-pesquisa">Área</h5>
                                 <label class="sessao-area-filtro-label area-corrente">
                                     Mínimo
-                                    <input type="text" onkeypress="mascaraCampo(this, mvalor2)" name="min_area" placeholder="m²" value="" class="search-results-input escolhaAcomodacao" data-mask-currency="true">
+                                    <input type="text" onkeypress="mascaraCampo(this, mvalor2)" name="min_area" placeholder="m²" value="<?=(Session::get('min_area'))?>" class="search-results-input escolhaAcomodacao" data-mask-currency="true">
                                 </label>
                                 <label class="sessao-area-filtro-label area-corrente">
                                     Máximo
-                                    <input type="text" name="max_area" onkeypress="mascaraCampo(this, mvalor2)" placeholder="m²" value="" class="search-results-input escolhaAcomodacao" data-mask-currency="true">
+                                    <input type="text" name="max_area" onkeypress="mascaraCampo(this, mvalor2)" placeholder="m²" value="<?=(Session::get('max_area'))?>" class="search-results-input escolhaAcomodacao" data-mask-currency="true">
                                 </label>
                             </section>
                             <section class="clearfix sessao-area-filtro bg-branco ">
                                 <h5 class="sessao-texto-pesquisa hidden">Cômodos</h5>
                                 <label class="sessao-texto-pesquisa sessao-area-filtro-label-numeric fontsize11px">
                                     Quartos
-                                    <select  name="num_quartos" id="numQuartos" class="search-results-select numeric-select escolhaAcomodacao">
+                                    <select value="<?=(Session::get('num_quartos'))?>" name="num_quartos" id="numQuartos" class="search-results-select numeric-select escolhaAcomodacao">
                                         <option selected="selected" value="0">-</option>
                                         <option value="1">1+</option>
                                         <option value="2">2+</option>
@@ -128,7 +128,7 @@
                                 </label>
                                 <label class="sessao-texto-pesquisa sessao-area-filtro-label-numeric fontsize11px">
                                     Banheiros
-                                    <select name="num_banheiros" id="numBanheiros" class="search-results-select numeric-select escolhaAcomodacao">
+                                    <select value="<?=(Session::get('num_banheiros'))?>" name="num_banheiros" id="numBanheiros" class="search-results-select numeric-select escolhaAcomodacao">
                                         <option selected="selected" value="0">-</option>
                                         <option value="1">1+</option>
                                         <option value="2">2+</option>
@@ -139,7 +139,7 @@
                                 </label>
                                 <label class="sessao-texto-pesquisa sessao-area-filtro-label-numeric fontsize11px" >
                                     Vagas
-                                    <select id="numVagas" name="num_vagas" class="search-results-select numeric-select escolhaAcomodacao">
+                                    <select value="<?=(Session::get('num_vagas'))?>" id="numVagas" name="num_vagas" class="search-results-select numeric-select escolhaAcomodacao">
                                         <option selected="selected" value="0">-</option>
                                         <option value="1">1+</option>
                                         <option value="2">2+</option>
@@ -153,7 +153,7 @@
                     <div class="col-md-10 col-sm-12">
                         <div class="before"></div>
                         <div class="row" id="resultSearch">
-                            <div id="products" class="list-group">
+                            <div id="products"  class="list-group">
 
                                 <?php $contador = 0; ?>
 
@@ -249,6 +249,7 @@
 
                             </div>
                             <div class='text-center'>
+
                                 <div id="loading-page"><img alt="Loading..." src="{{url('images/ajaxLoading.gif')}}"><div><div class="carregamento-anuncio"></div></div></div>
                             </div>
                             @else

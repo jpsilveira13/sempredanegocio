@@ -17,8 +17,8 @@
             <div class="logmod__wrapper center-block">
                 <div class="logmod__container">
                     <ul class="logmod__tabs">
-                        <li data-tabtar="lgm-2"><a href="#">Login</a></li>
-                        <li data-tabtar="lgm-1"><a href="#">Registrar</a></li>
+                        <li data-tabtar="lgm-2"><a href="#">Clica aqui Entrar</a></li>
+                        <li data-tabtar="lgm-1"><a href="#">Clica aqui para Registrar</a></li>
                     </ul>
                     <div class="logmod__tab-wrapper">
                         <div class="logmod__tab lgm-1">

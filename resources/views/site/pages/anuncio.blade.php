@@ -6,8 +6,14 @@
 
     @if(!auth()->guest())
         @if(auth()->user()->id == $advertGeral->user->id)
-            <section class="container col-md-12 col-lg-12 no-show ">
+            <section class="container col-md-6 col-lg-6 no-show ">
                 <a href="{{url("/admin/anuncios/editar")}}/{{$advertGeral->id}}" style="margin-bottom: 10px" class="btn btn-zap">Editar Anúncio</a>
+            </section>
+            <br />
+        @endif
+        @if(auth()->user()->typeuser_id == 1 )
+            <section class="container col-md-6 col-lg-6 no-show ">
+                <a href="{{url("/admin/destroy")}}/{{$advertGeral->id}}" style="margin-bottom: 10px" class="btn btn-zap">Remover Anúncio</a>
             </section>
             <br />
         @endif
@@ -352,24 +358,41 @@ Olá, Gostaria de ter mais informações sobre o  anúncio {{$advertGeral->subca
 
                         @endif
                 </aside>
+
                 <aside class="box-default clearfix outras-informacoes">
                     <span class="title">Outras informações</span>
-
                     <!-- Atualizado há 16 dias -->
-                    <div class="pull-left content-anunciante">
-                        <a href="#" class="pull-left logo">
+                    <div class="content-anunciante">
+                        <a href="#" class="logo">
                             @if(count($advertGeral->user->avatar ) > 0)
-                                <img src="{{$advertGeral->user->avatar}}" alt="{{$advertGeral->user->name}}" width="88" height="52">
+                                <img class="center-block" src="{{$advertGeral->user->avatar}}" alt="{{$advertGeral->user->name}}" width="88" height="52">
                             @else
-                                <img src="{{asset('images/icon-user.png')}}" alt="{{$advertGeral->user->name}}" width="88" height="52">
+                                <img class="center-block" src="{{asset('images/icon-user.png')}}" alt="{{$advertGeral->user->name}}" width="88" height="52">
                             @endif
                         </a>
-                        <div class="pull-left anunciante">
-                            <a href="{{url('/')}}/{{$advertGeral->user->id}}/{{$advertGeral->user->url_name}}" class="fontsize13px">Outras ofertas de: {{$advertGeral->user->name}}</a>
+                        <br />
+                        <div class="btn btn-primary center-block anunciante">
+                            @if($advertGeral->user->url_name != null)
+                                <a style="color: #fff" href="{{url('/')}}/{{$advertGeral->user->id}}/{{$advertGeral->user->url_name}}" class="fontsize13px">Outros anúncios de: {{$advertGeral->user->name}}</a>
+                            @else
+                                <a style="color: #fff" href="#" class="fontsize13px">Outros anúncios de: {{$advertGeral->user->name}}</a>
+                            @endif
                         </div>
                     </div>
                 </aside>
-
+                @if(!auth()->guest())
+                    @if(auth()->user()->typeuser_id == 1)
+                        <aside class="box-default clearfix outras-informacoes">
+                            <span class="title">Informações do usuário</span>
+                            <span class="title">Nome</span>
+                            <p>{{$advertGeral->user->name}}</p>
+                            <span class="title">Email</span>
+                            <p>{{$advertGeral->user->email}}</p>
+                            <span class="title">Telefone</span>
+                            <p>{{$advertGeral->user->phone}}</p>
+                        </aside>
+                    @endif
+                @endif
             </div>
         </div>
     </div>

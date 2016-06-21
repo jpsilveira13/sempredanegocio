@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Response;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 use sempredanegocio\Http\Requests;
 use sempredanegocio\Models\Advert;
@@ -459,11 +460,13 @@ class HomeController extends Controller
 
 
         if($id_user){
+
             $query->where('user_id',$id_user);
 
         }
 
         if (\Input::get('subcategoria')) {
+            Session::put('subcategoria',\Input::get('subcategoria'));
             $query->where('subcategories_id', \Input::get('subcategoria'));
         }
         if (\Input::get('cidade')) {
@@ -471,33 +474,42 @@ class HomeController extends Controller
             $query->where('cidade', \Input::get('cidade'));
         }
         if (\Input::get('cidade') && \Input::get('bairro')) {
+            Session::put('bairro',\Input::get('bairro'));
             $query->where('bairro', \Input::get('bairro'));
         }
 
         if (\Input::get('tipo_anuncio')) {
+            Session::put('tipo_anuncio',\Input::get('tipo_anuncio'));
             $query->where('tipo_anuncio', \Input::get('tipo_anuncio'));
 
         }
         if ($min_price && $max_price) {
+            Session::put('min_price',$min_price);
+            Session::put('max_price',$max_price);
             $query->where('preco', '>=', $min_price)->where('preco', '<=', $max_price);
 
         }
         if ($min_area && $max_area) {
+            Session::put('min_area',$min_area);
+            Session::put('max_area',$max_area);
             $query->where('area_construida', '>=', $min_area)->where('area_construida', '<=', $max_area);
 
         }
 
         if (\Input::get('num_quartos')) {
+            Session::put('num_quartos',\Input::get('num_quartos'));
 
             $query->where('numero_quarto', \Input::get('num_quartos'));
 
         }
         if (\Input::get('num_banheiros')) {
+            Session::put('num_banheiros',\Input::get('num_banheiros'));
             $query->where('numero_banheiro', \Input::get('num_banheiros'));
 
         }
 
         if (\Input::get('num_vagas')) {
+            Session::put('num_vagas',\Input::get('num_vagas'));
             $query->where('numero_garagem', \Input::get('num_vagas'));
 
         }
@@ -577,6 +589,7 @@ class HomeController extends Controller
                 $queryCount = $queryAnuncios->count();
                 $queryAnuncios = $queryAnuncios->take(18)->get();
                 return view('resultado/anuncio',compact('queryAnuncios','subcategories','queryCount'));
+
             }else{
                 $queryAnuncios = Advert::join('subcategories', 'adverts.subcategories_id', '=', 'subcategories.id')->join('advert_imovel','adverts.id','=','advert_imovel.advert_id')->where('subcategories.category_id',$categoria)->where('tipo_anuncio','=',$transacao)->where('status','=','1')->select('adverts.*');
                 $queryCount = $queryAnuncios->count();

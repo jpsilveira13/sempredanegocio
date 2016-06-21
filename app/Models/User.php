@@ -23,6 +23,11 @@ class User extends Model implements AuthenticatableContract,
     public function payments() {
         return $this->hasMany(Payments::class)->Orderby('id','desc');
     }
+
+    public function mensagens(){
+        return $this->belongsTo(AdvertMessage::class,'id','id_user')->Orderby('id','desc');
+    }
+
     public function getAuthIdentifier()
     {
         return $this->getKey();
