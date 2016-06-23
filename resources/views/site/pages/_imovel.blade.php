@@ -1,4 +1,5 @@
 <div class="row no-margin">
+    <div id="recarregaPagina" class="clearfix"></div>
     <div class="container">
         <div class="col-md-12">
             <div class="search-results">
@@ -9,47 +10,11 @@
                 <h1 class="search-title"> Anúncios Encontrados</h1>
             </div>
         </div>
-        <div class="col-md-12 hidden-lg hidden-md">
+        <div class="col-md-12 hidden-md hidden-lg">
             <button id="btn-pesquisa" class="center-block btn-search">
-                Filtros
+                FILTRAR RESULTADOS
             </button>
         </div>
-       <!-- <div class="col-md-6 hidden-sm hidden-xs">
-            <div class="well well-sm">
-                <strong>Exibir como </strong>
-                <div class="btn-group">
-                    <a href="#" id="list" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-th-list">
-                 </span>Lista</a> <a href="#" id="grid" class="btn btn-default btn-sm"><span
-                                class="glyphicon glyphicon-th"></span>Grade</a>
-                </div>
-            </div>
-        </div> -->
-
-        <!--<div class="col-md-6 pull-right hidden-sm hidden-xs">
-            <form action="{{URL::current()}}" class="pull-right">
-                <div class="select2-container pull-right " style="margin-top:9px">
-                    <select class="select2-choice" id="sortby">
-                        <option value="Relevancia" selected="selected">
-                            Relevância
-
-                        </option>
-                        <option  value="DataAtualizacao">
-                            Data Atualização
-
-                        </option>
-                        <option  value="Valor">
-                            Valor
-
-                        </option>
-                        <option  value="Area">
-                            Área
-
-                        </option>
-                    </select>
-                </div>
-                <label class="control-label pull-right sort" for="sortby">Ordenar por</label>
-            </form>
-        </div> -->
         <div style="margin-bottom: 12px" class="col-md-12 col-xs-12 col-sm-12 center-block">
             <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 
@@ -64,18 +29,23 @@
         </div>
         <div class="clearfix"></div>
         <div class="row">
+
+
             <form action=""  id="formSearchImoveis" class="ajax">
                 <input type="hidden" value="1" name="status" />
-                <input type="hidden" value="{{$category}}" name="categoria" />
+                <input type="hidden" value="{{\Input::get('page')}}" name="page" id="page" />
+                <input type="hidden" value="{{\Input::get('categoria')}}" name="categoria" />
+                <input type="hidden" value="{{\Input::get('page')}}" name="page" id="page" />
                 <div id="nav-lateral" class="col-md-2 col-sm-2 no-padding ">
                     <button id="btn-close-nav" type="button" class="close">X</button>
                     <div class="area-pesquisa">
                         <section class="clearfix sessao-area-filtro bg-branco ">
                             <h5 class="sessao-texto-pesquisa">Localização</h5>
+                            <div class="filter-search">
 
-                            <input name="cidade" id="location" value="" autocomplete="off" type="text" class="form-control search-results-input  pl3" placeholder="Incluir Cidade">
-                            <ul id="listaCidades" class="lista-cidade-search"></ul>
-
+                                <input name="cidade" id="location" value="" autocomplete="off" type="text" class="form-control search-results-input  pl3" placeholder="Incluir Cidade">
+                                <ul id="listaCidades" class="lista-cidade-search"></ul>
+                            </div>
                         </section>
                         <section class="clearfix sessao-area-filtro bg-branco ">
                             <h5 class="sessao-texto-pesquisa">Bairro</h5>
@@ -157,26 +127,12 @@
                                 </select>
                             </label>
                         </section>
-                        <section class="clearfix sessao-area-filtro bg-branco">
-                            <h5 class="hidden">Controle exibição</h5>
-                            <label class="search-results-filter-section__label">
-                                <input type="checkbox" checked="" value="yes" name="imagens" class="search-results-filter__checkbox">
-                                Somente com imagens
-                            </label>
-                        </section>
+                        <fieldset class="site-main__view-results filter-view-results">
+                            <p>
+                                <a id="btn-close-nav"  class="filter-view-results__button filter-view-results__button-apply icon-after-arrow-bd-up js-toggleResultFilters">APLICAR FILTROS</a>
+                            </p>
+                        </fieldset>
                     </div>
-                    <!--<div class="propaganda">
-                        <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-
-                        <ins class="adsbygoogle"
-                             style="display:block"
-                             data-ad-client="ca-pub-9276435422488602"
-                             data-ad-slot="7022965179"
-                             data-ad-format="auto"></ins>
-                        <script>
-                            (adsbygoogle = window.adsbygoogle || []).push({});
-                        </script>
-                    </div> -->
                 </div>
                 <div class="col-md-10 col-sm-12">
                     <div class="before"></div>
@@ -277,7 +233,7 @@
                             </div>
                             <div class='text-center'>
                                 <div id="page-selection"></div>
-                                <div id="loading-page" ><img alt="Loading..." src="{{url('images/ajaxLoading.gif')}}"><div><div class="carregamento-anuncio"></div></div></div>
+                                <!--<div id="loading-page"><img alt="Loading..." src="{{url('images/ajaxLoading.gif')}}"><div><div class="carregamento-anuncio"></div></div></div> -->
                             </div>
                         </div>
                     </div>

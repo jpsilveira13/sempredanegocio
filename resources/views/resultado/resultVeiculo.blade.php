@@ -288,7 +288,7 @@
 
                     </div>
                     <div class='text-center'>
-                        <div id="loading-page"><img alt="Loading..." src="{{url('images/preloaderVei.gif')}}"><div><div class="carregamento-anuncio"></div></div></div>
+                       {!! $queryAnuncios->render() !!}}
                     </div>
                     @else
                         Nao achou nenhum resultado ;/

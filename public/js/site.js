@@ -181,7 +181,8 @@ $(document).ready(function(){
 
     $('#recarregaPagina').livequery(function(){
         $('#recarregaPagina').ready(function(){
-            scrollPagina();
+            var page = $('#page').val();
+            pagination(page);
         });
     });
 
@@ -933,7 +934,6 @@ $(document).ready(function(){
     });
 
     $('#btn-close-nav').on('click', function () {
-
         menuLateral.removeClass('na-lef-pos');
     });
 

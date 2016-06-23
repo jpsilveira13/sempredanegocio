@@ -13,7 +13,7 @@
         @endif
         @if(auth()->user()->typeuser_id == 1 )
             <section class="container col-md-6 col-lg-6 no-show ">
-                <a href="{{url("/admin/destroy")}}/{{$advertGeral->id}}" style="margin-bottom: 10px" class="btn btn-zap">Remover Anúncio</a>
+                <a href="{{url("/admin/anuncios/destroy")}}/{{$advertGeral->id}}" style="margin-bottom: 10px" class="btn btn-zap">Remover Anúncio</a>
             </section>
             <br />
         @endif

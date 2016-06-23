@@ -5,9 +5,11 @@ namespace sempredanegocio\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\View;
 use sempredanegocio\Http\Requests;
 use sempredanegocio\Models\Advert;
 use sempredanegocio\Models\AdvertImage;
@@ -73,7 +75,7 @@ class HomeController extends Controller
         }else{
             $subcategories = SubCategory::where('category_id',$categoria_id->id)->get();
             if($categoria_id->id == 1){
-                $adverts = Advert::join('subcategories', 'adverts.subcategories_id', '=', 'subcategories.id')->join('advert_imovel','adverts.id','=','advert_imovel.advert_id')->where('subcategories.category_id',$categoria_id->id)->where('status','=','1')->select('adverts.*')->limit(18)->skip(18)->get();
+                $adverts = Advert::join('subcategories', 'adverts.subcategories_id', '=', 'subcategories.id')->join('advert_imovel','adverts.id','=','advert_imovel.advert_id')->where('subcategories.category_id',$categoria_id->id)->where('status','=','1')->select('adverts.*')->limit(18)->skip(18)->paginate();
 
                 $advertsCount = Advert::join('subcategories', 'adverts.subcategories_id', '=', 'subcategories.id')->join('advert_imovel','adverts.id','=','advert_imovel.advert_id')->where('subcategories.category_id',$categoria_id->id)->select('adverts.*')->count();
 
@@ -106,7 +108,7 @@ class HomeController extends Controller
             }
         }
     }
-    
+
     public  function anuncie(){
 
         //$products = Product::orderBy(DB::raw('RAND()'))->get();
@@ -455,16 +457,12 @@ class HomeController extends Controller
         $min_price = str_replace(".","",str_replace(",","",\Input::get('min_price')));
         $min_area = \Input::has('min_area') ? Input::get('min_area'): null;
         $max_area = \Input::has('max_area') ? Input::get('max_area'): null;
-
         $query = Advert::select('adverts.*')->join('advert_imovel','adverts.id','=','advert_imovel.advert_id');
-
-
         if($id_user){
 
             $query->where('user_id',$id_user);
 
         }
-
         if (\Input::get('subcategoria')) {
             Session::put('subcategoria',\Input::get('subcategoria'));
             $query->where('subcategories_id', \Input::get('subcategoria'));
@@ -514,12 +512,7 @@ class HomeController extends Controller
 
         }
 
-        if(\Input::get('imagens') === 'yes') {
-
-        }
-
-        return Response::json($query->where('status', '>', '0')->orderBy('destaque','desc')->with('images','advertImovel')->paginate(18));
-
+        return $query->where('status', '>', '0')->orderBy('destaque','desc')->with('images','advertImovel')->paginate(18);
 
     }
 
@@ -571,7 +564,6 @@ class HomeController extends Controller
 
         return Response::json($query->where('status', '>', '0')->with('images','advertVeiculo')->paginate(18));
 
-
     }
 
     //search anuncio
@@ -579,6 +571,7 @@ class HomeController extends Controller
     {
 
         $categoria = Input::get('categoria');
+
         $subcategories = SubCategory::where('category_id', $categoria)->get();
         $transacao = Input::get('transacao');
         $cidade = Input::get('cidade');
@@ -587,7 +580,7 @@ class HomeController extends Controller
             if($cidade != null){
                 $queryAnuncios = Advert::join('subcategories', 'adverts.subcategories_id', '=', 'subcategories.id')->join('advert_imovel','adverts.id','=','advert_imovel.advert_id')->where('subcategories.category_id',$categoria)->where('cidade','=',$cidade)->where('tipo_anuncio','=',$transacao)->where('status','=','1')->select('adverts.*');
                 $queryCount = $queryAnuncios->count();
-                $queryAnuncios = $queryAnuncios->take(18)->get();
+                $queryAnuncios = $queryAnuncios->paginate(18);
                 return view('resultado/anuncio',compact('queryAnuncios','subcategories','queryCount'));
 
             }else{

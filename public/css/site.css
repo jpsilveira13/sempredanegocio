@@ -1721,11 +1721,41 @@ body{
     width: 100%;
     box-sizing: border-box;
     margin-bottom: 0;
+    height:43px;
     transition-delay: 0s;
     transition-duration: 0.3s;
     transition-property: all;
     transition-timing-function: ease-out;
     padding: 5px 3px 5px 0;
+}
+
+.filter-search{
+    position: relative;
+    margin-top: 6px;
+}
+
+.filter-search__field {
+    width: 100%;
+    height: 44px;
+    border: 1px solid #999!important;
+    padding-left: 33px!important;
+    padding-right: 9px!important;
+    margin-bottom: 10px!important;
+    border-radius: 0!important;
+}
+
+.filter-search__title:after, .filter-search__title:before {
+    position: absolute;
+    line-height: 42px;
+    width: 42px;
+    font-size: 24px;
+    font-size: 1.5rem;
+}
+.filter-search__title:before {
+    display: block;
+    top: 21px;
+    left: 7px;
+    color: rgba(0,0,0,.54);
 }
 
 .search-results-header-counter{
@@ -1781,6 +1811,7 @@ body{
     width: 49%;
 
 }
+
 
 .input-city{
 
@@ -3292,10 +3323,6 @@ input#images{display: none;}
     border-radius: 20px;
 }
 
-#btn-close-nav{
-    display: none;
-
-}
 /********************************/
 /*   Media Queries breakpoints  */
 /********************************/
@@ -3320,12 +3347,51 @@ input#images{display: none;}
 
     .area-pesquisa{
 
-        width: 69%;
+        width: 100%;
 
+    }
+
+
+    .filter-view-results__button-apply {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+    }
+
+    .filter-view-results__button {
+        background: #0A5489;
+        color: #fff;
+        display: block;
+        line-height: 60px;
+        font-size: 14px;
+        font-weight: 600;
+        text-decoration: none;
+        text-align: center;
+    }
+
+    .filter-view-results__button:after {
+        color: #1190cd;
+        background: #fff;
+        font-size: 26px;
+        font-size: 1.625rem;
+        border-radius: 50%;
+        top: 4px;
+        position: relative;
+        width: 36px;
+        height: 36px;
+        line-height: 36px;
     }
 
     #btn-pesquisa{
         display: block;
+        width: 100%;
+        border-radius: 0;
+        box-shadow: inset 0 -2px 0 0 rgba(0,0,0,.2);
+    }
+
+    #containerPesquisa{
+        margin: 0;
     }
 }
 
@@ -3359,20 +3425,6 @@ input#images{display: none;}
     .side-left, .side-right, .box-default, .container-financiamento .tool, .posvalue-imovel, .release-header>.pull-left, .container-conheca .tab-content-big, .container-conheca .tab-content-small, .check-ofertas {
         width: 100%;
         height:auto ;
-    }
-
-
-    #btn-close-nav{
-        font-size: 7em;
-        color: #034F85;
-        opacity: 1;
-        text-shadow: none;
-        display: block;
-        position: absolute;
-        right: 0px;
-        height: 100%;
-        bottom: 116px;
-
     }
 
     .na-lef-pos{

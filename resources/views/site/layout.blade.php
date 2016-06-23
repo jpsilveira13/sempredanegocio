@@ -20,8 +20,6 @@
     <meta name="keywords" content="Classificados, Anúncios grátis, à venda, usados, Imóveis, Carros, Motos, sempredanegocio.com.br, Sempre da Negócio, sempre da negocio, apartamentos, alugar, comprar, aluguel casa, aluguel casa temporada  " />
     <meta name="robots" content="ALL" />
     <meta name="copyright" content="© 2016 Sempre da Negócio" />
-
-
     @if(isset($advertGeral))
 
         <meta property="og:site_name" content="Sempre da Negócio">
@@ -496,7 +494,9 @@
 <script src="{{asset('js/validator.min.js')}}"></script>
 <script src="{{asset('js/lazyload.js')}}"></script>
 <script src="{{asset('js/lightbox.min.js')}}"></script>
+<script src="{{asset('js/jquery.bootpag.min.js')}}"></script>
 <script src="{{asset('js/site.js')}}"></script>
+
 
 <!--<script type="text/javascript" src="https://stc.sandbox.pagseguro.uol.com.br/pagseguro/api/v2/checkout/pagseguro.lightbox.js"></script> -->
 <script type="text/javascript" src="https://stc.pagseguro.uol.com.br/pagseguro/api/v2/checkout/pagseguro.lightbox.js"></script>

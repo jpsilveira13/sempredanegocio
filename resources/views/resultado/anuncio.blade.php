@@ -4,11 +4,11 @@
 </div><!-- fechamento da div row que esta dentro do layout -->
 </div><!-- fechamento da container  que esta dentro do layout -->
 
-@if(count($queryAnuncios) > 0)
 
+@if(count($queryAnuncios) > 0)
     <div id="recarregaPagina" class="clearfix"></div>
     <div class="row no-margin">
-        <div class="container">
+        <div id="containerPesquisa" class="container">
             <div class="col-md-12">
                 <div class="search-results">
                     <mark class="search-results-count">
@@ -20,20 +20,9 @@
             </div>
             <div class="col-md-12 hidden-md hidden-lg">
                 <button id="btn-pesquisa" class="center-block btn-search">
-                    Filtros
+                    FILTRAR RESULTADOS
                 </button>
             </div>
-            <div class="col-md-6 hidden-sm hidden-xs">
-                <div class="well well-sm">
-                    <strong>Exibir como </strong>
-                    <div class="btn-group">
-                        <a href="#" id="list" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-th-list">
-                 </span>Lista</a> <a href="#" id="grid" class="btn btn-default btn-sm"><span
-                                    class="glyphicon glyphicon-th"></span>Grade</a>
-                    </div>
-                </div>
-            </div>
-
             <div style="margin-bottom: 12px" class="col-md-12 col-xs-12 col-sm-12 center-block">
                 <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
                 <!-- header responsivo -->
@@ -51,20 +40,20 @@
             <div class="row">
                 <form action=""  id="formSearchImoveis" class="ajax">
                     <input type="hidden" value="1" name="status" />
+                    <input type="hidden" value="{{\Input::get('page')}}" name="page" id="page" />
                     <input type="hidden" value="{{\Input::get('categoria')}}" name="categoria" />
                     <div id="nav-lateral" class="col-md-2 col-sm-2 no-padding">
-                        <button id="btn-close-nav" type="button" class="close">X</button>
                         <div class="area-pesquisa">
                             <section class="clearfix sessao-area-filtro bg-branco ">
                                 <h5 class="sessao-texto-pesquisa">Localização</h5>
-                                <div class="input-group">
-                                    <input name="cidade" id="location" value="{{\Input::get('cidade')}}"  autocomplete="off" type="text" class="form-control search-results-input pl3" placeholder="Incluir Cidade">
+                                <div class="filter-search">
+                                    <i class="filter-search__title icon-search fa fa-search fa-2x"></i>
+                                    <input name="cidade" id="location" value="{{\Input::get('cidade')}}"  autocomplete="off" type="text" class="filter-search__field form-control" placeholder="Incluir Cidade">
                                     <ul id="listaCidades" class="arrumaAnuncio lista-cidade-search"></ul>
                                 </div>
                             </section>
                             <section class="clearfix sessao-area-filtro bg-branco ">
                                 <h5 class="sessao-texto-pesquisa">Bairro</h5>
-
                                 <input readonly name="bairro" id="bairro" value="{{\Input::get('bairro')}}" autocomplete="off" type="text" class="form-control search-results-input  pl3" placeholder="Incluir Bairro">
                                 <ul id="listaBairros" class="lista-cidade-search"></ul>
                             </section>
@@ -113,7 +102,7 @@
                                     <input type="text" name="max_area" onkeypress="mascaraCampo(this, mvalor2)" placeholder="m²" value="<?=(Session::get('max_area'))?>" class="search-results-input escolhaAcomodacao" data-mask-currency="true">
                                 </label>
                             </section>
-                            <section class="clearfix sessao-area-filtro bg-branco ">
+                            <section style="padding-bottom: 56px" class="clearfix sessao-area-filtro bg-branco ">
                                 <h5 class="sessao-texto-pesquisa hidden">Cômodos</h5>
                                 <label class="sessao-texto-pesquisa sessao-area-filtro-label-numeric fontsize11px">
                                     Quartos
@@ -148,13 +137,18 @@
                                     </select>
                                 </label>
                             </section>
+                            <fieldset class="site-main__view-results filter-view-results">
+                                <p>
+                                    <a id="btn-close-nav"  class="filter-view-results__button filter-view-results__button-apply icon-after-arrow-bd-up js-toggleResultFilters">APLICAR FILTROS</a>
+                                </p>
+                            </fieldset>
+
                         </div>
                     </div>
                     <div class="col-md-10 col-sm-12">
                         <div class="before"></div>
                         <div class="row" id="resultSearch">
                             <div id="products"  class="list-group">
-
                                 <?php $contador = 0; ?>
 
                                 @foreach($queryAnuncios as $queryAnuncio)
@@ -249,8 +243,7 @@
 
                             </div>
                             <div class='text-center'>
-
-                                <div id="loading-page"><img alt="Loading..." src="{{url('images/ajaxLoading.gif')}}"><div><div class="carregamento-anuncio"></div></div></div>
+                                <div id="page-selection"></div>
                             </div>
                             @else
                                 Nao achou nenhum resultado ;/
