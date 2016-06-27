@@ -137,7 +137,7 @@
                                     </select>
                                 </label>
                             </section>
-                            <fieldset class="site-main__view-results filter-view-results">
+                            <fieldset id="aplicaFiltro" class="site-main__view-results filter-view-results">
                                 <p>
                                     <a id="btn-close-nav"  class="filter-view-results__button filter-view-results__button-apply icon-after-arrow-bd-up js-toggleResultFilters">APLICAR FILTROS</a>
                                 </p>

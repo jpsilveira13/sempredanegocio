@@ -3332,6 +3332,10 @@ input#images{display: none;}
 
 }
 
+#aplicaFiltro{
+    display: none;
+}
+
 @media only screen and (max-width:1000px){
     #nav-lateral{
         position: fixed;
@@ -3393,7 +3397,11 @@ input#images{display: none;}
     #containerPesquisa{
         margin: 0;
     }
+    #aplicaFiltro{
+        display: block;
+    }
 }
+
 
 #toTop
 {

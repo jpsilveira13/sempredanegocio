@@ -180,11 +180,9 @@ class HomeController extends Controller
                 'description' => 'Os melhores anúncios no melhor site.',
                 'advertGeral' => $advertGeral
             ]);
-
         }
 
     }
-
     public  function getCategories(){
         $cat_id = Input::get('cat_id');
 
@@ -194,14 +192,9 @@ class HomeController extends Controller
 
     }
 
-
-
     public  function getAdvSub(){
         $adv_id = Input::get('adv_id');
-
-
         $features = Feature::where('subcategory_id','=',$adv_id)->get();
-
         return Response::json($features);
 
     }
@@ -511,8 +504,7 @@ class HomeController extends Controller
             $query->where('numero_garagem', \Input::get('num_vagas'));
 
         }
-
-        return $query->where('status', '>', '0')->orderBy('destaque','desc')->with('images','advertImovel')->paginate(18);
+        return Response::json($query->where('status', '>', '0')->orderBy('destaque','desc')->with('images','advertImovel')->paginate(18));
 
     }
 
@@ -537,9 +529,6 @@ class HomeController extends Controller
         if (\Input::get('cidade')) {
 
             $query->where('cidade', \Input::get('cidade'));
-        }
-        if (\Input::get('cidade') && \Input::get('bairro')) {
-            $query->where('bairro', \Input::get('bairro'));
         }
 
         if (\Input::get('tipo_anuncio')) {

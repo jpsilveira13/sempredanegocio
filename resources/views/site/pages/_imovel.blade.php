@@ -127,7 +127,7 @@
                                 </select>
                             </label>
                         </section>
-                        <fieldset class="site-main__view-results filter-view-results">
+                        <fieldset id="aplicaFiltro" class="site-main__view-results filter-view-results">
                             <p>
                                 <a id="btn-close-nav"  class="filter-view-results__button filter-view-results__button-apply icon-after-arrow-bd-up js-toggleResultFilters">APLICAR FILTROS</a>
                             </p>
@@ -233,7 +233,6 @@
                             </div>
                             <div class='text-center'>
                                 <div id="page-selection"></div>
-                                <!--<div id="loading-page"><img alt="Loading..." src="{{url('images/ajaxLoading.gif')}}"><div><div class="carregamento-anuncio"></div></div></div> -->
                             </div>
                         </div>
                     </div>

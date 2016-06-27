@@ -20,42 +20,6 @@
                 Filtros
             </button>
         </div>
-        <!--  <div class="col-md-6 hidden-sm hidden-xs">
-              <div class="well well-sm">
-                  <strong>Exibir como </strong>
-                  <div class="btn-group">
-                      <a href="#" id="list" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-th-list">
-                   </span>Lista</a> <a href="#" id="grid" class="btn btn-default btn-sm"><span
-                                  class="glyphicon glyphicon-th"></span>Grade</a>
-                  </div>
-              </div>
-          </div> -->
-
-        <!--<div class="col-md-6 pull-right hidden-sm hidden-xs">
-            <form action="{{URL::current()}}" class="pull-right">
-                <div class="select2-container pull-right " style="margin-top:9px">
-                    <select class="select2-choice" id="sortby">
-                        <option value="Relevancia" selected="selected">
-                            Relevância
-
-                        </option>
-                        <option  value="DataAtualizacao">
-                            Data Atualização
-
-                        </option>
-                        <option  value="Valor">
-                            Valor
-
-                        </option>
-                        <option  value="Area">
-                            Área
-
-                        </option>
-                    </select>
-                </div>
-                <label class="control-label pull-right sort" for="sortby">Ordenar por</label>
-            </form>
-        </div> -->
         <div style="margin-bottom: 12px" class="col-md-12 col-xs-12 col-sm-12 center-block">
             <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
             <!-- header responsivo imoveis -->
@@ -126,18 +90,6 @@
                         </section>
                     </div>
             </form>
-            <!--<div class="propaganda">
-                <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-
-                <ins class="adsbygoogle"
-                     style="display:block"
-                     data-ad-client="ca-pub-9276435422488602"
-                     data-ad-slot="7022965179"
-                     data-ad-format="auto"></ins>
-                <script>
-                    (adsbygoogle = window.adsbygoogle || []).push({});
-                </script>
-            </div> -->
         </div>
         <div class="col-md-10 col-sm-12">
             <div class="before"></div>
@@ -236,7 +188,7 @@
                         @endforeach
                     </div>
                     <div class='text-center'>
-                        <div id="loading-page"><img alt="Loading..." src="{{url('images/preloaderVei.gif')}}"><div><div class="carregamento-anuncio"></div></div></div>
+
                     </div>
                 </div>
             </div>

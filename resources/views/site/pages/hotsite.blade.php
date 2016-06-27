@@ -3,14 +3,11 @@
 @section('content')
 </div>
 </div>
-
-
 <div class="col-md-12 col-lg-12 hidden-sm hidden-xs no-padding">
     <div class="header-logo-minisite @if($user->typeuser_id == 5) bg-car @endif">
         @if($user->typeuser_id < 5)
             <div class="minisite-area-logo">
                 <h1 class="area-logo-titulo">
-                    @if()
                     <img src="{{$user->avatar}}" title="{{$user->name}}" />
                     <aside>Registro CRECI: </aside>
                 </h1>
