@@ -13,4 +13,11 @@ $(document).ready(function () {
 
         });
     });
+    $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+        var target = $(this).attr('href');
+
+        $(target).css('left','-'+$(window).width()+'px');
+        var left = $(target).offset().left;
+        $(target).css({left:left}).animate({"left":"0px"}, "10");
+    })
 });

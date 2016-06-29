@@ -62,7 +62,7 @@
             $url1 = $advert->images()->first()->extension;
         }
         ?>
-        <meta property="og:image" content="{{url($url1)}}">
+        <meta property="og:image" content="{{url($advert->user->avatar)}}">
         <meta property="og:image:width" content="484">
         <meta property="og:image:height" content="252">
         <meta property="og:description" content="Acessem o meu hotsite e confiram os meus anúncios publicados.">
@@ -190,7 +190,7 @@
                 <dl>
                     <dt class="footer-menu__title">Encontre Anúncios</dt>
                     <dd class="footer-menu__item">
-                        <a href="{{url('imoveis')}}" itemprop="url" title="Imóveis">Imóveis</a>
+                        <a href="{{url('anuncio?transacao=venda&categoria=1&cidade=')}}" itemprop="url" title="Imóveis">Imóveis</a>
                     </dd>
                     <dd class="footer-menu__item">
                         <a href="{{url('veiculos')}}" itemprop="url" title="Veículos">Veículos</a>

@@ -59,7 +59,7 @@
         <div class="row no-margin">
             <div class="container">
                 <div class="col-md-3 col-sm-6 selecao-categoria">
-                    <a href="{{asset('/imoveis')}}">
+                    <a href="{{url('anuncio?transacao=venda&categoria=1&cidade=')}}">
                         <figure class="">
                             <img class="mb10 transition-img" src="{{url('images/img-imoveis.png')}}" alt="Imóveis" title="Área Imóveis" width="167" height="130" />
                             <figcaption>

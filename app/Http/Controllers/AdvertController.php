@@ -26,17 +26,20 @@ class AdvertController extends Controller
     private $advertVeiculo;
     private $advertImovel;
     private $subcategories;
+    private $features;
 
-    public function  __construct(Advert $advertModel,AdvertImovel $advertImovel, AdvertVeiculo $advertVeiculo, SubCategory $subcategories){
+    public function  __construct(Advert $advertModel,AdvertImovel $advertImovel, AdvertVeiculo $advertVeiculo, SubCategory $subcategories,Feature $feature){
         $this->advertModel = $advertModel;
         $this->advertImovel = $advertImovel;
         $this->advertVeiculo = $advertVeiculo;
         $this->subcategories = $subcategories;
+        $this->features = $feature;
+
     }
 
     public function index(){
         $user = Auth::user();
-        if($user->tipo != 'admin'){
+        if($user->typeuser_id != 1){
 
             $adverts = Advert::where('user_id',$user->id)->orderBy('id','desc')->paginate(30);
             return view('admin.anuncios.index',compact('adverts'));
@@ -177,9 +180,11 @@ class AdvertController extends Controller
     public function edit($id){
 
         $advert = $this->advertModel->find($id);
-        $subcategories = $this->subcategories->where('category_id',1)->get();
-        return view('admin.anuncios.edit',compact('advert','subcategories'));
+        $subcategories = $this->subcategories->where('category_id',1);
 
+        $features = $this->features->where('subcategory_id',$advert->subcategory->id)->get();
+
+        return view('admin.anuncios.edit',compact('advert','subcategories','features'));
     }
 
     public function destroy($id){

@@ -95,18 +95,18 @@
                             <article class="minisite-anuncio-destaque">
                                 @if(count($advert->images))
                                     <?php
-                                    $pos = strpos($advert->images()->first()->extension, "amazonaws.com");
+                                    $pos = strpos($advert->images()->first()->extension, "imoveis/site/");
 
                                     $url1 = "";
                                     if ($pos === false) {
 
-                                    $url1 = "galeria/".$advert->images()->first()->extension;
-                                    ?>
-                                    <img class="group list-group-image content-img-sugestao lazy transition-img" data-original="{{url($url1)}}" width="220" height="229" alt="titulo imagem" />
-                                    <?php }else{
                                     $url1 = $advert->images()->first()->extension;
                                     ?>
                                     <img class="group list-group-image content-img-sugestao lazy transition-img" data-original="{{$url1}}" width="220" height="229" alt="titulo imagem" />
+                                    <?php }else{
+                                    $url1 = "galeria/".$advert->images()->first()->extension;
+                                    ?>
+                                    <img class="group list-group-image content-img-sugestao lazy transition-img" data-original="{{url($url1)}}" width="220" height="229" alt="titulo imagem" />
                                     <?php }?>
 
                                 @else
@@ -379,25 +379,24 @@
                                         <div class="thumbnail">
                                             @if(count($advert->images))
                                                 <?php
-                                                $pos = strpos($advert->images()->first()->extension, "amazonaws.com");
-
+                                                $pos = strpos($advert->images()->first()->extension, "imoveis/site/");
 
                                                 $url1 = "";
                                                 if ($pos === false) {
 
+                                                $url1 = $advert->images()->first()->extension;
+                                                ?>
+                                                <img class="group list-group-image content-img-sugestao lazy transition-img" data-original="{{$url1}}" width="220" height="229" alt="titulo imagem" />
+                                                <?php }else{
                                                 $url1 = "galeria/".$advert->images()->first()->extension;
                                                 ?>
                                                 <img class="group list-group-image content-img-sugestao lazy transition-img" data-original="{{url($url1)}}" width="220" height="229" alt="titulo imagem" />
-                                                <?php }else{
-                                                $url1 = $advert->images()->first()->extension;
-
-                                                ?>
-                                                <img class="group list-group-image content-img-sugestao lazy transition-img" data-original="{{$url1}}" width="220" height="229" alt="titulo imagem" />
                                                 <?php }?>
 
                                             @else
                                                 <img class="group list-group-image content-img-sugestao lazy transition-img" src="{{url('images/no-image.jpg')}}" alt="titulo imagem" />
                                             @endif
+
                                             @if($advert->advertImovel != null)
                                                 <div class="caption infos-suggest">
                                                     <h4 class="group inner list-group-item-heading text-bairro">{{$advert->cidade}}<br />{{$advert->estado}}

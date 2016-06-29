@@ -66,11 +66,11 @@ class HomeController extends Controller
 
     //pega a url dinamicamente e compara se existe ou nao.
     public function tipocategoria($name_url){
-
         $categoria_id = Category::select('id')->where('name_url', $name_url)->first();
 
         if(empty($categoria_id)){
-            return view('error.error404');
+
+            //return view('error.error404');
 
         }else{
             $subcategories = SubCategory::where('category_id',$categoria_id->id)->get();
@@ -79,7 +79,7 @@ class HomeController extends Controller
 
                 $advertsCount = Advert::join('subcategories', 'adverts.subcategories_id', '=', 'subcategories.id')->join('advert_imovel','adverts.id','=','advert_imovel.advert_id')->where('subcategories.category_id',$categoria_id->id)->select('adverts.*')->count();
 
-                return view('site.pages.anuncios', [
+                return view('resultado/anuncio', [
                     'title' => 'Sempredanegocio.com.br | Não perca tempo! Anuncie',
                     'description' => 'Os melhores anúncios no melhor site.',
                     'adverts' => $adverts,
@@ -560,7 +560,6 @@ class HomeController extends Controller
     {
 
         $categoria = Input::get('categoria');
-
         $subcategories = SubCategory::where('category_id', $categoria)->get();
         $transacao = Input::get('transacao');
         $cidade = Input::get('cidade');

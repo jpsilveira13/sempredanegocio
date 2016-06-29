@@ -125,21 +125,20 @@
                                         @foreach($advertGeral->images()->get() as $images)
                                             <div class="<?php if($j==0){echo 'active';}?> item srle" data-slide-number="<?=$j?>">
                                                 <?php
-                                                $pos = strpos($images->extension, "amazonaws.com");
+                                                $pos = strpos($images->extension, "imoveis/site/");
                                                 $url1 = "";
                                                 if ($pos === false) {
-                                                $url1 = "galeria/".$images->extension;
-
+                                                $url1 = $images->extension;
                                                 ?>
                                                 <a href="{{url($url1)}}" data-lightbox="roadtrip" data-title="Imagem do imóvel">
-                                                    <img src="{{url($url1)}}" class="img-responsive">
+                                                    <img src="{{$url1}}" class="img-responsive">
                                                 </a>
                                                 <?php
                                                 }else{
-                                                $url1 = $images->extension;
+                                                    $url1 = "galeria/".$images->extension;
                                                 ?>
                                                 <a href="{{$url1}}" data-lightbox="roadtrip" data-title="Imagem do imóvel">
-                                                    <img src="{{$url1}}" class="img-responsive">
+                                                    <img src="{{url($url1)}}" class="img-responsive">
                                                 </a>
                                                 <?php } ?>
                                             </div>
@@ -172,19 +171,21 @@
                                     <li>
                                         <a  id="carousel-selector-<?=$i?>" class="<?php if($i==0){echo 'selected';}?>">
                                             <?php
-                                            $pos = strpos($images->extension, "amazonaws.com");
+                                            $pos = strpos($images->extension, "imoveis/site/");
                                             $url1 = "";
                                             if ($pos === false) {
-                                            $url1 = "galeria/".$images->extension;
+                                            $url1 = $images->extension;
 
                                             ?>
-                                            <img src="{{url($url1)}}" width="80" height="60" class="img-responsive">
+                                            <img src="{{$url1}}" width="80" height="60" class="img-responsive">
 
                                             <?php
                                             }else{
-                                            $url1 = $images->extension;
+                                            $url1 = "galeria/".$images->extension;
+
+
                                             ?>
-                                            <img src="{{$url1}}" width="80" height="60" class="img-responsive">
+                                            <img src="{{url($url1)}}" width="80" height="60" class="img-responsive">
                                             <?php }?>
                                         </a>
                                     </li>
