@@ -24,6 +24,7 @@ function pagination(page) {
                 $('#products').empty();
 
             }, success: function (data) {
+
                 $('html, body').animate({scrollTop: 0}, 'slow');
                 if(data.total== 0) {
                     $("#page-selection").hide();
@@ -32,13 +33,14 @@ function pagination(page) {
                     mostra_paginacao(data.current_page, data.last_page);
                     $("#page-selection").show();
                 }
+                var totalAnuncio = formatNumber(data.total);
+                $('.search-results-header-counter').html(totalAnuncio);
                 if (data.data.length != 0) {
                     $('#loading-page').css('display', 'block');
                     $(".before").empty();
                     $('#resultSearch').fadeTo('slow', 1);
 
                     var html = '';
-                    var totalAnuncio = formatNumber(data.total);
                     $('#page').val(data.current_page);
                     var data = data.data;
                     var len = data.length;
@@ -47,14 +49,19 @@ function pagination(page) {
                     var cont = 0;
                     var char = "imoveis/site";
                     var url;
-                    html += '<input type="hidden" value="' + page + '" id="page" name="page" />';
+                    /*html += '<input type="hidden" value="' + page + '" id="page" name="page" />'; */
                     for (var i = 0; i < len; i++) {
                         cont++;
                         if (cont > 12) {
                             cont = 0;
                             html += '<div style="margin-bottom: 20px" class="item col-xs-12 col-sm-12 col-lg-12 col-md-12 bloco-item"><script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script><ins class="adsbygoogle"style="display:block" data-ad-client="ca-pub-9276435422488602" data-ad-slot="4429425578" data-ad-format="auto"></ins>  <script> (adsbygoogle = window.adsbygoogle || []).push({}) </script></div>';
                         }
-                        html += '<div class="item col-xs-12 col-sm-6 col-lg-4 col-md-4 bloco-item"><a class="item-total" href="/anuncio/' + data[i].tipo_anuncio + '/' + data[i].id + '/' + data[i].url_anuncio + '"><div class="thumbnail">';
+                        html += '<div class="item col-xs-12 col-sm-6 col-lg-4 col-md-4 bloco-item">';
+
+                       /* if(da.user.typeuser_id == 1){
+                            html+=  '<span class="contador-visita"><i class="fa fa-eye" aria-hidden="true"></i>' +data[i].advert_count +'</span>';
+                        } */
+                    html+='<a class="item-total" href="/anuncio/' + data[i].tipo_anuncio + '/' + data[i].id + '/' + data[i].url_anuncio + '"><div class="thumbnail">';
 
                         //Validação se existe imagem ou nao
                         if (data[i].images[0]) {
@@ -96,7 +103,7 @@ function pagination(page) {
                 } else {
                     swal.close();
 
-                    $('#products').append('<div class="teste"> <p style="clear:both; text-align:center"><br /><br />FIM DE ANÚNCIOS ;/</p></div>');
+                    $('#products').append('<h1 class="text-error-search">Nenhum resultado foi encontrado!</h1><img class="img-responsive center-block" src="../images/404erro.png" />');
                     $('#page-selection').hide();
                 }
                 status = 0;

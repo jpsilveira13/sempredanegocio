@@ -414,13 +414,14 @@ $(document).ready(function(){
 
         posting.done(function( data ) {
             if(data.fail) {
-
+                console.log('deu  errado!!');
                 $.each(data.errors, function( index, value ) {
                     $('text-error').show('fast');
                 });
                 $('#successMessage').empty();
             }
             if(data.success) {
+                console.log('deu certo');
                 formAmigo.empty();
                 $('.hide-body').empty();
                 $('#divSucessoAmigo').css('display','block');
@@ -1015,8 +1016,8 @@ $(document).ready(function(){
     });
 
 //anuncie html
-
     $('#propriedade1').empty();
+
 
     $("#subcategory").livequery(function(){
 

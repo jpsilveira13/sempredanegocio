@@ -22,7 +22,7 @@ class AdvertImovel extends Model
 
 
     public function advertImo(){
-        return $this->belongsTo(Advert::class);
+        return $this->belongsTo(Advert::class,'advert_id','id');
 
     }
 }

@@ -21,17 +21,26 @@ class MessageController extends Controller
 
     public function index()
     {
-        $user = Auth::user();
-        $messages = AdvertMessage::where('id_user',$user->id)->orderBy('visto','asc')->paginate(30);
-        return view('admin.mensagens.index',compact('messages'));
+        if(Auth::user()->typeuser_id == 1){
+            $messages = AdvertMessage::orderBy('created_at','desc')->paginate(30);
+            return view('admin.mensagens.index',compact('messages'));
 
+        }else{
+            $user = Auth::user();
+            $messages = AdvertMessage::where('id_user',$user->id)->orderBy('visto','asc')->paginate(30);
+            return view('admin.mensagens.index',compact('messages'));
+        }
     }
 
     public function view($id){
+
         $mensagem = $this->messageModel->find($id);
-        $mensagem->visto = $mensagem->visto+1;
-        $mensagem->save();
+        if(Auth::user()->typeuser_id != 1) {
+            $mensagem->visto = $mensagem->visto + 1;
+            $mensagem->save();
+        }
         return view('admin.mensagens.view',compact('mensagem'));
+
     }
 
     public function destroy($id){

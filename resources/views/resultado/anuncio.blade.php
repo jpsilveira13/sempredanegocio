@@ -41,7 +41,8 @@
                 <form action=""  id="formSearchImoveis" class="ajax">
                     <input type="hidden" value="1" name="status" />
                     <input type="hidden" value="{{\Input::get('page')}}" name="page" id="page" />
-                    <input type="hidden" value="{{\Input::get('categoria')}}" name="categoria" />
+                    <input type="hidden" value="1" name="categoria" />
+                   
                     <div id="nav-lateral" class="col-md-2 col-sm-2 no-padding">
                         <div class="area-pesquisa">
                             <section class="clearfix sessao-area-filtro bg-branco ">

@@ -24,18 +24,28 @@ function pagination(page) {
                 $('html, body').animate({scrollTop: 0}, 'slow');
                 $('#products').empty();
             }, success: function (data) {
+
                 $('html, body').animate({scrollTop: 0}, 'slow');
-                mostra_paginacao(data.current_page, data.last_page);
+                if(data.total== 0) {
+                    $("#page-selection").hide();
+
+                }else{
+                    mostra_paginacao(data.current_page, data.last_page);
+                    $("#page-selection").show();
+                }
                 $("#page-selection").show();
+                var totalAnuncio = formatNumber(data.total);
+                $('.search-results-header-counter').html(totalAnuncio);
                 if (data.data.length != 0) {
+
                     $('#loading-page').css('display', 'block');
                     $(".before").empty();
                     $('#resultSearch').fadeTo('slow', 1);
                     var html = '';
-                    var totalAnuncio = formatNumber(data.total);
+
                     var data = data.data;
                     var len = data.length;
-                    $('.search-results-header-counter').html(totalAnuncio);
+                    $('#page').val(data.current_page);
                     //Criador do contador para os anuncios
                     var cont = 0;
                     var char = "imoveis/img";
@@ -88,7 +98,8 @@ function pagination(page) {
                 } else {
                     swal.close();
 
-                    $('#products').append('<div class="teste"> <p style="clear:both; text-align:center"><br /><br />FIM DE ANÚNCIOS ;/</p></div>');
+                    $('#products').append('<h1 class="text-error-search">Nenhum resultado foi encontrado!</h1><img class="img-responsive center-block" src="../images/404erro.png" />');
+                    $('#page-selection').hide();
                 }
                 status = 0;
             }

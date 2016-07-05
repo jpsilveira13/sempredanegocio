@@ -50,19 +50,9 @@
         <meta property="og:title" content="{{$user->name}}">
         <meta property="og:type" content="website">
         <meta property="og:url" content="{{url('/')}}/{{$user->id}}/{{$user->url_name}}">
-        <?php
-        $pos = strpos($advert->images()->first()->extension, "amazonaws.com");
 
-        $url1 = "";
-        if ($pos === false) {
-
-            $url1 = "galeria/".$advert->images()->first()->extension;
-        }else{
-
-            $url1 = $advert->images()->first()->extension;
-        }
-        ?>
-        <meta property="og:image" content="{{url($advert->user->avatar)}}">
+        <meta property="og:image" content="<?php if(empty($user->avatar)): echo asset('images/no-image.jpg');
+        else: echo asset($user->avatar); endif ?>">
         <meta property="og:image:width" content="484">
         <meta property="og:image:height" content="252">
         <meta property="og:description" content="Acessem o meu hotsite e confiram os meus anúncios publicados.">

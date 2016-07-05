@@ -165,17 +165,15 @@
                                         <li>X</li>
                                         <li>X</li>
                                         <li>X</li>
-                                        <li>Sem SMS de alerta</li>
                                         <li>X</li>
                                         <li>X</li>
                                     </ul>
                                 </li>
                                 @if(empty( auth()->user()->id))
                                     <li class="button"><a class="btn btnPagamento" href="{{url('login')}}" id="">Cadastrar</a></li>
-                                @else
-                                    <li class="button"><a class="btn btnPagamento" href="#" id="">Anunciar</a></li>
+                                @elseif(empty(auth()->user()->typeuser_id))
+                                    <li class="button"><a class="btn btnPagamento" href="#" id="{{url('anuncie')}}">Anunciar</a></li>
                                 @endif
-
                             </ul>
                         </li>
                         <li class="plan col-md-4 col-sm-6 col-xs-12">
@@ -189,7 +187,7 @@
                                         <li>2 <span>meses</span></li>
                                         <li>X</li>
                                         <li>X</li>
-                                        <li>10 <span> SMS de alerta</span></li>
+
                                         <li>X</li>
                                         <li>X</li>
 
@@ -215,7 +213,6 @@
                                         <li>6 <span>meses</span></li>
                                         <li>Impulsionado pelo Google</li>
                                         <li>X</li>
-                                        <li>26 <span> SMS de alerta</span></li>
                                         <li>1 vídeo do seu anúncio</li>
                                         <li>X</li>
                                     </ul>
@@ -240,7 +237,7 @@
                                         <li>1 <span>ano</span></li>
                                         <li>Impulsionado pelo Google</li>
                                         <li>Impulsionado pelo Facebook</li>
-                                        <li>48 <span> SMS de alerta</span></li>
+
                                         <li>1 vídeo do seu anúncio</li>
                                         <li>Loja Virtual</li>
                                     </ul>

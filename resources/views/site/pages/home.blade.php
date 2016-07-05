@@ -70,7 +70,7 @@
                     </a>
                 </div>
                 <div class="col-md-3 col-sm-6 selecao-categoria">
-                    <a href="{{asset('/veiculos')}}">
+                    <a href="{{url('http://www.sempredanegocio.com.br/anuncio?transacao=venda&categoria=2&cidade=')}}">
                         <figure class="">
                             <img class="mb10 transition-img height148" src="{{url('images/img-veiculos.png')}}" alt="Veículos" title="Área Veículos" width="167" height="130" />
                             <figcaption>

@@ -3,6 +3,7 @@
 @section('content')
 </div>
 </div>
+
 <div class="col-md-12 col-lg-12 hidden-sm hidden-xs no-padding">
     <div class="header-logo-minisite @if($user->typeuser_id == 5) bg-car @endif">
         @if($user->typeuser_id < 5)
@@ -67,15 +68,18 @@
 
         <div class="minisite-header-footer">
             <dl class="minisite-header-footer-info">
-                <dt>Telefone:</dt>
-                <dd class="agente-minisite-sprited agente-minisite-telefone ">
-                    <span itemprop="telephone">{{$user->phone}}</span>
-                </dd>
-
-                <dt>Email:</dt>
-                <dd class="agente-minisite-sprited agente-minisite-email">
-                    <span itemprop="email"> {{$user->email}}</span>
-                </dd>
+                @if(!empty($user->phone))
+                    <dt>Telefone:</dt>
+                    <dd class="agente-minisite-sprited agente-minisite-telefone ">
+                        <span itemprop="telephone">{{$user->phone}}</span>
+                    </dd>
+                @endif
+                @if(!empty($user->email))
+                    <dt>Email:</dt>
+                    <dd class="agente-minisite-sprited agente-minisite-email">
+                        <span itemprop="email"> {{$user->email}}</span>
+                    </dd>
+                @endif
                 @if(!empty($user->address))
                     <dt>Endereço:</dt>
                     <dd itemprop="address" itemscope itemtype="http://schema.org/PostalAddress" class="agente-minisite-sprited agente-minisite-local">
@@ -350,7 +354,7 @@
                     <div class="col-md-12">
                         <div id="products" class="list-group">
                             <?php $contador = 0; ?>
-                            @foreach($user->advertuser()->get() as $advert)
+                            @foreach($advertUser as $advert)
                                 <?php $contador+=1;?>
                                 @if($contador > 12)
                                     <?php $contador = 0;?>
@@ -371,7 +375,7 @@
                                 <div class="item  col-xs-12 col-sm-6 col-lg-4 col-md-4 bloco-item">
                                     @if(!empty(auth()->user()->id))
 
-                                        @if(count(auth()->user()->id) > 0 && auth()->user()->id == $advert->user_id )
+                                        @if(count(auth()->user()->id) > 0 && auth()->user()->id == $advert->user_id || auth()->user()->typeuser_id == 1 )
                                             <span class="contador-visita"><i class="fa fa-eye" aria-hidden="true"></i> {{$advert->advert_count}}</span>
                                         @endif
                                     @endif
@@ -490,14 +494,17 @@
                             @endforeach
                         </div>
                         <div class='text-center'>
-                            <div id="loading-page"><img alt="Loading..." src="http://www.infinite-scroll.com/loading.gif"><div><div class="carregamento-anuncio">Carregando anúncios...</div></div></div>
+                            {!! $advertUser->render() !!}
                         </div>
                     </div>
                 </div>
+
             </div>
+
         </div>
 
     </div>
+
 </div>
 
 

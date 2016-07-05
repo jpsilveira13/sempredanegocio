@@ -15,6 +15,17 @@
 Route::get('/', function(){
     return view('layout');
 });
+/* rotas ajax */
+
+Route::post('/get-contadortel','HomeController@contadorTelefone');
+
+Route::post('/get-contadorFinanciamento','HomeController@contadorFinanciamento');
+
+Route::post('/form-denuncia', 'HomeController@denuncia');
+Route::post('/form-amigo', 'HomeController@formAmigo');
+Route::post('/form-message', 'HomeController@formContato');
+Route::post('/form-pagamento','HomeController@formPagamento');
+
 
 //rotas parceria, contato
 
@@ -67,6 +78,7 @@ Route::group(['middleware'=>'auth'], function() {
     ]);
     Route::post('/payment/{id}', ['as' => 'adquirir' , 'uses' => 'PaymentController@pay']);
     Route::get('/payment/{id}', ['as' => 'adquirir' , 'uses' => 'PaymentController@pay']);
+
 });
 
 Route::get('planos', 'HomeController@telaPlano' );
@@ -80,16 +92,6 @@ Route::get('anuncie',[
 ]);
 */
 
-/* rotas ajax */
-
-Route::post('/get-contadortel','HomeController@contadorTelefone');
-
-Route::post('/get-contadorFinanciamento','HomeController@contadorFinanciamento');
-
-Route::post('/form-denuncia', 'HomeController@denuncia');
-Route::post('/form-amigo', 'HomeController@formAmigo');
-Route::post('/form-message', 'HomeController@formContato');
-Route::post('/form-pagamento','HomeController@formPagamento');
 
 Route::get('login','HomeController@loginTela');
 
@@ -140,14 +142,14 @@ Route::get('search-veiculos',[
 Route::get('sem-imagem', 'HomeController@noImage');
 Route::get('/consultar_cep','HomeController@searchCep');
 
-Route::get('anuncio','HomeController@searchAnuncio');
+//Route::get('anuncio','HomeController@searchAnuncio');
 Route::controllers([
     'auth' => 'Auth\AuthController',
     'password' => 'Auth\PasswordController',
 
 ]);
 
-
+Route::get('/{name_url}', 'HomeController@searchAnuncio');
 
 //Controlador para o login
 Route::get('social/login/redirect/{provider}', ['uses' => 'Auth\AuthController@redirectToProvider', 'as' => 'social.login']);
@@ -155,7 +157,6 @@ Route::get('social/login/{provider}', 'Auth\AuthController@handleProviderCallbac
 
 Route::group(['prefix' => 'admin', 'middleware'=>'auth','where'=>['id'=>'[0-9]+']], function()
 {
-    //ajax url
 
 
     Route::group(['prefix' => 'home'],function(){
@@ -177,9 +178,11 @@ Route::group(['prefix' => 'admin', 'middleware'=>'auth','where'=>['id'=>'[0-9]+'
     Route::group(['prefix' => 'anuncios'],function() {
 
         Route::get('/',['as'=>'anuncios', 'uses' => 'AdvertController@index']);
-        Route::get('/editar/{id}',['as'=>'admin.anuncios.update', 'uses' => 'AdvertController@edit']);
+        Route::post('/update/{id}',['as'=>'admin.anuncios.update', 'uses' => 'AdvertController@update']);
         Route::get('{id}/edit',['as'=>'admin.anuncios.edit','uses'=>'AdvertController@edit']);
         Route::get('destroy/{id}',['as'=> 'anuncios.destroy','uses' => 'AdvertController@destroy'  ]);
+        Route::get('/apagar-imagem',['as'=>'/apagar-imagem','uses'=>'AdvertController@destroyOneImage']);
+
     });
 
     Route::group(['prefix' => 'mensagens'],function() {
@@ -214,7 +217,7 @@ Route::group(['prefix' => 'admin', 'middleware'=>'auth','where'=>['id'=>'[0-9]+'
 
 });
 
-Route::get('/{url_name}', 'HomeController@tipocategoria');
+
 Route::get('/{url_name}/teste', 'HomeController@tipocategoriaTeste');
 
 

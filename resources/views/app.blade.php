@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
     <title>Sistema Sempre da Negócio vindo,</title>
 
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
@@ -50,7 +51,6 @@
                 <a href="#" class="dropdown-toggle style-menu-header" data-toggle="dropdown"><i class="fa fa-envelope"></i><span class="badge estilo-numero">{{$i}}</span> <b class="caret"></b></a>
 
                 <ul class="dropdown-menu message-dropdown">
-
                     @if(auth()->user()->mensagens()->count() >0)
                         @foreach(auth()->user()->mensagens()->get() as $mensagem)
                             <li class="message-preview">
@@ -74,9 +74,7 @@
                         <li class="message-footer">
                             <a href="{{url('admin/mensagens')}}">Ver todas mensagens</a>
                         </li>
-
                     @else
-
                         <li class="message-footer">
                             <a href="#">Não há mensagens cadastradas</a>
                         </li>
@@ -84,38 +82,39 @@
                 </ul>
             </li>
             <!--
-            <li class="dropdown">
-                <a href="#" class="dropdown-toggle style-menu-header" data-toggle="dropdown"><i class="fa fa-bell"></i> <b class="caret"></b></a>
-                <ul class="dropdown-menu alert-dropdown">
-                    <li>
-                        <a href="#">Alert Name <span class="label label-default">Alert Badge</span></a>
-                    </li>
-                    <li>
-                        <a href="#">Alert Name <span class="label label-primary">Alert Badge</span></a>
-                    </li>
-                    <li>
-                        <a href="#">Alert Name <span class="label label-success">Alert Badge</span></a>
-                    </li>
-                    <li>
-                        <a href="#">Alert Name <span class="label label-info">Alert Badge</span></a>
-                    </li>
-                    <li>
-                        <a href="#">Alert Name <span class="label label-warning">Alert Badge</span></a>
-                    </li>
-                    <li>
-                        <a href="#">Alert Name <span class="label label-danger">Alert Badge</span></a>
-                    </li>
-                    <li class="divider"></li>
-                    <li>
-                        <a href="#">View All</a>
-                    </li>
-                </ul>
-            </li>
-            -->
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle style-menu-header" data-toggle="dropdown"><i class="fa fa-bell"></i> <b class="caret"></b></a>
+                    <ul class="dropdown-menu alert-dropdown">
+                        <li>
+                            <a href="#">Alert Name <span class="label label-default">Alert Badge</span></a>
+                        </li>
+                        <li>
+                            <a href="#">Alert Name <span class="label label-primary">Alert Badge</span></a>
+                        </li>
+                        <li>
+                            <a href="#">Alert Name <span class="label label-success">Alert Badge</span></a>
+                        </li>
+                        <li>
+                            <a href="#">Alert Name <span class="label label-info">Alert Badge</span></a>
+                        </li>
+                        <li>
+                            <a href="#">Alert Name <span class="label label-warning">Alert Badge</span></a>
+                        </li>
+                        <li>
+                            <a href="#">Alert Name <span class="label label-danger">Alert Badge</span></a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="#">View All</a>
+                        </li>
+                    </ul>
+                </li>
+          -->
+
             <li class="dropdown">
 
                 @if(!auth()->user()->avatar)
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> {{auth()->user()->name}}<b class="caret"></b></a>
+                    <a style="padding: 16px 15px 19px;" href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> {{auth()->user()->name}}<b class="caret"></b></a>
                 @else
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                         <span class="user-menu-icon" style="background-image: url('<?=auth()->user()->avatar?>');"></span>
@@ -166,18 +165,19 @@
                         <a href="{{route('leads')}}"><i class="fa fa-tag"></i> Leads</a>
                     @endif
                 </li>
+
                 <!--
-                 <li>
-                     <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-arrows-v"></i> Dropdown <i class="fa fa-fw fa-caret-down"></i></a>
-                     <ul id="demo" class="collapse">
-                         <li>
-                             <a href="#">Dropdown Item</a>
-                         </li>
-                         <li>
-                             <a href="#">Dropdown Item</a>
-                         </li>
-                     </ul>
-                 </li>-->
+     <li>
+         <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-arrows-v"></i> Dropdown <i class="fa fa-fw fa-caret-down"></i></a>
+         <ul id="demo" class="collapse">
+             <li>
+                 <a href="#">Dropdown Item</a>
+             </li>
+             <li>
+                 <a href="#">Dropdown Item</a>
+             </li>
+         </ul>
+     </li>-->
             </ul>
         </div>
         <!-- /.navbar-collapse -->

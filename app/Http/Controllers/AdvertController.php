@@ -26,13 +26,14 @@ class AdvertController extends Controller
     private $advertVeiculo;
     private $advertImovel;
     private $subcategories;
+    private $advertImage;
     private $features;
-
-    public function  __construct(Advert $advertModel,AdvertImovel $advertImovel, AdvertVeiculo $advertVeiculo, SubCategory $subcategories,Feature $feature){
+    public function  __construct(Advert $advertModel,AdvertImovel $advertImovel, AdvertVeiculo $advertVeiculo, SubCategory $subcategories,Feature $feature,AdvertImage $advertImage){
         $this->advertModel = $advertModel;
         $this->advertImovel = $advertImovel;
         $this->advertVeiculo = $advertVeiculo;
         $this->subcategories = $subcategories;
+        $this->advertImage = $advertImage;
         $this->features = $feature;
 
     }
@@ -187,6 +188,63 @@ class AdvertController extends Controller
         return view('admin.anuncios.edit',compact('advert','subcategories','features'));
     }
 
+    public function update(Request $request,$id){
+        $data = $request->all();
+        $advert = $this->advertModel->find($id);
+        if(!empty($data['caracteristicas'])){
+
+
+            $features = $data['caracteristicas'];
+            $advert->features()->sync($features);
+            unset($data['caracteristicas']);
+        }else{
+            $features = array();
+        }
+        $advert->features()->sync($features);
+        if(empty($data['preco'])){
+            $data['preco'] = 0;
+        }else{
+            $data['preco'] = str_replace(",",".",str_replace(".","",$data['preco']));
+        }
+        if(empty($data['valor_condominio'])){
+            $data['valor_condominio'] = 0;
+        }else{
+            $data['valor_condominio'] = str_replace(",",".",str_replace(".","",$data['valor_condominio']));
+        }
+
+        if(empty($data['valor_iptu'])){
+            $data['valor_iptu'] = 0;
+        }else{
+            $data['valor_iptu']  = str_replace(",",".",str_replace(".","",$data['valor_iptu']));
+        }
+        if($data['active'] != 1){
+            $data['active'] = 0;
+        }
+        if(empty($data['acomodacoes'])){
+            $data['acomodacoes'] = 0;
+
+        }
+        $data2 = $data;
+        unset($data2['active']);
+        unset($data2['anuncio_descricao']);
+        unset($data2['preco']);
+        unset($data2['status']);
+        unset($data['caracteristicas']);
+        unset($data['numero_quarto']);
+        unset($data['numero_garagem']);
+        unset($data['numero_banheiro']);
+        unset($data['area_construida']);
+        unset($data['valor_condominio']);
+        unset($data['valor_iptu']);
+        unset($data['acomodacoes']);
+        unset($data2['_token']);
+
+        $this->advertModel->find($id)->update($data);
+        $this->advertImovel->where('advert_id',$id)->update($data2);
+        $request->session()->flash('alert-success', 'Anúncio editado com sucesso!');
+        return redirect()->route("anuncios");
+    }
+
     public function destroy($id){
 
         $tipoUsuario = Auth::user()->typeuser_id;
@@ -214,5 +272,16 @@ class AdvertController extends Controller
             return view('error.error404');
 
         }
+    }
+
+    public function destroyOneImage(){
+        $id = \Input::get('id');
+        $image = $this->advertImage->find($id);
+        if (file_exists(public_path() . '/galeria/' . $image->extension)) {
+
+            File::delete(public_path() . '/galeria/' . $image->extension);
+        }
+        $image->delete();
+
     }
 }

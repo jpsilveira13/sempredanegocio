@@ -127,3 +127,22 @@ table {
         display: block;
     }
 }
+
+/* CSS imagem anuncio */
+
+
+.img-anuncio{
+    margin-bottom: 1000px;
+}
+
+
+.img-anuncio img {
+    opacity: 0.5;
+    filter: alpha(opacity=50); /* For IE8 and earlier */
+}
+
+.img-anuncio img:hover{
+    opacity: 1.0;
+    filter: alpha(opacity=100); /* For IE8 and earlier */
+}
+
