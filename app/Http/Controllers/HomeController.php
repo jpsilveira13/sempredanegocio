@@ -143,14 +143,14 @@ class HomeController extends Controller
         $subcategories = SubCategory::get();
         $advertUser = Advert::where('user_id',$id)->orderBy('created_at','desc')->paginate();
 
-        //$marcas = VeiculoMarca::get();
+        $marcas = VeiculoMarca::get();
         $advertAluga = Advert::where('user_id',$id)->where('tipo_anuncio','=','aluga')->count();
         $advertVenda = Advert::where('user_id',$id)->where('tipo_anuncio','=','venda')->count();
 
         if(empty($advertUser)) {
             return view('error.error404');
         }else{
-            return view('site.pages.hotsite',compact('advertUser','user','advertAluga','advertVenda','subcategories'));
+            return view('site.pages.hotsite',compact('advertUser','user','advertAluga','advertVenda','subcategories','marcas'));
 
         }
 

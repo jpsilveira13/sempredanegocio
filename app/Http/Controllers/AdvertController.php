@@ -3,6 +3,7 @@
 namespace sempredanegocio\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use sempredanegocio\Models\AdvertImovel;
@@ -229,6 +230,9 @@ class AdvertController extends Controller
         unset($data2['anuncio_descricao']);
         unset($data2['preco']);
         unset($data2['status']);
+        unset($data2['bairro']);
+        unset($data2['rua']);
+        unset($data2['numero']);
         unset($data['caracteristicas']);
         unset($data['numero_quarto']);
         unset($data['numero_garagem']);
@@ -274,14 +278,23 @@ class AdvertController extends Controller
         }
     }
 
-    public function destroyOneImage(){
-        $id = \Input::get('id');
-        $image = $this->advertImage->find($id);
-        if (file_exists(public_path() . '/galeria/' . $image->extension)) {
+    public function destroyOneImage($id, Request $request)
+    {
 
-            File::delete(public_path() . '/galeria/' . $image->extension);
+        $image = AdvertImage::find($id);
+        if ( $request->ajax() ) {
+            if (file_exists(public_path() . '/galeria/' . $image->extension)) {
+
+                File::delete(public_path() . '/galeria/' . $image->extension);
+            }
+            $image->delete();
+            return response(['msg' => 'Imagem deletada com sucesso', 'status' => 'success']);
         }
-        $image->delete();
+        return response(['msg' => 'Ocorreu um erro na execução', 'status' => 'false']);
 
     }
+
+
+
+
 }

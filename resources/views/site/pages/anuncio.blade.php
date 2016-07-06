@@ -250,8 +250,9 @@
 
                                 <a href="#emailModal" class="icone-social icone-e-mail" data-target="#emailModal" data-toggle="modal" title="Enviar por e-mail"></a>
                                 <a href="" class="icone-social icone-twitter" role="button" target="_blank"  title="Compartilhar no Twitter"></a>
-                                <a href="" class="icone-social icone-facebook" role="button" target="_blank"  title="Compartilhar no Facebook"></a>
+                                <a href="http://www.facebook.com/sharer.php?u={{Request::url()}}" class="share-facebook icone-social icone-facebook" role="button" target="_blank" title="Compartilhar no Facebook">
 
+                                </a>
                             </div>
                         </li>
                         <li><a href="#denuncieModal" id="modalDenuncieAbrir" class="modal-denuncie icone-alerta-reportar" data-toggle="modal" data-target="#denuncieModal">Reportar erro ou denunciar essa oferta</a></li>

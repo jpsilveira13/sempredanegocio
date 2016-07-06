@@ -121,7 +121,9 @@
                                         <span class="minisite-anuncio-destaque-bairro">{{$advert->bairro}}</span>
                                         <p class="minisite-anuncio-destaque-detalhes">R$ {{number_format((float)$advert->preco,2,",",".")}} - {{$advert->advertImovel->area_construida}} m2 - {{$advert->advertImovel->numero_quarto}} quarto </p>
                                         <p class="minisite-anuncio-destaque-localizacao">
-                                            {{$advert->rua}} - @if($advert->numero){{$advert->numero}}@else @endif
+                                            @if($advert->active == 0)
+                                                {{$advert->rua}} - @if($advert->numero){{$advert->numero}}@else @endif
+                                            @endif
                                         </p>
                                         <div>
                                             <button class="minisite-anuncio-destaque-contato contatoBtn">Contato / Ver Detalhe</button>
@@ -161,7 +163,7 @@
                 @if($user->typeuser_id < 5)
                     <h1 class="search-title"> Imovéis de {{$user->name}}</h1>
                 @elseif($user->typeuser_id == 5)
-                    <h1 class="search-title"> Imovéis de {{$user->name}}</h1>
+                    <h1 class="search-title"> Veículos de {{$user->name}}</h1>
 
                 @endif
             </div>

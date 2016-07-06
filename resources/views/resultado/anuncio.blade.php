@@ -24,16 +24,7 @@
                 </button>
             </div>
             <div style="margin-bottom: 12px" class="col-md-12 col-xs-12 col-sm-12 center-block">
-                <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-                <!-- header responsivo -->
-                <ins class="adsbygoogle"
-                     style="display:block"
-                     data-ad-client="ca-pub-9276435422488602"
-                     data-ad-slot="5825433572"
-                     data-ad-format="auto"></ins>
-                <script>
-                    (adsbygoogle = window.adsbygoogle || []).push({});
-                </script>
+                <a class="Anuncie aqui" target="_blank" title="Anuncie aqui" href="{{url('contato')}}"> <img src="{{url('images/bannerImo.png')}}" class="img-responsive center-block" /></a>
             </div>
             <br />
             <div class="clearfix"></div>
@@ -42,7 +33,7 @@
                     <input type="hidden" value="1" name="status" />
                     <input type="hidden" value="{{\Input::get('page')}}" name="page" id="page" />
                     <input type="hidden" value="1" name="categoria" />
-                   
+
                     <div id="nav-lateral" class="col-md-2 col-sm-2 no-padding">
                         <div class="area-pesquisa">
                             <section class="clearfix sessao-area-filtro bg-branco ">

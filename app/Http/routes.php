@@ -181,7 +181,8 @@ Route::group(['prefix' => 'admin', 'middleware'=>'auth','where'=>['id'=>'[0-9]+'
         Route::post('/update/{id}',['as'=>'admin.anuncios.update', 'uses' => 'AdvertController@update']);
         Route::get('{id}/edit',['as'=>'admin.anuncios.edit','uses'=>'AdvertController@edit']);
         Route::get('destroy/{id}',['as'=> 'anuncios.destroy','uses' => 'AdvertController@destroy'  ]);
-        Route::get('/apagar-imagem',['as'=>'/apagar-imagem','uses'=>'AdvertController@destroyOneImage']);
+        Route::get('destroy-image/{id}','AdvertController@destroyOneImage');
+        //Route::get('destroy/{id}/image',['as'=>'products.images.destroy', 'uses' => 'ProductsController@destroyImage']);
 
     });
 

@@ -71,18 +71,41 @@ $(document).ready(function () {
         $(target).css('left','-'+$(window).width()+'px');
         var left = $(target).offset().left;
         $(target).css({left:left}).animate({"left":"0px"}, "10");
-    })
+    });
 
-    $('.removerImage').on('click', function () {
+    $('.removerImage').on('click', function (e) {
+
         var id = $(this).data('id');
-        var url = '/apagar-imagem';
-        console.log(url);
-        $.get(url, {'id':id}, function(data)
-        {
-            console.log(data);
-           console.log('deu certo');
+
+        swal({
+            title: "Você tem certeza?",
+            text: "Não tem como recuperar depois de deletado!",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#DD6B55",
+            confirmButtonText: "Sim, deleta!",
+            closeOnConfirm: false
+        }, function (isConfirm) {
+            if (!isConfirm) return;
+            console.log('deu certo');
+            url = "/admin/anuncios/destroy-image/"+id;
+            $.ajax({
+                url: url,
+                type: "GET",
+                data: id,
+                success: function (msg) {
+
+                    if (msg.status === 'success') {
+                        swal("Pronto!", "Sua imagem foi deletada com sucesso!", "success");
+                    }
+                    $('#imagem'+id).fadeOut(2000);
+                }
+            });
 
         });
 
-    })
+    });
 });
+
+
+

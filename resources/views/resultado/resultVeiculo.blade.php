@@ -21,18 +21,8 @@
                 FILTRAR RESULTADOS
             </button>
         </div>
-
         <div style="margin-bottom: 12px" class="col-md-12 col-xs-12 col-sm-12 center-block">
-            <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-            <!-- header responsivo -->
-            <ins class="adsbygoogle"
-                 style="display:block"
-                 data-ad-client="ca-pub-9276435422488602"
-                 data-ad-slot="5825433572"
-                 data-ad-format="auto"></ins>
-            <script>
-                (adsbygoogle = window.adsbygoogle || []).push({});
-            </script>
+            <a class="Anuncie aqui" target="_blank" title="Anuncie aqui" href="{{url('contato')}}"> <img src="{{url('images/bannerGarage.png')}}" class="img-responsive center-block" /></a>
         </div>
         <br />
         <div class="clearfix"></div>
