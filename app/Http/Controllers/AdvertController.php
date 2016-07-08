@@ -294,7 +294,25 @@ class AdvertController extends Controller
 
     }
 
+    public function capaImagem($id, Request $request){
+        //$image = AdvertImage::where('id',$id)->get();
+        $image = $this->advertImage->find($id); // Aqui eu tenho a imagem capa
+        $idAd = $image->advert_id; //aqui eu peguei o advert_id
+        //Aqui é uma coleçaoo
+        $image2 = AdvertImage::where('advert_id',$idAd)->where('capa',1)->first();
 
+        if($request->ajax()) {
+            if ($image2) {
+                $image2->capa = 0;
+                $image2->update();
+            }
 
+                $image->capa = 1;
+                $image->update();
+
+            return response(['msg' => 'Imagem deletada com sucesso', 'status' => 'success']);
+        }
+        return response(['msg' => 'Ocorreu um erro na execução', 'status' => 'false']);
+    }
 
 }

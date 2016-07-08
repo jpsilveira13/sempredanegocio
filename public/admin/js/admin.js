@@ -86,8 +86,7 @@ $(document).ready(function () {
             confirmButtonText: "Sim, deleta!",
             closeOnConfirm: false
         }, function (isConfirm) {
-            if (!isConfirm) return;
-            console.log('deu certo');
+            if (isConfirm){
             url = "/admin/anuncios/destroy-image/"+id;
             $.ajax({
                 url: url,
@@ -99,6 +98,43 @@ $(document).ready(function () {
                         swal("Pronto!", "Sua imagem foi deletada com sucesso!", "success");
                     }
                     $('#imagem'+id).fadeOut(2000);
+                }
+            });
+            }else{
+                swal("Cancelado", "Imagem não foi deletada", "error");
+            }
+
+        });
+
+    });
+
+    $('.capaImagem').on('click', function (e) {
+
+        var id = $(this).data('id');
+
+        swal({
+            title: "Você tem certeza?",
+            type: "info",
+            showCancelButton: true,
+            confirmButtonColor: "#DD6B55",
+            confirmButtonText: "Sim, Atualizar!",
+            closeOnConfirm: false
+        }, function (isConfirm) {
+            if (!isConfirm) return;
+
+            url = "/admin/anuncios/capa-image/"+id;
+            $.ajax({
+                url: url,
+                type: "GET",
+                data: id,
+                success: function (msg) {
+
+                    if (msg.status === 'success') {
+                        swal("Pronto!", "Capa selecionada!", "success");
+                    }
+
+                    $('#imagem'+id+'img').css('border','#000');
+
                 }
             });
 

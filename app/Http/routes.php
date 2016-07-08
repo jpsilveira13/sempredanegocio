@@ -44,7 +44,7 @@ Route::post('password/reset', 'Auth\PasswordController@postReset');
 
 
 Route::get('/email',[
-   'uses' => 'HomeController@sendEmailTest'
+    'uses' => 'HomeController@sendEmailTest'
 
 ]);
 
@@ -58,7 +58,7 @@ Route::get('/', [
 /*Route::post('/payment', 'PaymentController@pay');*/
 
 
-        /* anuncios routes */
+/* anuncios routes */
 Route::group(['middleware'=>'auth'], function() {
 
 
@@ -172,7 +172,7 @@ Route::group(['prefix' => 'admin', 'middleware'=>'auth','where'=>['id'=>'[0-9]+'
     });
 
     Route::group(['prefix' => 'perfil'],function(){
-       Route::get('/',['as'=> 'perfil','uses' => 'PerfilController@index']);
+        Route::get('/',['as'=> 'perfil','uses' => 'PerfilController@index']);
     });
 
     Route::group(['prefix' => 'anuncios'],function() {
@@ -182,6 +182,7 @@ Route::group(['prefix' => 'admin', 'middleware'=>'auth','where'=>['id'=>'[0-9]+'
         Route::get('{id}/edit',['as'=>'admin.anuncios.edit','uses'=>'AdvertController@edit']);
         Route::get('destroy/{id}',['as'=> 'anuncios.destroy','uses' => 'AdvertController@destroy'  ]);
         Route::get('destroy-image/{id}','AdvertController@destroyOneImage');
+        Route::get('capa-image/{id}','AdvertController@capaImagem');
         //Route::get('destroy/{id}/image',['as'=>'products.images.destroy', 'uses' => 'ProductsController@destroyImage']);
 
     });
@@ -229,7 +230,7 @@ Route::get('anuncio/{tipo_anuncio}/{id}/{url_anuncio}',[
 ]);
 
 Route::get('{id}/{url_name}',[
-   'uses' => "HomeController@hotsite"
+    'uses' => "HomeController@hotsite"
 
 ]);
 //procura cep
