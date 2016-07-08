@@ -52,24 +52,26 @@ function pagination(page) {
                     var char = "imoveis/site";
                     var url;
                     /*html += '<input type="hidden" value="' + page + '" id="page" name="page" />'; */
+                    console.log(page);
                     for (var i = 0; i < len; i++) {
                         cont++;
                         if (cont > 12) {
                             cont = 0;
-                            if(!page){
-                            html += '<div style="margin-bottom: 20px" class="item col-xs-12 col-sm-12 col-lg-12 col-md-12 bloco-item"> <a class="Anuncie aqui" target="_blank" title="Anuncie aqui" href="1545398/predileta-imoveis"> <img src="images/bannerPredileta.png" class="img-responsive center-block" /></a></div>';
+                            html += '<div style="margin-bottom: 20px" class="item col-xs-12 col-sm-12 col-lg-12 col-md-12 bloco-item">';
+                            if(!page || page == 1){
+
+                                html+='<a class="Anuncie aqui" target="_blank" title="Anuncie aqui" href="1545398/predileta-imoveis"> <img src="images/bannerPredileta.png" class="img-menor img-responsive center-block" /></a>';
                             }else if(page == 2){
-                                html += '<div style="margin-bottom: 20px" class="item col-xs-12 col-sm-12 col-lg-12 col-md-12 bloco-item"> <a class="Anuncie aqui" target="_blank" title="Anuncie aqui" href="1830134/imobiliaria-visao"> <img src="images/bannerVisao.png" class="img-responsive center-block" /></a></div>';
+                                html+='<a class="Anuncie aqui" target="_blank" title="Anuncie aqui" href="1830134/imobiliaria-visao"> <img src="images/bannerVisao.png" class="img-menor img-responsive center-block" /></a>';
+
                             }else{
-                                html += '<div style="margin-bottom: 20px" class="item col-xs-12 col-sm-12 col-lg-12 col-md-12 bloco-item"><script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script><ins class="adsbygoogle"style="display:block" data-ad-client="ca-pub-9276435422488602" data-ad-slot="4429425578" data-ad-format="auto"></ins>  <script> (adsbygoogle = window.adsbygoogle || []).push({}) </script></div>';
+                                html += '<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script><ins class="adsbygoogle"style="display:block" data-ad-client="ca-pub-9276435422488602" data-ad-slot="4429425578" data-ad-format="auto"></ins>  <script> (adsbygoogle = window.adsbygoogle || []).push({}) </script>';
                             }
+                            html+='</div>';
                         }
                         html += '<div class="item col-xs-12 col-sm-6 col-lg-4 col-md-4 bloco-item">';
 
-                       /* if(da.user.typeuser_id == 1){
-                            html+=  '<span class="contador-visita"><i class="fa fa-eye" aria-hidden="true"></i>' +data[i].advert_count +'</span>';
-                        } */
-                    html+='<a class="item-total" href="/anuncio/' + data[i].tipo_anuncio + '/' + data[i].id + '/' + data[i].url_anuncio + '"><div class="thumbnail">';
+                        html+='<a class="item-total" href="/anuncio/' + data[i].tipo_anuncio + '/' + data[i].id + '/' + data[i].url_anuncio + '"><div class="thumbnail">';
 
                         //Validação se existe imagem ou nao
                         if (data[i].images[0]) {
