@@ -5536,6 +5536,10 @@ span.minisite-area-atuacao-texto{
     font-size: 20px;
 }
 
+.hide-div{
+    display: none;
+}
+
 #tipo-plano span{
     font-weight: bold;
 }

@@ -78,40 +78,50 @@
                     <h2><i class="fa fa-map-marker"></i> Sobre a Localização</h2>
                     <hr />
                     <div class="row">
+                        <div class="col-md-12">
+                            <div style="padding-left: 0px" class="checkbox">
+                                <label><input id="ativoEndereco"type="checkbox" value="ativo" checked> Não cadastrar endereço</label>
+                            </div>
+                        </div>
+
                         <div class="col-md-6 col-lg-6 anuncio-area-localizacao">
-                            <div class="form-group has-feedback">
-                                <label>CEP: *</label><br />
-                                <input type="text" onkeypress="mascaraCampo(this,mascCEP)" class="form-control input-large" id='cep' data-error="Campo não pode ser vazio" placeholder="CEP" value="{{old('cep')}}" name="cep" required maxlength="9"/>
-                                <span class="form-control-feedback" aria-hidden="true"></span>
-                                <div class="help-block with-errors"></div>
+                            <div class="hide-div">
+                                <div class="form-group has-feedback">
+                                    <label>CEP: *</label><br />
+                                    <input type="text" onkeypress="mascaraCampo(this,mascCEP)" class="form-control input-large" id='cep'  data-error="Campo não pode ser vazio" placeholder="CEP" value="{{old('cep')}}" name="cep" required maxlength="9"/>
+                                    <span class="form-control-feedback" aria-hidden="true"></span>
+                                    <div class="help-block with-errors"></div>
+                                </div>
                             </div>
                             <div class="form-group has-feedback localizacao hide">
                                 <label>Estado: *</label><br />
-                                <input type="text"  data-minlength="1" class="form-control input-large" id="estado" data-error="Campo não pode ser vazio" required  name="estado" value="{{old('estado')}}" required readonly />
-                                <span class="form-control-feedback"></span>
-                            </div>
-                            <div class="form-group has-feedback localizacao hide">
-                                <label>Cidade: *</label><br />
-                                <input type="text"  data-minlength="1" class="form-control input-large" id="cidade" data-error="Campo não pode ser vazio" required  name="cidade" value="{{old('cidade')}}" required readonly />
-                                <span class="form-control-feedback"></span>
-                            </div>
-                            <div class="form-group has-feedback localizacao hide">
-                                <label>Zona/Bairro: *</label><br />
-                                <input type="text"  data-minlength="1" class="form-control input-large" id="bairro" data-error="Campo não pode ser vazio" required placeholder="Nome do bairro ou zona*" value="{{old('bairro')}}" name="bairro" required readonly />
+                                <input type="text"  data-minlength="1" class="form-control input-large" id="estado" data-error="Campo não pode ser vazio"  name="estado" value="{{old('estado')}}" />
                                 <span class="form-control-feedback"></span>
                             </div>
 
-                            <div class="form-group has-feedback localizacao hide">
-                                <label>Nome da rua: *</label><br />
-                                <input type="text" class="form-control input-large" id='rua' value="{{old('rua')}}" data-error="Campo não pode ser vazio" placeholder="Ex.: Av. Paulista" name="rua" required readonly />
-                                <span class="form-control-feedback" aria-hidden="true"></span>
-                                <div class="help-block with-errors"></div>
+                            <div class="form-group has-feedback localizacao">
+                                <label>Cidade: *</label><br />
+                                <input type="text"  data-minlength="1" class="form-control input-large" id="cidade" data-error="Campo não pode ser vazio" required  name="cidade" value="{{old('cidade')}}" />
+                                <span class="form-control-feedback"></span>
                             </div>
-                            <div class="form-group">
-                                <label>Número da casa/prédio: *</label><br />
-                                <input maxlength="6" onkeypress="mascaraCampo(this, mascSoNumeros)" type="text" class="form-control input-small" id="numero" placeholder="Ex.: 9999" value="{{old('numero')}}" name="numero" required data-error="Campo não pode ser vazio" />
-                                <span class="form-control-feedback" aria-hidden="true"></span>
-                                <div class="help-block with-errors"></div>
+                            <div class="form-group has-feedback localizacao">
+                                <label>Zona/Bairro: *</label><br />
+                                <input type="text"  data-minlength="1" class="form-control input-large" id="bairro" data-error="Campo não pode ser vazio"  placeholder="Nome do bairro ou zona*" value="{{old('bairro')}}" name="bairro"  />
+                                <span class="form-control-feedback"></span>
+                            </div>
+                            <div class="hide-div">
+                                <div class="form-group has-feedback localizacao">
+                                    <label>Nome da rua: *</label><br />
+                                    <input type="text" class="form-control input-large" id='rua' value="{{old('rua')}}" data-error="Campo não pode ser vazio" placeholder="Ex.: Av. Paulista" name="rua"  />
+                                    <span class="form-control-feedback" aria-hidden="true"></span>
+                                    <div class="help-block with-errors"></div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Número da casa/prédio: *</label><br />
+                                    <input maxlength="6" onkeypress="mascaraCampo(this, mascSoNumeros)" type="text" class="form-control input-small" id="numero" placeholder="Ex.: 9999" value="{{old('numero')}}" name="numero" data-error="Campo não pode ser vazio" />
+                                    <span class="form-control-feedback" aria-hidden="true"></span>
+                                    <div class="help-block with-errors"></div>
+                                </div>
                             </div>
                             <div style="padding-left: 0px" class="checkbox">
                                 <label><input name="active" type="checkbox" value="1">Ocultar endereço (não mostrará no anúncio)</label>

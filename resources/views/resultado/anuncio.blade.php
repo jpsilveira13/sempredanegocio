@@ -24,7 +24,7 @@
                 </button>
             </div>
             <div style="margin-bottom: 12px" class="col-md-12 col-xs-12 col-sm-12 center-block">
-                <a class="Anuncie aqui" target="_blank" title="Anuncie aqui" href="{{url('contato')}}"> <img src="{{url('images/bannerImo.png')}}" class="img-responsive center-block" /></a>
+                <a class="Anuncie aqui" target="_blank" title="Anuncie aqui" href="{{url('seja-parceiro')}}"> <img src="{{url('images/bannerImo.png')}}" class="img-responsive center-block" /></a>
             </div>
             <br />
             <div class="clearfix"></div>
@@ -61,9 +61,13 @@
                             <section class="clearfix sessao-area-filtro bg-branco ">
                                 <h5 class="sessao-texto-pesquisa">Modalidade</h5>
                                 <select  value="<?=(Session::get('tipo_anuncio'))?>" name="tipo_anuncio" class="search-results-select search-results-select-img escolhaAcomodacao">
-                                    <option value="">Seleciona uma opção</option>
+
                                     @if(\Input::get('transacao') == 'venda')
-                                        <option value="venda" selected>Comprar</option>
+                                        <option selected value="venda">Comprar</option>
+                                        <option value="aluga">Alugar</option>
+                                    @elseif(!\Input::get('transacao'))
+                                        <option selected value="">Seleciona uma opção</option>
+                                        <option value="venda">Comprar</option>
                                         <option value="aluga">Alugar</option>
                                     @else
                                         <option value="venda">Comprar</option>

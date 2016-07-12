@@ -33,6 +33,10 @@ Route::get('parcerias','HomeController@parceriaTela');
 Route::get('contato','HomeController@contato');
 Route::post('enviar/contato',['as'=> 'contato.form','uses' => 'HomeController@contatoEnvio']);
 
+Route::get('seja-parceiro','HomeController@sejaParceiro');
+Route::post('enviar/parceiro',['as'=> 'parceiro.form','uses' => 'HomeController@parceiroEnvio']);
+
+
 
 // Rotas para solicitar trocar de senha...
 Route::get('password/email', 'Auth\PasswordController@getEmail');

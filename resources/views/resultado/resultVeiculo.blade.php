@@ -22,7 +22,7 @@
             </button>
         </div>
         <div style="margin-bottom: 12px" class="col-md-12 col-xs-12 col-sm-12 center-block">
-            <a class="Anuncie aqui" target="_blank" title="Anuncie aqui" href="{{url('contato')}}"> <img src="{{url('images/bannerGarage.png')}}" class="img-responsive center-block" /></a>
+            <a class="Anuncie aqui" target="_blank" title="Anuncie aqui" href="{{url('seja-parceiro')}}"> <img src="{{url('images/bannerGarage.png')}}" class="img-responsive center-block" /></a>
         </div>
         <br />
         <div class="clearfix"></div>

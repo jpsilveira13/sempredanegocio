@@ -91,9 +91,6 @@ function mascData(v){
                                              //de novo (para o segundo bloco de nï¿½meros)
     return v
 }
-
-
-
 function mvalor(v){
     v=v.replace(/\D/g,"");//Remove tudo o que não é dígito
     v=v.replace(/(\d)(\d{8})$/,"$1.$2");//coloca o ponto dos milhões
@@ -102,8 +99,6 @@ function mvalor(v){
     v=v.replace(/(\d)(\d{2})$/,"$1,$2");//coloca a virgula antes dos 2 últimos dígitos
     return v;
 }
-
-
 function mvalor2(v){
     v=v.replace(/[^1234567890],./g,""); //somente numeros, ponto e virgula
     return v;
@@ -140,7 +135,17 @@ $(document).ready(function(){
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
     });
+    $('#ativoEndereco').on('click', function () {
+        if($(this).is(':checked')){
+            $('.hide-div').css('display','none');
+            $('#rua').val('');
+            $('#estado').val('');
+            $('#cep').val('');
 
+        }else{
+            $('.hide-div').css('display','block');
+        }
+    });
     //tela de plano
 
     $('#escolhaPlanos').on('change',function(e){

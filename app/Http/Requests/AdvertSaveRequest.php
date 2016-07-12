@@ -25,11 +25,6 @@ class AdvertSaveRequest extends Request
     {
         $rules = [
             'tipo_anuncio' => 'required',
-            'estado' => 'required',
-            'cidade' => 'required',
-            'bairro' => 'required',
-            'rua' => 'required',
-
             'numero_quarto' => 'numeric',
             'numero_garagem' => 'numeric',
             'numero_suite' => 'numeric',

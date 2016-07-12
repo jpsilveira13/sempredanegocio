@@ -28,6 +28,7 @@ use sempredanegocio\Models\User;
 use sempredanegocio\Models\VeiculoAno;
 use sempredanegocio\Models\VeiculoMarca;
 use sempredanegocio\Models\VeiculoModelo;
+use sempredanegocio\Models\SejaParceiro;
 
 class HomeController extends Controller
 {
@@ -399,6 +400,14 @@ class HomeController extends Controller
         ]);
     }
 
+    public function sejaParceiro(){
+
+        return view('site.pages.seja_parceiro', [
+            'title' => 'Sempredanegocio.com.br | Não perca tempo! Anuncie.',
+            'description' => 'Alguma dúvida? Entra em contato conosco!',
+        ]);
+    }
+
     public function contatoEnvio(Requests\ContatoSaveRequest $requests){
 
         $data = $requests->all();
@@ -416,6 +425,22 @@ class HomeController extends Controller
 
     }
 
+    public function parceiroEnvio(Requests\ParceiroSaveRequest $requests){
+
+        $data = $requests->all();
+        if(SejaParceiro::create($data)) {
+            \Mail::send('emails.contactForm',$data,function($message) use ($data){
+                $message->from('comercial@sempredanegocio.com.br', 'Sempre da Negócio');
+
+                $message->to('comercial@sempredanegocio.com.br');
+                $message->subject($data['name']. ', entrou em contato com você ');
+
+            });
+        }
+
+        return redirect('/')->with('contato', 'Enviado com sucesso!! Em breve entraremos em contato!');
+
+    }
 
 
     public function scopeImoveis(){

@@ -230,7 +230,7 @@
                             </p>
                     </div>
                     @if(!auth()->guest())
-                        @if(auth()->user()->id == $advertGeral->user->id)
+                        @if(auth()->user()->id == $advertGeral->user->id || auth()->user()->typeuser_id == 1)
                             <div id="codigoAnuncio">
                                 <p><strong>Número de visitas do anúncio: </strong> {{$advertGeral->advert_count}}</p>
                             </div>
