@@ -26,7 +26,7 @@ function pagination(page) {
                 $('#products').empty();
 
             }, success: function (data) {
-                console.log(page);
+                console.log(data);
                 $('html, body').animate({scrollTop: 0}, 'slow');
                 if(data.total== 0) {
                     $("#page-selection").hide();
@@ -52,7 +52,7 @@ function pagination(page) {
                     var char = "imoveis/site";
                     var url;
                     /*html += '<input type="hidden" value="' + page + '" id="page" name="page" />'; */
-                    console.log(page);
+
                     for (var i = 0; i < len; i++) {
                         cont++;
                         if (cont > 12) {
@@ -74,7 +74,22 @@ function pagination(page) {
                         html+='<a class="item-total" href="/anuncio/' + data[i].tipo_anuncio + '/' + data[i].id + '/' + data[i].url_anuncio + '"><div class="thumbnail">';
 
                         //Validação se existe imagem ou nao
-                        if (data[i].images[0]) {
+
+                       /* for(var j = 1;j<data[i].images[j].length;j++){
+                            console.log(data)
+                        } */
+
+                        if(data[i].imagecapa){
+                            console.log(data[i].imagecapa.extension);
+                            if (data[i].imagecapa.extension.indexOf(char) > -1) {
+                                url = "galeria/" + data[i].imagecapa.extension;
+
+                            } else {
+                                url = data[i].imagecapa.extension;
+
+                            }
+                            html += '<img class="group list-group-image content-img-sugestao lazy transition-img" data-original="' + url + '" width="220" height="229" alt="titulo imagem" />'
+                        }else if (data[i].images[0]) {
 
                             if (data[i].images[0].extension.indexOf(char) > -1) {
                                 url = "galeria/" + data[i].images[0].extension;

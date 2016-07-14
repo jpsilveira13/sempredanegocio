@@ -4,9 +4,10 @@ namespace sempredanegocio\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class AdvertImage extends Model
+class ImageCape extends Model
 {
 
+    protected $table = 'imagem_capa';
     protected $fillable = [
         'advert_id',
         'extension',
@@ -14,13 +15,9 @@ class AdvertImage extends Model
 
     ];
 
-    public function advertimage(){
+    public function advertcapaimage(){
         return $this->belongsTo(Advert::class);
 
-    }
-
-    public function imagemDestaque($query){
-        return $query->where('destaque',1);
     }
 
 }

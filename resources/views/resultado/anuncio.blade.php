@@ -174,6 +174,7 @@
                                             <div class="thumbnail">
 
                                                 @if(count($queryAnuncio->images))
+
                                                     <?php
                                                     $pos = strpos($queryAnuncio->images()->first()->extension, "amazonaws.com");
 

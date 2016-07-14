@@ -48,7 +48,7 @@ function scrollPagina(page) {
                 }
             },
             success: function(data) {
-
+                cons
                 if (data.data.length != 0) {
                     $('#loading-page').css('display','block');
                     continuaScroll = true;

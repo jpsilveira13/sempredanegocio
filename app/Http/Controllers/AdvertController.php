@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use sempredanegocio\Models\AdvertImovel;
 use sempredanegocio\Models\AdvertVeiculo;
+use sempredanegocio\Models\ImageCape;
 use sempredanegocio\Models\SubCategory;
 use sempredanegocio\Models\User;
 use sempredanegocio\Http\Requests;
@@ -29,13 +30,15 @@ class AdvertController extends Controller
     private $subcategories;
     private $advertImage;
     private $features;
-    public function  __construct(Advert $advertModel,AdvertImovel $advertImovel, AdvertVeiculo $advertVeiculo, SubCategory $subcategories,Feature $feature,AdvertImage $advertImage){
+    private $imagemCapa;
+    public function  __construct(Advert $advertModel,AdvertImovel $advertImovel, AdvertVeiculo $advertVeiculo, SubCategory $subcategories,Feature $feature,AdvertImage $advertImage, ImageCape $imagemCapa){
         $this->advertModel = $advertModel;
         $this->advertImovel = $advertImovel;
         $this->advertVeiculo = $advertVeiculo;
         $this->subcategories = $subcategories;
         $this->advertImage = $advertImage;
         $this->features = $feature;
+        $this->imagemCapa = $imagemCapa;
 
     }
 
@@ -294,25 +297,16 @@ class AdvertController extends Controller
 
     }
 
-    public function capaImagem($id, Request $request){
-        //$image = AdvertImage::where('id',$id)->get();
+    public function capaImagem($id, Request $request)
+    {
+
         $image = $this->advertImage->find($id); // Aqui eu tenho a imagem capa
+
         $idAd = $image->advert_id; //aqui eu peguei o advert_id
-        //Aqui é uma coleçaoo
-        $image2 = AdvertImage::where('advert_id',$idAd)->where('capa',1)->first();
+        $extension = $image->extension;
 
-        if($request->ajax()) {
-            if ($image2) {
-                $image2->capa = 0;
-                $image2->update();
-            }
-
-                $image->capa = 1;
-                $image->update();
-
-            return response(['msg' => 'Imagem deletada com sucesso', 'status' => 'success']);
-        }
-        return response(['msg' => 'Ocorreu um erro na execução', 'status' => 'false']);
+        $this->imagemCapa->where('advert_id', $idAd)->delete($id);
+        $this->imagemCapa->create(['advert_id' => $idAd, 'extension' => $extension]);
     }
 
 }

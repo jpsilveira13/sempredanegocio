@@ -47,6 +47,15 @@ class Advert extends Model
         return $this->hasMany(AdvertImage::class,'advert_id','id');
     }
 
+    public function imagecapa(){
+
+        return $this->hasOne(ImageCape::class,'advert_id','id');
+    }
+
+    public function getImagemDestaque($id){
+        return AdvertImage::where('advert_id',$id)->where('capa',1);
+    }
+
     public function subcategory(){
         return $this->belongsTo(SubCategory::class,'subcategories_id','id');
 
@@ -66,6 +75,9 @@ class Advert extends Model
         return $this->belongsTo(AdvertMessage::class);
 
     }
+
+
+
     public function cidades(){
         return $this->hasMany(Advert::class);
 

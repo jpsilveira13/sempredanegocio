@@ -127,13 +127,12 @@ $(document).ready(function () {
                 url: url,
                 type: "GET",
                 data: id,
-                success: function (msg) {
+                success: function () {
 
-                    if (msg.status === 'success') {
                         swal("Pronto!", "Capa selecionada!", "success");
-                    }
 
-                    $('#imagem'+id+'img').css('border','#000');
+
+                    $('#imagem'+id).css('opacity','1');
 
                 }
             });

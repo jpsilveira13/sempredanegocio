@@ -36,6 +36,7 @@ Route::post('enviar/contato',['as'=> 'contato.form','uses' => 'HomeController@co
 Route::get('seja-parceiro','HomeController@sejaParceiro');
 Route::post('enviar/parceiro',['as'=> 'parceiro.form','uses' => 'HomeController@parceiroEnvio']);
 
+Route::get('testeImagem','HomeController@imagemDestaque');
 
 
 // Rotas para solicitar trocar de senha...

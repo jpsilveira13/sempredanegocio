@@ -125,6 +125,7 @@ class HomeController extends Controller
 
     public function anuncieCategoria(){
         $anuncieCats = Category::get();
+
         $anuncieSubCat = SubCategory::get();
         $anuncieCaract = Feature::get();
         $typeusers = TypeUser::get();
@@ -452,7 +453,7 @@ class HomeController extends Controller
         $min_area = \Input::has('min_area') ? Input::get('min_area'): null;
         $max_area = \Input::has('max_area') ? Input::get('max_area'): null;
         $query = Advert::select('adverts.*')->join('advert_imovel','adverts.id','=','advert_imovel.advert_id');
-        /*if($id_user){
+              /*if($id_user){
 
             $query->where('user_id',$id_user);
 
@@ -505,7 +506,7 @@ class HomeController extends Controller
             $query->where('numero_garagem', \Input::get('num_vagas'));
 
         }
-        return Response::json($query->where('status', '>', '0')->orderBy('destaque','desc')->with('images','advertImovel')->paginate(18));
+        return Response::json($query->where('status', '>', '0')->orderBy('destaque','desc')->with('images','advertImovel','imagecapa')->paginate(18));
 
     }
 
@@ -714,6 +715,13 @@ class HomeController extends Controller
                 'description' => 'Os melhores anúncios no melhor site.',
             ]);
         }
+    }
+
+    public function imagemDestaque(){
+
+        $teste = Advert::take(18)->get();
+
+        return view('site.pages.teste', compact('teste'));
     }
 
 }

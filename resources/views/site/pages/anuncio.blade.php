@@ -345,12 +345,6 @@ Olá, Gostaria de ter mais informações sobre o  anúncio {{$advertGeral->subca
                         <div class="col-lg-12" style="margin-bottom:15px"><a href="https://wwws8.hsbc.com.br/HPB-SIMULACAOAUF-PWS/servlets/SimulacaoPwsServlet?ServletState=1" target="_blank" alt="" title=""><img border="0" width="190" height="53" src="{{url('images/hsbc.jpg')}}" alt="" title="" class="center-block"></a></div>
 
                         @endif
-
-                                <!--<span class="title">Mapa do Imóvel</span>https://www2.bancobrasil.com.br/aapf/login.jsp
-                        <div class="anuncio-area-mapa larMapa center-block">
-                            <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d60081.57254231143!2d-47.93496225!3d-19.750978449999998!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1spt-BR!2sbr!4v1447264947839" width="100%" height="100%" frameborder="0" style="border:0" allowfullscreen=""></iframe>
-                        </div> -->
-
                         @if($advertGeral->advertImovel != null)
                             <span class="title">Simuladores</span>
                             <div class="col-lg-12" style="margin-bottom:15px"><a href="http://www8.caixa.gov.br/siopiinternet/simulaOperacaoInternet.do?method=inicializarCasoUso" target="_blank" alt="" title=""><img border="0" width="190" height="53" src="{{url('images/caixa.jpg')}}" alt="" title="" class="center-block" /></a></div>

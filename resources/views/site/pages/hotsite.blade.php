@@ -97,7 +97,23 @@
                     @if($i < 5)
                         <a class="menu-show" href="{{url('/')}}/anuncio/{{$advert->tipo_anuncio}}/{{$advert->id}}/{{$advert->url_anuncio}}">
                             <article class="minisite-anuncio-destaque">
-                                @if(count($advert->images))
+                                @if($advert->imagecapa)
+                                    <?php
+                                    $pos = strpos($advert->imagecapa()->first()->extension, "imoveis/site/");
+
+                                    $url1 = "";
+                                    if ($pos === false) {
+
+                                    $url1 = $advert->imagecapa()->first()->extension;
+                                    ?>
+                                    <img class="group list-group-image content-img-sugestao lazy transition-img" data-original="{{$url1}}" width="220" height="229" alt="titulo imagem" />
+                                    <?php }else{
+                                    $url1 = "galeria/".$advert->imagecapa()->first()->extension;
+                                    ?>
+                                    <img class="group list-group-image content-img-sugestao lazy transition-img" data-original="{{url($url1)}}" width="220" height="229" alt="titulo imagem" />
+                                    <?php }?>
+
+                                @elseif(count($advert->images))
                                     <?php
                                     $pos = strpos($advert->images()->first()->extension, "imoveis/site/");
 
@@ -274,7 +290,6 @@
                                         <option value="2">2+</option>
                                         <option value="3">3+</option>
                                         <option value="4">4+</option>
-
                                     </select>
                                 </label>
                                 <label class="sessao-texto-pesquisa sessao-area-filtro-label-numeric fontsize11px" >
@@ -383,7 +398,22 @@
                                     @endif
                                     <a class="item-total" href="{{url('/')}}/anuncio/{{$advert->tipo_anuncio}}/{{$advert->id}}/{{str_slug($advert->url_anuncio)}}" >
                                         <div class="thumbnail">
-                                            @if(count($advert->images))
+                                            @if($advert->imagecapa)
+                                                <?php
+                                                $pos = strpos($advert->imagecapa->extension, "imoveis/site/");
+                                                $url1 = "";
+                                                if ($pos === false) {
+
+                                                $url1 = $advert->imagecapa->extension;
+                                                ?>
+                                                <img class="group list-group-image content-img-sugestao lazy transition-img" data-original="{{$url1}}" width="220" height="229" alt="titulo imagem" />
+                                                <?php }else{
+                                                $url1 = "galeria/".$advert->imagecapa->extension;
+                                                ?>
+                                                <img class="group list-group-image content-img-sugestao lazy transition-img" data-original="{{url($url1)}}" width="220" height="229" alt="titulo imagem" />
+                                                <?php }?>
+
+                                            @elseif(count($advert->images))
                                                 <?php
                                                 $pos = strpos($advert->images()->first()->extension, "imoveis/site/");
 
@@ -500,14 +530,8 @@
                         </div>
                     </div>
                 </div>
-
             </div>
-
         </div>
-
     </div>
-
 </div>
-
-
 @endsection
