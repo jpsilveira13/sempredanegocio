@@ -135,7 +135,7 @@
                                                 </a>
                                                 <?php
                                                 }else{
-                                                    $url1 = "galeria/".$images->extension;
+                                                $url1 = "galeria/".$images->extension;
                                                 ?>
                                                 <a href="{{$url1}}" data-lightbox="roadtrip" data-title="Imagem do imóvel">
                                                     <img src="{{url($url1)}}" class="img-responsive">
@@ -214,7 +214,7 @@
                         @if($advertGeral->features()->count() > 0)
                             <p></p>
                             <p>
-                                <strong>Características do Imóvel:</strong>
+                                <strong>Características:</strong>
 
                                 @foreach($advertGeral->features()->get() as $feature)
                                     {{$feature->name}},
@@ -344,15 +344,15 @@ Olá, Gostaria de ter mais informações sobre o  anúncio {{$advertGeral->subca
                         <div class="col-lg-12" style="margin-bottom:15px"><a href=" https://www2.bancobrasil.com.br/aapf/login.jsp?url=emprestimo/simulacao/8B6-00.jsp" target="_blank" alt="" title=""><img border="0" width="190" height="56" src="{{url('images/banco-brasil.jpg')}}" alt="" title="" class="center-block"></a></div>
                         <div class="col-lg-12" style="margin-bottom:15px"><a href="https://wwws8.hsbc.com.br/HPB-SIMULACAOAUF-PWS/servlets/SimulacaoPwsServlet?ServletState=1" target="_blank" alt="" title=""><img border="0" width="190" height="53" src="{{url('images/hsbc.jpg')}}" alt="" title="" class="center-block"></a></div>
 
-                        @endif
-                        @if($advertGeral->advertImovel != null)
-                            <span class="title">Simuladores</span>
-                            <div class="col-lg-12" style="margin-bottom:15px"><a href="http://www8.caixa.gov.br/siopiinternet/simulaOperacaoInternet.do?method=inicializarCasoUso" target="_blank" alt="" title=""><img border="0" width="190" height="53" src="{{url('images/caixa.jpg')}}" alt="" title="" class="center-block" /></a></div>
-                            <div class="col-lg-12" style="margin-bottom:15px"><a href="https://wwws3.hsbc.com.br/HPB-CHM-SIMULADOR/servlets/HPBCreditoImobiliarioServlet" target="_blank" alt="" title=""><img border="0" width="190" height="53" src="{{url('images/santander.jpg')}}" alt="" title="" class="center-block" /></a></div>
-                            <div class="col-lg-12" style="margin-bottom:15px"><a href="https://wwws3.hsbc.com.br/HPB-CHM-SIMULADOR/servlets/HPBCreditoImobiliarioServlet" target="_blank" alt="" title=""><img border="0" width="190" height="53" src="{{url('images/hsbc.jpg')}}" alt="" title="" class="center-block"></a></div>
-                            <div class="col-lg-12" style="margin-bottom:15px"><a href="http://www.bb.com.br/portalbb/page44,116,19519,1,0,1,1.bb?codigoNoticia=377&amp;codigoMenu=172&amp;codigoRet" target="_blank" alt="" title=""><img border="0" width="190" height="56" src="{{url('images/banco-brasil.jpg')}}" alt="" title="" class="center-block"></a></div>
+                    @endif
+                    @if($advertGeral->advertImovel != null)
+                        <span class="title">Simuladores</span>
+                        <div class="col-lg-12" style="margin-bottom:15px"><a href="http://www8.caixa.gov.br/siopiinternet/simulaOperacaoInternet.do?method=inicializarCasoUso" target="_blank" alt="" title=""><img border="0" width="190" height="53" src="{{url('images/caixa.jpg')}}" alt="" title="" class="center-block" /></a></div>
+                        <div class="col-lg-12" style="margin-bottom:15px"><a href="https://wwws3.hsbc.com.br/HPB-CHM-SIMULADOR/servlets/HPBCreditoImobiliarioServlet" target="_blank" alt="" title=""><img border="0" width="190" height="53" src="{{url('images/santander.jpg')}}" alt="" title="" class="center-block" /></a></div>
+                        <div class="col-lg-12" style="margin-bottom:15px"><a href="https://wwws3.hsbc.com.br/HPB-CHM-SIMULADOR/servlets/HPBCreditoImobiliarioServlet" target="_blank" alt="" title=""><img border="0" width="190" height="53" src="{{url('images/hsbc.jpg')}}" alt="" title="" class="center-block"></a></div>
+                        <div class="col-lg-12" style="margin-bottom:15px"><a href="http://www.bb.com.br/portalbb/page44,116,19519,1,0,1,1.bb?codigoNoticia=377&amp;codigoMenu=172&amp;codigoRet" target="_blank" alt="" title=""><img border="0" width="190" height="56" src="{{url('images/banco-brasil.jpg')}}" alt="" title="" class="center-block"></a></div>
 
-                        @endif
+                    @endif
                 </aside>
 
                 <aside class="box-default clearfix outras-informacoes">

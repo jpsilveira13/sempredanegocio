@@ -153,9 +153,10 @@
                                     <select name="modelo_id" class="form-control" id="modelo"></select>
                                 </div>
                             </div>
+
                             <div id="divAno" class="col-md-4 col-lg-4 col-sm-6 col-xs-12">
-                                <div class="form-group has-feedback"> <label for="Subcategoria">Ano</label>
-                                    <select name="tipo" class="form-control" id="tipo"></select>
+                                <div class="form-group has-feedback"> <label for="Ano Veiculo">Ano</label>
+                                    <input  class="form-control" type="text" name="tipo" maxlength="4"/>
                                 </div>
                             </div>
                         </div>

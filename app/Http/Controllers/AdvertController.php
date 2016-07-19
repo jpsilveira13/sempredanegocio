@@ -59,7 +59,6 @@ class AdvertController extends Controller
     public function store(Storage $storage,Requests\AdvertSaveRequest $request, AdvertImage $advertImage, User $user, AdvertImovel $advertImovel, AdvertVeiculo $advertVeiculo){
 
         $data = $request->all();
-
         //aqui eu atualizo as informações do usuário
 
         $data['user_id']    = Auth::user()->id;
@@ -196,8 +195,6 @@ class AdvertController extends Controller
         $data = $request->all();
         $advert = $this->advertModel->find($id);
         if(!empty($data['caracteristicas'])){
-
-
             $features = $data['caracteristicas'];
             $advert->features()->sync($features);
             unset($data['caracteristicas']);
@@ -294,6 +291,21 @@ class AdvertController extends Controller
             return response(['msg' => 'Imagem deletada com sucesso', 'status' => 'success']);
         }
         return response(['msg' => 'Ocorreu um erro na execução', 'status' => 'false']);
+
+    }
+
+    public function postUpload($id,Request $request){
+        $idAdv = $this->advertModel->find($id)->id;
+
+        $image = $request->file('file');
+        $renamed = "imoveis/site/".md5(date('Ymdhms').$image->getClientOriginalName()).'.'.$image->getClientOriginalExtension();
+
+        $path = public_path().'/galeria/'.$renamed;
+
+        Image::make($image->getRealPath())->resize(678,407)->save($path);
+        $create =$this->advertImage->create(['advert_id' => $idAdv,'extension' => $renamed]);
+
+        return $create;
 
     }
 

@@ -354,16 +354,9 @@ class HomeController extends Controller
         );
         $rules = array(
             'email_usuario'              =>  'required',
-            'telefone_usuario'           =>  'required',
             'mensagem'                   =>  'required',
         );
-        if(AdvertMessage::create($userData)) {
 
-            //return success  message
-            return Response::json(array(
-                'success' => true
-            ));
-        }
 
         $validator = Validator::make($userData,$rules);
         if($validator->fails()){
@@ -380,6 +373,13 @@ class HomeController extends Controller
                 $message->replyTo($userData['email_usuario'], $userData['nome']);
 
             });
+            if(AdvertMessage::create($userData)) {
+
+                //return success  message
+                return Response::json(array(
+                    'success' => true
+                ));
+            }
 
         }
 

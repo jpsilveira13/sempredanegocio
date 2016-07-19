@@ -189,6 +189,9 @@ Route::group(['prefix' => 'admin', 'middleware'=>'auth','where'=>['id'=>'[0-9]+'
         Route::get('destroy-image/{id}','AdvertController@destroyOneImage');
         Route::get('capa-image/{id}','AdvertController@capaImagem');
         //Route::get('destroy/{id}/image',['as'=>'products.images.destroy', 'uses' => 'ProductsController@destroyImage']);
+        Route::post('create-image/upload', ['as' => 'anuncios.image', 'uses' => 'AdminController@create']);
+        Route::post('upload/{id}', ['as' => 'adverts.images.store', 'uses' =>'AdvertController@postUpload']);
+
 
     });
 

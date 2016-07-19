@@ -51,6 +51,65 @@ $(document).ready(function () {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
     });
+
+    var photo_counter = 0;
+    Dropzone.options.realDropzone = {
+
+        uploadMultiple: false,
+        parallelUploads: 100,
+        maxFilesize: 8,
+        previewsContainer: '#dropzonePreview',
+        previewTemplate: document.querySelector('#preview-template').innerHTML,
+        addRemoveLinks: true,
+        dictRemoveFile: 'Remover',
+        dictFileTooBig: 'Image is bigger than 8MB',
+
+        // The setting up of the dropzone
+        init:function() {
+
+            this.on("removedfile", function(file) {
+                url = "/admin/anuncios/destroy-image/"+id;
+                $.ajax({
+                    type: 'POST',
+                    url: 'url',
+                    data: {id: file.name, _token: $('#csrf-token').val()},
+                    dataType: 'html',
+                    success: function(data){
+                        var rep = JSON.parse(data);
+                        if(rep.code == 200)
+                        {
+                            photo_counter--;
+                            $("#photoCounter").text( "(" + photo_counter + ")");
+                        }
+
+                    }
+                });
+
+            } );
+        },
+        error: function(file, response) {
+            if($.type(response) === "string")
+                var message = response; //dropzone sends it's own error messages in string
+            else
+                var message = response.message;
+            file.previewElement.classList.add("dz-error");
+            _ref = file.previewElement.querySelectorAll("[data-dz-errormessage]");
+            _results = [];
+            for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+                node = _ref[_i];
+                _results.push(node.textContent = message);
+            }
+            return _results;
+        },
+        success: function(file,done) {
+            console.log(file);
+            photo_counter++;
+            $("#photoCounter").text( "(" + photo_counter + ")");
+        }
+    }
+
+        // instantiate the uploader
+
     $('#imoveisSearch').on('click', function () {
         $.get('/get-veiculos', function(data){
 
