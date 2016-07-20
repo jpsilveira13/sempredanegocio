@@ -71,7 +71,7 @@
                                 <option value="aluga">Alugar</option>
                             </select>
                         </section>
-                        <section class="clearfix sessao-area-filtro bg-branco ">
+                        <section style="padding-bottom: 60px" class="clearfix sessao-area-filtro bg-branco ">
                             <h5 class="sessao-texto-pesquisa">Preço</h5>
                             <label class="sessao-area-filtro-label preco-corrente">
                                 Mínimo
@@ -89,18 +89,7 @@
                         </fieldset>
                     </div>
             </form>
-            <div class="propaganda">
-                <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-                <!-- header responsivo imoveis -->
-                <ins class="adsbygoogle"
-                     style="display:block"
-                     data-ad-client="ca-pub-9276435422488602"
-                     data-ad-slot="7022965179"
-                     data-ad-format="auto"></ins>
-                <script>
-                    (adsbygoogle = window.adsbygoogle || []).push({});
-                </script>
-            </div>
+
         </div>
         <div class="col-md-10 col-sm-12">
             <div class="before"></div>

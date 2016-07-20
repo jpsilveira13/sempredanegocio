@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}" />
-    <title>Sistema Sempre da Negócio vindo,</title>
+    <title>Sistema Sempre da Negócio</title>
 
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
 
@@ -49,8 +49,10 @@
         </div>
         <!-- Top Menu Items -->
         <ul class="nav navbar-right top-nav">
+            <li>
+                <a class="style-menu-header" href="{{url('anuncie')}}" target="_blank"><i class="fa fa-pencil" aria-hidden="true"></i> Anuncie</a>
+            </li>
             <li class="dropdown">
-
                 <a href="#" class="dropdown-toggle style-menu-header" data-toggle="dropdown"><i class="fa fa-envelope"></i><span class="badge estilo-numero">{{$i}}</span> <b class="caret"></b></a>
 
                 <ul class="dropdown-menu message-dropdown">
@@ -142,6 +144,7 @@
                     </li>
                 </ul>
             </li>
+
         </ul>
         <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
         <div class="collapse navbar-collapse navbar-ex1-collapse">

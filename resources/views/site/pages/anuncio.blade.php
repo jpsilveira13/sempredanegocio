@@ -7,7 +7,7 @@
     @if(!auth()->guest())
         @if(auth()->user()->id == $advertGeral->user->id)
             <section class="container col-md-6 col-lg-6 no-show ">
-                <a href="{{url("/admin/anuncios/editar")}}/{{$advertGeral->id}}" style="margin-bottom: 10px" class="btn btn-zap">Editar Anúncio</a>
+                <a href="{{route('admin.anuncios.edit',['id'=>$advertGeral->id])}}" style="margin-bottom: 10px" class="btn btn-zap">Editar Anúncio</a>
             </section>
             <br />
         @endif
@@ -392,13 +392,13 @@ Olá, Gostaria de ter mais informações sobre o  anúncio {{$advertGeral->subca
             </div>
         </div>
     </div>
-    <section class="container col-md-12 col-lg-12  mt40 no-show ">
+    <!--<section class="container col-md-12 col-lg-12  mt40 no-show ">
         <h2 class="estilo-fonte-h2">Demais resultados da sua busca</h2>
-        <!-- area slider mais imoveis -->
+        >
         <div class="box-default clearfix multislide">
             Aqui será slider dos imovéis com busca parecida.
         </div>
-    </section>
+    </section> -->
     <!-- modal email -->
     <div class="modal fade" id="emailModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog">

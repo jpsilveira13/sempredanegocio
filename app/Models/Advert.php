@@ -39,7 +39,7 @@ class Advert extends Model
     }
 
    public function advertVeiculo(){
-       return $this->hasOne(AdvertVeiculo::class);
+       return $this->hasOne(AdvertVeiculo::class,'advert_id','id');
 
    }
     public function images(){

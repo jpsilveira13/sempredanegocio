@@ -10,6 +10,7 @@ class AdvertImage extends Model
     protected $fillable = [
         'advert_id',
         'extension',
+        'capa'
 
 
     ];

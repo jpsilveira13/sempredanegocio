@@ -3,22 +3,21 @@
 namespace sempredanegocio\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
+use Intervention\Image\Facades\Image;
+use sempredanegocio\Http\Requests;
+use sempredanegocio\Models\Advert;
+use sempredanegocio\Models\AdvertImage;
 use sempredanegocio\Models\AdvertImovel;
 use sempredanegocio\Models\AdvertVeiculo;
+use sempredanegocio\Models\Feature;
 use sempredanegocio\Models\ImageCape;
 use sempredanegocio\Models\SubCategory;
 use sempredanegocio\Models\User;
-use sempredanegocio\Http\Requests;
-use sempredanegocio\Http\Controllers\Controller;
-use sempredanegocio\Models\Advert;
-use sempredanegocio\Models\AdvertImage;
-use sempredanegocio\Models\Feature;
-use Intervention\Image\Facades\Image;
-use Illuminate\Support\Facades\File;
-use Illuminate\Support\Facades\Storage;
+use sempredanegocio\Models\VeiculoMarca;
+use sempredanegocio\Models\VeiculoModelo;
 
 
 class AdvertController extends Controller
@@ -184,16 +183,30 @@ class AdvertController extends Controller
     public function edit($id){
 
         $advert = $this->advertModel->find($id);
-        $subcategories = $this->subcategories->where('category_id',1);
-
         $features = $this->features->where('subcategory_id',$advert->subcategory->id)->get();
 
-        return view('admin.anuncios.edit',compact('advert','subcategories','features'));
+
+        if($advert->advertVeiculo != null){
+
+            $marcas = VeiculoMarca::all();
+         
+            $modelos = VeiculoModelo::where('modelo',$advert->advertVeiculo->modelo)->get();
+
+            return view('admin.anuncios.edit',compact('advert','marcas','modelos','features'));
+        }
+        if ($advert->advertImovel != null){
+
+            return view('admin.anuncios.edit',compact('advert','features'));
+        }
+
     }
 
     public function update(Request $request,$id){
         $data = $request->all();
+
         $advert = $this->advertModel->find($id);
+        dd($advert);
+
         if(!empty($data['caracteristicas'])){
             $features = $data['caracteristicas'];
             $advert->features()->sync($features);
@@ -207,46 +220,76 @@ class AdvertController extends Controller
         }else{
             $data['preco'] = str_replace(",",".",str_replace(".","",$data['preco']));
         }
-        if(empty($data['valor_condominio'])){
-            $data['valor_condominio'] = 0;
+        if($data['category'] == 2){
+
+            unset($data['category']);
+            $data2 = $data;
+
+            unset($data['ano']);
+            unset($data['cor']);
+            unset($data['placa']);
+            unset($data['km']);
+            unset($data['combustivel']);
+            unset($data['portas']);
+            unset($data['cambio']);
+            unset($data2['active']);
+            unset($data2['anuncio_descricao']);
+            unset($data2['preco']);
+            unset($data2['status']);
+            unset($data2['bairro']);
+            unset($data2['rua']);
+            unset($data2['numero']);
+            unset($data2['_token']);
+
+            $this->advertModel->find($id)->update($data);
+            $this->advertVeiculo->where('advert_id',$id)->update($data2);
+
+            $request->session()->flash('alert-success', 'Anúncio editado com sucesso!');
+            return redirect()->route("anuncios");
+
         }else{
-            $data['valor_condominio'] = str_replace(",",".",str_replace(".","",$data['valor_condominio']));
-        }
 
-        if(empty($data['valor_iptu'])){
-            $data['valor_iptu'] = 0;
-        }else{
-            $data['valor_iptu']  = str_replace(",",".",str_replace(".","",$data['valor_iptu']));
-        }
-        if($data['active'] != 1){
-            $data['active'] = 0;
-        }
-        if(empty($data['acomodacoes'])){
-            $data['acomodacoes'] = 0;
+            if(empty($data['valor_condominio'])){
+                $data['valor_condominio'] = 0;
+            }else{
+                $data['valor_condominio'] = str_replace(",",".",str_replace(".","",$data['valor_condominio']));
+            }
 
-        }
-        $data2 = $data;
-        unset($data2['active']);
-        unset($data2['anuncio_descricao']);
-        unset($data2['preco']);
-        unset($data2['status']);
-        unset($data2['bairro']);
-        unset($data2['rua']);
-        unset($data2['numero']);
-        unset($data['caracteristicas']);
-        unset($data['numero_quarto']);
-        unset($data['numero_garagem']);
-        unset($data['numero_banheiro']);
-        unset($data['area_construida']);
-        unset($data['valor_condominio']);
-        unset($data['valor_iptu']);
-        unset($data['acomodacoes']);
-        unset($data2['_token']);
+            if(empty($data['valor_iptu'])){
+                $data['valor_iptu'] = 0;
+            }else{
+                $data['valor_iptu']  = str_replace(",",".",str_replace(".","",$data['valor_iptu']));
+            }
+            if($data['active'] != 1){
+                $data['active'] = 0;
+            }
+            if(empty($data['acomodacoes'])){
+                $data['acomodacoes'] = 0;
 
-        $this->advertModel->find($id)->update($data);
-        $this->advertImovel->where('advert_id',$id)->update($data2);
-        $request->session()->flash('alert-success', 'Anúncio editado com sucesso!');
-        return redirect()->route("anuncios");
+            }
+            $data2 = $data;
+            unset($data2['active']);
+            unset($data2['anuncio_descricao']);
+            unset($data2['preco']);
+            unset($data2['status']);
+            unset($data2['bairro']);
+            unset($data2['rua']);
+            unset($data2['numero']);
+            unset($data['caracteristicas']);
+            unset($data['numero_quarto']);
+            unset($data['numero_garagem']);
+            unset($data['numero_banheiro']);
+            unset($data['area_construida']);
+            unset($data['valor_condominio']);
+            unset($data['valor_iptu']);
+            unset($data['acomodacoes']);
+            unset($data2['_token']);
+
+            $this->advertModel->find($id)->update($data);
+            $this->advertImovel->where('advert_id',$id)->update($data2);
+            $request->session()->flash('alert-success', 'Anúncio editado com sucesso!');
+            return redirect()->route("anuncios");
+        }
     }
 
     public function destroy($id){

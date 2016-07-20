@@ -131,7 +131,7 @@ $(document).ready(function () {
         var left = $(target).offset().left;
         $(target).css({left:left}).animate({"left":"0px"}, "10");
     });
-
+    
     $('.removerImage').on('click', function (e) {
 
         var id = $(this).data('id');
@@ -191,7 +191,7 @@ $(document).ready(function () {
                         swal("Pronto!", "Capa selecionada!", "success");
 
 
-                    $('#imagem'+id).css('opacity','1');
+                    $('#imagem'+id).addClass('classeCapaSelecionada');
 
                 }
             });

@@ -236,7 +236,7 @@
                 <dl class="site-footer__social nav-icon">
                     <dt class="nav-icon__title">Social</dt>
                     <dd class="nav-icon__item -icon -facebook icon-facebook-f">
-                        <a href="https://www.facebook.com/Sempre-da-Neg%C3%B3cio-1698054733743389/" target="_blank" itemprop="url" title="facebook"><i class="fa fa-facebook"></i></a>
+                        <a href="https://www.facebook.com/sempredanegocio/" target="_blank" itemprop="url" title="facebook"><i class="fa fa-facebook"></i></a>
                     </dd>
                     <dd class="nav-icon__item -icon -twitter icon-twitter-bird"><a href="#"  itemprop="url" title="twitter"><i class="fa fa-twitter" aria-hidden="true"></i>
                         </a>
