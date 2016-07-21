@@ -534,7 +534,17 @@ class HomeController extends Controller
 
         if ($min_price && $max_price) {
             $query->where('preco', '>=', $min_price)->where('preco', '<=', $max_price);
+        }
+        if(\Input::get('ano_inicio')){
+            $query->where('ano','>=',\Input::get('ano_inicio'));
+        }
 
+        if(\Input::get('ano_final')){
+            $query->where('ano','<=',\Input::get('ano_final'));
+        }
+
+        if ($min_price && $max_price) {
+            $query->where('preco', '>=', $min_price)->where('preco', '<=', $max_price);
         }
 
         if (\Input::get('marca_id')) {

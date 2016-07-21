@@ -63,6 +63,17 @@
                             <h5 class="sessao-texto-pesquisa">Seleciona o Modelo</h5>
                             <select id="modelo" name="modelo_id" class="search-results-select search-results-select-img escolhaAcomodacao"></select>
                         </section>
+                        <section  class="clearfix sessao-area-filtro bg-branco ">
+                            <h5 class="sessao-texto-pesquisa">Ano veículo</h5>
+                            <label class="sessao-area-filtro-label preco-corrente">
+                                Ano início
+                                <input type="text" placeholder="ex.:1995"  value="{{old('ano_inicio')}}" name="ano_inicio" id="ano_inicio" class="search-results-input escolhaAcomodacao" onkeypress="mascaraCampo(this, mascSoNumeros)" maxlength="4">
+                            </label>
+                            <label class="sessao-area-filtro-label preco-corrente">
+                                Ano final
+                                <input type="text" placeholder="ex.:2016" onkeypress="mascaraCampo(this, mascSoNumeros)" value="{{old('ano_final')}}" name="ano_final" class="search-results-input escolhaAcomodacao" maxlength="4">
+                            </label>
+                        </section>
                         <section class="clearfix sessao-area-filtro bg-branco ">
                             <h5 class="sessao-texto-pesquisa">Modalidade</h5>
                             <select  name="tipo_anuncio" class="search-results-select search-results-select-img escolhaAcomodacao">
