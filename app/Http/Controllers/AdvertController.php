@@ -198,7 +198,6 @@ class AdvertController extends Controller
 
             return view('admin.anuncios.edit',compact('advert','features'));
         }
-
     }
 
     public function update(Request $request,$id){
