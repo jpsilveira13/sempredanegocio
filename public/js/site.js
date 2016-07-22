@@ -751,7 +751,7 @@ $(document).ready(function(){
             $('#divAdvertSubcategory').hide('fast');
             $.ajax({
                 type: "GET",
-                url: "get-marcatotal",
+                url: "/get-marcatotal?subcategories_id="+adv_id,
                 data: "marca",
 
                 beforeSend: function () {
@@ -762,8 +762,6 @@ $(document).ready(function(){
                 },
                 success: function (data) {
                     if (data.length > 0) {
-
-
                         for (i = 0; i < data.length; i++) {
 
                             $("#veiculos").append('<option id='+data[i].codigo_marca+' value=' + data[i].marca + '>' + data[i].marca + '</option>');
@@ -804,7 +802,7 @@ $(document).ready(function(){
 
         $.get('/get-marca?marca_id=' + marca_id, function(data){
             //$('#subcategory').empty();
-
+            $('#modelo').append('<option value="" selected="selected" >Selecione uma opção</option>');
             $.each(data, function(index, modelObj){
                 $('#modelo').append('<option id="'+modelObj.codigo_modelo+'" value="'+modelObj.modelo+'" >'+modelObj.modelo+'</option>');
 
@@ -812,11 +810,13 @@ $(document).ready(function(){
 
         });
     });
+
     $('#modelo').on('change',function(e){
         var modelo_id = $(this).find('option:selected').attr('id');
 
         $('#tipo').empty();
         $.get('/get-modelo?modelo_id=' + modelo_id, function(data){
+
             $.each(data, function(index, anoObj){
 
                 $('#tipo').append('<option value="'+anoObj.ano+'" >'+anoObj.ano+'</option>');

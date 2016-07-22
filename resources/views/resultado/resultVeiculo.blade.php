@@ -43,7 +43,7 @@
                         </section>
                         <section class="clearfix sessao-area-filtro bg-branco">
                             <h5 class="sessao-texto-pesquisa">Tipo de Veículos</h5>
-                            <select  name="subcategoria" class="search-results-select search-results-select-img escolhaAcomodacao">
+                            <select  id="subcategory" name="subcategories_id" class="search-results-select search-results-select-img escolhaAcomodacao">
                                 <option value="">Seleciona uma opção</option>
                                 @foreach($subcategories as $subcategory)
                                     <option value="{{$subcategory->id}}" id="{{$subcategory->id}}">{{$subcategory->name}}</option>
@@ -61,7 +61,9 @@
                         </section>
                         <section class="clearfix sessao-area-filtro bg-branco">
                             <h5 class="sessao-texto-pesquisa">Seleciona o Modelo</h5>
-                            <select id="modelo" name="modelo_id" class="search-results-select search-results-select-img escolhaAcomodacao"></select>
+                            <select id="modelo" name="modelo_id" class="search-results-select search-results-select-img escolhaAcomodacao">
+                                <option value="" selected="selected">Selecione uma opção</option>
+                            </select>
                         </section>
                         <section  class="clearfix sessao-area-filtro bg-branco ">
                             <h5 class="sessao-texto-pesquisa">Ano veículo</h5>

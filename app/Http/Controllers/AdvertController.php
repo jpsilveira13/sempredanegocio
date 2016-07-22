@@ -202,9 +202,8 @@ class AdvertController extends Controller
 
     public function update(Request $request,$id){
         $data = $request->all();
-
         $advert = $this->advertModel->find($id);
-        dd($advert);
+
 
         if(!empty($data['caracteristicas'])){
             $features = $data['caracteristicas'];
@@ -219,6 +218,7 @@ class AdvertController extends Controller
         }else{
             $data['preco'] = str_replace(",",".",str_replace(".","",$data['preco']));
         }
+
         if($data['category'] == 2){
 
             unset($data['category']);
@@ -246,7 +246,8 @@ class AdvertController extends Controller
             $request->session()->flash('alert-success', 'Anúncio editado com sucesso!');
             return redirect()->route("anuncios");
 
-        }else{
+        }
+        if($data['category'] == 1){
 
             if(empty($data['valor_condominio'])){
                 $data['valor_condominio'] = 0;

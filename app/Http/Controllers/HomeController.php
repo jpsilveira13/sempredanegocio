@@ -136,9 +136,7 @@ class HomeController extends Controller
             'typeusers' => $typeusers
 
         ]);
-
     }
-
     //hotsite
     public function hotsite($id,$url_name){
         $user = User::find($id);
@@ -200,8 +198,10 @@ class HomeController extends Controller
     }
 
     public function getMarcaTotal(){
-        // $tipoVeiculo = Input::get('subcategories_id');
-        $marca_total = VeiculoMarca::orderBy('marca','asc')->get();
+        $tipo_id = Input::get('subcategories_id');
+
+        $marca_total = VeiculoMarca::where('tipo','=',$tipo_id)->orderBy('marca','asc')->get();
+
         return Response::json($marca_total);
 
     }
@@ -453,11 +453,11 @@ class HomeController extends Controller
         $min_area = \Input::has('min_area') ? Input::get('min_area'): null;
         $max_area = \Input::has('max_area') ? Input::get('max_area'): null;
         $query = Advert::select('adverts.*')->join('advert_imovel','adverts.id','=','advert_imovel.advert_id');
-              /*if($id_user){
+        /*if($id_user){
 
-            $query->where('user_id',$id_user);
+      $query->where('user_id',$id_user);
 
-        }*/
+  }*/
         if (\Input::get('subcategoria')) {
             Session::put('subcategoria',\Input::get('subcategoria'));
             $query->where('subcategories_id', \Input::get('subcategoria'));
@@ -519,8 +519,8 @@ class HomeController extends Controller
 
         $query = Advert::select('adverts.*')->join('advert_carro','adverts.id','=','advert_carro.advert_id');
 
-        if (\Input::get('subcategoria')) {
-            $query->where('subcategories_id', \Input::get('subcategoria'));
+        if (\Input::get('subcategoria_id')) {
+            $query->where('subcategories_id', \Input::get('subcategoria_id'));
         }
         if (\Input::get('cidade')) {
 
@@ -549,11 +549,11 @@ class HomeController extends Controller
 
         if (\Input::get('marca_id')) {
 
-            $query->where('marca', \Input::get('marca_id'));
+            $query->where('marca','LIKE','%'.\Input::get('marca_id').'%');
 
         }
         if (\Input::get('modelo_id')) {
-            $query->where('modelo', \Input::get('modelo_id'));
+            $query->where('modelo','LIKE','%'. \Input::get('modelo_id').'%');
 
         }
 
