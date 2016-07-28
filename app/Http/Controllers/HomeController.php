@@ -519,8 +519,9 @@ class HomeController extends Controller
 
         $query = Advert::select('adverts.*')->join('advert_carro','adverts.id','=','advert_carro.advert_id');
 
-        if (\Input::get('subcategoria_id')) {
-            $query->where('subcategories_id', \Input::get('subcategoria_id'));
+        if (\Input::get('subcategories_id')) {
+            Session::put('subcategories_id',\Input::get('subcategories_id'));
+            $query->where('subcategories_id', \Input::get('subcategories_id'));
         }
         if (\Input::get('cidade')) {
 
@@ -528,31 +529,33 @@ class HomeController extends Controller
         }
 
         if (\Input::get('tipo_anuncio')) {
+            Session::put('tipo_anuncio',\Input::get('tipo_anuncio'));
             $query->where('tipo_anuncio', \Input::get('tipo_anuncio'));
 
         }
 
         if ($min_price && $max_price) {
+            Session::put('min_price',$min_price);
+            Session::put('max_price',$max_price);
             $query->where('preco', '>=', $min_price)->where('preco', '<=', $max_price);
         }
         if(\Input::get('ano_inicio')){
+            Session::put('ano_inicio',\Input::get('ano_inicio'));
             $query->where('ano','>=',\Input::get('ano_inicio'));
         }
 
         if(\Input::get('ano_final')){
+            Session::put('ano_final',\Input::get('ano_final'));
             $query->where('ano','<=',\Input::get('ano_final'));
         }
 
-        if ($min_price && $max_price) {
-            $query->where('preco', '>=', $min_price)->where('preco', '<=', $max_price);
-        }
-
         if (\Input::get('marca_id')) {
-
+            Session::put('marca_id',\Input::get('marca_id'));
             $query->where('marca','LIKE','%'.\Input::get('marca_id').'%');
 
         }
         if (\Input::get('modelo_id')) {
+            Session::put('modelo_id',\Input::get('modelo_id'));
             $query->where('modelo','LIKE','%'. \Input::get('modelo_id').'%');
 
         }
@@ -565,6 +568,7 @@ class HomeController extends Controller
     public function searchAnuncio($name_url)
     {
 
+
         if(Input::get('categoria')){
             $categoria = Input::get('categoria');
             $transacao = Input::get('transacao');
@@ -576,6 +580,7 @@ class HomeController extends Controller
             if($categoria == null) {
 
                 $categoria = 1;
+
             }else{
 
                 $cidade = null;

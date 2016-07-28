@@ -29,8 +29,9 @@
         <div class="row">
             <form action=""  id="formSearchVeiculos" class="ajax">
                 <input type="hidden" value="1" name="status" />
-                <input type="hidden" value="{{\Input::get('categoria')}}" name="categoria" />
                 <input type="hidden" value="{{\Input::get('page')}}" name="page" id="page" />
+                <input type="hidden" value="2" name="categoria" />
+
                 <div id="nav-lateral" class="col-md-2 col-sm-2 no-padding ">
                     <div class="area-pesquisa">
                         <section class="clearfix sessao-area-filtro bg-branco ">
@@ -43,7 +44,7 @@
                         </section>
                         <section class="clearfix sessao-area-filtro bg-branco">
                             <h5 class="sessao-texto-pesquisa">Tipo de Veículos</h5>
-                            <select  id="subcategory" name="subcategories_id" class="search-results-select search-results-select-img escolhaAcomodacao">
+                            <select value="<?=(Session::get('subcategories_id'))?>" id="subcategory" name="subcategories_id" class="search-results-select search-results-select-img escolhaAcomodacao">
                                 <option value="">Seleciona uma opção</option>
                                 @foreach($subcategories as $subcategory)
                                     <option value="{{$subcategory->id}}" id="{{$subcategory->id}}">{{$subcategory->name}}</option>
@@ -52,7 +53,7 @@
                         </section>
                         <section class="clearfix sessao-area-filtro bg-branco">
                             <h5 class="sessao-texto-pesquisa">Seleciona a Marca</h5>
-                            <select  id="veiculos" name="marca_id" class="search-results-select search-results-select-img escolhaAcomodacao">
+                            <select  id="veiculos" value="<?=(Session::get('marca_id'))?>" name="marca_id" class="search-results-select search-results-select-img escolhaAcomodacao">
                                 <option value="">Seleciona uma opção</option>
                                 @foreach($pegaMarcas as $pegaMarca)
                                     <option value="{{$pegaMarca->marca}}" id="{{$pegaMarca->codigo_marca}}">{{$pegaMarca->marca}}</option>
@@ -61,7 +62,7 @@
                         </section>
                         <section class="clearfix sessao-area-filtro bg-branco">
                             <h5 class="sessao-texto-pesquisa">Seleciona o Modelo</h5>
-                            <select id="modelo" name="modelo_id" class="search-results-select search-results-select-img escolhaAcomodacao">
+                            <select id="modelo" name="modelo_id" value="<?=(Session::get('modelo_id'))?>" class="search-results-select search-results-select-img escolhaAcomodacao">
                                 <option value="" selected="selected">Selecione uma opção</option>
                             </select>
                         </section>
@@ -69,30 +70,40 @@
                             <h5 class="sessao-texto-pesquisa">Ano veículo</h5>
                             <label class="sessao-area-filtro-label preco-corrente">
                                 Ano início
-                                <input type="text" placeholder="ex.:1995"  value="{{old('ano_inicio')}}" name="ano_inicio" id="ano_inicio" class="search-results-input escolhaAcomodacao" onkeypress="mascaraCampo(this, mascSoNumeros)" maxlength="4">
+                                <input type="text" placeholder="ex.:1995"  value="<?=(Session::get('ano_inicio'))?>" name="ano_inicio" id="ano_inicio" class="search-results-input escolhaAcomodacao" onkeypress="mascaraCampo(this, mascSoNumeros)" maxlength="4">
                             </label>
                             <label class="sessao-area-filtro-label preco-corrente">
                                 Ano final
-                                <input type="text" placeholder="ex.:2016" onkeypress="mascaraCampo(this, mascSoNumeros)" value="{{old('ano_final')}}" name="ano_final" class="search-results-input escolhaAcomodacao" maxlength="4">
+                                <input type="text" placeholder="ex.:2016" onkeypress="mascaraCampo(this, mascSoNumeros)"  value="<?=(Session::get('ano_final'))?>" name="ano_final" class="search-results-input escolhaAcomodacao" maxlength="4">
                             </label>
                         </section>
                         <section class="clearfix sessao-area-filtro bg-branco ">
                             <h5 class="sessao-texto-pesquisa">Modalidade</h5>
-                            <select  name="tipo_anuncio" class="search-results-select search-results-select-img escolhaAcomodacao">
-                                <option value="" selected>Seleciona uma opção</option>
-                                <option value="venda" >Comprar</option>
-                                <option value="aluga">Alugar</option>
+                            <select  value="<?=(Session::get('tipo_anuncio'))?>" name="tipo_anuncio" class="search-results-select search-results-select-img escolhaAcomodacao">
+
+                                @if(\Input::get('transacao') == 'venda')
+                                    <option selected value="venda">Comprar</option>
+                                    <option value="aluga">Alugar</option>
+                                @elseif(!\Input::get('transacao'))
+                                    <option selected value="">Seleciona uma opção</option>
+                                    <option value="venda">Comprar</option>
+                                    <option value="aluga">Alugar</option>
+                                @else
+                                    <option value="venda">Comprar</option>
+                                    <option value="aluga" selected>Alugar</option>
+                                @endif
+
                             </select>
                         </section>
                         <section style="padding-bottom: 60px" class="clearfix sessao-area-filtro bg-branco ">
                             <h5 class="sessao-texto-pesquisa">Preço</h5>
                             <label class="sessao-area-filtro-label preco-corrente">
                                 Mínimo
-                                <input type="text" placeholder="0" value="{{old('min_price')}}" name="min_price" id="min_price" onkeypress="mascaraCampo(this, mvalor2)"  class="search-results-input escolhaAcomodacao" data-mask-currency="true">
+                                <input type="text" placeholder="0" value="<?=(Session::get('min_price'))?>" name="min_price" id="min_price" onkeypress="mascaraCampo(this, mvalor2)"  class="search-results-input escolhaAcomodacao" data-mask-currency="true">
                             </label>
                             <label class="sessao-area-filtro-label preco-corrente">
                                 Máximo
-                                <input onkeypress="mascaraCampo(this, mvalor2)" type="text" name="max_price" placeholder="0"  class="search-results-input escolhaAcomodacao" data-mask-currency="true">
+                                <input onkeypress="mascaraCampo(this, mvalor2)" type="text" name="max_price" placeholder="0" value="<?=(Session::get('max_price'))?>"  class="search-results-input escolhaAcomodacao" data-mask-currency="true">
                             </label>
                         </section>
                         <fieldset id="aplicaFiltro" class="site-main__view-results filter-view-results">
@@ -102,7 +113,6 @@
                         </fieldset>
                     </div>
             </form>
-
         </div>
         <div class="col-md-10 col-sm-12">
             <div class="before"></div>

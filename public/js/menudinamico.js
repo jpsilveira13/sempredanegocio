@@ -80,7 +80,7 @@ function pagination(page) {
                         } */
 
                         if(data[i].imagecapa){
-                            console.log(data[i].imagecapa.extension);
+
                             if (data[i].imagecapa.extension.indexOf(char) > -1) {
                                 url = "galeria/" + data[i].imagecapa.extension;
 

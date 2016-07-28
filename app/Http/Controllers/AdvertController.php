@@ -189,7 +189,7 @@ class AdvertController extends Controller
         if($advert->advertVeiculo != null){
 
             $marcas = VeiculoMarca::all();
-         
+
             $modelos = VeiculoModelo::where('modelo',$advert->advertVeiculo->modelo)->get();
 
             return view('admin.anuncios.edit',compact('advert','marcas','modelos','features'));
@@ -248,7 +248,7 @@ class AdvertController extends Controller
 
         }
         if($data['category'] == 1){
-
+            unset($data['category']);
             if(empty($data['valor_condominio'])){
                 $data['valor_condominio'] = 0;
             }else{

@@ -42,10 +42,11 @@ function pagination(page) {
                     $(".before").empty();
                     $('#resultSearch').fadeTo('slow', 1);
                     var html = '';
-
+                    $('#page').val(data.current_page);
+                    $('#page').val();
                     var data = data.data;
                     var len = data.length;
-                    $('#page').val(data.current_page);
+
                     //Criador do contador para os anuncios
                     var cont = 0;
                     var char = "imoveis/img";
@@ -66,15 +67,26 @@ function pagination(page) {
                         html += '<div class="item col-xs-12 col-sm-6 col-lg-4 col-md-4 bloco-item"><a class="item-total" href="/anuncio/' + data[i].tipo_anuncio + '/' + data[i].id + '/' + data[i].url_anuncio + '"><div class="thumbnail heigth417">';
 
                         //Validação se existe imagem ou nao
-                        if (data[i].images[0]) {
+                        if(data[i].imagecapa){
+
+                            if (data[i].imagecapa.extension.indexOf(char) > -1) {
+                                url = "galeria/" + data[i].imagecapa.extension;
+
+                            } else {
+                                url = data[i].imagecapa.extension;
+
+                            }
+                            html += '<img class="group list-group-image content-img-sugestao lazy transition-img" data-original="' + url + '" width="220" height="229" alt="titulo imagem" />'
+                        }else if (data[i].images[0]) {
 
                             if (data[i].images[0].extension.indexOf(char) > -1) {
                                 url = "galeria/" + data[i].images[0].extension;
+
                             } else {
                                 url = data[i].images[0].extension;
 
                             }
-                            html += '<img class="group list-group-image content-img-sugestao lazy transition-img" data-original="' + url + '" width="220" height="229" alt="' + data[i].anuncio_descricao + '" />'
+                            html += '<img class="group list-group-image content-img-sugestao lazy transition-img" data-original="' + url + '" width="220" height="229" alt="titulo imagem" />'
 
                         } else {
                             html += '<img class="group list-group-image content-img-sugestao lazy transition-img" src="images/no-image.jpg" alt="titulo imagem" />';

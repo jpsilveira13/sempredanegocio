@@ -10,7 +10,7 @@
             <div class="minisite-area-logo">
                 <h1 class="area-logo-titulo">
                     <img src="{{$user->avatar}}" title="{{$user->name}}" />
-                    <aside>Registro CRECI: </aside>
+                    <aside>Registro CRECI: {{$user->creci}} </aside>
                 </h1>
                 <p class="minisite-diamente minisite-diamante-upper pula-linha">
                     {{$advertVenda}}<br />Imóveis a <b> venda</b>
