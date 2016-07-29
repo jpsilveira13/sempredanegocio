@@ -267,7 +267,7 @@
                                     <div class="form-group has-feedback">
                                         @if(empty(auth()->user()->typeuser_id))
                                             <label>Selecione seu perfil </label>
-                                            <select class="form-control" name="typeuser_id">
+                                            <select required="required" class="form-control" name="typeuser_id">
                                                 <option>Selecione seu tipo de usuário</option>
                                                 @foreach($typeusers as $typeuser)
                                                     @if($typeuser->id == 1)

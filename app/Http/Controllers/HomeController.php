@@ -138,6 +138,7 @@ class HomeController extends Controller
         ]);
     }
     //hotsite
+
     public function hotsite($id,$url_name){
         $user = User::find($id);
         $subcategories = SubCategory::get();
@@ -443,6 +444,18 @@ class HomeController extends Controller
 
     }
 
+    public function scopeHotImo(){
+        $max_price = str_replace(".","",str_replace(",","",\Input::get('max_price')));
+        $min_price = str_replace(".","",str_replace(",","",\Input::get('min_price')));
+        $min_area = \Input::has('min_area') ? Input::get('min_area'): null;
+        $max_area = \Input::has('max_area') ? Input::get('max_area'): null;
+
+        $query = Advert::select('adverts.*')->join('advert_imovel','adverts.id','=','advert_imovel.advert_id')->where('user_id',3946)->get();
+        dd($query);
+
+
+
+    }
 
     public function scopeImoveis(){
 
@@ -453,11 +466,9 @@ class HomeController extends Controller
         $min_area = \Input::has('min_area') ? Input::get('min_area'): null;
         $max_area = \Input::has('max_area') ? Input::get('max_area'): null;
         $query = Advert::select('adverts.*')->join('advert_imovel','adverts.id','=','advert_imovel.advert_id');
-        /*if($id_user){
-
-      $query->where('user_id',$id_user);
-
-  }*/
+        if($id_user){
+            $query->where('user_id',$id_user);
+        }
         if (\Input::get('subcategoria')) {
             Session::put('subcategoria',\Input::get('subcategoria'));
             $query->where('subcategories_id', \Input::get('subcategoria'));
@@ -507,6 +518,10 @@ class HomeController extends Controller
 
         }
         return Response::json($query->where('status', '>', '0')->orderBy('destaque','desc')->with('images','advertImovel','imagecapa')->paginate(18));
+
+    }
+
+    public function scopeHotsite(){
 
     }
 

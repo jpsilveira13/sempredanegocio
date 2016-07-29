@@ -6,6 +6,7 @@ function pagination(page) {
 
     var filters = $('#formSearchImoveis').serialize() + "&page=" + page;
 
+    console.log(filters);
     if(status == 0){
         status = 1;
 
@@ -75,9 +76,9 @@ function pagination(page) {
 
                         //Validação se existe imagem ou nao
 
-                       /* for(var j = 1;j<data[i].images[j].length;j++){
-                            console.log(data)
-                        } */
+                        /* for(var j = 1;j<data[i].images[j].length;j++){
+                         console.log(data)
+                         } */
 
                         if(data[i].imagecapa){
 
@@ -105,12 +106,19 @@ function pagination(page) {
                         }
                         html += ' <div class="caption infos-suggest"> <h4 class="group inner list-group-item-heading text-bairro">' + data[i].cidade + '<br />' + data[i].estado + '</h4><p class="group inner list-group-item-text"><ul class="list-infos unstyled clearfix no-padding" id="tooltip-config"><li class="icone-quartos zaptip" data-original-title="Quantidade de quartos" data-toggle="tooltip"> ' + data[i].advert_imovel.numero_quarto + '</li><li class="icone-suites zaptip" data-original-title="Quantidade de Banheiros" data-toggle="tooltip"> ' + data[i].advert_imovel.numero_banheiro + '</li><li class="icone-vagas zaptip" data-original-title="Quantidade de vagas" data-toggle="tooltip"> ' + data[i].advert_imovel.numero_garagem + '</li></ul>';
                         html += '<div class="col-xs-12 col-md-12 list-item-nav2"><p class="lead description-anuncio">' + data[i].anuncio_descricao + '</p></div><div class="row list-group-hidden"> <div class="col-xs-12 col-md-12"><p class="lead description-anuncio">' + data[i].anuncio_descricao + '</p></div></div>';
-                        html += '<div class="row mb4"><div class="col-xs-8 col-md-8 "><div class="bottom-suggest"> <span class="val-imovel">R$ ' + mvalor(data[i].preco) + ' </span>';
+                        if(data[i].preco == 0){
+                            html += '<div class="row mb4"><div class="col-xs-8 col-md-8 "><div class="bottom-suggest"> <span class="val-imovel">Sob consulta </span>';
+                        }else{
+                            html += '<div class="row mb4"><div class="col-xs-8 col-md-8 "><div class="bottom-suggest"> <span class="val-imovel">R$ ' + mvalor(data[i].preco) + ' </span>';
+                        }
+                        //Validar se o anúncio é venda ou compra
                         //Validar se o anúncio é venda ou compra
                         if (data[i].tipo_anuncio == 'aluga') {
                             html += '<span class="text-diaria"> / mês</span>';
-                        } else {
-                            html += '<span class="text-diaria">/ venda</span>';
+                        }else if(data[i].preco == 0){
+                            html+= '';
+                        } else  {
+                            html += '<span class="text-diaria"> / venda</span>';
                         }
                         html += '</div></div><div class="col-xs-4 col-md-4 fr"><div class="acoes-minifichas-sugestoes"> <span class="addicon btnFavorito4090308 icone-favoritada pull-right fvestilo"data-toggle="tooltip" data-placement="top" data-original-title="Adicionar à minha lista"></span></div></div></div></div></div></a></div>';
 

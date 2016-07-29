@@ -135,7 +135,7 @@
                                 @if($advert->advertImovel != null)
                                     <div class="minisite-anuncio-destaque-descricao">
                                         <span class="minisite-anuncio-destaque-bairro">{{$advert->bairro}}</span>
-                                        <p class="minisite-anuncio-destaque-detalhes">R$ {{number_format((float)$advert->preco,2,",",".")}} - {{$advert->advertImovel->area_construida}} m2 - {{$advert->advertImovel->numero_quarto}} quarto </p>
+                                        <p class="minisite-anuncio-destaque-detalhes">@if($advert->preco != 0)R$ {{number_format((float)$advert->preco,2,",",".")}} @else Sob consulta @endif - {{$advert->advertImovel->area_construida}} m2 - {{$advert->advertImovel->numero_quarto}} quarto </p>
                                         <p class="minisite-anuncio-destaque-localizacao">
                                             @if($advert->active == 0)
                                                 {{$advert->rua}} - @if($advert->numero){{$advert->numero}}@else @endif
@@ -214,12 +214,12 @@
             </script>
         </div>
         <div class="clearfix"></div>
-
         <div class="row">
             @if($user->typeuser_id < 5)
                 <form action=""  id="formSearchImoveis" class="ajax">
                     <input type="hidden" name="id_user" value="{{$user->id}}" />
-
+                    <input type="hidden" value="1" name="categoria" />
+                    <input type="hidden" value="{{\Input::get('page')}}" name="page" id="page" />
                     <div id="nav-lateral" class="col-md-2 col-sm-2 no-padding ">
                         <button id="btn-close-nav" type="button" class="close">X</button>
                         <div class="area-pesquisa">
@@ -462,8 +462,11 @@
                                                     <div class="row mb4">
                                                         <div class="col-xs-8 col-md-8 ">
                                                             <div class="bottom-suggest">
-                                                                <span class="val-imovel">R$ {{number_format((float)$advert->preco,2,",",".")}}</span>
-                                                                <span class="text-diaria">@if($advert->tipo_anuncio == 'aluga')/ mês @elseif($advert->tipo_anuncio == 'venda') / venda @endif</span>
+                                                                <span class="val-imovel">@if($advert->preco != 0)R$ {{number_format((float)$advert->preco,2,",",".")}} @else Sob consulta @endif</span>
+                                                                @if($advert->preco != 0)
+                                                                    <span class="text-diaria">@if($advert->tipo_anuncio == 'aluga')/ mês @elseif($advert->tipo_anuncio == 'venda') / venda @endif</span>
+                                                                @endif
+
                                                             </div>
                                                         </div>
                                                         <div class="col-xs-4 col-md-4 fr">

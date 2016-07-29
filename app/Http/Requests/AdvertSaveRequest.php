@@ -37,7 +37,7 @@ class AdvertSaveRequest extends Request
 
         $nbr = count($this->input('anuncio_images')) - 1;
         foreach(range(0, $nbr) as $index) {
-            $rules['anuncio_images.' . $index] = 'image|mimes:jpeg,jpg,bmp,png,gif|max:3000';
+            $rules['anuncio_images.' . $index] = 'image|mimes:jpeg,jpg,bmp,png,gif|max:100000';
         }
 
         return $rules;

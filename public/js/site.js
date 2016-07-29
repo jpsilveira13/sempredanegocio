@@ -780,8 +780,6 @@ $(document).ready(function(){
         }
         $('#divAdvertSubcategory').hide('fast');
         $.get('/ajax-advcat?adv_id=' + adv_id, function(data){
-
-
             var caractList = $('#listCaract');
             var html = '<div class="btn-group" data-toggle="buttons">';
             for(var j = 0, lenj = data.length;j<lenj;j++){

@@ -93,11 +93,17 @@ function pagination(page) {
                         }
                         html += ' <div class="caption infos-suggest"> <h4 class="group inner list-group-item-heading text-bairro">' + data[i].advert_veiculo.marca + '<br />' + data[i].advert_veiculo.modelo + '</h4><p class="group inner list-group-item-text"><div class="features"><div><span><i class="spr-resultado-busca ico-year"></i>' + data[i].advert_veiculo.ano + '</span><span><i class="spr-resultado-busca ico-combustivel"></i>' + data[i].advert_veiculo.combustivel + '</span></div><div><span><i class="spr-resultado-busca ico-km"></i>' + data[i].advert_veiculo.km + '</span><span><i class="spr-resultado-busca ico-shift"></i>' + data[i].advert_veiculo.cambio + '</span></div></div> </p>';
                         html += '<div class="col-xs-12 col-md-12 list-item-nav2"><p class="lead description-anuncio">' + data[i].anuncio_descricao + '</p></div><div class="row list-group-hidden"> <div class="col-xs-12 col-md-12"><p class="lead description-anuncio">' + data[i].anuncio_descricao + '</p></div></div>';
-                        html += '<div class="row mb4"><div class="col-xs-8 col-md-8 "><div class="bottom-suggest"> <span class="val-imovel">R$ ' + mvalor(data[i].preco) + ' </span>';
+                        if(data[i].preco == 0){
+                            html += '<div class="row mb4"><div class="col-xs-8 col-md-8 "><div class="bottom-suggest"> <span class="val-imovel">Sob consulta </span>';
+                        }else{
+                            html += '<div class="row mb4"><div class="col-xs-8 col-md-8 "><div class="bottom-suggest"> <span class="val-imovel">R$ ' + mvalor(data[i].preco) + ' </span>';
+                        }
                         //Validar se o anúncio é venda ou compra
                         if (data[i].tipo_anuncio == 'aluga') {
                             html += '<span class="text-diaria"> / mês</span>';
-                        } else {
+                        }else if(data[i].preco == 0){
+                            html+= '';
+                        } else  {
                             html += '<span class="text-diaria"> / venda</span>';
                         }
                         html += '</div></div><div class="col-xs-4 col-md-4 fr"><div class="acoes-minifichas-sugestoes"> <span class="addicon btnFavorito4090308 icone-favoritada pull-right fvestilo"data-toggle="tooltip" data-placement="top" data-original-title="Adicionar à minha lista"></span></div></div></div></div></div></a></div>';

@@ -142,8 +142,9 @@ Route::get('search-veiculos',[
     'uses' => 'HomeController@scopeVeiculos'
 
 ]);
-
-
+Route::get('search-hotImo',[
+   'uses'=> 'HomeController@scopeHotImo'
+]);
 Route::get('sem-imagem', 'HomeController@noImage');
 Route::get('/consultar_cep','HomeController@searchCep');
 
