@@ -248,9 +248,7 @@ class AdminController extends Controller
             'lead' => $lead
         ]);
     }
-
     //Pegar os veiculos
-
     public function getVeiculo(){
         $id_user =  Auth::user()->id;
         $queryVeiculos = Advert::select('adverts.*')->join('advert_imovel','adverts.id','=','advert_imovel.advert_id');
@@ -344,24 +342,33 @@ class AdminController extends Controller
 
         $user = Auth::user();
 
-        ini_set("user_agent","SempreDaNegocio Robot - see http://www.sempredanegocio.com.br");
-        $xml = simplexml_load_file('http://integracao.valuegaia.com.br/arquivos/modelo.xml', 'SimpleXMLElement', LIBXML_NOCDATA);
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $user->url_ValueGaia);
+        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        $content = curl_exec($ch);
+        curl_close ( $ch );
+
+        $xml = simplexml_load_string($content);
+
+        if(!$xml)
+        {
+            //$request->session()->flash('alert-error', 'Anúncio editado com sucesso!');
+            return view('admin.principal.integracao',[
+                'user' => $user,
+                'valida' => true
+            ]);
+        }
+
 
         foreach ($xml->Imoveis->Imovel as $value){
-            /*
-            foreach ($value->Fotos->Foto as $va) {
-                $qnt = $va->URLArquivo;
 
-            }*/
-            //echo $value->PlacaNoLocal;
-            //dd($value);
-
-            $anuncio = Advert::where('origem_identificacao', '=', $value->CodigoImovel.$value->CodigoImovelAuxiliar)->get();
+            $anuncio = Advert::where('origem_identificacao', '=', $value->CodigoCliente.$value->CodigoImovel.$value->CodigoImovelAuxiliar)->get();
 
             if($anuncio->count() > 0) {
 
                 foreach ($anuncio as $anu){
-                    echo $anu->id."<br>".$anu->tipo_anuncio."<br>";
+                    //echo $anu->id."<br>".$anu->tipo_anuncio."<br>";
 
                     $anu->anuncio_titulo = $value->TituloImovel;
                     $anu->anuncio_descricao = $value->Observacao;
@@ -411,8 +418,6 @@ class AdminController extends Controller
                     else if ($tipo === 'Pousada' || $tipo === 'Resort' || $tipo === 'Hotel' || $tipo === 'Ilha')
                         $subcategories_id = "90";
 
-                    //echo $user_id."<br>".$subcategories_id."<br>".$tipo."<br>".$value->TipoImovel;
-
                     $anu->subcategories_id = $subcategories_id;
 
                     $anu->save();
@@ -426,14 +431,16 @@ class AdminController extends Controller
 
                     $anu->advertImovel->save();
 
-                    foreach ($anu->images as $img) {
-                        $img->delete();
-                    }
-                    foreach ($value->Fotos->Foto as $va) {
+                    if(isset($value->Fotos)) {
+                        foreach ($anu->images as $img) {
+                            $img->delete();
+                        }
+                        foreach ($value->Fotos->Foto as $va) {
 
-                        $extension = $va->URLArquivo;
-                        AdvertImage::create(['advert_id' => $anu->id, 'extension' => $extension]);
+                            $extension = $va->URLArquivo;
+                            AdvertImage::create(['advert_id' => $anu->id, 'extension' => $extension]);
 
+                        }
                     }
 
                     $feature = array();
@@ -632,16 +639,13 @@ class AdminController extends Controller
 
                     $tipo_anuncio = "aluga";
                     $origem = "ValueGaia";
-                    $origem_identificacao = $value->CodigoImovel . $value->CodigoImovelAuxiliar;
+                    $origem_identificacao = $value->CodigoCliente.$value->CodigoImovel.$value->CodigoImovelAuxiliar;
 
                     $anuncio_titulo = $value->TituloImovel;
                     $anuncio_descricao = $value->Observacao;
                     $preco = $value->PrecoLocacao;
                     $url_anuncio = str_slug($value->TituloImovel);
 
-                    //echo $tipo_anuncio."<br>".$origem."<br>".$origem_identificacao."<br>".$anuncio_titulo."<br>".$anuncio_descricao
-                    //    ."<br>".$preco."<br>".$url_anuncio."<br>";
-
                     $estado = $value->Estado;
                     $cidade = $value->Cidade;
                     $bairro = $value->Bairro;
@@ -653,9 +657,6 @@ class AdminController extends Controller
                     } else {
                         $active = 0;
                     }
-
-                    //echo $estado."<br>".$cidade."<br>".$bairro."<br>".$active."<br>".$rua
-                    //    ."<br>".$numero."<br>";
 
                     //$destaque, - verificar com o mauricio
 
@@ -696,8 +697,6 @@ class AdminController extends Controller
                     )
                         $subcategories_id = "90";
 
-                    //echo $user_id."<br>".$subcategories_id."<br>".$tipo."<br>".$value->TipoImovel;
-
                     $advert = Advert::create(['user_id' => $user_id,
                         'subcategories_id' => $subcategories_id,
                         'tipo_anuncio' => $tipo_anuncio,
@@ -713,8 +712,6 @@ class AdminController extends Controller
                         'preco' => $preco,
                         'url_anuncio' => $url_anuncio,
                         'active' => $active]);
-
-                    echo $advert->id;
 
                     $numero_quarto = $value->QtdDormitorios;
                     $numero_garagem = $value->QtdVagas;
@@ -733,11 +730,13 @@ class AdminController extends Controller
                         'advert_id' => $advert->id,
                         'category_id' => $category_id]);
 
-                    foreach ($value->Fotos->Foto as $va) {
+                    if(isset($value->Fotos)) {
+                        foreach ($value->Fotos->Foto as $va) {
 
-                        $extension = $va->URLArquivo;
-                        AdvertImage::create(['advert_id' => $advert->id, 'extension' => $extension]);
+                            $extension = $va->URLArquivo;
+                            AdvertImage::create(['advert_id' => $advert->id, 'extension' => $extension]);
 
+                        }
                     }
 
                     $feature = array();
@@ -926,20 +925,17 @@ class AdminController extends Controller
                     if (!empty($feature)) {
                         $advert->features()->sync($feature);
                     }
-                } else if (!empty($value->PrecoVenda)) { //venda @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-                    /*
+                }
+                if (!empty($value->PrecoVenda)) { //venda @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
                     $tipo_anuncio = "venda";
                     $origem = "ValueGaia";
-                    $origem_identificacao = $value->CodigoImovel . $value->CodigoImovelAuxiliar;
+                    $origem_identificacao = $value->CodigoCliente.$value->CodigoImovel.$value->CodigoImovelAuxiliar;
 
                     $anuncio_titulo = $value->TituloImovel;
                     $anuncio_descricao = $value->Observacao;
                     $preco = $value->PrecoVenda;
                     $url_anuncio = str_slug($value->TituloImovel);
 
-                    //echo $tipo_anuncio."<br>".$origem."<br>".$origem_identificacao."<br>".$anuncio_titulo."<br>".$anuncio_descricao
-                    //    ."<br>".$preco."<br>".$url_anuncio."<br>";
-
                     $estado = $value->Estado;
                     $cidade = $value->Cidade;
                     $bairro = $value->Bairro;
@@ -951,9 +947,6 @@ class AdminController extends Controller
                     } else {
                         $active = 0;
                     }
-
-                    //echo $estado."<br>".$cidade."<br>".$bairro."<br>".$active."<br>".$rua
-                    //    ."<br>".$numero."<br>";
 
                     //$destaque, - verificar com o mauricio
 
@@ -994,8 +987,6 @@ class AdminController extends Controller
                     )
                         $subcategories_id = "90";
 
-                    //echo $user_id."<br>".$subcategories_id."<br>".$tipo."<br>".$value->TipoImovel;
-
                     $advert = Advert::create(['user_id' => $user_id,
                         'subcategories_id' => $subcategories_id,
                         'tipo_anuncio' => $tipo_anuncio,
@@ -1011,8 +1002,6 @@ class AdminController extends Controller
                         'preco' => $preco,
                         'url_anuncio' => $url_anuncio,
                         'active' => $active]);
-
-                    echo $advert->id;
 
                     $numero_quarto = $value->QtdDormitorios;
                     $numero_garagem = $value->QtdVagas;
@@ -1031,11 +1020,13 @@ class AdminController extends Controller
                         'advert_id' => $advert->id,
                         'category_id' => $category_id]);
 
-                    foreach ($value->Fotos->Foto as $va) {
+                    if(isset($value->Fotos)) {
+                        foreach ($value->Fotos->Foto as $va) {
 
-                        $extension = $va->URLArquivo;
-                        AdvertImage::create(['advert_id' => $advert->id, 'extension' => $extension]);
+                            $extension = $va->URLArquivo;
+                            AdvertImage::create(['advert_id' => $advert->id, 'extension' => $extension]);
 
+                        }
                     }
 
                     $feature = array();
@@ -1223,12 +1214,25 @@ class AdminController extends Controller
 
                     if (!empty($feature)) {
                         $advert->features()->sync($feature);
-                    }*/
+                    }
                 }
             }
         }
 
+        return view('admin.principal.integracao',[
+            'user' => $user,
+            'valida' => false
+        ]);
 
+    }
+    //Abrir integração
+    public function integracao(){
 
+        $user = Auth::user();
+
+        return view('admin.principal.integracao',[
+            'user' => $user,
+            'valida' => false
+        ]);
     }
 }

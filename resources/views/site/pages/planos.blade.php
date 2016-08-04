@@ -42,12 +42,7 @@
                                         <li>12 <span>Fotos na internet</span></li>
                                         <li>Padrão</li>
                                         <li><span>Máximo de </span> 5 <span>anúncios</span></li>
-                                        <li>Sem SMS de alerta</li>
                                         <li>Mensal</li>
-                                        <li>X</li>
-                                        <li>X</li>
-                                        <li>X</li>
-                                        <li>X</li>
                                         <li>X</li>
                                         <li>X</li>
                                         <li>X</li>
@@ -71,10 +66,7 @@
                                         <li>Fotos ilimitadas</li>
                                         <li> <span>Até</span> 12 <span>vezes mais visualização por anúncio</span></li>
                                         <li><span>Máximo </span> 40 <span>anúncios</span></li>
-                                        <li>40 <span>SMS de alerta</span></li>
                                         <li>Mensal</li>
-                                        <li>1 <span>vídeo de seu anúncio</span></li>
-                                        <li><span>Exibição de até </span> 40 <span>vezes do corretor em anúncios particulares na região.</span></li>
                                         <li>Página hotsite</li>
                                         <li>Impulsionado pelo google</li>
                                         <li>X</li>
@@ -98,10 +90,7 @@
                                         <li>Fotos ilimitada</li>
                                         <li> <span>Até</span> 48 <span>vezes mais visualização por anúncio</span></li>
                                         <li>Anúncios ilimitados</li>
-                                        <li>80 <span>SMS de alerta</span></li>
                                         <li>Mensal</li>
-                                        <li>1 <span>vídeo de seu anúncio</span></li>
-                                        <li><span>Exibição de até </span> 80 <span>vezes do corretor em anúncios particulares na região.</span></li>
                                         <li>Página hotsite</li>
                                         <li>Impulsionado pelo google</li>
                                         <li>Impulsionado pelo facebook</li>
@@ -125,10 +114,8 @@
                                         <li>Fotos ilimitada</li>
                                         <li> <span>Até</span> 576 <span>vezes mais visualização por anúncio</span></li>
                                         <li>Anúncios ilimitados</li>
-                                        <li>960 <span>SMS de alerta</span></li>
+
                                         <li>Anual</li>
-                                        <li>1 <span>vídeo de seu anúncio</span></li>
-                                        <li><span>Exibição de até </span> 960 <span>vezes do corretor em anúncios particulares na região.</span></li>
                                         <li>Página hotsite</li>
                                         <li>Impulsionado pelo google</li>
                                         <li>Impulsionado pelo facebook</li>
@@ -165,8 +152,6 @@
                                         <li>X</li>
                                         <li>X</li>
                                         <li>X</li>
-                                        <li>X</li>
-                                        <li>X</li>
                                     </ul>
                                 </li>
                                 @if(empty( auth()->user()->id))
@@ -187,10 +172,6 @@
                                         <li>2 <span>meses</span></li>
                                         <li>X</li>
                                         <li>X</li>
-
-                                        <li>X</li>
-                                        <li>X</li>
-
                                     </ul>
                                 </li>
                                 @if(empty( auth()->user()->id))
@@ -212,8 +193,6 @@
                                         <li> <span>Até</span> 48 <span>vezes mais visualização</span></li>
                                         <li>6 <span>meses</span></li>
                                         <li>Impulsionado pelo Google</li>
-                                        <li>X</li>
-                                        <li>1 vídeo do seu anúncio</li>
                                         <li>X</li>
                                     </ul>
                                 </li>
@@ -237,9 +216,6 @@
                                         <li>1 <span>ano</span></li>
                                         <li>Impulsionado pelo Google</li>
                                         <li>Impulsionado pelo Facebook</li>
-
-                                        <li>1 vídeo do seu anúncio</li>
-                                        <li>Loja Virtual</li>
                                     </ul>
                                 </li>
 

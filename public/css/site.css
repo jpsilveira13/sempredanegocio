@@ -4807,6 +4807,21 @@ span.minisite-area-atuacao-texto{
 
 
 /* area login */
+.pabsolute{
+    position: absolute;
+}
+
+.align-direita{
+    right: 0;
+}
+
+.align-esquerda{
+    left: 0;
+}
+.img-cadastro{
+
+
+}
 
 .logmod{
     margin-bottom: 50px;

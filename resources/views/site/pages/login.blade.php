@@ -3,7 +3,7 @@
 @section('content')
     @include('site.pages._etapa')
 
-    <div class="container">
+    <div class="container position-relative">
         @if (count($errors) > 0)
             <div class="alert alert-danger">
                 <ul>
@@ -13,12 +13,20 @@
                 </ul>
             </div>
         @endif
+        <div class="col-md-12 hidden-sm hidden-xs">
+            <div class="pabsolute align-direita">
+                <img width="150" class="img-responsive" src="{{url('images/nao4.png')}}" />
+            </div>
+            <div class="pabsolute align-esquerda">
+                <img width="150" class="img-responsive" src="{{url('images/sim4.png')}}" />
+            </div>
+        </div>
         <div class="logmod">
             <div class="logmod__wrapper center-block">
                 <div class="logmod__container">
                     <ul class="logmod__tabs">
-                        <li data-tabtar="lgm-2"><a href="#">Clica aqui Entrar</a></li>
-                        <li data-tabtar="lgm-1"><a href="#">Clica aqui para Registrar</a></li>
+                        <li data-tabtar="lgm-2"><a href="#">Entrar</a></li>
+                        <li data-tabtar="lgm-1"><a href="#">Registrar</a></li>
                     </ul>
                     <div class="logmod__tab-wrapper">
                         <div class="logmod__tab lgm-1">

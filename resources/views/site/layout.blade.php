@@ -271,36 +271,7 @@
             </div>
         </div>
     </div>
-
 </footer>
-
-<!--<footer>
-    <div class="row">
-        <div class="container">
-            <div class="col-md-12 bb-white">
-                <div class="text-center footer-texto">
-                    <p><strong>Email: marketing@sempredanegocio.com.br</strong> / </p>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="container">
-            <div class="col-md-12">
-                <div class="social-area pull-left mt15">
-                    <a><i class="fa fa-facebook fa-2x"></i></a>
-                    <a><i class="fa fa-twitter fa-2x"></i></a>
-                    <a><i class="fa fa-instagram fa-2x"></i></a>
-                    <a><i class="fa fa-whatsapp fa-2x"></i></a>
-                    <a href="mailto:marketing@sempredanegocio.com.br"><i class="fa fa-envelope fa-2x"></i></a>
-                </div>
-                <div class="footer-texto text-right text-estilo-center">
-                    <p>Copyright © 2016. Todos os direitos reservados.</p>
-                </div>
-            </div>
-        </div>
-    </div>
-</footer> -->
 
 <!--<a href="{{url('anuncie')}}" title="Anuncie" class="btn btn-anuncio <?=Request::is('anuncie') ? 'hide' : '' ?>" id="btAnuncie">Anuncie Agora</a> -->
 <a href="#" title="Ir para o topo" class="hide" id="toTop">Topo</a>
@@ -487,8 +458,6 @@
 <script src="{{asset('js/jquery.bootpag.min.js')}}"></script>
 <script src="{{asset('js/site.js')}}"></script>
 
-
-<!--<script type="text/javascript" src="https://stc.sandbox.pagseguro.uol.com.br/pagseguro/api/v2/checkout/pagseguro.lightbox.js"></script> -->
 <script type="text/javascript" src="https://stc.pagseguro.uol.com.br/pagseguro/api/v2/checkout/pagseguro.lightbox.js"></script>
 
 
@@ -498,10 +467,12 @@
     @endif
     @if(Request::is('/') || Request::is('anuncie') || Request::is('veiculos'))
             <!--<script src="{{asset('js/menudinamico.js')}}"></script> -->
+    <!--<script src="{{asset('js/searchHotImo.js')}}"></script> -->
+    <!-- <script src="{{asset('js/menudinamicoVeiculo.js')}}"></script> -->
+    <!-- <script src="{{asset('js/searchHotVeiculo.js')}}"></script>-->
 @elseif( \Input::get('categoria') == 1 || Request::is('imoveis') )
     <script src="{{asset('js/menudinamico.js')}}"></script>
-@endif
-
+    @endif
 @if (session('status') && !Request::is('password/email'))
     <script>
         swal("Parabéns!", "Seu anúncio foi criado com sucesso!", "success")
@@ -512,7 +483,8 @@
         swal("Parabéns!", "Enviado com sucesso!! Em breve entraremos em contato.", "success")
     </script>
 @endif
-
+@yield('jsveiculo')
+@yield('jsimovel')
 </body>
 </html>
 

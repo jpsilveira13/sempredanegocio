@@ -44,6 +44,7 @@ function pagination(page) {
                     $('#resultSearch').fadeTo('slow', 1);
 
                     var html = '';
+                    var loc = window.location.origin;
                     $('#page').val(data.current_page);
                     var data = data.data;
                     var len = data.length;
@@ -83,7 +84,7 @@ function pagination(page) {
                         if(data[i].imagecapa){
 
                             if (data[i].imagecapa.extension.indexOf(char) > -1) {
-                                url = "galeria/" + data[i].imagecapa.extension;
+                                url = loc+"/galeria/" + data[i].imagecapa.extension;
 
                             } else {
                                 url = data[i].imagecapa.extension;
@@ -93,7 +94,7 @@ function pagination(page) {
                         }else if (data[i].images[0]) {
 
                             if (data[i].images[0].extension.indexOf(char) > -1) {
-                                url = "galeria/" + data[i].images[0].extension;
+                                url = loc+"/galeria/" + data[i].images[0].extension;
 
                             } else {
                                 url = data[i].images[0].extension;

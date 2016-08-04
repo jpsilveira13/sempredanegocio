@@ -3,12 +3,12 @@ function formatNumber (num) {
     return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.")
 }
 function pagination(page) {
-    var filters = $('#formSearchVeiculos').serialize() + "&page=" + page;
+    var filters = $('#searchHotVeiculos').serialize() + "&page=" + page;
     if(status == 0) {
         status = 1;
 
         $.ajax({
-            url: "search-veiculos",
+            url: "search-hotveiculos",
             type: 'GET',
             cache: false,
             data: filters,
@@ -21,11 +21,12 @@ function pagination(page) {
                     imageUrl: "../images/loadingCarro.gif",
                     showConfirmButton: false
                 });
-                $('html, body').animate({scrollTop: 0}, 'slow');
-                $('#products').empty();
+                $('#products').css('opacity','0.5');
             }, success: function (data) {
+                $('.pagination').css('display','none');
+                $('#products').empty();
+                $('#products').css('opacity','1');
 
-                $('html, body').animate({scrollTop: 0}, 'slow');
                 if(data.total== 0) {
                     $("#page-selection").hide();
 
@@ -44,12 +45,13 @@ function pagination(page) {
                     var html = '';
                     var loc = window.location.origin;
                     $('#page').val(data.current_page);
+                    var user_id = data.data[0].user_id;
                     var data = data.data;
                     var len = data.length;
 
                     //Criador do contador para os anuncios
                     var cont = 0;
-                    var char = "imoveis/site";
+                    var char = "imoveis/img";
                     var url;
                     for (var i = 0; i < len; i++) {
                         cont++;
@@ -80,7 +82,7 @@ function pagination(page) {
                         }else if (data[i].images[0]) {
 
                             if (data[i].images[0].extension.indexOf(char) > -1) {
-                                url = loc+"/galeria/" + data[i].images[0].extension;
+                                url = locl+"/galeria/" + data[i].images[0].extension;
 
                             } else {
                                 url = data[i].images[0].extension;
@@ -117,7 +119,7 @@ function pagination(page) {
 
                     });
 
-                    window.history.pushState({}, null, '/anuncio?transacao=' + data[0].tipo_anuncio + '&cidade=&' + filters);
+                    window.history.pushState({}, null, '/'+user_id+'/anuncio?transacao=' + data[0].tipo_anuncio + '&cidade=&' + filters);
                     swal.close();
 
                 } else {

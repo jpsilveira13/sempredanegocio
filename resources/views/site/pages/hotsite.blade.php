@@ -4,6 +4,11 @@
 </div>
 </div>
 
+@if(session('entrou'))
+      <H1> entrou AQUI PORRA!!</H1>
+    <div id="recarregaPagina" class="clearfix"></div>
+
+@endif
 <div class="col-md-12 col-lg-12 hidden-sm hidden-xs no-padding">
     <div class="header-logo-minisite @if($user->typeuser_id == 5) bg-car @endif">
         @if($user->typeuser_id < 5)
@@ -216,23 +221,28 @@
         <div class="clearfix"></div>
         <div class="row">
             @if($user->typeuser_id < 5)
-                <form action=""  id="formSearchImoveis" class="ajax">
-                    <input type="hidden" name="id_user" value="{{$user->id}}" />
-                    <input type="hidden" value="1" name="categoria" />
-                    <input type="hidden" value="{{\Input::get('page')}}" name="page" id="page" />
-                    <div id="nav-lateral" class="col-md-2 col-sm-2 no-padding ">
-                        <button id="btn-close-nav" type="button" class="close">X</button>
+                <form action=""  id="searchHotImoveis" class="ajax">
+                    <input type="hidden" value="1" name="status" />
+                    <input type="hidden" value="{{$user->id}}" name='user_id' />
+                    <input type="hidden" value="{{\Input::get('page')}}" name="page" />
+                    <div id="nav-lateral" class="col-md-2 col-sm-2 no-padding">
                         <div class="area-pesquisa">
-                            <!--<section class="clearfix sessao-area-filtro bg-branco ">
+                            <section class="clearfix sessao-area-filtro bg-branco ">
                                 <h5 class="sessao-texto-pesquisa">Localização</h5>
-
-                               <input name="cidade" id="location" value="" autocomplete="off" type="text" class="form-control search-results-input  pl3" placeholder="Incluir Cidade">
-                                <ul id="listaCidades" class="lista-cidade-search"></ul>
-
-                            </section> -->
+                                <div class="filter-search">
+                                    <i class="filter-search__title icon-search fa fa-search fa-2x"></i>
+                                    <input name="cidade" id="location" value="{{\Input::get('cidade')}}"  autocomplete="off" type="text" class="filter-search__field form-control" placeholder="Incluir Cidade">
+                                    <ul id="listaCidades" class="arrumaAnuncio lista-cidade-search"></ul>
+                                </div>
+                            </section>
+                            <section class="clearfix sessao-area-filtro bg-branco ">
+                                <h5 class="sessao-texto-pesquisa">Bairro</h5>
+                                <input readonly name="bairro" id="bairro" value="{{\Input::get('bairro')}}" autocomplete="off" type="text" class="form-control search-results-input  pl3" placeholder="Incluir Bairro">
+                                <ul id="listaBairros" class="lista-cidade-search"></ul>
+                            </section>
                             <section class="clearfix sessao-area-filtro bg-branco">
                                 <h5 class="sessao-texto-pesquisa">Tipo de imóvel</h5>
-                                <select  name="subcategoria" class="search-results-select search-results-select-img escolhaAcomodacao">
+                                <select   value="<?=(Session::get('subcategoria'))?> "name="subcategoria" class="search-results-select search-results-select-img escolhaAcomodacao">
                                     <option value="">Seleciona uma opção</option>
                                     @foreach($subcategories as $subcategory)
                                         <option value="{{$subcategory->id}}" id="{{$subcategory->id}}">{{$subcategory->name}}</option>
@@ -241,39 +251,49 @@
                             </section>
                             <section class="clearfix sessao-area-filtro bg-branco ">
                                 <h5 class="sessao-texto-pesquisa">Modalidade</h5>
-                                <select  name="tipo_anuncio" class="search-results-select search-results-select-img escolhaAcomodacao">
-                                    <option value="" selected>Seleciona uma opção</option>
-                                    <option value="venda" >Comprar</option>
-                                    <option value="aluga">Alugar</option>
+                                <select  value="<?=(Session::get('tipo_anuncio'))?>" name="tipo_anuncio" class="search-results-select search-results-select-img escolhaAcomodacao">
+
+                                    @if(\Input::get('transacao') == 'venda')
+                                        <option selected value="venda">Comprar</option>
+                                        <option value="aluga">Alugar</option>
+                                    @elseif(!\Input::get('transacao'))
+                                        <option selected value="">Todos</option>
+                                        <option value="venda">Comprar</option>
+                                        <option value="aluga">Alugar</option>
+                                    @else
+                                        <option value="venda">Comprar</option>
+                                        <option value="aluga" selected>Alugar</option>
+                                    @endif
+
                                 </select>
                             </section>
                             <section class="clearfix sessao-area-filtro bg-branco ">
                                 <h5 class="sessao-texto-pesquisa">Preço</h5>
                                 <label class="sessao-area-filtro-label preco-corrente">
                                     Mínimo
-                                    <input type="text" placeholder="0" name="min_price" id="min_price" onkeypress="mascaraCampo(this, mvalor2)"  class="search-results-input escolhaAcomodacao" data-mask-currency="true">
+                                    <input type="text" value="<?=(Session::get('min_price'))?>" placeholder="R$" name="min_price" id="min_price" onkeypress="mascaraCampo(this, mvalor2)"  class="search-results-input escolhaAcomodacao" data-mask-currency="true">
                                 </label>
                                 <label class="sessao-area-filtro-label preco-corrente">
                                     Máximo
-                                    <input onkeypress="mascaraCampo(this, mvalor2)" type="text" name="max_price" placeholder="0"  class="search-results-input escolhaAcomodacao" data-mask-currency="true">
+                                    <input onkeypress="mascaraCampo(this, mvalor2)" type="text" name="max_price" placeholder="R$" value="<?=(Session::get('max_price'))?>"  class="search-results-input escolhaAcomodacao" data-mask-currency="true">
                                 </label>
                             </section>
                             <section class="clearfix sessao-area-filtro bg-branco ">
                                 <h5 class="sessao-texto-pesquisa">Área</h5>
                                 <label class="sessao-area-filtro-label area-corrente">
                                     Mínimo
-                                    <input type="text" onkeypress="mascaraCampo(this, mvalor2)" name="min_area" placeholder="0" value="" class="search-results-input escolhaAcomodacao" data-mask-currency="true">
+                                    <input type="text" onkeypress="mascaraCampo(this, mvalor2)" name="min_area" placeholder="m²" value="<?=(Session::get('min_area'))?>" class="search-results-input escolhaAcomodacao" data-mask-currency="true">
                                 </label>
                                 <label class="sessao-area-filtro-label area-corrente">
                                     Máximo
-                                    <input type="text" name="max_area" onkeypress="mascaraCampo(this, mvalor2)" placeholder="0" value="" class="search-results-input escolhaAcomodacao" data-mask-currency="true">
+                                    <input type="text" name="max_area" onkeypress="mascaraCampo(this, mvalor2)" placeholder="m²" value="<?=(Session::get('max_area'))?>" class="search-results-input escolhaAcomodacao" data-mask-currency="true">
                                 </label>
                             </section>
-                            <section class="clearfix sessao-area-filtro bg-branco ">
+                            <section style="padding-bottom: 56px" class="clearfix sessao-area-filtro bg-branco ">
                                 <h5 class="sessao-texto-pesquisa hidden">Cômodos</h5>
                                 <label class="sessao-texto-pesquisa sessao-area-filtro-label-numeric fontsize11px">
                                     Quartos
-                                    <select  name="num_quartos" id="numQuartos" class="search-results-select numeric-select escolhaAcomodacao">
+                                    <select value="<?=(Session::get('num_quartos'))?>" name="num_quartos" id="numQuartos" class="search-results-select numeric-select escolhaAcomodacao">
                                         <option selected="selected" value="0">-</option>
                                         <option value="1">1+</option>
                                         <option value="2">2+</option>
@@ -284,7 +304,7 @@
                                 </label>
                                 <label class="sessao-texto-pesquisa sessao-area-filtro-label-numeric fontsize11px">
                                     Banheiros
-                                    <select name="num_banheiros" id="numBanheiros" class="search-results-select numeric-select escolhaAcomodacao">
+                                    <select value="<?=(Session::get('num_banheiros'))?>" name="num_banheiros" id="numBanheiros" class="search-results-select numeric-select escolhaAcomodacao">
                                         <option selected="selected" value="0">-</option>
                                         <option value="1">1+</option>
                                         <option value="2">2+</option>
@@ -294,7 +314,7 @@
                                 </label>
                                 <label class="sessao-texto-pesquisa sessao-area-filtro-label-numeric fontsize11px" >
                                     Vagas
-                                    <select id="numVagas" name="num_vagas" class="search-results-select numeric-select escolhaAcomodacao">
+                                    <select value="<?=(Session::get('num_vagas'))?>" id="numVagas" name="num_vagas" class="search-results-select numeric-select escolhaAcomodacao">
                                         <option selected="selected" value="0">-</option>
                                         <option value="1">1+</option>
                                         <option value="2">2+</option>
@@ -303,26 +323,35 @@
                                     </select>
                                 </label>
                             </section>
+                            <fieldset id="aplicaFiltro" class="site-main__view-results filter-view-results">
+                                <p>
+                                    <a id="btn-close-nav"  class="filter-view-results__button filter-view-results__button-apply icon-after-arrow-bd-up js-toggleResultFilters">APLICAR FILTROS</a>
+                                </p>
+                            </fieldset>
                         </div>
                     </div>
                 </form>
+            @section('jsimovel')
+                <script src="{{asset('js/searchHotImo.js')}}"></script>
+            @endsection
             @endif
             @if($user->typeuser_id == 5)
-                <form action=""  id="formSearchVeiculos" class="ajax">
+                <form action=""  id="searchHotVeiculos" class="ajax">
                     <input type="hidden" value="1" name="status" />
+                    <input type="hidden" value="{{$user->id}}" name='user_id' />
                     <div id="nav-lateral" class="col-md-2 col-sm-2 no-padding ">
-                        <button id="btn-close-nav" type="button" class="close">X</button>
                         <div class="area-pesquisa">
                             <section class="clearfix sessao-area-filtro bg-branco ">
                                 <h5 class="sessao-texto-pesquisa">Localização</h5>
-
-                                <input name="cidade" id="location" value="" autocomplete="off" type="text" class="form-control search-results-input  pl3" placeholder="Incluir Cidade">
-                                <ul id="listaCidades" class="lista-cidade-search"></ul>
-
+                                <div class="filter-search">
+                                    <i class="filter-search__title icon-search fa fa-search fa-2x"></i>
+                                    <input name="cidade" id="location" value="{{\Input::get('cidade')}}"  autocomplete="off" type="text" class="filter-search__field form-control" placeholder="Incluir Cidade">
+                                    <ul id="listaCidades" class="arrumaAnuncio lista-cidade-search"></ul>
+                                </div>
                             </section>
                             <section class="clearfix sessao-area-filtro bg-branco">
                                 <h5 class="sessao-texto-pesquisa">Tipo de Veículos</h5>
-                                <select  name="subcategoria" class="search-results-select search-results-select-img escolhaAcomodacao">
+                                <select value="<?=(Session::get('subcategories_id'))?>" id="subcategory" name="subcategories_id" class="search-results-select search-results-select-img escolhaAcomodacao">
                                     <option value="">Seleciona uma opção</option>
                                     @foreach($subcategories as $subcategory)
                                         <option value="{{$subcategory->id}}" id="{{$subcategory->id}}">{{$subcategory->name}}</option>
@@ -331,39 +360,68 @@
                             </section>
                             <section class="clearfix sessao-area-filtro bg-branco">
                                 <h5 class="sessao-texto-pesquisa">Seleciona a Marca</h5>
-                                <select  id="veiculos" name="marca_id" class="search-results-select search-results-select-img escolhaAcomodacao">
+                                <select  id="veiculos" value="<?=(Session::get('marca_id'))?>" name="marca_id" class="search-results-select search-results-select-img escolhaAcomodacao">
                                     <option value="">Seleciona uma opção</option>
-                                    @foreach($marcas as $marca)
-                                        <option value="{{$marca->marca}}" id="{{$marca->codigo_marca}}">{{$marca->marca}}</option>
-                                    @endforeach
+
                                 </select>
                             </section>
                             <section class="clearfix sessao-area-filtro bg-branco">
                                 <h5 class="sessao-texto-pesquisa">Seleciona o Modelo</h5>
-                                <select id="modelo" name="modelo_id" class="search-results-select search-results-select-img escolhaAcomodacao"></select>
+                                <select id="modelo" name="modelo_id" value="<?=(Session::get('modelo_id'))?>" class="search-results-select search-results-select-img escolhaAcomodacao">
+                                    <option value="" selected="selected">Todos</option>
+                                </select>
+                            </section>
+                            <section  class="clearfix sessao-area-filtro bg-branco ">
+                                <h5 class="sessao-texto-pesquisa">Ano veículo</h5>
+                                <label class="sessao-area-filtro-label preco-corrente">
+                                    Ano início
+                                    <input type="text" placeholder="ex.:1995"  value="<?=(Session::get('ano_inicio'))?>" name="ano_inicio" id="ano_inicio" class="search-results-input escolhaAcomodacao" onkeypress="mascaraCampo(this, mascSoNumeros)" maxlength="4">
+                                </label>
+                                <label class="sessao-area-filtro-label preco-corrente">
+                                    Ano final
+                                    <input type="text" placeholder="ex.:2016" onkeypress="mascaraCampo(this, mascSoNumeros)"  value="<?=(Session::get('ano_final'))?>" name="ano_final" class="search-results-input escolhaAcomodacao" maxlength="4">
+                                </label>
                             </section>
                             <section class="clearfix sessao-area-filtro bg-branco ">
                                 <h5 class="sessao-texto-pesquisa">Modalidade</h5>
-                                <select  name="tipo_anuncio" class="search-results-select search-results-select-img escolhaAcomodacao">
-                                    <option value="" selected>Seleciona uma opção</option>
-                                    <option value="venda" >Comprar</option>
-                                    <option value="aluga">Alugar</option>
+                                <select  value="<?=(Session::get('tipo_anuncio'))?>" name="tipo_anuncio" class="search-results-select search-results-select-img escolhaAcomodacao">
+
+                                    @if(\Input::get('transacao') == 'venda')
+                                        <option selected value="venda">Comprar</option>
+                                        <option value="aluga">Alugar</option>
+                                    @elseif(!\Input::get('transacao'))
+                                        <option selected value="">Todos</option>
+                                        <option value="venda">Comprar</option>
+                                        <option value="aluga">Alugar</option>
+                                    @else
+                                        <option value="venda">Comprar</option>
+                                        <option value="aluga" selected>Alugar</option>
+                                    @endif
+
                                 </select>
                             </section>
-                            <section class="clearfix sessao-area-filtro bg-branco ">
+                            <section style="padding-bottom: 60px" class="clearfix sessao-area-filtro bg-branco ">
                                 <h5 class="sessao-texto-pesquisa">Preço</h5>
                                 <label class="sessao-area-filtro-label preco-corrente">
                                     Mínimo
-                                    <input type="text" placeholder="0" value="{{old('min_price')}}" name="min_price" id="min_price" onkeypress="mascaraCampo(this, mvalor2)"  class="search-results-input escolhaAcomodacao" data-mask-currency="true">
+                                    <input type="text" placeholder="0" value="<?=(Session::get('min_price'))?>" name="min_price" id="min_price" onkeypress="mascaraCampo(this, mvalor2)"  class="search-results-input escolhaAcomodacao" data-mask-currency="true">
                                 </label>
                                 <label class="sessao-area-filtro-label preco-corrente">
                                     Máximo
-                                    <input onkeypress="mascaraCampo(this, mvalor2)" type="text" name="max_price" placeholder="0"  class="search-results-input escolhaAcomodacao" data-mask-currency="true">
+                                    <input onkeypress="mascaraCampo(this, mvalor2)" type="text" name="max_price" placeholder="0" value="<?=(Session::get('max_price'))?>"  class="search-results-input escolhaAcomodacao" data-mask-currency="true">
                                 </label>
                             </section>
+                            <fieldset id="aplicaFiltro" class="site-main__view-results filter-view-results">
+                                <p>
+                                    <a id="btn-close-nav"  class="filter-view-results__button filter-view-results__button-apply icon-after-arrow-bd-up js-toggleResultFilters">APLICAR FILTROS</a>
+                                </p>
+                            </fieldset>
                         </div>
                     </div>
                 </form>
+            @section('jsveiculo')
+                <script src="{{asset('js/searchHotVeiculo.js')}}"></script>
+            @endsection
             @endif
             <div class="col-md-10 col-sm-12">
                 <div class="before"></div>
@@ -529,6 +587,7 @@
                             @endforeach
                         </div>
                         <div class='text-center'>
+                            <div id="page-selection"></div>
                             {!! $advertUser->render() !!}
                         </div>
                     </div>

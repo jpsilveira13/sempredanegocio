@@ -142,9 +142,18 @@ Route::get('search-veiculos',[
     'uses' => 'HomeController@scopeVeiculos'
 
 ]);
-Route::get('search-hotImo',[
-   'uses'=> 'HomeController@scopeHotImo'
+
+Route::get('{id}/search-hotimoveis',[
+    'uses' => 'SearchController@searchImo'
+
 ]);
+
+Route::get('{id}/search-hotveiculos',[
+    'uses' => 'SearchController@searchVeiculos'
+
+]);
+
+
 Route::get('sem-imagem', 'HomeController@noImage');
 Route::get('/consultar_cep','HomeController@searchCep');
 
@@ -202,14 +211,12 @@ Route::group(['prefix' => 'admin', 'middleware'=>'auth','where'=>['id'=>'[0-9]+'
         Route::get('message/view/{id}',['as'=>'message.view','uses'=> 'MessageController@view' ]);
         Route::get('message/destroy/{id}',['as'=>'message.destroy', 'uses' => 'MessageController@destroy']);
     });
-
     Route::group(['prefix' => 'adm'],function() {
 
         Route::get('/',['as'=>'adm', 'uses' => 'AdminController@dadosPainelAdm']);
-
         Route::get('/anuncios',['as'=>'adm.anuncios', 'uses' => 'AdminController@anunciosSemImg']);
         Route::get('/xml',['as'=>'adm.xml', 'uses' => 'AdminController@lerXML']);
-        Route::get('/deluser',['as'=>'adm.deluser', 'uses' => 'AdminController@usuariosSemAnuncio']);
+        //Route::get('/deluser',['as'=>'adm.deluser', 'uses' => 'AdminController@usuariosSemAnuncio']);
 
 
     });
@@ -225,6 +232,10 @@ Route::group(['prefix' => 'admin', 'middleware'=>'auth','where'=>['id'=>'[0-9]+'
         Route::get('{id}/{idLead}/inativarleadhistorico',['as'=>'admin.leads.inativarhistorico','uses'=>'AdminController@inativarHistoricoLead']);
 
     });
+    Route::group(['prefix' => 'integracao'],function() {
+
+        Route::get('/',['as'=>'integracao', 'uses' => 'AdminController@integracao']);
+    });
 
 });
 
@@ -239,7 +250,8 @@ Route::get('anuncio/{tipo_anuncio}/{id}/{url_anuncio}',[
 ]);
 
 Route::get('{id}/{url_name}',[
-    'uses' => "HomeController@hotsite"
+    'uses' => "HomeController@hotsite",
+    'as' => 'hotsite'
 
 ]);
 //procura cep
