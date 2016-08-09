@@ -83,7 +83,7 @@ class SearchController extends Controller
             $query->where('numero_garagem', Input::get('num_vagas'));
 
         }
-        return Response::json($query->where('status', '>', '0')->with('images','advertImovel','imagecapa')->paginate(18));
+        return Response::json($query->where('status', '>', '0')->orderByRaw("RAND()")->with('images','advertImovel','imagecapa')->paginate(18));
 
     }
 
@@ -105,7 +105,6 @@ class SearchController extends Controller
         if (Input::get('tipo_anuncio')) {
             Session::put('tipo_anuncio',Input::get('tipo_anuncio'));
             $query->where('tipo_anuncio',Input::get('tipo_anuncio'));
-
         }
 
         if ($min_price && $max_price) {
@@ -134,6 +133,6 @@ class SearchController extends Controller
 
         }
 
-        return Response::json($query->where('status', '>', '0')->orderBy('destaque','desc')->with('images','advertVeiculo','imagecapa')->paginate(18));
+        return Response::json($query->where('status', '>', '0')->orderByRaw("RAND()")->with('images','advertVeiculo','imagecapa')->paginate(18));
     }
 }

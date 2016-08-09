@@ -2,6 +2,11 @@
 function formatNumber (num) {
     return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.")
 }
+
+index = 0;
+var images = ['images/bannerCarroCia.png'];
+index = Math.floor(Math.random()*images.length);
+var href= "326135/carro-cia";
 function pagination(page) {
     var filters = $('#searchHotVeiculos').serialize() + "&page=" + page;
     if(status == 0) {
@@ -58,12 +63,10 @@ function pagination(page) {
                         if (cont > 12) {
                             cont = 0;
                             html += '<div style="margin-bottom: 20px" class="item col-xs-12 col-sm-12 col-lg-12 col-md-12 bloco-item">';
-                            if(!page || page == 1){
 
-                                html+='<a class="Anuncie aqui" target="_blank" title="Anuncie aqui" href="326135/carro-cia"> <img src="images/bannerCarroCia.png" class="img-menor img-responsive center-block" /></a>';
-                            }else{
-                                html += '<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script><ins class="adsbygoogle"style="display:block" data-ad-client="ca-pub-9276435422488602" data-ad-slot="4429425578" data-ad-format="auto"></ins>  <script> (adsbygoogle = window.adsbygoogle || []).push({}) </script>';
-                            }
+
+                                html+='<a class="Anuncie aqui" target="_blank" title="Anuncie aqui" href="'+href+'"> <img src="'+images[index]+'" class="img-menor img-responsive center-block" /></a>';
+
                             html+='</div>';
                         }
                         html += '<div class="item col-xs-12 col-sm-6 col-lg-4 col-md-4 bloco-item"><a class="item-total" href="/anuncio/' + data[i].tipo_anuncio + '/' + data[i].id + '/' + data[i].url_anuncio + '"><div class="thumbnail heigth417">';

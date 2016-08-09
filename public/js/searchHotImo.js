@@ -2,6 +2,17 @@
 function formatNumber (num) {
     return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.");
 }
+index = 0;
+var images = ['images/bannerPredileta.png','images/bannerVisao.png'];
+index = Math.floor(Math.random()*images.length);
+var href = "";
+if(images[index].length == 26){
+    href = "1545398/predileta-imoveis";
+
+}else if(images[index].length == 22){
+    href = "1830134/imobiliaria-visao";
+}
+
 function pagination(page) {
 
     var filters = $('#searchHotImoveis').serialize() + "&page=" + page;
@@ -62,15 +73,9 @@ function pagination(page) {
                         if (cont > 12) {
                             cont = 0;
                             html += '<div style="margin-bottom: 20px" class="item col-xs-12 col-sm-12 col-lg-12 col-md-12 bloco-item">';
-                            if(!page || page == 1){
 
-                                html+='<a class="Anuncie aqui" target="_blank" title="Anuncie aqui" href="1545398/predileta-imoveis"> <img src="images/bannerPredileta.png" class="img-menor img-responsive center-block" /></a>';
-                            }else if(page == 2){
-                                html+='<a class="Anuncie aqui" target="_blank" title="Anuncie aqui" href="1830134/imobiliaria-visao"> <img src="images/bannerVisao.png" class="img-menor img-responsive center-block" /></a>';
+                                html+='<a class="Anuncie aqui" target="_blank" title="Anuncie aqui" href="'+href+'"> <img src="'+images[index]+'" class="img-menor img-responsive center-block" /></a>';
 
-                            }else{
-                                html += '<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script><ins class="adsbygoogle"style="display:block" data-ad-client="ca-pub-9276435422488602" data-ad-slot="4429425578" data-ad-format="auto"></ins>  <script> (adsbygoogle = window.adsbygoogle || []).push({}) </script>';
-                            }
                             html+='</div>';
                         }
                         html += '<div class="item col-xs-12 col-sm-6 col-lg-4 col-md-4 bloco-item">';
@@ -102,7 +107,7 @@ function pagination(page) {
                             html += '<img class="group list-group-image content-img-sugestao lazy transition-img" data-original="' + url + '" width="220" height="229" alt="titulo imagem" />'
 
                         } else {
-                            html += '<img class="group list-group-image content-img-sugestao lazy transition-img" src="images/no-image.jpg" alt="titulo imagem" />';
+                            html += '<img class="group list-group-image content-img-sugestao lazy transition-img" src="../images/no-image.jpg" alt="titulo imagem" />';
                         }
                         html += ' <div class="caption infos-suggest"> <h4 class="group inner list-group-item-heading text-bairro">' + data[i].cidade + '<br />' + data[i].estado + '</h4><p class="group inner list-group-item-text"><ul class="list-infos unstyled clearfix no-padding" id="tooltip-config"><li class="icone-quartos zaptip" data-original-title="Quantidade de quartos" data-toggle="tooltip"> ' + data[i].advert_imovel.numero_quarto + '</li><li class="icone-suites zaptip" data-original-title="Quantidade de Banheiros" data-toggle="tooltip"> ' + data[i].advert_imovel.numero_banheiro + '</li><li class="icone-vagas zaptip" data-original-title="Quantidade de vagas" data-toggle="tooltip"> ' + data[i].advert_imovel.numero_garagem + '</li></ul>';
                         html += '<div class="col-xs-12 col-md-12 list-item-nav2"><p class="lead description-anuncio">' + data[i].anuncio_descricao + '</p></div><div class="row list-group-hidden"> <div class="col-xs-12 col-md-12"><p class="lead description-anuncio">' + data[i].anuncio_descricao + '</p></div></div>';

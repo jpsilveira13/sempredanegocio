@@ -4,8 +4,7 @@
 </div>
 </div>
 
-@if(session('entrou'))
-      <H1> entrou AQUI PORRA!!</H1>
+@if(\Input::get('page'))
     <div id="recarregaPagina" class="clearfix"></div>
 
 @endif
@@ -243,7 +242,7 @@
                             <section class="clearfix sessao-area-filtro bg-branco">
                                 <h5 class="sessao-texto-pesquisa">Tipo de imóvel</h5>
                                 <select   value="<?=(Session::get('subcategoria'))?> "name="subcategoria" class="search-results-select search-results-select-img escolhaAcomodacao">
-                                    <option value="">Seleciona uma opção</option>
+                                    <option value="">Todos</option>
                                     @foreach($subcategories as $subcategory)
                                         <option value="{{$subcategory->id}}" id="{{$subcategory->id}}">{{$subcategory->name}}</option>
                                     @endforeach
@@ -254,6 +253,7 @@
                                 <select  value="<?=(Session::get('tipo_anuncio'))?>" name="tipo_anuncio" class="search-results-select search-results-select-img escolhaAcomodacao">
 
                                     @if(\Input::get('transacao') == 'venda')
+                                        <option value="">Todos</option>
                                         <option selected value="venda">Comprar</option>
                                         <option value="aluga">Alugar</option>
                                     @elseif(!\Input::get('transacao'))
@@ -261,6 +261,7 @@
                                         <option value="venda">Comprar</option>
                                         <option value="aluga">Alugar</option>
                                     @else
+                                        <option value="">Todos</option>
                                         <option value="venda">Comprar</option>
                                         <option value="aluga" selected>Alugar</option>
                                     @endif

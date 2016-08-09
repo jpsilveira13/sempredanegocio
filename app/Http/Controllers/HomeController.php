@@ -141,8 +141,14 @@ class HomeController extends Controller
 
     public function hotsite($id,$url_name){
         $user = User::find($id);
-        $subcategories = SubCategory::get();
-        $advertUser = Advert::where('user_id',$id)->where('status','>','0')->orderBy('created_at','desc')->paginate();
+        if($user->typeuser_id < 5 ){
+            $subcategories = SubCategory::where('category_id',1)->get();
+
+        }else{
+            $subcategories = Subcategory::where('category_id',2)->get();
+        }
+
+        $advertUser = Advert::where('user_id',$id)->where('status','>','0')->orderByRaw("RAND()")->paginate(18);
 
         $marcas = VeiculoMarca::get();
         $advertAluga = Advert::where('user_id',$id)->where('tipo_anuncio','=','aluga')->where('status','>','0')->count();
@@ -504,8 +510,6 @@ class HomeController extends Controller
         return Response::json($query->where('status', '>', '0')->orderBy('destaque','desc')->with('images','advertImovel','imagecapa')->paginate(18));
 
     }
-
-
 
     //search veiculos
     public function scopeVeiculos(){

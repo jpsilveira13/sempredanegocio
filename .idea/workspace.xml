@@ -2,21 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="22cc3c4c-8d6b-4348-a9d1-14a4f20b5655" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/js/searchHotImo.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/js/searchHotVeiculo.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/AdminController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/AdminController.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/HomeController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/HomeController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/routes.php" afterPath="$PROJECT_DIR$/app/Http/routes.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/css/site.css" afterPath="$PROJECT_DIR$/public/css/site.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/SearchController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/SearchController.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/js/menudinamico.js" afterPath="$PROJECT_DIR$/public/js/menudinamico.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/js/menudinamicoVeiculo.js" afterPath="$PROJECT_DIR$/public/js/menudinamicoVeiculo.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/resultado/anuncio.blade.php" afterPath="$PROJECT_DIR$/resources/views/resultado/anuncio.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/resultado/resultVeiculo.blade.php" afterPath="$PROJECT_DIR$/resources/views/resultado/resultVeiculo.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/site/layout.blade.php" afterPath="$PROJECT_DIR$/resources/views/site/layout.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/js/searchHotImo.js" afterPath="$PROJECT_DIR$/public/js/searchHotImo.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/js/searchHotVeiculo.js" afterPath="$PROJECT_DIR$/public/js/searchHotVeiculo.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/site/pages/hotsite.blade.php" afterPath="$PROJECT_DIR$/resources/views/site/pages/hotsite.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/site/pages/login.blade.php" afterPath="$PROJECT_DIR$/resources/views/site/pages/login.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/site/pages/planos.blade.php" afterPath="$PROJECT_DIR$/resources/views/site/pages/planos.blade.php" />
     </list>
     <ignored path="sempredanegocio.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -45,14 +37,25 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
-      <file leaf-file-name="searchHotImo.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="HomeController.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/Http/Controllers/HomeController.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-1.8387097">
+              <caret line="150" column="97" selection-start-line="150" selection-start-column="75" selection-end-line="150" selection-end-column="97" />
+              <folding>
+                <element signature="e#52#88#0#PHP" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="searchHotImo.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/public/js/searchHotImo.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="109" column="152" selection-start-line="109" selection-start-column="148" selection-end-line="109" selection-end-column="152" />
+            <state vertical-scroll-proportion="3.4231498">
+              <caret line="80" column="53" selection-start-line="80" selection-start-column="52" selection-end-line="80" selection-end-column="53" />
               <folding>
-                <marker date="1470249715159" expanded="true" signature="2271:2290" placeholder="..." />
-                <marker date="1470249715159" expanded="true" signature="3105:3118" placeholder="..." />
+                <marker date="1470680463328" expanded="true" signature="2570:2589" placeholder="..." />
               </folding>
             </state>
           </provider>
@@ -61,23 +64,10 @@
       <file leaf-file-name="SearchController.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Http/Controllers/SearchController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-13.16129">
-              <caret line="46" column="56" selection-start-line="46" selection-start-column="56" selection-end-line="46" selection-end-column="56" />
+            <state vertical-scroll-proportion="-58.60606">
+              <caret line="136" column="5" selection-start-line="136" selection-start-column="5" selection-end-line="136" selection-end-column="5" />
               <folding>
                 <element signature="e#52#80#0#PHP" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="searchHotVeiculo.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/public/js/searchHotVeiculo.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="98" column="151" selection-start-line="98" selection-start-column="148" selection-end-line="98" selection-end-column="151" />
-              <folding>
-                <marker date="1470249488227" expanded="true" signature="2235:2254" placeholder="..." />
-                <marker date="1470249488227" expanded="true" signature="2786:2799" placeholder="..." />
               </folding>
             </state>
           </provider>
@@ -87,11 +77,10 @@
         <entry file="file://$PROJECT_DIR$/public/js/menudinamico.js">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="46" column="20" selection-start-line="46" selection-start-column="20" selection-end-line="46" selection-end-column="53" />
+              <caret line="79" column="139" selection-start-line="79" selection-start-column="124" selection-end-line="79" selection-end-column="139" />
               <folding>
-                <element signature="e#439#831#0" expanded="false" />
-                <marker date="1470249620008" expanded="true" signature="2343:2362" placeholder="..." />
-                <marker date="1470249620008" expanded="true" signature="3177:3190" placeholder="..." />
+                <element signature="e#804#1196#0" expanded="false" />
+                <marker date="1470680312171" expanded="true" signature="2708:2727" placeholder="..." />
               </folding>
             </state>
           </provider>
@@ -100,22 +89,23 @@
       <file leaf-file-name="menudinamicoVeiculo.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/public/js/menudinamicoVeiculo.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-8.277778">
-              <caret line="51" column="46" selection-start-line="51" selection-start-column="46" selection-end-line="51" selection-end-column="46" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="6" column="41" selection-start-line="6" selection-start-column="41" selection-end-line="6" selection-end-column="41" />
               <folding>
-                <marker date="1470326786672" expanded="true" signature="2148:2167" placeholder="..." />
-                <marker date="1470326786672" expanded="true" signature="2699:2712" placeholder="..." />
+                <marker date="1470680674530" expanded="true" signature="2284:2303" placeholder="..." />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="AdvertCategory.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/Models/AdvertCategory.php">
+      <file leaf-file-name="searchHotVeiculo.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/public/js/searchHotVeiculo.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-0.0">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="65" column="0" selection-start-line="65" selection-start-column="0" selection-end-line="65" selection-end-column="0" />
+              <folding>
+                <marker date="1470680775560" expanded="true" signature="2370:2389" placeholder="..." />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -132,14 +122,14 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="hotsite.blade.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="hotsite.blade.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/resources/views/site/pages/hotsite.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.6653226">
-              <caret line="227" column="79" selection-start-line="227" selection-start-column="79" selection-end-line="227" selection-end-column="79" />
+            <state vertical-scroll-proportion="-139.58064">
+              <caret line="246" column="134" selection-start-line="246" selection-start-column="134" selection-end-line="246" selection-end-column="134" />
               <folding>
-                <element signature="e#20488#27278#0#HTML" expanded="false" />
-                <element signature="e#27999#28026#0#HTML" expanded="true" />
+                <element signature="e#20584#27374#0#HTML" expanded="false" />
+                <element signature="e#28095#28122#0#HTML" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -221,17 +211,17 @@
         <option value="$PROJECT_DIR$/resources/views/resultado/anuncio.blade.php" />
         <option value="$PROJECT_DIR$/public/css/site.css" />
         <option value="$PROJECT_DIR$/resources/views/site/pages/login.blade.php" />
-        <option value="$PROJECT_DIR$/app/Http/Controllers/HomeController.php" />
         <option value="$PROJECT_DIR$/public/js/site.js" />
         <option value="$PROJECT_DIR$/app/Http/routes.php" />
-        <option value="$PROJECT_DIR$/public/js/searchHotVeiculo.js" />
-        <option value="$PROJECT_DIR$/public/js/menudinamico.js" />
-        <option value="$PROJECT_DIR$/public/js/searchHotImo.js" />
         <option value="$PROJECT_DIR$/resources/views/site/layout.blade.php" />
-        <option value="$PROJECT_DIR$/public/js/menudinamicoVeiculo.js" />
         <option value="$PROJECT_DIR$/resources/views/resultado/resultVeiculo.blade.php" />
+        <option value="$PROJECT_DIR$/app/Http/Controllers/HomeController.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/SearchController.php" />
         <option value="$PROJECT_DIR$/resources/views/site/pages/hotsite.blade.php" />
+        <option value="$PROJECT_DIR$/public/js/menudinamico.js" />
+        <option value="$PROJECT_DIR$/public/js/searchHotImo.js" />
+        <option value="$PROJECT_DIR$/public/js/menudinamicoVeiculo.js" />
+        <option value="$PROJECT_DIR$/public/js/searchHotVeiculo.js" />
       </list>
     </option>
   </component>
@@ -499,13 +489,6 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="php">
-          <url>file://$PROJECT_DIR$/app/Http/Controllers/HomeController.php</url>
-          <line>510</line>
-          <option name="timeStamp" value="18" />
-        </line-breakpoint>
-      </breakpoints>
       <option name="time" value="19" />
     </breakpoint-manager>
     <watches-manager />
@@ -802,44 +785,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/HomeController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="10.258064">
-          <caret line="561" column="0" selection-start-line="561" selection-start-column="0" selection-end-line="561" selection-end-column="0" />
-          <folding>
-            <element signature="e#52#88#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/Http/routes.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-5.354839">
           <caret line="150" column="17" selection-start-line="150" selection-start-column="17" selection-end-line="150" selection-end-column="35" />
           <folding>
-            <element signature="e#7#392#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/js/searchHotVeiculo.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="98" column="151" selection-start-line="98" selection-start-column="148" selection-end-line="98" selection-end-column="151" />
-          <folding>
-            <marker date="1470249488227" expanded="true" signature="2235:2254" placeholder="..." />
-            <marker date="1470249488227" expanded="true" signature="2786:2799" placeholder="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/js/searchHotImo.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="109" column="152" selection-start-line="109" selection-start-column="148" selection-end-line="109" selection-end-column="152" />
-          <folding>
-            <marker date="1470249715159" expanded="true" signature="2271:2290" placeholder="..." />
-            <marker date="1470249715159" expanded="true" signature="3105:3118" placeholder="..." />
+            <element signature="e#7#392#0#PHP" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -849,29 +800,6 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/js/menudinamico.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="46" column="20" selection-start-line="46" selection-start-column="20" selection-end-line="46" selection-end-column="53" />
-          <folding>
-            <element signature="e#439#831#0" expanded="false" />
-            <marker date="1470249620008" expanded="true" signature="2343:2362" placeholder="..." />
-            <marker date="1470249620008" expanded="true" signature="3177:3190" placeholder="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/js/menudinamicoVeiculo.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-8.277778">
-          <caret line="51" column="46" selection-start-line="51" selection-start-column="46" selection-end-line="51" selection-end-column="46" />
-          <folding>
-            <marker date="1470326786672" expanded="true" signature="2148:2167" placeholder="..." />
-            <marker date="1470326786672" expanded="true" signature="2699:2712" placeholder="..." />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -893,6 +821,26 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/HomeController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-1.8387097">
+          <caret line="150" column="97" selection-start-line="150" selection-start-column="75" selection-end-line="150" selection-end-column="97" />
+          <folding>
+            <element signature="e#52#88#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/SearchController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-58.60606">
+          <caret line="136" column="5" selection-start-line="136" selection-start-column="5" selection-end-line="136" selection-end-column="5" />
+          <folding>
+            <element signature="e#52#80#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/resultado/resultVeiculo.blade.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="15.612904">
@@ -901,23 +849,54 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/SearchController.php">
+    <entry file="file://$PROJECT_DIR$/resources/views/site/pages/hotsite.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-13.16129">
-          <caret line="46" column="56" selection-start-line="46" selection-start-column="56" selection-end-line="46" selection-end-column="56" />
+        <state vertical-scroll-proportion="-139.58064">
+          <caret line="246" column="134" selection-start-line="246" selection-start-column="134" selection-end-line="246" selection-end-column="134" />
           <folding>
-            <element signature="e#52#80#0#PHP" expanded="true" />
+            <element signature="e#20584#27374#0#HTML" expanded="false" />
+            <element signature="e#28095#28122#0#HTML" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/site/pages/hotsite.blade.php">
+    <entry file="file://$PROJECT_DIR$/public/js/menudinamico.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6653226">
-          <caret line="227" column="79" selection-start-line="227" selection-start-column="79" selection-end-line="227" selection-end-column="79" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="79" column="139" selection-start-line="79" selection-start-column="124" selection-end-line="79" selection-end-column="139" />
           <folding>
-            <element signature="e#20488#27278#0#HTML" expanded="false" />
-            <element signature="e#27999#28026#0#HTML" expanded="true" />
+            <element signature="e#804#1196#0" expanded="false" />
+            <marker date="1470680312171" expanded="true" signature="2708:2727" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/js/menudinamicoVeiculo.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="6" column="41" selection-start-line="6" selection-start-column="41" selection-end-line="6" selection-end-column="41" />
+          <folding>
+            <marker date="1470680674530" expanded="true" signature="2284:2303" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/js/searchHotVeiculo.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="65" column="0" selection-start-line="65" selection-start-column="0" selection-end-line="65" selection-end-column="0" />
+          <folding>
+            <marker date="1470680775560" expanded="true" signature="2370:2389" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/js/searchHotImo.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="3.4231498">
+          <caret line="80" column="53" selection-start-line="80" selection-start-column="52" selection-end-line="80" selection-end-column="53" />
+          <folding>
+            <marker date="1470680463328" expanded="true" signature="2570:2589" placeholder="..." />
           </folding>
         </state>
       </provider>
