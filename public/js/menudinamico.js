@@ -2,7 +2,7 @@
 function formatNumber (num) {
     return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.")
 }
-index = 0;
+var index = 0;
 var images = ['images/bannerPredileta.png','images/bannerVisao.png'];
 index = Math.floor(Math.random()*images.length);
 var href = "";
@@ -12,17 +12,9 @@ if(images[index].length == 26){
 }else if(images[index].length == 22){
     href = "1830134/imobiliaria-visao";
 }
-
-console.log(images[index].length);
-console.log(images[index]);
-
-
-
 function pagination(page) {
 
     var filters = $('#formSearchImoveis').serialize() + "&page=" + page;
-
-    console.log(filters);
     if(status == 0){
         status = 1;
 
@@ -39,12 +31,17 @@ function pagination(page) {
                     imageUrl: "../images/loadingSearch.gif",
                     showConfirmButton: false
                 });
-                $('html, body').animate({scrollTop: 0}, 'slow');
-                $('#products').empty();
 
+                $('#products').css('opacity','0.5');
             }, success: function (data) {
-                console.log(data);
-                $('html, body').animate({scrollTop: 0}, 'slow');
+                var existeBairro = $('#bairro').val();
+
+                if(existeBairro.length != 0){
+                    console.log(existeBairro);
+                    $('#bairro').attr('readonly', false);
+                }
+                $('#products').empty();
+                $('#products').css('opacity','1');
                 if(data.total== 0) {
                     $("#page-selection").hide();
 
@@ -115,7 +112,7 @@ function pagination(page) {
                         } else {
                             html += '<img class="group list-group-image content-img-sugestao lazy transition-img" src='+loc+'"/images/no-image.jpg" alt="titulo imagem" />';
                         }
-                        html += ' <div class="caption infos-suggest"> <h4 class="group inner list-group-item-heading text-bairro">' + data[i].cidade + '<br />' + data[i].estado + '</h4><p class="group inner list-group-item-text"><ul class="list-infos unstyled clearfix no-padding" id="tooltip-config"><li class="icone-quartos zaptip" data-original-title="Quantidade de quartos" data-toggle="tooltip"> ' + data[i].advert_imovel.numero_quarto + '</li><li class="icone-suites zaptip" data-original-title="Quantidade de Banheiros" data-toggle="tooltip"> ' + data[i].advert_imovel.numero_banheiro + '</li><li class="icone-vagas zaptip" data-original-title="Quantidade de vagas" data-toggle="tooltip"> ' + data[i].advert_imovel.numero_garagem + '</li></ul>';
+                        html += ' <div class="caption infos-suggest"> <h4 class="group inner list-group-item-heading text-bairro">' + data[i].cidade + ' - ' + data[i].estado + '<br />'+data[i].bairro+'</h4><p class="group inner list-group-item-text"><ul class="list-infos unstyled clearfix no-padding" id="tooltip-config"><li class="icone-quartos zaptip" data-original-title="Quantidade de quartos" data-toggle="tooltip"> ' + data[i].advert_imovel.numero_quarto + '</li><li class="icone-suites zaptip" data-original-title="Quantidade de Banheiros" data-toggle="tooltip"> ' + data[i].advert_imovel.numero_banheiro + '</li><li class="icone-vagas zaptip" data-original-title="Quantidade de vagas" data-toggle="tooltip"> ' + data[i].advert_imovel.numero_garagem + '</li></ul>';
                         html += '<div class="col-xs-12 col-md-12 list-item-nav2"><p class="lead description-anuncio">' + data[i].anuncio_descricao + '</p></div><div class="row list-group-hidden"> <div class="col-xs-12 col-md-12"><p class="lead description-anuncio">' + data[i].anuncio_descricao + '</p></div></div>';
                         if(data[i].preco == 0){
                             html += '<div class="row mb4"><div class="col-xs-8 col-md-8 "><div class="bottom-suggest"> <span class="val-imovel">Sob consulta </span>';

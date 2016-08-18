@@ -164,10 +164,12 @@ class HomeController extends Controller
     }
     public function anuncioInterno($tipo_anuncio, $id, $url_anuncio){
         $advertGeral = Advert::where('id',$id)->with('advertImovel','advertVeiculo')->first();
-
+        //$precoMaior = $advertGeral->preco *
         $advertCount = Advert::find($id);
         $advertCount->advert_count = $advertCount->advert_count+1;
         $advertCount->save();
+        $relacionados = Advert::where('preco','>=',$advertGeral->preco * 0.8)->where('preco', '<=', $advertGeral->preco * 1.2)->where('cidade', '=', $advertGeral->cidade)->take(3)->get();
+         //dd($relacionados);
 
         if(empty($advertGeral)){
             return view('error.error404');
@@ -176,7 +178,8 @@ class HomeController extends Controller
             return view('site.pages.anuncio', [
                 'title' => 'Sempredanegocio.com.br | Não perca tempo! Anuncie.',
                 'description' => 'Os melhores anúncios no melhor site.',
-                'advertGeral' => $advertGeral
+                'advertGeral' => $advertGeral,
+                'relacionados' => $relacionados,
             ]);
         }
 
@@ -241,7 +244,6 @@ class HomeController extends Controller
         return \Response::json($dados);
 
     }
-
 
     public function searchCidade($query){
         $result = null;
@@ -359,6 +361,8 @@ class HomeController extends Controller
             'mensagem'                          =>  $formFields['mensagem'],
 
         );
+        if(empty($userData['email_usuario']))
+            $userData['email_usuario'] = "comercial@sempredanegocio.com.br";
         $rules = array(
             'email_usuario'              =>  'required',
             'mensagem'                   =>  'required',
@@ -372,6 +376,7 @@ class HomeController extends Controller
                 'errors' => $validator->getMessageBag()->toArray()
             ));
         }else {
+
             \Mail::send('emails.contactAnunciante',$userData,function($message) use ($userData){
                 $message->from('naoresponder@sempredanegocio.com.br', 'Sempre da Negócio');
 

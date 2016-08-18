@@ -494,7 +494,7 @@
 
                                             @if($advert->advertImovel != null)
                                                 <div class="caption infos-suggest">
-                                                    <h4 class="group inner list-group-item-heading text-bairro">{{$advert->cidade}}<br />{{$advert->estado}}
+                                                    <h4 class="group inner list-group-item-heading text-bairro">{{$advert->cidade}} - {{$advert->estado}} <br /> {{$advert->bairro}}
 
                                                     </h4>
                                                     <p class="group inner list-group-item-text">

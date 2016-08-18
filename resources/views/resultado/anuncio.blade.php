@@ -23,8 +23,11 @@
                     FILTRAR RESULTADOS
                 </button>
             </div>
-            <div style="margin-bottom: 12px" class="col-md-12 col-xs-12 col-sm-12 center-block">
+            <!--<div style="margin-bottom: 12px" class="col-md-12 col-xs-12 col-sm-12 center-block">
                 <a class="Anuncie aqui" target="_blank" title="Anuncie aqui" href="{{url('seja-parceiro')}}"> <img src="{{url('images/bannerImo.png')}}" class="img-responsive center-block" /></a>
+            </div>-->
+            <div style="margin-bottom: 12px" class="col-md-12 col-xs-12 col-sm-12 center-block">
+                <a class="Anuncie aqui" target="_blank" title="Anuncie aqui" href="{{url('/anuncio/venda/2372304/ayat-club-residence')}}"> <img src="{{url('images/bg-hindy.jpg')}}" class="img-responsive center-block" /></a>
             </div>
             <br />
             <div class="clearfix"></div>

@@ -48,7 +48,7 @@ class AdvertController extends Controller
             $adverts = Advert::where('user_id',$user->id)->orderBy('id','desc')->paginate(30);
             return view('admin.anuncios.index',compact('adverts'));
         }else{
-            $adverts = $this->advertModel->paginate(30);
+            $adverts = $this->advertModel->orderBy('id','desc')->paginate(30);
             return view('admin.anuncios.index',compact('adverts'));
         }
 

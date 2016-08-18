@@ -188,6 +188,8 @@ $(document).ready(function(){
         $('#recarregaPagina').ready(function(){
             var page = $('#page').val();
             pagination(page);
+
+
         });
     });
 
@@ -1031,7 +1033,7 @@ $(document).ready(function(){
 
             //if verifica qual subcategoria foi escolhida
 
-            if(sub_id == 10 || sub_id == 20 || sub_id == 60 || sub_id == 70 || sub_id == 80 || sub_id == 107 || sub_id == 108 || sub_id == 112 || sub_id == 113 || sub_id == 105 || sub_id == 107) {
+            if(sub_id == 10 || sub_id == 20 || sub_id == 60 || sub_id == 70 || sub_id == 80 || sub_id == 107 || sub_id == 108 || sub_id == 112 || sub_id == 113 || sub_id == 105 || sub_id == 107 || sub_id == 114) {
 
                 $('<div class="row"><div class="col-md-4 col-lg-4 col-sm-6 col-xs-12">' +
                     '<div class="form-group has-feedback"> ' +

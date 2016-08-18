@@ -2,6 +2,7 @@
 
 @section('content')
 
+
     <div class="clearfix" style="margin-bottom: 10px"></div>
 
     @if(!auth()->guest())
@@ -126,18 +127,22 @@
                                             <div class="<?php if($j==0){echo 'active';}?> item srle" data-slide-number="<?=$j?>">
                                                 <?php
                                                 $pos = strpos($images->extension, "imoveis/site/");
+
                                                 $url1 = "";
                                                 if ($pos === false) {
                                                 $url1 = $images->extension;
+
                                                 ?>
+
                                                 <a href="{{url($url1)}}" data-lightbox="roadtrip" data-title="Imagem do imóvel">
                                                     <img src="{{$url1}}" class="img-responsive">
                                                 </a>
+
                                                 <?php
                                                 }else{
                                                 $url1 = "galeria/".$images->extension;
                                                 ?>
-                                                <a href="{{$url1}}" data-lightbox="roadtrip" data-title="Imagem do imóvel">
+                                                <a href="{{url($url1)}}" data-lightbox="roadtrip" data-title="Imagem do imóvel">
                                                     <img src="{{url($url1)}}" class="img-responsive">
                                                 </a>
                                                 <?php } ?>
@@ -166,6 +171,7 @@
                         <!-- thumb navigation carousel items -->
                         <ul class="list-inline mt10">
                             @if($advertGeral->images()->count() >0)
+
                                 <?php $i=0?>
                                 @foreach($advertGeral->images()->get() as $images)
                                     <li>
@@ -285,7 +291,7 @@
                                         <input type="hidden" name="id_user" value="{{$advertGeral->user->id}}" />
                                         <input type="hidden" name="url_site"  value="{{Request::url()}}" />
                                         <input type="hidden" name="nome_usuario" value="@if(count($advertGeral->user->name) > 0){{$advertGeral->user->name}}@else -- @endif" />
-                                        <input type="hidden" name="email_usuario"  value="@if(count($advertGeral->user->email) > 0){{$advertGeral->user->email}}@else -- @endif" />
+                                        <input type="hidden" name="email_usuario"  value="@if(count($advertGeral->user->email) > 0){{$advertGeral->user->email}} @endif" />
 
                                         <input type="hidden" name="telefone_usuario" value="@if(count($advertGeral->user->phone) > 0){{$advertGeral->user->phone}}@else -- @endif" />
                                         <input id="txtNome" required name="nome" class="input input-block-level" type="text" placeholder="Nome" value="">
@@ -354,7 +360,6 @@ Olá, Gostaria de ter mais informações sobre o  anúncio {{$advertGeral->subca
 
                     @endif
                 </aside>
-
                 <aside class="box-default clearfix outras-informacoes">
                     <span class="title">Outras informações</span>
                     <!-- Atualizado há 16 dias -->
@@ -392,13 +397,68 @@ Olá, Gostaria de ter mais informações sobre o  anúncio {{$advertGeral->subca
             </div>
         </div>
     </div>
-    <!--<section class="container col-md-12 col-lg-12  mt40 no-show ">
-        <h2 class="estilo-fonte-h2">Demais resultados da sua busca</h2>
-        >
+    <section class="container col-md-12 col-lg-12  mt40 no-show ">
+        <h2 class="estilo-fonte-h2">Encontre outros anúncios similares</h2>
+
         <div class="box-default clearfix multislide">
-            Aqui será slider dos imovéis com busca parecida.
+            @foreach($relacionados as $relacionado)
+                <div class="col-md-4 col-sm-6 mb17">
+                    <div class="similar-card">
+                        <a href="{{url()}}/anuncio/{{$relacionado->tipo_anuncio}}/{{$relacionado->id}}/{{str_slug($relacionado->url_anuncio)}}">
+                            <div class="similiar-card-image">
+                                <p class="similiar-card-title">Para @if($relacionado->tipo_anuncio == 'venda') venda @else aluga @endif</p>
+                                <p class="similiar-card-price">@if($relacionado->preco != 0)R$ {{number_format((float)$relacionado->preco,2,",",".")}} @else Sob Consulta @endif</p>
+
+                                <ul class="similiar-card-prices"><li class="card-image-prices-item">Condomínio <strong>@if($relacionado->advertImovel->valor_condominio != 0)R$ {{number_format((float)$relacionado->advertImovel->valor_condominio,2,",",".")}} @else -- @endif </strong></li><li class="card-image-prices-item">IPTU <strong>@if($relacionado->advertImovel->iptu != 0)R$ {{number_format((float)$relacionado->advertImovel->iptu,2,",",".")}} @else -- @endif</strong></li> </ul>
+                                <ul class="card-image-caract"><li class="card-image-caract-item"><strong>@if($relacionado->advertImovel->area_construida != 0){{$relacionado->advertImovel->area_construida}} @else -- @endif</strong> m²</li> <li class="card-image-caract-item"><strong>@if($relacionado->advertImovel->numero_quarto != 0){{$relacionado->advertImovel->numero_quarto}} @else -- @endif</strong> Dormitórios</li> <li class="card-image-caract-item"><strong>@if($relacionado->advertImovel->numero_banheiro != 0){{$relacionado->advertImovel->numero_banheiro}} @else -- @endif</strong> Banheiros</li> <li class="card-image-caract-item"><strong>@if($relacionado->advertImovel->numero_garagem != 0){{$relacionado->advertImovel->numero_garagem}} @else -- @endif</strong> Vagas</li></ul>
+                                <div class="card-image-overlay"></div>
+                                <div class="property_card__overlay-outer"><div class="property_card__overlay-inner"></div></div>
+                                @if($relacionado->imagecapa)
+                                    <?php
+                                    $pos = strpos($relacionado->imagecapa()->first()->extension, "imoveis/site/");
+
+                                    $url2 = "";
+                                    if ($pos === false) {
+
+                                    $url2 = $relacionado->imagecapa()->first()->extension;
+                                    ?>
+
+                                    <img class="card-image" src="{{$url2}}" alt="">
+                                    <?php }else{
+                                    $url2 = "galeria/".$relacionado->imagecapa()->first()->extension;
+                                    ?>
+                                    <img class="card-image" src="{{url($url2)}}" alt="">
+                                    <?php }?>
+
+                                @elseif(count($relacionado->images))
+                                    <?php
+                                    $pos = strpos($relacionado->images()->first()->extension, "imoveis/site/");
+
+                                    $url2 = "";
+                                    if ($pos === false) {
+
+                                    $url2 = $relacionado->images()->first()->extension;
+                                    ?>
+                                        <img class="card-image" src="{{$url2}}" alt="">
+                                    <?php }else{
+                                    $url2 = "galeria/".$relacionado->images()->first()->extension;
+                                    ?>
+                                        <img class="card-image" src="{{url($url2)}}" alt="">
+                                    <?php }?>
+
+                                @else
+                                    <img class="card-image" src="{{url('images/no-image.jpg')}}" alt="" />
+                                @endif
+
+                            </div>
+                        </a>
+                        <div class="similar-card-detail card-detail"><p class="card-detail-end">{{$relacionado->bairro}}, {{$relacionado->cidade}} - {{$relacionado->estado}}</p></div>
+                        <div class="similar-card-lnk card-lnk"><span class="card-button"><a href="{{url()}}/anuncio/{{$relacionado->tipo_anuncio}}/{{$relacionado->id}}/{{str_slug($relacionado->url_anuncio)}}">Ver mais detalhes</a></span></div>
+                    </div>
+                </div>
+            @endforeach
         </div>
-    </section> -->
+    </section>
     <!-- modal email -->
     <div class="modal fade" id="emailModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog">
