@@ -168,9 +168,8 @@ class HomeController extends Controller
         $advertCount = Advert::find($id);
         $advertCount->advert_count = $advertCount->advert_count+1;
         $advertCount->save();
-        $relacionados = Advert::where('preco','>=',$advertGeral->preco * 0.8)->where('preco', '<=', $advertGeral->preco * 1.2)->where('cidade', '=', $advertGeral->cidade)->take(3)->get();
-         //dd($relacionados);
 
+        $relacionados = Advert::where('preco','>=',$advertGeral->preco * 0.8)->where('preco', '<=', $advertGeral->preco * 1.2)->where('cidade', '=', $advertGeral->cidade)->where('subcategories_id',$advertGeral->subcategories_id)->take(3)->get();
         if(empty($advertGeral)){
             return view('error.error404');
 

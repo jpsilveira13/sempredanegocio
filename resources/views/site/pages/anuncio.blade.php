@@ -399,65 +399,132 @@ Olá, Gostaria de ter mais informações sobre o  anúncio {{$advertGeral->subca
     </div>
     <section class="container col-md-12 col-lg-12  mt40 no-show ">
         <h2 class="estilo-fonte-h2">Encontre outros anúncios similares</h2>
+        @if($advertGeral->advertImovel != null)
 
-        <div class="box-default clearfix multislide">
-            @foreach($relacionados as $relacionado)
-                <div class="col-md-4 col-sm-6 mb17">
-                    <div class="similar-card">
-                        <a href="{{url()}}/anuncio/{{$relacionado->tipo_anuncio}}/{{$relacionado->id}}/{{str_slug($relacionado->url_anuncio)}}">
-                            <div class="similiar-card-image">
-                                <p class="similiar-card-title">Para @if($relacionado->tipo_anuncio == 'venda') venda @else aluga @endif</p>
-                                <p class="similiar-card-price">@if($relacionado->preco != 0)R$ {{number_format((float)$relacionado->preco,2,",",".")}} @else Sob Consulta @endif</p>
+            <div class="box-default clearfix multislide">
 
-                                <ul class="similiar-card-prices"><li class="card-image-prices-item">Condomínio <strong>@if($relacionado->advertImovel->valor_condominio != 0)R$ {{number_format((float)$relacionado->advertImovel->valor_condominio,2,",",".")}} @else -- @endif </strong></li><li class="card-image-prices-item">IPTU <strong>@if($relacionado->advertImovel->iptu != 0)R$ {{number_format((float)$relacionado->advertImovel->iptu,2,",",".")}} @else -- @endif</strong></li> </ul>
-                                <ul class="card-image-caract"><li class="card-image-caract-item"><strong>@if($relacionado->advertImovel->area_construida != 0){{$relacionado->advertImovel->area_construida}} @else -- @endif</strong> m²</li> <li class="card-image-caract-item"><strong>@if($relacionado->advertImovel->numero_quarto != 0){{$relacionado->advertImovel->numero_quarto}} @else -- @endif</strong> Dormitórios</li> <li class="card-image-caract-item"><strong>@if($relacionado->advertImovel->numero_banheiro != 0){{$relacionado->advertImovel->numero_banheiro}} @else -- @endif</strong> Banheiros</li> <li class="card-image-caract-item"><strong>@if($relacionado->advertImovel->numero_garagem != 0){{$relacionado->advertImovel->numero_garagem}} @else -- @endif</strong> Vagas</li></ul>
-                                <div class="card-image-overlay"></div>
-                                <div class="property_card__overlay-outer"><div class="property_card__overlay-inner"></div></div>
-                                @if($relacionado->imagecapa)
-                                    <?php
-                                    $pos = strpos($relacionado->imagecapa()->first()->extension, "imoveis/site/");
+                @foreach($relacionados as $relacionado)
+                    <div class="col-md-4 col-sm-6 mb17">
+                        <div class="similar-card">
+                            <a href="{{url()}}/anuncio/{{$relacionado->tipo_anuncio}}/{{$relacionado->id}}/{{str_slug($relacionado->url_anuncio)}}">
+                                <div class="similiar-card-image">
+                                    <p class="similiar-card-title">Para @if($relacionado->tipo_anuncio == 'venda') venda @else aluga @endif</p>
+                                    <p class="similiar-card-price">@if($relacionado->preco != 0)R$ {{number_format((float)$relacionado->preco,2,",",".")}} @else Sob Consulta @endif</p>
 
-                                    $url2 = "";
-                                    if ($pos === false) {
+                                    <ul class="similiar-card-prices"><li class="card-image-prices-item">Condomínio <strong>@if($relacionado->advertImovel->valor_condominio != 0)R$ {{number_format((float)$relacionado->advertImovel->valor_condominio,2,",",".")}} @else -- @endif </strong></li><li class="card-image-prices-item">IPTU <strong>@if($relacionado->advertImovel->iptu != 0)R$ {{number_format((float)$relacionado->advertImovel->iptu,2,",",".")}} @else -- @endif</strong></li> </ul>
+                                    <ul class="card-image-caract"><li class="card-image-caract-item"><strong>@if($relacionado->advertImovel->area_construida != 0){{$relacionado->advertImovel->area_construida}} @else -- @endif</strong> m²</li> <li class="card-image-caract-item"><strong>@if($relacionado->advertImovel->numero_quarto != 0){{$relacionado->advertImovel->numero_quarto}} @else -- @endif</strong> Dormitórios</li> <li class="card-image-caract-item"><strong>@if($relacionado->advertImovel->numero_banheiro != 0){{$relacionado->advertImovel->numero_banheiro}} @else -- @endif</strong> Banheiros</li> <li class="card-image-caract-item"><strong>@if($relacionado->advertImovel->numero_garagem != 0){{$relacionado->advertImovel->numero_garagem}} @else -- @endif</strong> Vagas</li></ul>
+                                    <div class="card-image-overlay"></div>
+                                    <div class="property_card__overlay-outer"><div class="property_card__overlay-inner"></div></div>
+                                    @if($relacionado->imagecapa)
+                                        <?php
+                                        $pos = strpos($relacionado->imagecapa()->first()->extension, "imoveis/site/");
 
-                                    $url2 = $relacionado->imagecapa()->first()->extension;
-                                    ?>
+                                        $url2 = "";
+                                        if ($pos === false) {
 
-                                    <img class="card-image" src="{{$url2}}" alt="">
-                                    <?php }else{
-                                    $url2 = "galeria/".$relacionado->imagecapa()->first()->extension;
-                                    ?>
-                                    <img class="card-image" src="{{url($url2)}}" alt="">
-                                    <?php }?>
+                                        $url2 = $relacionado->imagecapa()->first()->extension;
+                                        ?>
 
-                                @elseif(count($relacionado->images))
-                                    <?php
-                                    $pos = strpos($relacionado->images()->first()->extension, "imoveis/site/");
-
-                                    $url2 = "";
-                                    if ($pos === false) {
-
-                                    $url2 = $relacionado->images()->first()->extension;
-                                    ?>
                                         <img class="card-image" src="{{$url2}}" alt="">
-                                    <?php }else{
-                                    $url2 = "galeria/".$relacionado->images()->first()->extension;
-                                    ?>
+                                        <?php }else{
+                                        $url2 = "galeria/".$relacionado->imagecapa()->first()->extension;
+                                        ?>
                                         <img class="card-image" src="{{url($url2)}}" alt="">
-                                    <?php }?>
+                                        <?php }?>
 
-                                @else
-                                    <img class="card-image" src="{{url('images/no-image.jpg')}}" alt="" />
-                                @endif
+                                    @elseif(count($relacionado->images))
+                                        <?php
+                                        $pos = strpos($relacionado->images()->first()->extension, "imoveis/site/");
 
-                            </div>
-                        </a>
-                        <div class="similar-card-detail card-detail"><p class="card-detail-end">{{$relacionado->bairro}}, {{$relacionado->cidade}} - {{$relacionado->estado}}</p></div>
-                        <div class="similar-card-lnk card-lnk"><span class="card-button"><a href="{{url()}}/anuncio/{{$relacionado->tipo_anuncio}}/{{$relacionado->id}}/{{str_slug($relacionado->url_anuncio)}}">Ver mais detalhes</a></span></div>
+                                        $url2 = "";
+                                        if ($pos === false) {
+
+                                        $url2 = $relacionado->images()->first()->extension;
+                                        ?>
+                                        <img class="card-image" src="{{$url2}}" alt="">
+                                        <?php }else{
+                                        $url2 = "galeria/".$relacionado->images()->first()->extension;
+                                        ?>
+                                        <img class="card-image" src="{{url($url2)}}" alt="">
+                                        <?php }?>
+
+                                    @else
+                                        <img class="card-image" src="{{url('images/no-image.jpg')}}" alt="" />
+                                    @endif
+
+                                </div>
+                            </a>
+                            <div class="similar-card-detail card-detail"><p class="card-detail-end">{{$relacionado->bairro}}, {{$relacionado->cidade}} - {{$relacionado->estado}}</p></div>
+                            <div class="similar-card-lnk card-lnk"><span class="card-button"><a href="{{url()}}/anuncio/{{$relacionado->tipo_anuncio}}/{{$relacionado->id}}/{{str_slug($relacionado->url_anuncio)}}">Ver mais detalhes</a></span></div>
+                        </div>
                     </div>
-                </div>
-            @endforeach
-        </div>
+                @endforeach
+
+            </div>
+        @endif
+        @if($advertGeral->advertVeiculo != null)
+            <div class="box-default clearfix multislide">
+
+                @foreach($relacionados as $relacionado)
+
+                    <div class="col-md-4 col-sm-6 mb17">
+                        <div class="similar-card">
+                            <a href="{{url()}}/anuncio/{{$relacionado->tipo_anuncio}}/{{$relacionado->id}}/{{str_slug($relacionado->url_anuncio)}}">
+
+                                <div class="similiar-card-image">
+                                    <p class="similiar-card-title">Para @if($relacionado->tipo_anuncio == 'venda') venda @else aluga @endif</p>
+                                    <p class="similiar-card-price">@if($relacionado->preco != 0)R$ {{number_format((float)$relacionado->preco,2,",",".")}} @else Sob Consulta @endif</p>
+
+                                    <ul class="card-image-caract"><li class="card-image-caract-item"><strong>@if($relacionado->advertVeiculo->ano != 0){{$relacionado->advertVeiculo->ano}} @else -- @endif</strong> ano</li> <li class="card-image-caract-item"><strong>@if($relacionado->advertVeiculo->km != 0){{$relacionado->advertVeiculo->km}} @else -- @endif</strong> KM</li> <li class="card-image-caract-item"><strong>@if($relacionado->advertVeiculo->combustivel != 0){{$relacionado->advertVeiculo->combustivel}} @else -- @endif</strong> Combustível</li> <li class="card-image-caract-item"><strong>@if($relacionado->advertVeiculo->cambio != 0){{$relacionado->advertVeiculo->cambio}} @else -- @endif</strong> Câmbio</li></ul>
+
+                                    <div class="card-image-overlay"></div>
+                                    <div class="property_card__overlay-outer"><div class="property_card__overlay-inner"></div></div>
+                                    @if($relacionado->imagecapa)
+                                        <?php
+                                        $pos = strpos($relacionado->imagecapa()->first()->extension, "imoveis/site/");
+
+                                        $url2 = "";
+                                        if ($pos === false) {
+
+                                        $url2 = $relacionado->imagecapa()->first()->extension;
+                                        ?>
+
+                                        <img class="card-image" src="{{$url2}}" alt="">
+                                        <?php }else{
+                                        $url2 = "galeria/".$relacionado->imagecapa()->first()->extension;
+                                        ?>
+                                        <img class="card-image" src="{{url($url2)}}" alt="">
+                                        <?php }?>
+
+                                    @elseif(count($relacionado->images))
+                                        <?php
+                                        $pos = strpos($relacionado->images()->first()->extension, "imoveis/site/");
+
+                                        $url2 = "";
+                                        if ($pos === false) {
+
+                                        $url2 = $relacionado->images()->first()->extension;
+                                        ?>
+                                        <img class="card-image" src="{{$url2}}" alt="">
+                                        <?php }else{
+                                        $url2 = "galeria/".$relacionado->images()->first()->extension;
+                                        ?>
+                                        <img class="card-image" src="{{url($url2)}}" alt="">
+                                        <?php }?>
+
+                                    @else
+                                        <img class="card-image" src="{{url('images/no-image.jpg')}}" alt="" />
+                                    @endif
+
+                                </div>
+                            </a>
+                            <div class="similar-card-detail card-detail"><p class="card-detail-end">{{$relacionado->bairro}}, {{$relacionado->cidade}} - {{$relacionado->estado}}</p></div>
+                            <div class="similar-card-lnk card-lnk"><span class="card-button"><a href="{{url()}}/anuncio/{{$relacionado->tipo_anuncio}}/{{$relacionado->id}}/{{str_slug($relacionado->url_anuncio)}}">Ver mais detalhes</a></span></div>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+        @endif
     </section>
     <!-- modal email -->
     <div class="modal fade" id="emailModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">

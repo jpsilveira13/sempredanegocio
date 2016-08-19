@@ -3,7 +3,7 @@ function formatNumber (num) {
     return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.")
 }
 var index = 0;
-var images = ['images/bannerPredileta.png','images/bannerVisao.png'];
+var images = ['images/bannerPredileta.png','images/bannerVisao.png','images/assessocredito.jpg','images/maisimoveisbg.jpg','images/edificar.jpg','images/masterimoveisbg1.jpg'];
 index = Math.floor(Math.random()*images.length);
 var href = "";
 if(images[index].length == 26){
@@ -11,7 +11,17 @@ if(images[index].length == 26){
 
 }else if(images[index].length == 22){
     href = "1830134/imobiliaria-visao";
+}else if(images[index].length == 23 ){
+    href = "1830145/assessocredito-uberaba";
+}else if(images[index].length == 24 ){
+    href = "1830167/mais-imoveis";
+}else if(images[index].length == 20 ){
+    href = "1830155/edificar-inteligencia-imobiliaria";
+}else if(images[index].length == 27 ){
+    href = "1830165/master-imoveis";
 }
+
+
 function pagination(page) {
 
     var filters = $('#formSearchImoveis').serialize() + "&page=" + page;
