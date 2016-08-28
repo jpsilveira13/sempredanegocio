@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="{{ asset('css/lightbox.min.css') }}"/>
     <!-- <link rel="stylesheet" href="{{ asset('css/jquery-ui.css') }}"/> -->
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,800' rel='stylesheet' type='text/css'>
+    @yield('csnoticia')
     <title>{{ isset($title) ? $title : 'Sempre Da Negócio - Anúncios Classificados Grátis' }}</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -485,6 +486,7 @@
 @endif
 @yield('jsveiculo')
 @yield('jsimovel')
+@yield('jsnoticia')
 </body>
 </html>
 

@@ -28,6 +28,9 @@ class User extends Model implements AuthenticatableContract,
         return $this->belongsTo(AdvertMessage::class,'id','id_user')->Orderby('id','desc');
     }
 
+    public function noticeuser(){
+        return $this->hasMany(Notice::class);
+    }
     public function getAuthIdentifier()
     {
         return $this->getKey();

@@ -15,7 +15,15 @@
 Route::get('/', function(){
     return view('layout');
 });
+
+//rotas blog
+
+
+Route::get('/blog/noticias','BlogController@index');
+Route::get('/blog/{url_category}/{url_titulo}','BlogController@interno');
 /* rotas ajax */
+
+
 
 Route::post('/get-contadortel','HomeController@contadorTelefone');
 

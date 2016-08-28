@@ -38,7 +38,6 @@ class CreateAdvertsTable extends Migration
             $table->foreign('user_id')->references('id')->on('users');
             $table->integer('subcategories_id')->unsigned();
             $table->foreign('subcategories_id')->references('id')->on('subcategories');
-
             $table->timestamps();
         });
     }
