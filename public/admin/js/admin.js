@@ -62,7 +62,7 @@ $(document).ready(function () {
         previewTemplate: document.querySelector('#preview-template').innerHTML,
         addRemoveLinks: true,
         dictRemoveFile: 'Remover',
-        dictFileTooBig: 'Image is bigger than 8MB',
+        dictFileTooBig: 'Imagem superior a 8 MB',
 
         // The setting up of the dropzone
         init:function() {

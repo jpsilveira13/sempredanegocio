@@ -763,7 +763,7 @@ $(document).ready(function(){
 
                 },
                 success: function (data) {
-                    console.log(data);
+
                     if (data.length > 0) {
                         for (i = 0; i < data.length; i++) {
 
