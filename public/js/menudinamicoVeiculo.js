@@ -4,9 +4,9 @@ function formatNumber (num) {
 }
 
 index = 0;
-var images = ['images/bannerCarroCia.png'];
+var images = ['images/sdncar.jpg'];
 index = Math.floor(Math.random()*images.length);
-var href= "326135/carro-cia";
+var href= "http://www.sdncar.com.br";
 
 function pagination(page) {
     var filters = $('#formSearchVeiculos').serialize() + "&page=" + page;

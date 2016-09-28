@@ -114,18 +114,18 @@
     <div class="col-md-3 bann-left">
         <div class="b-search">
             <form>
-                <input type="text" value="Search" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Search';}">
+                <input type="text" value="Search" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Buscar';}">
                 <input type="submit" value="">
             </form>
         </div>
-        <h3>Posts Recentes</h3>
+        <h3>Notícias Recentes</h3>
         <div class="blo-top">
             <div class="blog-grids">
                 <div class="blog-grid-left">
                     <a href="single.html"><img src="images/1b.jpg" class="img-responsive" alt=""></a>
                 </div>
                 <div class="blog-grid-right">
-                    <h4><a href="single.html">Little Invaders </a></h4>
+                    <h4><a href="single.html">Lorem Ipsum </a></h4>
                     <p>pellentesque dui, non felis. Maecenas male </p>
                 </div>
                 <div class="clearfix"> </div>
