@@ -1020,7 +1020,13 @@ $(document).ready(function(){
         }// end for;
 
     });
+//leilao
 
+    $('.botoes-lance').click(function(){
+        var valor = $(this).data('value');
+        var
+        console.log(valor);
+    });
 //anuncie html
     $('#propriedade1').empty();
 

@@ -16,8 +16,16 @@ Route::get('/', function(){
     return view('layout');
 });
 
-//rotas blog
 
+//rotas leilao
+
+Route::get('/ofertas','LeilaoController@index');
+
+Route::get('oferta/{id}/{url_anuncio}',[
+    'uses' => "LeilaoController@interno"
+]);
+
+//rotas blog
 
 Route::get('/blog/noticias','BlogController@index');
 Route::get('/blog/{url_category}/{url_titulo}','BlogController@interno');
@@ -74,6 +82,8 @@ Route::get('/', [
 /* anuncios routes */
 Route::group(['middleware'=>'auth'], function() {
 
+//parte leilao
+    Route::get('pega-lance/{id}','LeilaoController@pegaLance');
 
     Route::get('anuncie', 'HomeController@anuncie');
     Route::post('anuncie','AdvertController@store');

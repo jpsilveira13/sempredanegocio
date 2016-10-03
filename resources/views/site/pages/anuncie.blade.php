@@ -160,6 +160,39 @@
                                 </div>
                             </div>
                         </div>
+                        @if(auth()->user()->typeuser_id == 1)
+                            <div class="row">
+                                <div class="col-md-4 col-lg-4 col-sm-6 col-xs-12">
+                                    <div class="form-group has-feedback"> <label for="Leilão">Esse veículo é para leilão?</label>
+                                        <select required class="form-control" name="leilao">
+                                            <option value="">Selecione uma opção...</option>
+                                            <option value="1">Sim</option>
+                                            <option value="0">Não</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div  class="col-md-4 col-lg-4 col-sm-6 col-xs-12">
+                                    <div class="form-group has-feedback"> <label for="Valor máximo Veiculo">Valor tabela fipe</label>
+                                        <input onkeypress="mascaraCampo(this,mvalor)"  maxlength="14"  placeholder="Ex.: 150.00"  class="form-control" type="text" name="preco_fipe" />
+                                    </div>
+                                </div>
+                                <div  class="col-md-4 col-lg-4 col-sm-6 col-xs-12">
+                                    <div class="form-group has-feedback"> <label for="Valor mínimo Veiculo">Valor mínimo</label>
+                                        <input onkeypress="mascaraCampo(this,mvalor)"  maxlength="14"  placeholder="Ex.: 150.00"  class="form-control" type="text" name="preco_min" />
+                                    </div>
+                                </div>
+                                <div  class="col-md-4 col-lg-4 col-sm-6 col-xs-12">
+                                    <div class="form-group has-feedback"> <label for="Valor mínimo Veiculo">Valor máximo</label>
+                                        <input onkeypress="mascaraCampo(this,mvalor)"  maxlength="14"  placeholder="Ex.: 150.00"  class="form-control" type="text" name="preco_max" />
+                                    </div>
+                                </div>
+                                <div  class="col-md-4 col-lg-4 col-sm-6 col-xs-12">
+                                    <div class="form-group has-feedback"> <label for="Variância veículo">Valor variância</label>
+                                        <input onkeypress="mascaraCampo(this,mvalor)"  maxlength="14"  placeholder="Ex.: 150.00"  class="form-control" type="text" name="variancia" />
+                                    </div>
+                                </div>
+                            </div>
+                        @endif
                     </div>
                     <div id="propriedade1">
 

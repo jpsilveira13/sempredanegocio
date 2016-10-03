@@ -19,13 +19,27 @@ class AdvertVeiculo extends Model
         'placa',
         'opcionais',
         'marca',
-        'modelo'
-
+        'modelo',
+        'leilao',
+        'preco_fipe',
+        'preco_leilao',
+        'preco_min',
+        'preco_max',
+        'variancia'
     ];
 
 
     public function advertVeiculo(){
-        return $this->belongsTo(Advert::class);
+        return $this->belongsTo(Advert::class,'advert_id','id');
 
     }
+
+    public function ativo(){
+        return $this->where('leilao','>',0);
+    }
+
+    public function leilao(){
+        return $this->hasMany(Leilao::class,'veiculo_id','id');
+    }
+
 }

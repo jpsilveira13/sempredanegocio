@@ -148,9 +148,34 @@ class AdvertController extends Controller
             $cor            = $data['cor'];
             $marca          = $data['marca_id'];
             $modelo         = $data['modelo_id'];
+            $leilao         = $data['leilao'];
+            $preco_fipe     = $data['preco_fipe'];
+            $preco_min      = $data['preco_min'];
+            $preco_max      = $data['preco_max'];
+            $variancia      = $data['variancia'];
             $opcionais      = 0;
+            if(empty($data['preco_fipe'])){
+                $preco_fipe = 0;
+            }else{
+                $preco_fipe  = str_replace(",",".",str_replace(".","",$data['preco_fipe']));
+            }
+            if(empty($data['preco_min'])){
+                $preco_min = 0;
+                $preco_leilao = 0;
+            }else{
+                $preco_min  = str_replace(",",".",str_replace(".","",$data['preco_min']));
+                $preco_leilao = $preco_min;
+            }
+            if(empty($data['preco_max'])){
+                $preco_max = 0;
+            }else{
+                $preco_max  = str_replace(",",".",str_replace(".","",$data['preco_max']));
+            }
+            if(empty($data['variancia'])){
+                $variancia = str_replace(",",".",str_replace(".","",$data['variancia']));
+            }
 
-            $advertVeiculo::create(['ano'=>$tipo,'km' => $km,'cor' => $cor,'portas' => $portas,'cambio' => $cambio, 'combustivel' => $combustivel,'placa' => $placa,'opcionais'=> $opcionais,'marca' => $marca,'modelo' => $modelo, 'advert_id' => $anuncio->id,'category_id' => $data['category_id']]);
+            $advertVeiculo::create(['ano'=>$tipo,'km' => $km,'cor' => $cor,'portas' => $portas,'cambio' => $cambio, 'combustivel' => $combustivel,'placa' => $placa,'opcionais'=> $opcionais,'marca' => $marca,'modelo' => $modelo,'leilao' => $leilao, 'preco_fipe' => $preco_fipe, 'preco_leilao' => $preco_leilao, 'preco_min' => $preco_min, 'preco_max' => $preco_max, 'variancia' => $variancia,'advert_id' => $anuncio->id,'category_id' => $data['category_id']]);
         }
         if($anuncio){
 

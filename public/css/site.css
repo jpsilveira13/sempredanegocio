@@ -5664,7 +5664,125 @@ span.minisite-area-atuacao-texto{
 
 }
 
-
 .img-menor{
     width: auto!important;
+}
+
+/* css leilao */
+
+@keyframes flickerAnimation {
+    0%   { opacity:1; }
+    50%  { opacity:0; }
+    100% { opacity:1; }
+}
+@-o-keyframes flickerAnimation{
+    0%   { opacity:1; }
+    50%  { opacity:0; }
+    100% { opacity:1; }
+}
+@-moz-keyframes flickerAnimation{
+    0%   { opacity:1; }
+    50%  { opacity:0; }
+    100% { opacity:1; }
+}
+@-webkit-keyframes flickerAnimation{
+    0%   { opacity:1; }
+    50%  { opacity:0; }
+    100% { opacity:1; }
+}
+.text-effect {
+    -webkit-animation: flickerAnimation 1s infinite;
+    -moz-animation: flickerAnimation 1s infinite;
+    -o-animation: flickerAnimation 1s infinite;
+    animation: flickerAnimation 1s infinite;
+}
+
+.preco-fipe{
+    clear: right;
+    margin-top: 13px;
+}
+
+.lance-total{
+    text-align: left;
+}
+
+.lance-descricao{
+    height: auto;
+    margin-bottom: 10px;
+    background-color: #5C095B;
+    border-radius: 5px;
+}
+.lance-borda{
+    border-bottom: 1px dashed #d4d4d4;
+
+}
+.lance-online{
+    padding: 8px 0;
+    margin-left: 11px;
+}
+
+.nome-vencendo{
+    color: #87D76B;
+}
+.status{
+    display: inline-block;
+    font-weight: bold;
+    padding-top: 3px;
+    font-size: 15px;
+    margin-top: 5px;
+    color: #fff;
+}
+
+.lance-botao{
+    display: block;
+    position: relative;
+}
+
+.abas-botoes-lance{
+    display: block;
+}
+
+
+.lance-botao-aba{
+    text-align: center;
+
+}
+
+.box-leilao{
+
+    color: rgb(255, 255, 255);
+    padding: 5px;
+    display: block;
+    clear: both;
+    position: relative;
+}
+
+.botoes-lance{
+    display: block;
+
+    background: #5C095B;
+    border: 1px solid #fff;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    margin: 4px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    font-size: 13px;
+    text-decoration: none;
+    text-align: center;
+    color: #fff;
+}
+
+.ultimo-lance h3{
+    clear: both;
+    display: block;
+    width: 100%;
+    padding-bottom: 6px;
+    padding-top: 6px;
+    background: #5C095B;
+    color: #fff;
+    margin: auto;
+    margin-bottom: 8px;
+
+    text-align: center;
 }
