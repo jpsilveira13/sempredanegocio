@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
     <link href='//cdn.jsdelivr.net/devicons/1.8.0/css/devicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/jquery.bootstrapvalidator/0.5.2/css/bootstrapValidator.min.css"/>
-    <link rel="stylesheet" href="{{ asset('css/sweetalert2.min.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('css/sweetalert.css') }}"/>
     <link rel="stylesheet" href="{{ asset('css/lightbox.min.css') }}"/>
     <!-- <link rel="stylesheet" href="{{ asset('css/jquery-ui.css') }}"/> -->
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,800' rel='stylesheet' type='text/css'>
@@ -445,7 +445,7 @@
 <script src="{{asset('js/jquery-2.1.4.min.js')}}"></script>
 <script src="{{asset('js/livequery.min.js')}}"></script>
 <script src="{{asset('js/bootstrap.min.js')}}"></script>
-<script src="{{asset('js/sweetalert2.min.js')}}"></script>
+<script src="{{asset('js/sweetalert.min.js')}}"></script>
 <!--<script src="{{asset('js/infinitescroll.js')}}"></script> -->
 <!--<script src="{{asset('js/typeahead.min.js')}}"></script> -->
 <!--<script src="{{asset('js/bloodhound.min.js')}}"></script> -->
@@ -457,6 +457,7 @@
 <script src="{{asset('js/lazyload.js')}}"></script>
 <script src="{{asset('js/lightbox.min.js')}}"></script>
 <script src="{{asset('js/jquery.bootpag.min.js')}}"></script>
+<script src="{{asset('js/jquery.countdown.min.js')}}"></script>
 <script src="{{asset('js/site.js')}}"></script>
 
 <script type="text/javascript" src="https://stc.pagseguro.uol.com.br/pagseguro/api/v2/checkout/pagseguro.lightbox.js"></script>

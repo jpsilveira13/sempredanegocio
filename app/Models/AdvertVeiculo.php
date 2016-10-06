@@ -25,7 +25,8 @@ class AdvertVeiculo extends Model
         'preco_leilao',
         'preco_min',
         'preco_max',
-        'variancia'
+        'variancia',
+        'leilaoativo'
     ];
 
 

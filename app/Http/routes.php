@@ -19,6 +19,8 @@ Route::get('/', function(){
 
 //rotas leilao
 
+
+
 Route::get('/ofertas','LeilaoController@index');
 
 Route::get('oferta/{id}/{url_anuncio}',[
@@ -83,7 +85,7 @@ Route::get('/', [
 Route::group(['middleware'=>'auth'], function() {
 
 //parte leilao
-    Route::get('pega-lance/{id}','LeilaoController@pegaLance');
+
 
     Route::get('anuncie', 'HomeController@anuncie');
     Route::post('anuncie','AdvertController@store');
@@ -272,6 +274,11 @@ Route::get('{id}/{url_name}',[
     'as' => 'hotsite'
 
 ]);
+
+Route::group(['middleware' => 'auth'],function(){
+    Route::post('/pega-lance','LeilaoController@pegaLance');
+});
+
 //procura cep
 
 

@@ -2,6 +2,7 @@
 
 @section('content')
 
+    <input type="hidden" id="dataCronometro" value="{{$amanha}}" />
 
     <div class="clearfix" style="margin-bottom: 10px"></div>
 
@@ -18,13 +19,22 @@
             </section>
             <br />
         @endif
-
     @endif
-
     <section class="container col-md-6 col-lg-6 no-show ">
-        <a href="{{url("ofertas")}}" style="margin-bottom: 10px" class="btn btn-zap">Ver todos os Anúncios</a>
+        <a href="{{url("ofertas")}}" style="margin-bottom: 10px" class="btn btn-zap">Ver todas as ofertas</a>
     </section>
     <p></p>
+    <section class="mb10 container col-md-12 col lg-12">
+        <div class="center-block">
+            <div class="countdown">
+                <span>Contagem Regressiva</span>
+                <div class="mt12" id="jcountdown"></div>
+            </div>
+        </div>
+
+    </section>
+    <br />
+    <br />
     <div class="container no-padding">
         <div class="col-md-7 col-lg-7 ">
             <div class="side-left">
@@ -49,11 +59,11 @@
                                 <span id="precoLeilao" class="subtitle">Lance Atual</span>
                             @if(!empty($leilao))
                                 @if($leilao->valor > 0)
-                                    R$ {{number_format((float)$leilao->valor,2,",",".")}}
+                                    <span id="valorLance">R$ {{number_format((float)$leilao->valor,2,",",".")}}</span>
                                 @endif
                             @else
 
-                                R$ {{number_format((float)$oferta->preco_min,2,",",".")}}
+                                <span id="valorLance">R$ {{number_format((float)$oferta->preco_min,2,",",".")}}</span>
                             @endif
                         </span>
                     </div>
@@ -255,82 +265,76 @@
                             </div>
                         </div>
                         <div id="lance" class="box-leilao">
-                            @if(empty(auth()->user()->id))
-                                Não tá logado ;/
-                            @else
-                                <div id="area-botao">
-                                    @for($i = 0;$i<9;$i++)
-                                        <div class="col-md-4 col-lg-4 col-sm-6">
-                                            @if(!empty($leilao))
-                                                @if(($leilao->valor > 0))
-                                                    <?php
-                                                    $leilao->valor = $leilao->valor + $oferta->variancia;
-                                                    ?>
-                                                    <a href="#"  data-value="{{$leilao->valor}}" data-id="{{$oferta->id}}" data-user="{{auth()->user()->id}}" class="botoes-lance">
-
-                                                        <b style="font-size: 13px;">{{number_format($leilao->valor,2,",",".")}}</b><br>Dar Lance!
-                                                    </a>
-                                                @endif
-                                            @else
-                                                <?php
-                                                $oferta->preco_min = $oferta->preco_min + $oferta->variancia;
-                                                ?>
-                                                <a href="#" data-value="{{$oferta->preco_min}}" class="botoes-lance">
-                                                    <b style="font-size: 13px;">{{number_format($oferta->preco_min,2,",",".")}}</b><br>Dar Lance!
-                                                </a>
-                                            @endif
-                                        </div>
-                                    @endfor
+                            @if(auth()->guest())
+                                <div class="precisa-logado">
+                                    <div class="caixa-texto center-block">
+                                        Você precisa está logado<br />
+                                        para participar.
+                                        @if(!Request::is('auth/login'))
+                                            <a href="#loginModal" id="modalLogin" class="btn btn-large btn-zap" data-toggle="modal" data-target="#loginModal">Entrar</a>
+                                        @endif
+                                    </div>
                                 </div>
                             @endif
+                            <div id="area-botao">
+                                @for($i = 0;$i<9;$i++)
+                                    <div class="col-md-4 col-lg-4 col-sm-6">
+                                        @if(!empty($leilao))
+                                            @if(($leilao->valor > 0))
+                                                <?php
+                                                $leilao->valor = $leilao->valor + $oferta->variancia;
+                                                ?>
+                                                <a href="#"  data-value="{{$leilao->valor}}" data-idveiculo="{{$oferta->id}}" data-user="@if(!empty(auth()->user()->id)){{auth()->user()->id}} @endif" class="botoes-lance">
+
+                                                    <b style="font-size: 13px;">{{number_format($leilao->valor,2,",",".")}}</b><br>Dar Lance!
+                                                </a>
+                                            @endif
+                                        @else
+                                            <?php
+                                            $oferta->preco_min = $oferta->preco_min + $oferta->variancia;
+                                            ?>
+                                            <a href="#" data-value="{{$oferta->preco_min}}" data-idveiculo="{{$oferta->id}}" data-user="@if(!empty(auth()->user()->id)){{auth()->user()->id}} @endif" class="botoes-lance">
+                                                <b style="font-size: 13px;">{{number_format($oferta->preco_min,2,",",".")}}</b><br>Dar Lance!
+                                            </a>
+                                        @endif
+                                    </div>
+                                @endfor
+                            </div>
+
                             <br clear="all" />
                         </div>
                     </div>
-                    @if(auth()->guest())
-                        @if(!Request::is('auth/login'))
-                            <a href="#loginModal" id="modalLogin" class="" data-toggle="modal" data-target="#loginModal"><span class="pull-left">Adicionar à minha lista</span></a>
-                        @endif
-                    @else
-                        <a href="#" id="modalLogin" class=""><span class="pull-left">Adicionar à minha lista</span></a>
-
-                    @endif
-
 
                     <div class="clearfix"></div>
                 </div><!-- fim contratar anunciante -->
                 <!-- top 5 leilao -->
                 <aside class="box-default clearfix ultimo-lance">
-                    @if(!$leilao)
+                    <h3>Últimos 5 lances</h3>
+                    <div class="top5">
+                        <table id="tabelaLance" class="table table-hover table-striped table-responsive">
+                            <thead>
+                            <th>Nº do lance</th>
+                            <th>Lance(R$)</th>
+                            <th>Lance+5%(R$)</th>
+                            <th>Usuário</th>
+                            </thead>
+                            <tbody>
+                            @foreach($top5 as $usuario)
 
-                        <h3 class="mt10">Não há lances cadastrado seja o primeiro!</h3>
-                    @else
-                        <h3>Últimos 5 lances</h3>
-                        <div class="top5">
-                            <table id="tabelaLance" class="table table-hover table-striped table-responsive">
-                                <thead>
-                                <th>Nº do lance</th>
-                                <th>Lance(R$)</th>
-                                <th>Lance+5%(R$)</th>
-                                <th>Usuário</th>
-                                </thead>
-                                <tbody>
-                                @foreach($top5 as $usuario)
+                                <tr>
 
-                                    <tr>
-
-                                        <td>{{$usuario->numero_lance}}</td>
-                                        <td>{{number_format((float)$usuario->valor,2,",",".")}}</td>
-                                        <?php
-                                        $usuario->valor = ($usuario->valor * 0.05) + $usuario->valor;
-                                        ?>
-                                        <td>{{number_format((float)$usuario->valor,2,",",".")}}</td>
-                                        <td>{{strstr($usuario->userleilao->name, ' ', true)}}</td>
-                                    </tr>
-                                @endforeach
-                                </tbody>
-                            </table>
-                        </div>
-                    @endif
+                                    <td>{{$usuario->numero_lance}}</td>
+                                    <td>{{number_format((float)$usuario->valor,2,",",".")}}</td>
+                                    <?php
+                                    $usuario->valor = ($usuario->valor * 0.05) + $usuario->valor;
+                                    ?>
+                                    <td>{{number_format((float)$usuario->valor,2,",",".")}}</td>
+                                    <td>{{strstr($usuario->userleilao->name, ' ', true)}}</td>
+                                </tr>
+                            @endforeach
+                            </tbody>
+                        </table>
+                    </div>
                 </aside>
                 <!-- área anúncio site -->
                 <aside class="box-default clearfix outras-informacoes height240px">
@@ -344,13 +348,6 @@
                         (adsbygoogle = window.adsbygoogle || []).push({});
                     </script>
                 </aside>
-                <aside class="box-default clearfix outras-informacoes">
-
-                </aside>
-                <aside class="box-default clearfix outras-informacoes">
-
-                </aside>
-
             </div>
         </div>
     </div>
@@ -369,7 +366,6 @@
 
                             <img class="img-responsive center-block borda-image" width="140" height="140" src="<?php if($oferta->advertVeiculo->images()->count() > 0):
                                 echo asset($url1); endif?>" />
-
 
                             <small>Sob consulta</small>
                             <br />

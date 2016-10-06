@@ -127,6 +127,21 @@ function mascValorDoisDecimais(v){
     }
 
 }
+function getMoney( str )
+{
+    return parseInt( str.replace(/[\D]+/g,'') );
+}
+function formatReal( int )
+{
+    var tmp = int+='00';
+    tmp = tmp.replace(/([0-9]{2})$/g, ",$1");
+    if( tmp.length > 6 )
+        tmp = tmp.replace(/([0-9]{3}),([0-9]{2}$)/g, ".$1,$2");
+
+    return tmp;
+}
+
+
 
 //Começo jquery Site
 $(document).ready(function(){
@@ -235,6 +250,7 @@ $(document).ready(function(){
                     type: 'success',
                     showCloseButton: true,
                     showCancelButton: true,
+                    html: true,
                     confirmButtonText:
                         '<a href="http://www.sempredanegocio.com.br/admin/home">Painel Administrativo</a>',
                     cancelButtonText:
@@ -1020,13 +1036,99 @@ $(document).ready(function(){
         }// end for;
 
     });
-//leilao
 
-    $('.botoes-lance').click(function(){
-        var valor = $(this).data('value');
-        var
-        console.log(valor);
+//leilao
+    $(".botoes-lance").livequery(function() {
+
+        $(this).click(function () {
+            event.preventDefault();
+            var valor = $(this).data('value');
+            var idveiculo = $(this).data('idveiculo');
+            var iduser = $(this).data('user');
+            console.log(iduser);
+            console.log(valor);
+            console.log(idveiculo);
+            swal({
+                    title: "Você tem certeza?",
+                    type: "info",
+                    showCancelButton: true,
+                    confirmButtonColor: "#5C095B",
+                    text: "Caso aceite, será cobrado uma taxa administrativa de 5%",
+                confirmButtonText: "Sim, Dar o lance!",
+                    cancelButtonText: " Cancelar",
+                    closeOnConfirm: false,
+
+                }, function (isConfirm) {
+                    if (!isConfirm) return;
+
+                    $.ajax({
+                        type: "POST",
+                        url: '/pega-lance',
+                        dataType: 'json',
+                        data: {
+                            idveiculo: idveiculo,
+                            valor: valor,
+                        },
+                        success: function (data) {
+                            console.log(data);
+                            if (data.success) {
+                                swal("Pronto!", "Lance Efetivado!", 'success');
+                                console.log(data);
+                                var variancia = parseFloat(data.lance.variancia);
+                                var resultado = parseFloat(data.lance.valor);
+                                var lancePorcento = formatReal(data.lancePorcento);
+                                var valorLance = formatReal(data.lance.valor);
+
+                                $('#valorLance').html(valorLance);
+                                $('.nome-vencendo').html(data.nome);
+                                var row = '<tr><td>' + data.lance.numero_lance + '</td><td>' + valorLance + '</td><td>' + lancePorcento + '</td><td>' + data.nome + '</td></tr>';
+                                console.log(data.lance.numero_lance);
+                                if(data.lance.numero_lance == 1){
+                                    $('#tabelaLance tbody').append(row);
+                                    console.log('teste')
+                                }else{
+                                    $('#tabelaLance tbody').prepend(row);
+                                }
+                                if(data.lance.numero_lance > 5){
+                                    $('#tabelaLance tbody tr:last').remove();
+                                }
+
+                                $('#area-botao').empty();
+                                var html = '';
+                                for (var i = 0; i <= 8; i++) {
+                                    resultado = variancia + resultado;
+
+                                    html += '<div class="col-md-4 col-lg-4 col-sm-6"><a href="#" data-value="' + resultado + '" data-idveiculo="' + data.lance.veiculo_id + '" data-user="' + data.lance.user_id + '" class="botoes-lance"><b style="font-size: 13px">' + formatReal(resultado) + '</b><br />Dar Lance! </a></div>'
+
+                                }
+                                $('#area-botao').append(html);
+
+                            } else {
+                                swal("Ops!", "Existe um lance maior. Por favor atualiza a página!", 'error');
+                            }
+                        },
+                        error: function () {
+                            swal("Ops!", "Você precisa está logado para dar lance!", 'error');
+                        }
+                    });
+                }
+            );
+
+        });
     });
+
+    $(function(){
+        var tempo = $('#dataCronometro').attr('value');
+        console.log(tempo);
+        $('#jcountdown').countdown(tempo, function(event) {
+            var $this = $(this).html(event.strftime(''
+
+                + '<span>%H</span> :'
+                + '<span>%M</span> :'
+                + '<span>%S</span> '));
+        });
+    });
+
 //anuncie html
     $('#propriedade1').empty();
 

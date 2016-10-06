@@ -155,6 +155,10 @@ section{
 
 }
 
+.mt12{
+    margin-top: 12px;
+}
+
 .mb17{
     margin-bottom: 16px;
 
@@ -5757,6 +5761,33 @@ span.minisite-area-atuacao-texto{
     position: relative;
 }
 
+
+.precisa-logado{
+    position: absolute;
+    width: 100%;
+    height:100%;
+    display: block;
+    background-color: rgba(255, 255, 255, 0.6);
+    padding: 8px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    font-size: 13px;
+    font-weight: bold;
+    text-align: center;
+    z-index: 10;
+}
+
+.caixa-texto{
+    width: 175px;
+    height: auto;
+    background: #F7B41D;
+    padding: 8px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    font-size: 13px;
+    font-weight: bold;
+    text-align: center;
+}
 .botoes-lance{
     display: block;
 
@@ -5783,6 +5814,10 @@ span.minisite-area-atuacao-texto{
     color: #fff;
     margin: auto;
     margin-bottom: 8px;
-
+    -webkit-border-radius:5px;
+    -moz-border-radius:5px;
+    border-radius:5px;
     text-align: center;
 }
+.countdown {position: relative; color: lightblue; font-size: 16px; font-family:arial; display: block; margin: auto; text-align: center; background:rgba(0,0,0,0.7); border-radius:10px; padding:10px; }
+#jcountdown > span {font-size:36px; margin-left:10px; color:white;}
