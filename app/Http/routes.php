@@ -30,7 +30,7 @@ Route::get('oferta/{id}/{url_anuncio}',[
 //rotas blog
 
 Route::get('/blog/noticias','BlogController@index');
-Route::get('/blog/{url_category}/{url_titulo}','BlogController@interno');
+Route::get('/blog/{url_site}','BlogController@interno');
 /* rotas ajax */
 
 
@@ -238,6 +238,12 @@ Route::group(['prefix' => 'admin', 'middleware'=>'auth','where'=>['id'=>'[0-9]+'
         Route::get('/xml',['as'=>'adm.xml', 'uses' => 'AdminController@lerXML']);
         //Route::get('/deluser',['as'=>'adm.deluser', 'uses' => 'AdminController@usuariosSemAnuncio']);
 
+
+    });
+    Route::group(['prefix' => 'leilao'],function() {
+
+        Route::get('/',['as'=>'leilao', 'uses' => 'LeilaoController@listarleilao']);
+        Route::get('view/{id}',['as'=>'leilao.view','uses'=> 'LeilaoController@view' ]);
 
     });
 

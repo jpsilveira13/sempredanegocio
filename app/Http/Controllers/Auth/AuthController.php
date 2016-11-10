@@ -34,6 +34,9 @@ class AuthController extends Controller
      *
      * @return void
      */
+
+    protected $redirectPath = '/';
+
     public function __construct(Request $request)
     {
         $this->middleware('guest', ['except' => 'getLogout']);
@@ -46,7 +49,7 @@ class AuthController extends Controller
 
 
     public function getLogin() {
-        return redirect('/anuncie');
+        return redirect()->intended();
     }
 
     public function redirectToProvider($provider){
@@ -69,11 +72,11 @@ class AuthController extends Controller
             $user->typeuser_id = 2;
             $user->password = bcrypt(str_random(10));
             $user->save();
-            return redirect('/anuncie');
+            return redirect()->intended();
           \Event::fire(new UsuarioInserido($user));
         }
         auth()->login($user);
-        return redirect('/admin/home');
+        return redirect()->intended();
     }
 
 

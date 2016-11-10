@@ -44,13 +44,15 @@ class LeilaoController extends Controller
 
     public function interno($id)
     {
+
         $agora =time();
+
         $oferta = $this->veiculo->where('advert_id', $id)->with('advertVeiculo')->first();
         //Aqui soma + 1 dia
         $amanha = strtotime($oferta->created_at);
         $amanha = strtotime('+1 day', $amanha);
         $tempo = $amanha;
-        $amanha = strftime("%Y/%m/%d", $amanha);
+        $amanha = strftime("%Y/%m/%d %H:%M:%S", $amanha);
 
         //validar se o leilao está ativo
         if($tempo < $agora && $oferta->leilaoativo == 1){
@@ -58,7 +60,8 @@ class LeilaoController extends Controller
             $oferta->leilaoativo = 0;
             $oferta->save();
         }
-
+        $oferta->advertVeiculo->advert_count =  $oferta->advertVeiculo->advert_count+1;
+        $oferta->advertVeiculo->save();
         $leilao = $this->leilao->where('veiculo_id', $oferta->id)->with('advertleilao', 'userleilao')->orderBy('valor', 'desc')->first();
         $top5 = $this->leilao->orderBy('valor', 'desc')->where('veiculo_id', $oferta->id)->take(5)->get();
 
@@ -135,6 +138,25 @@ class LeilaoController extends Controller
             }
         }
 
+
+    }
+
+    public function listarleilao(){
+        $leiloes = $this->leilao->orderBy('visto','desc')->paginate(30);
+        return view('admin.leilao.index',compact('leiloes'));
+    }
+
+    public function view($id){
+
+        $leilao = $this->leilao->find($id);
+
+        if($leilao->visto > 0){
+            $leilao->visto = $leilao->visto - 1;
+            $leilao->save();
+        }
+
+
+        return view('admin.leilao.view',compact('leilao'));
 
     }
 }

@@ -43,7 +43,9 @@ function pagination(page) {
                 });
 
                 $('#products').css('opacity','0.5');
+                $('html, body').animate({scrollTop: 0}, 'slow');
             }, success: function (data) {
+
                 var existeBairro = $('#bairro').val();
 
                 if(existeBairro.length != 0){
@@ -62,6 +64,7 @@ function pagination(page) {
                 var totalAnuncio = formatNumber(data.total);
                 $('.search-results-header-counter').html(totalAnuncio);
                 if (data.data.length != 0) {
+
                     $('#loading-page').css('display', 'block');
                     $(".before").empty();
                     $('#resultSearch').fadeTo('slow', 1);

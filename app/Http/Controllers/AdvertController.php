@@ -148,11 +148,7 @@ class AdvertController extends Controller
             $cor            = $data['cor'];
             $marca          = $data['marca_id'];
             $modelo         = $data['modelo_id'];
-            $leilao         = $data['leilao'];
-            $preco_fipe     = $data['preco_fipe'];
-            $preco_min      = $data['preco_min'];
-            $preco_max      = $data['preco_max'];
-            $variancia      = $data['variancia'];
+
             $opcionais      = 0;
             if(empty($data['preco_fipe'])){
                 $preco_fipe = 0;
@@ -172,8 +168,22 @@ class AdvertController extends Controller
                 $preco_max  = str_replace(",",".",str_replace(".","",$data['preco_max']));
             }
             if(empty($data['variancia'])){
+                $variancia = 0;
+            }else{
                 $variancia = str_replace(",",".",str_replace(".","",$data['variancia']));
+
             }
+            if(empty($data['leilao'])) {
+                $leilao = 0;
+            }else{
+                $leilao         = $data['leilao'];
+            }
+            if(empty($data['preco_fipe'])) {
+                $leilao = 0;
+            }else{
+                $preco_fipe         = $data['preco_fipe'];
+            }
+
 
             $advertVeiculo::create(['ano'=>$tipo,'km' => $km,'cor' => $cor,'portas' => $portas,'cambio' => $cambio, 'combustivel' => $combustivel,'placa' => $placa,'opcionais'=> $opcionais,'marca' => $marca,'modelo' => $modelo,'leilao' => $leilao, 'preco_fipe' => $preco_fipe, 'preco_leilao' => $preco_leilao, 'preco_min' => $preco_min, 'preco_max' => $preco_max, 'variancia' => $variancia,'advert_id' => $anuncio->id,'category_id' => $data['category_id']]);
         }
@@ -308,6 +318,7 @@ class AdvertController extends Controller
             unset($data['valor_condominio']);
             unset($data['valor_iptu']);
             unset($data['acomodacoes']);
+
             unset($data2['_token']);
 
             $this->advertModel->find($id)->update($data);

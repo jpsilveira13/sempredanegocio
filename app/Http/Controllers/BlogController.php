@@ -29,8 +29,12 @@ class BlogController extends Controller
             return view('site.blog.principal',compact('noticias'));
     }
 
-    public function interno(){
-        return view('site.blog.interno');
+    public function interno($url_site){
+
+        $noticiaInt = $this->notice->where('url_site',$url_site)->first();
+
+        return view('site.blog.interno',compact('noticiaInt'));
+
     }
 
 }

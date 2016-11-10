@@ -1382,10 +1382,16 @@ i.tag {
   display: block;
 }
 .single-top {
-  float: left;
-  width: 74%;
+
   padding: 1em;
   border: 1px solid #D8DADC;
+	background: #fff;
+}
+.single-top h1{
+	color: #000;
+	font-weight: bold;
+	font-size: 30px;
+	text-align: center;
 }
 i.adm {
   width: 15px;

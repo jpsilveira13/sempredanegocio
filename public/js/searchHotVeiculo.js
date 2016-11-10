@@ -27,6 +27,7 @@ function pagination(page) {
                     showConfirmButton: false
                 });
                 $('#products').css('opacity','0.5');
+                $('html, body').animate({scrollTop: 0}, 'slow');
             }, success: function (data) {
                 $('.pagination').css('display','none');
                 $('#products').empty();

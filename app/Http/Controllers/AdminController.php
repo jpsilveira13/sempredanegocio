@@ -5,13 +5,16 @@ namespace sempredanegocio\Http\Controllers;
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session;
 use sempredanegocio\Http\Requests;
 use sempredanegocio\Models\Advert;
 use sempredanegocio\Models\AdvertImovel;
 use sempredanegocio\Models\AdvertImage;
 use sempredanegocio\Models\AdvertMessage;
+use sempredanegocio\Models\AdvertVeiculo;
 use sempredanegocio\Models\Complaint;
 use sempredanegocio\Models\DadosAdmin;
+use sempredanegocio\Models\Leilao;
 use sempredanegocio\Models\User;
 use sempredanegocio\Models\Leads;
 use sempredanegocio\Models\LeadsHistorico;
@@ -20,19 +23,28 @@ use DateTime;
 
 class AdminController extends Controller
 {
+    private $leilao;
+
+    public function __construct(Leilao $leilao){
+        $this->leilao = $leilao;
+    }
+
     public function home(User $user)
     {
+        Session::put('lances',$leilao = $this->leilao->where('visto','>','0')->count());
+
         $user = Auth::user();
+        $countOfertas = AdvertVeiculo::where('leilao','>',0)->count();
 
         if($user->typeuser_id == 1){
             $queryCountTotal = Advert::count();
             $countTickert = Complaint::count();
-            return view('admin.principal.index',compact('queryCountTotal','countTickert'));
+            return view('admin.principal.index',compact('queryCountTotal','countTickert','countOfertas'));
         }else{
             $id_user =  Auth::user()->id;
             $messageCount = AdvertMessage::where('id_user',$id_user)->count();
             $queryCountUser = Advert::where('user_id','=',$id_user )->count();
-            return view('admin.principal.index',compact('queryCountUser','messageCount'));
+            return view('admin.principal.index',compact('queryCountUser','messageCount','countOfertas'));
         }
     }
     //Carregar dados do painel adm

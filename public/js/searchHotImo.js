@@ -34,7 +34,7 @@ function pagination(page) {
                 });
 
                 $('#products').css('opacity','0.5');
-
+                $('html, body').animate({scrollTop: 0}, 'slow');
             }, success: function (data) {
                 var existeBairro = $('#bairro').val();
 

@@ -52,6 +52,11 @@
             <li>
                 <a class="style-menu-header" href="{{url('anuncie')}}" target="_blank"><i class="fa fa-pencil" aria-hidden="true"></i> Anuncie</a>
             </li>
+            @if(auth()->user()->typeuser_id == 1)
+                <li class="dropdown">
+                    <a href="{{route('leilao')}}" class="dropdown-toggle style-menu-header"><i class="fa fa-gavel"></i><span class="badge estilo-numero">{{\Session::get('lances')}}</span></a>
+                </li>
+            @endif
             <li class="dropdown">
                 <a href="#" class="dropdown-toggle style-menu-header" data-toggle="dropdown"><i class="fa fa-envelope"></i><span class="badge estilo-numero">{{$i}}</span> <b class="caret"></b></a>
 

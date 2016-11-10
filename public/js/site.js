@@ -1045,9 +1045,7 @@ $(document).ready(function(){
             var valor = $(this).data('value');
             var idveiculo = $(this).data('idveiculo');
             var iduser = $(this).data('user');
-            console.log(iduser);
-            console.log(valor);
-            console.log(idveiculo);
+
             swal({
                     title: "Você tem certeza?",
                     type: "info",

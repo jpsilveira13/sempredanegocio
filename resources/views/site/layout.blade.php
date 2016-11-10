@@ -57,7 +57,39 @@
         <meta property="og:image:width" content="484">
         <meta property="og:image:height" content="252">
         <meta property="og:description" content="Acessem o meu hotsite e confiram os meus anúncios publicados.">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    @elseif(isset($oferta))
+        <meta property="og:site_name" content="Sempre da Negócio">
+        <meta property="og:title" content="{{$oferta->advertVeiculo->danuncio_titulo}}">
+        <meta name="description" content="{{$oferta->advertVeiculo->anuncio_descricao}}" />
+        <meta property="og:type" content="website">
+        <meta property="og:url" content="{{url('/')}}/oferta/{{$oferta->advertVeiculo->id}}/{{$oferta->advertVeiculo->url_anuncio}}">
+        <meta property="og:image:width" content="484">
+        <meta property="og:image:height" content="252">
+        <?php
+        $pos = strpos($oferta->advertVeiculo->images()->first()->extension, "amazonaws.com");
+        $url1 = "";
+        if ($pos === false) {
+            $url1 = "galeria/".$oferta->advertVeiculo->images()->first()->extension;
+        } else {
+            $url1 = $oferta->advertVeiculo->images()->first()->extension;
+        }
+
+        ?>
+        <meta property="og:image" content="<?php if($oferta->advertVeiculo->images()->count() < 1): echo asset('images/no-image.jpg');
+
+        else: echo asset($url1); endif ?>">
+
+    @elseif(isset($noticiaInt))
+        <meta property="og:site_name" content="Sempre da Negócio">
+        <meta property="og:title" content="{{$noticiaInt->titulo}}">
+        <meta name="description" content="{!! str_limit($noticiaInt->descricao,45) !!}" />
+        <meta property="og:type" content="website">
+        <meta property="og:url" content="{{url('/')}}/blog/{{$noticiaInt->url_site}}">
+        <meta property="og:image:width" content="484">
+        <meta property="og:image:height" content="252">
+
+        <meta property="og:image" content="{{url('galeria/blog')}}/{{$noticiaInt->url_image}}">
+
 
     @else
 
@@ -474,7 +506,7 @@
     <!-- <script src="{{asset('js/searchHotVeiculo.js')}}"></script>-->
 @elseif( \Input::get('categoria') == 1 || Request::is('imoveis') )
     <script src="{{asset('js/menudinamico.js')}}"></script>
-    @endif
+@endif
 @if (session('status') && !Request::is('password/email'))
     <script>
         swal("Parabéns!", "Seu anúncio foi criado com sucesso!", "success")
