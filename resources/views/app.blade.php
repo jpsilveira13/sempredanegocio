@@ -128,7 +128,7 @@
                 @else
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                         <span class="user-menu-icon" style="background-image: url('<?=auth()->user()->avatar?>');"></span>
-                        <span class="align-div-menu">{{auth()->user()->name}}</span>
+                        <span class="align-div-menu">{{ strstr(auth()->user()->name,' ',true)  }}</span>
 
                         <b class="caret mt18neg"></b>
                     </a>
@@ -177,18 +177,6 @@
                     @endif
                 </li>
 
-                <!--
-     <li>
-         <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-arrows-v"></i> Dropdown <i class="fa fa-fw fa-caret-down"></i></a>
-         <ul id="demo" class="collapse">
-             <li>
-                 <a href="#">Dropdown Item</a>
-             </li>
-             <li>
-                 <a href="#">Dropdown Item</a>
-             </li>
-         </ul>
-     </li>-->
             </ul>
         </div>
         <!-- /.navbar-collapse -->
