@@ -5,7 +5,14 @@
 
 @stop
 @section('content')
+
 </div>
+</div>
+<div style="float: none" class="caixa-leilao col-sm-12 col-xs-12 hidden-lg hidden-md no-padding">
+    <div class="btn-leilao">
+        <a href="{{url('ofertas')}}">LEILÕES</a>
+    </div>
+
 </div>
 
 

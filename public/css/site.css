@@ -5821,3 +5821,33 @@ span.minisite-area-atuacao-texto{
 }
 .countdown {position: relative; color: lightblue; font-size: 16px; font-family:arial; display: block; margin: auto; text-align: center; background:rgba(0,0,0,0.7); border-radius:10px; padding:10px; }
 #jcountdown > span {font-size:36px; margin-left:10px; color:white;}
+
+.caixa-leilao{
+    margin-top: 70px;
+    background: #5c095b;
+    height: 71px;
+
+}
+
+.btn-leilao{
+    background: #fff;
+    /* padding: 15px; */
+    width: 75%;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    border-radius: 5px;
+    height: 56px;
+    position: relative;
+    top: 8px;
+}
+
+.btn-leilao a{
+    color: #5c095b;
+    text-align: center;
+    line-height: 62px;
+    font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: 2rem;
+}
